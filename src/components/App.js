@@ -1,25 +1,39 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Signup from "./Signup";
 import LoginForm from "./Login";
 import Homepage from "./Homepage";
+import Creategame from "./Creategame";
+import Profile from "./Profile";
 import {AuthProvider} from "../contexts/AuthContext";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
-
+import Navbar from './Navbar';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Container from '@mui/material/Container';
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <Routes>
-          <Route path="/signup" element={<Signup/>}/>
-          <Route path="/login" element={<LoginForm/>}/>
-          <Route exact path="/" element={<Homepage/>}/>
-        </Routes>
+      <Container component="main" sx={{mt: 5}}>
+      {/* <Route exact path="/" element={<Homepage/>}/> */}
+      
         
-      </AuthProvider>
-    </Router>
+        <Router>
+        <AuthProvider>
+          <Routes>
+            <Route exact path="/" element={<Homepage/>}/>
+            <Route path="/signup" element={<Signup/>}/>
+            <Route path="/login" element={<LoginForm/>}/>
+            <Route path="/creategame" element={<Creategame/>}/>
+            <Route path="/profile" element={<Profile/>}/>
+          </Routes>
+          
+        </AuthProvider>
+        
+
+        
+        </Router>
+        </Container>
+
     
     
   );
