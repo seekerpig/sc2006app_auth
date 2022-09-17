@@ -23,27 +23,27 @@ export default function ImgMediaCard() {
         image="https://img.freepik.com/free-vector/soccer-volleyball-baseball-rugby-equipment_1441-4026.jpg"
       />
       <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography gutterBottom variant="h6" component="div" style={{fontSize:15}}>
           Looking for casual game
         </Typography>
-        <Typography gutterBottom variant="overline" component="div">
+        <Typography gutterBottom variant="overline" component="div" style={{fontSize:11}}>
           Badminton
         </Typography>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={12} md={6}>
-            <CalendarMonthIcon sx={{ verticalAlign:"middle"}} />
+            <CalendarMonthIcon sx={{ verticalAlign:"middle"}}  color="disabled"/>
             <Typography variant="body2" color="text.secondary" sx={{verticalAlign:"middle", display:"inline-flex", ml:1}}>
               Date
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
-          <AccessTimeIcon sx={{ verticalAlign:"middle"}} />
+          <AccessTimeIcon sx={{ verticalAlign:"middle"}}  color="disabled"/>
             <Typography variant="body2" color="text.secondary" sx={{verticalAlign:"middle", display:"inline-flex", ml:1}}>
               Date
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <LocationOnIcon sx={{ verticalAlign:"middle"}} />
+            <LocationOnIcon sx={{ verticalAlign:"middle"}} color="disabled" />
             <Typography variant="body2" color="text.secondary" sx={{verticalAlign:"middle", display:"inline-flex", ml:1}}>
               Location
             </Typography>
@@ -53,11 +53,11 @@ export default function ImgMediaCard() {
       </CardContent>
       <CardActions>
           <Box sx={{ flexGrow: 1 }}>
-            <PeopleAltIcon sx={{ fontSize: 32, ml:1, verticalAlign:"middle"}} />
+            <PeopleAltIcon  sx={{ fontSize: 25, ml:1, verticalAlign:"middle"}} />
             <Typography variant="h6" color="text.secondary" sx={{verticalAlign:"middle", display:"inline-flex", ml:1}}>1 / 6</Typography>
           </Box>
           <Box>
-            <Button variant ="contained" size="medium" endIcon={<ArrowRightIcon />}>View</Button>
+            <Button variant ="contained"  style={{minWidth: '80px', minHeight: '30px'}} >View</Button>
           </Box>
       </CardActions>
     </Card>
