@@ -1,21 +1,23 @@
 import React from 'react'
-import { useAuth } from "../contexts/AuthContext";
+//import { useAuth } from "../contexts/AuthContext";
 // import Card from "@mui/material/Card";
 // import CardActions from '@mui/material/CardActions';
 // import CardContent from '@mui/material/CardContent';
 // import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
+//import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import ResponsiveAppBar from './Navbar';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+//import ResponsiveAppBar from './Navbar';
+//import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid'; // Grid version 1
 import Card from './Card'
 import Banner from "./Banner";
+import ExploreSportsBar from './ExploreSportsBar';
 
 
-export default function Homepage() {
-  const { currentUser, logout } = useAuth();
+
+export default function HomePage() {
+  /*const { currentUser, logout } = useAuth();*/
 
   return (
     // <ThemeProvider theme={theme}>
@@ -40,6 +42,13 @@ export default function Homepage() {
     // </ThemeProvider>
     <Container>
       <Banner />
+      <ExploreSportsBar/>
+      <div style={{marginBottom: '10px', marginTop:'50px' }}>
+      <Typography variant="overline" style={{ color: '#9e998b'}}>
+                Find Games to Play
+            </Typography>
+      </div>
+      
       <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} >
         {Array.from(Array(5)).map((_, index) => (
           <Grid item xs={6} sm={6} md={4} lg={3} key={index}>

@@ -10,10 +10,10 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
+//import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import AddIcon from '@mui/icons-material/Add';
-import { createTheme, ThemeProvider } from '@mui/system';
+//import { createTheme, ThemeProvider } from '@mui/system';
 
 
 
@@ -39,8 +39,14 @@ const Navbar = () => {
 
 
   return (
-      <AppBar position="static"  color="transparent" style={{background:"#ffffff"}} elevation={0}>
-        <Container maxWidth="xl">
+      <Container maxWidth={false} style={{background:"#ffffff"}} >
+        <Container>
+
+        
+
+      
+      <AppBar position="static"  color="transparent" elevation={0}>
+        <Container>
           <Toolbar>
             
             {/* <SportsBasketballIcon sx={{ fontSize: 28, display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -180,6 +186,8 @@ const Navbar = () => {
           </Toolbar>
         </Container>
       </AppBar>
+      </Container>
+      </Container>
   );
 };
 export default Navbar;

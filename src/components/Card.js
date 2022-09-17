@@ -8,14 +8,14 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid'; // Grid version 1
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import Box from '@mui/material/Box';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+//import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 export default function ImgMediaCard() {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card  sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         alt="green iguana"

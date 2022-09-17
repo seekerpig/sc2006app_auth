@@ -8,8 +8,7 @@ import ExplorePage from "./ExplorePage";
 import {AuthProvider} from "../contexts/AuthContext";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
-import Navbar from './Navbar';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+//import Navbar from './Navbar';
 import Container from '@mui/material/Container';
 
 function App() {
@@ -37,7 +36,9 @@ function App() {
 
         
         </Router>
+        
         </Container>
+        
 
     
     
