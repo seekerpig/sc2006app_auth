@@ -11,6 +11,9 @@ export const globalTheme = createTheme({
             dark: '#003ab6',
             contrastText: '#fff',
         },
+        secondary: {
+            main: '#ffffff'
+        }
     },
     shadows: ["none"],
 });
