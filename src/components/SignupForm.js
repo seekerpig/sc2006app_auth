@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container, Alert, IconButton, Stack } from '@mui/material/';
+import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container, Alert } from '@mui/material/';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
