@@ -16,7 +16,7 @@ import ExploreSportsBar from './ExploreSportsBar';
 
 
 
-export default function Homepage() {
+export default function HomePage() {
   const { currentUser, logout } = useAuth();
 
   return (
