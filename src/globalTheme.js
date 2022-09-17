@@ -1,13 +1,16 @@
 import { createTheme } from "@mui/material";
-import { indigo } from "@mui/material/colors";
 
 export const globalTheme = createTheme({
     palette: {
+        background: {
+            default: "#F6F7F9"
+        },
         primary: {
-        main: indigo[500],
+            light: '#7790ff',
+            main: '#3563e9',
+            dark: '#003ab6',
+            contrastText: '#fff',
         },
-        secondary: {
-        main: indigo[100],
-        },
-    }
+    },
+    shadows: ["none"],
 });

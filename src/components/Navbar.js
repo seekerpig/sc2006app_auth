@@ -13,9 +13,8 @@ import MenuItem from '@mui/material/MenuItem';
 import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import AddIcon from '@mui/icons-material/Add';
-import { indigo } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/system';
-import { Link } from 'react-router-dom';
+
 
 
 const Navbar = () => {
@@ -40,10 +39,11 @@ const Navbar = () => {
 
 
   return (
-      <AppBar position="static">
+      <AppBar position="static"  color="transparent" style={{background:"#ffffff"}} elevation={0}>
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <SportsBasketballIcon sx={{ fontSize: 28, display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Toolbar>
+            
+            {/* <SportsBasketballIcon sx={{ fontSize: 28, display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
             <Typography
               variant="h5"
               noWrap
@@ -96,7 +96,7 @@ const Navbar = () => {
                   </MenuItem>
               </Menu>
             </Box>
-            <SportsBasketballIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            {/*<SportsBasketballIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
             <Typography
               variant="h5"
               noWrap
@@ -115,13 +115,15 @@ const Navbar = () => {
             >
               VERSA
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+            </Box>
             <Box sx={{ flexGrow: 0, mr:2, display: { xs: 'none', md: 'flex'} }}>
                 <Button
                 sx={{ display: 'inline-flex'}}
                   startIcon={<AddIcon />}
                   variant="contained"
-                  color="secondary"
+                  color="primary"
                   enableElevation
                   href="./creategame"
                 >

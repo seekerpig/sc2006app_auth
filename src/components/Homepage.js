@@ -1,5 +1,5 @@
 import React from 'react'
-import {useAuth} from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 // import Card from "@mui/material/Card";
 // import CardActions from '@mui/material/CardActions';
 // import CardContent from '@mui/material/CardContent';
@@ -11,10 +11,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid'; // Grid version 1
 import Card from './Card'
+import Banner from "./Banner";
 
 
 export default function Homepage() {
-  const {currentUser,logout} = useAuth();
+  const { currentUser, logout } = useAuth();
 
   return (
     // <ThemeProvider theme={theme}>
@@ -34,16 +35,19 @@ export default function Homepage() {
     //     </CardActions>
     //   </Card>
 
-      
+
     //   </Container>
     // </ThemeProvider>
-        <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} >
+    <Container>
+      <Banner />
+      <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} >
         {Array.from(Array(5)).map((_, index) => (
           <Grid item xs={6} sm={6} md={4} lg={3} key={index}>
-            <Card/>
+            <Card />
           </Grid>
         ))}
       </Grid>
+    </Container>
 
   )
 }
