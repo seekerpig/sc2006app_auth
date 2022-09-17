@@ -4,10 +4,10 @@ import { useAuth } from "../contexts/AuthContext";
 // import CardActions from '@mui/material/CardActions';
 // import CardContent from '@mui/material/CardContent';
 // import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
+//import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import ResponsiveAppBar from './Navbar';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+//import ResponsiveAppBar from './Navbar';
+//import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid'; // Grid version 1
 import Card from './Card'
@@ -17,7 +17,7 @@ import ExploreSportsBar from './ExploreSportsBar';
 
 
 export default function HomePage() {
-  const { currentUser, logout } = useAuth();
+  const { currentUser/*, logout*/ } = useAuth();
 
   return (
     // <ThemeProvider theme={theme}>
