@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuth } from "../contexts/AuthContext";
+//import { useAuth } from "../contexts/AuthContext";
 // import Card from "@mui/material/Card";
 // import CardActions from '@mui/material/CardActions';
 // import CardContent from '@mui/material/CardContent';
@@ -17,7 +17,7 @@ import ExploreSportsBar from './ExploreSportsBar';
 
 
 export default function HomePage() {
-  const { currentUser/*, logout*/ } = useAuth();
+  {/*const { currentUser, logout } = useAuth();*/}
 
   return (
     // <ThemeProvider theme={theme}>
