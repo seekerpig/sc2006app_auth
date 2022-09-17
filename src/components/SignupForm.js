@@ -1,28 +1,18 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container, Alert, IconButton, Stack } from '@mui/material/';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Alert from '@mui/material/Alert'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {useAuth} from "../contexts/AuthContext";
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import { useAuth } from "../contexts/AuthContext";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="#">
+        TechnicalWizards
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -34,7 +24,7 @@ const theme = createTheme();
 
 export default function SignUp() {
 
-  const {currentUser, signup} = useAuth();
+  const { currentUser, signup } = useAuth();
   //console.log(currentUser);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -48,15 +38,14 @@ export default function SignUp() {
       password: data.get('password'),
     });
 
-    if (data.get('password') === 'abc')
-    {
+    if (data.get('password') === 'abc') {
       return setError('Password is wrong testing!');
     }
 
-    try{
+    try {
       setLoading(true);
       setError('');
-      await signup(data.get('email'), data.get('password') );
+      await signup(data.get('email'), data.get('password'));
       navigate('/login');
     } catch {
 
@@ -64,10 +53,10 @@ export default function SignUp() {
     }
 
     setLoading(false);
-    
+
   };
 
-  
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -131,6 +120,37 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="phoneNumber"
+                  label="Phone Number"
+                  type="number"
+                  id="phoneNumber"
+                  autoComplete="tel-national"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  multiline
+                  fullWidth
+                  rows={4}
+                  name="description"
+                  label="Description"
+                  id="description"
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <Button variant="outlined" component="label">
+                  Upload Your Profile Picture
+                  <input accept="image/*" type="file" id="img" name="img" />
+                </Button>
+
+              </Grid>
+
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
