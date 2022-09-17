@@ -17,7 +17,7 @@ import ExploreSportsBar from './ExploreSportsBar';
 
 
 export default function HomePage() {
-  {/*const { currentUser, logout } = useAuth();*/}
+  /*const { currentUser, logout } = useAuth();*/
 
   return (
     // <ThemeProvider theme={theme}>
