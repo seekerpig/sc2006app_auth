@@ -1,15 +1,14 @@
 import * as React from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import Box from "@mui/material/Box";
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { Typography } from "@mui/material";
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 import IconButton from "@mui/material/IconButton";
@@ -17,7 +16,7 @@ import Grid from '@mui/material/Grid'; // Grid version 1
 
 const sportList = ['Badminton', 'Basketball', 'Tennis', 'Soccer']
 const locationList = ['Jurong Corut', 'Sengkang Court', 'NTU Sports Complex']
-const dateList = ['date 1', 'date 2', 'date 3']
+// const dateList = ['date 1', 'date 2', 'date 3']
 
 
 export default function SelectVariants() {

@@ -1,16 +1,10 @@
 import React from "react";
-import { useAuth } from "../contexts/AuthContext";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid"; // Grid version 1
 import Card from "./Card";
-import Box from "@mui/material/Box";
-import { CardMedia } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import { InfoRounded } from "@mui/icons-material";
 import Filter from "./Filter";
 
 export default function ExplorePage() {
-  const { currentUser, logout } = useAuth();
   return (
     <Container>
       <Filter />
