@@ -12,6 +12,8 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid'; // Grid version 1
 import Card from './Card'
 import Banner from "./Banner";
+import ExploreSportsBar from './ExploreSportsBar';
+
 
 
 export default function Homepage() {
@@ -40,6 +42,13 @@ export default function Homepage() {
     // </ThemeProvider>
     <Container>
       <Banner />
+      <ExploreSportsBar/>
+      <div style={{marginBottom: '10px', marginTop:'50px' }}>
+      <Typography variant="overline" style={{ color: '#9e998b'}}>
+                Find Games to Play
+            </Typography>
+      </div>
+      
       <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} >
         {Array.from(Array(5)).map((_, index) => (
           <Grid item xs={6} sm={6} md={4} lg={3} key={index}>

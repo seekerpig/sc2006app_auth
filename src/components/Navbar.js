@@ -39,8 +39,14 @@ const Navbar = () => {
 
 
   return (
-      <AppBar position="static"  color="transparent" style={{background:"#ffffff"}} elevation={0}>
-        <Container maxWidth="xl">
+      <Container maxWidth={false} style={{background:"#ffffff"}} >
+        <Container>
+
+        
+
+      
+      <AppBar position="static"  color="transparent" elevation={0}>
+        <Container>
           <Toolbar>
             
             {/* <SportsBasketballIcon sx={{ fontSize: 28, display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -180,6 +186,8 @@ const Navbar = () => {
           </Toolbar>
         </Container>
       </AppBar>
+      </Container>
+      </Container>
   );
 };
 export default Navbar;
