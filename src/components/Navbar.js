@@ -39,16 +39,11 @@ const Navbar = () => {
 
 
   return (
-      <Container maxWidth={false} style={{background:"#ffffff"}} >
-        <Container>
-
-        
-
-      
-      <AppBar position="static"  color="transparent" elevation={0}>
+    <Container maxWidth={false} style={{ background: "#ffffff" }} >
+      <AppBar position="static" color="transparent" elevation={0}>
         <Container>
           <Toolbar>
-            
+
             {/* <SportsBasketballIcon sx={{ fontSize: 28, display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
             <Typography
               variant="h5"
@@ -67,7 +62,7 @@ const Navbar = () => {
             >
               VERSA
             </Typography>
-            
+
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"
@@ -97,9 +92,9 @@ const Navbar = () => {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                  <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center" href="./creategame" >Create Game</Typography>
-                  </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" href="./creategame" >Create Game</Typography>
+                </MenuItem>
               </Menu>
             </Box>
             {/*<SportsBasketballIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
@@ -124,32 +119,32 @@ const Navbar = () => {
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 
             </Box>
-            <Box sx={{ flexGrow: 0, mr:2, display: { xs: 'none', md: 'flex'} }}>
-                <Button
-                sx={{ display: 'inline-flex'}}
-                  startIcon={<AddIcon />}
-                  variant="contained"
-                  color="primary"
-                  enableElevation
-                  href="./creategame"
-                >
-                  Create Game
-                </Button>
+            <Box sx={{ flexGrow: 0, mr: 2, display: { xs: 'none', md: 'flex' } }}>
+              <Button
+                sx={{ display: 'inline-flex' }}
+                startIcon={<AddIcon />}
+                variant="contained"
+                color="primary"
+                enableElevation
+                href="./creategame"
+              >
+                Create Game
+              </Button>
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Profile">
                 <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-              //   aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleOpenUserMenu}
-                color="inherit"
-              >
-                <AccountCircle sx={{fontSize: 28}}/>
-              </IconButton>
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  //   aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleOpenUserMenu}
+                  color="inherit"
+                >
+                  <AccountCircle sx={{ fontSize: 28 }} />
+                </IconButton>
               </Tooltip>
               <Menu
                 sx={{ mt: '45px' }}
@@ -167,27 +162,26 @@ const Navbar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                
-                  <MenuItem  onClick={handleCloseUserMenu} component="a" href="/profile" >
-                    <Typography textAlign="center"  >Profile</Typography>
-                  </MenuItem>
-                  <MenuItem onClick={handleCloseUserMenu} component="a" href="/login">
-                    <Typography textAlign="center" >Login</Typography>
-                  </MenuItem>
-                  <MenuItem onClick={handleCloseUserMenu} component="a" href="/signup">
-                    <Typography textAlign="center" >Sign Up</Typography>
-                  </MenuItem>
-                  <MenuItem onClick={handleCloseUserMenu} component="a" href="/">
-                    <Typography textAlign="center" >Log Out</Typography>
-                  </MenuItem>
-                
+
+                <MenuItem onClick={handleCloseUserMenu} component="a" href="/profile" >
+                  <Typography textAlign="center"  >Profile</Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseUserMenu} component="a" href="/login">
+                  <Typography textAlign="center" >Login</Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseUserMenu} component="a" href="/signup">
+                  <Typography textAlign="center" >Sign Up</Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseUserMenu} component="a" href="/">
+                  <Typography textAlign="center" >Log Out</Typography>
+                </MenuItem>
+
               </Menu>
             </Box>
           </Toolbar>
         </Container>
       </AppBar>
-      </Container>
-      </Container>
+    </Container>
   );
 };
 export default Navbar;

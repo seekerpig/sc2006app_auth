@@ -15,13 +15,8 @@ function App() {
   return (
       
       <Container component="main" sx={{mt: 5}}>
-        
-      {/* <Route exact path="/" element={<Homepage/>}/> */}
-      
-        
         <Router>
         <AuthProvider>
-          
           <Routes>
             <Route exact path="/" element={<HomePage/>}/>
             <Route path="/signup" element={<SignupForm/>}/>
@@ -30,7 +25,6 @@ function App() {
             <Route path="/profile" element={<ProfilePage/>}/>
             <Route path="/explore" element={<ExplorePage/>}/>
           </Routes>
-          
         </AuthProvider>
         
 

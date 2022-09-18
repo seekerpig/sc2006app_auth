@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState, useEffect } from 'react';
 //import { useAuth } from "../contexts/AuthContext";
 // import Card from "@mui/material/Card";
 // import CardActions from '@mui/material/CardActions';
@@ -9,15 +10,28 @@ import Typography from '@mui/material/Typography';
 //import ResponsiveAppBar from './Navbar';
 //import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid'; // Grid version 1
 import Card from './Card'
 import Banner from "./Banner";
 import ExploreSportsBar from './ExploreSportsBar';
-
-
+import { db } from '../../src/firebaseconfig';
+import { collection, getDocs } from 'firebase/firestore'
 
 export default function HomePage() {
-  /*const { currentUser, logout } = useAuth();*/
+  const [games, setGames] = useState(null)
+
+  useEffect(() => {
+    const ref = collection(db, 'Games')
+    
+    getDocs(ref).then((snapshot) => {
+      let results = []
+      snapshot.docs.forEach(doc => {
+        results.push({id: doc.id, ...doc.data()})
+      })
+      setGames(results)
+      console.log(results)
+      
+    })
+  }, [])
 
   return (
     // <ThemeProvider theme={theme}>
@@ -48,14 +62,8 @@ export default function HomePage() {
                 Find Games to Play
             </Typography>
       </div>
-      
-      <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} >
-        {Array.from(Array(5)).map((_, index) => (
-          <Grid item xs={6} sm={6} md={4} lg={3} key={index}>
-            <Card />
-          </Grid>
-        ))}
-      </Grid>
+      {games && <Card games={games} />}
+
     </Container>
 
   )
