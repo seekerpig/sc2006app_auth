@@ -48,7 +48,7 @@ export default function GameList ({ games }) {
                 <Grid item xs={12}>
                   <LocationOnIcon sx={{ verticalAlign: "middle" }} color="disabled" />
                   <Typography variant="body2" color="text.secondary" sx={{ verticalAlign: "middle", display: "inline-flex", ml: 1 }}>
-                  {game.facility}
+                  {game.location}
                   </Typography>
                 </Grid>
               </Grid>

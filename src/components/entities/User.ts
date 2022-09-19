@@ -7,7 +7,7 @@ export default class User {
     phoneNo = 0;
     description = "";
     profileImage = "";
-    games: Game[] = [];
+    gameList:string[] = []
     
     constructor(uid:string, name:string, email:string, phoneNo:number, description:string, profileImage:string)
     {
@@ -19,9 +19,9 @@ export default class User {
         this.profileImage = profileImage;
     }
 
-    addGameToUser(game:Game)
+    addGameToUser(game:string)
     {
-        this.games.push(game);
+        this.gameList.push(game);
     }
 
     

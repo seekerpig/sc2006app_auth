@@ -5,14 +5,17 @@ import Container from '@mui/material/Container';
 import User from './entities/User';
 import Game from './entities/Game';
 import { Grid, Typography, Box, Paper } from '@mui/material';
-import Card from './CardWithProps';
+//import Card from './CardWithProps';
+import Card from './Card'
 
 const user1 = new User("abcd", "James Tan", "jamestan@gmail.com", "92749920", "I am a casual badminton player living in the northeast side of Singapore. Looking to play usually during friday nights!", "https://images.generated.photos/Ba_z-g_9fZ7h9GVAr0nSYFqfqLwwrj0RPlTlUi2I2Vs/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NjQ4MzM4LmpwZw.jpg");
-const game1 = new Game("game1", "30 minute quick game", "Badminton", "Come join for a 30mins quick game at Queenstown. Need a partner to play with! Telegram: @james02", "18 Oct 2022", "5.00PM", "5.30PM", "Queenstown Sports Centre", 4)
-const game2 = new Game("game2", "my second game!", "Badminton", "Come join for a 30mins quick game at Queenstown. Need a partner to play with! Telegram: @james02", "18 Oct 2022", "5.00PM", "5.30PM", "Queenstown Sports Centre", 4)
+const game1 = new Game("game1", "30 minute quick game", "Badminton", "Come join for a 30mins quick game at Queenstown. Need a partner to play with! Telegram: @james02", {seconds: 1663430400, nanoseconds: 839000000}, {seconds: 1663430400, nanoseconds: 839000000}, "5.30PM", "Queenstown Sports Centre", 4, user1.uniqueId)
+const game2 = new Game("game2", "my second game!", "Badminton", "Come join for a 30mins quick game at Queenstown. Need a partner to play with! Telegram: @james02", {seconds: 1663430400, nanoseconds: 839000000}, {seconds: 1663430400, nanoseconds: 839000000}, "5.30PM", "Queenstown Sports Centre", 4, user1.uniqueId)
 
-user1.addGameToUser(game1);
-user1.addGameToUser(game2);
+const games = [game1,game2];
+
+user1.addGameToUser(game1.gameId);
+user1.addGameToUser(game2.gameId);
 
 export default function ProfilePage() {
 
@@ -60,13 +63,14 @@ export default function ProfilePage() {
         <Typography gutterBottom variant="h6" align="center" style={{marginBottom:'20px'}} >
           My Games
         </Typography>
-        <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} sx={{width:"100%"}}>
-          {user1.games.map((game, index) => (
+        {games && <Card games={games} />}
+        {/* <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} sx={{width:"100%"}}>
+          {user1.gameList.map((game, index) => (
             <Grid item xs={12} sm={12} md={6} lg={4} key={index} align="center" >
               <Card style={{}} elevation={2} title={game.title} sportType={game.sportType} date={game.date} startTime={game.startTime} location={game.location} currentPlayers={game.currentPlayers} maxPlayers={game.maxPlayers} border="true"/>
             </Grid>
           ))}
-        </Grid>
+        </Grid> */}
 
 
       </Box >
