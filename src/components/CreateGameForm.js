@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Game from "./entities/Game";
+// import Game from "./entities/Game";
 import Select from '@mui/material/Select';
 
 const locations = [
