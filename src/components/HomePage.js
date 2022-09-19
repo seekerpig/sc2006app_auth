@@ -13,11 +13,16 @@ import Container from '@mui/material/Container';
 import Card from './Card'
 import Banner from "./Banner";
 import ExploreSportsBar from './ExploreSportsBar';
+// firebase connection
 import { db } from '../../src/firebaseconfig';
 import { collection, getDocs } from 'firebase/firestore'
+// Game entity
+import Game from './entities/Game';
+
+
 
 export default function HomePage() {
-  const [games, setGames] = useState(null)
+  const [gameList, setGames] = useState(null)
 
   useEffect(() => {
     const ref = collection(db, 'Games')
@@ -25,7 +30,19 @@ export default function HomePage() {
     getDocs(ref).then((snapshot) => {
       let results = []
       snapshot.docs.forEach(doc => {
-        results.push({id: doc.id, ...doc.data()})
+        results.push(new Game(
+          doc.id,
+          doc.data().title,
+          doc.data().sportType,
+          doc.data().description,
+          doc.data().date,
+          doc.data().startTime,
+          doc.data().endTime,
+          doc.data().location,
+          doc.data().maxPlayers,
+          doc.data().currentPlayers,
+          doc.data().userList
+        ))
       })
       setGames(results)
       console.log(results)
@@ -62,7 +79,7 @@ export default function HomePage() {
                 Find Games to Play
             </Typography>
       </div>
-      {games && <Card games={games} />}
+      {gameList && <Card games={gameList} />}
 
     </Container>
 

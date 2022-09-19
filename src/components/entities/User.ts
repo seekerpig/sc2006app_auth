@@ -1,7 +1,7 @@
 import Game from "./Game";
 
 export default class User {
-    uniqueId=""
+    userID=""
     name = "";
     email = "";
     phoneNo = 0;
@@ -9,9 +9,9 @@ export default class User {
     profileImage = "";
     gameList:string[] = []
     
-    constructor(uid:string, name:string, email:string, phoneNo:number, description:string, profileImage:string)
+    constructor(userID:string, name:string, email:string, phoneNo:number, description:string, profileImage:string)
     {
-        this.uniqueId = uid;
+        this.userID = userID;
         this.name = name;
         this.email = email;
         this.phoneNo = phoneNo;

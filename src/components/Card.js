@@ -12,14 +12,14 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-export default function GameList ({ games }) {
+export default function GameList({ games }) {
   console.log(games)
   return (
     <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} >
       {games.map(game => (
-      <Grid item xs={6} sm={6} md={4} lg={3} key={game}>
-        
-          <Card width='100%' borderRadius = '3' >
+        <Grid item xs={6} sm={6} md={4} lg={3} key={game}>
+
+          <Card width='100%' borderRadius='3' >
             <CardMedia
               component="img"
               height="140"
@@ -30,26 +30,31 @@ export default function GameList ({ games }) {
                 {game.title}
               </Typography>
               <Typography gutterBottom variant="overline" component="div" style={{ fontSize: 11 }}>
-                {game.sportsType}
+                {game.sportType}
               </Typography>
+
               <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={12} md={6}>
                   <CalendarMonthIcon sx={{ verticalAlign: "middle" }} color="disabled" />
                   <Typography variant="body2" color="text.secondary" sx={{ verticalAlign: "middle", display: "inline-flex", ml: 1 }}>
-                    {new Date(game.date.seconds * 1000).toLocaleDateString('en-GB', {day: 'numeric', month: 'short'}).replace(/ /g, ' ')}
+                    {new Date(game.date.seconds * 1000).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace(/ /g, ' ')}
                   </Typography>
                 </Grid>
+
                 <Grid item xs={12} md={6}>
                   <AccessTimeIcon sx={{ verticalAlign: "middle" }} color="disabled" />
                   <Typography variant="body2" color="text.secondary" sx={{ verticalAlign: "middle", display: "inline-flex", ml: 1 }}>
-                  {new Date(game.startTime.seconds * 1000).toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'})}
+                    {new Date(game.startTime.seconds * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                   </Typography>
                 </Grid>
-                <Grid item xs={12}>
-                  <LocationOnIcon sx={{ verticalAlign: "middle" }} color="disabled" />
-                  <Typography variant="body2" color="text.secondary" sx={{ verticalAlign: "middle", display: "inline-flex", ml: 1 }}>
-                  {game.location}
-                  </Typography>
+
+                <Grid item xs={12} display="flex">
+                  {/* <Grid container direction="row" alignItems="center" display="flex"> */}
+                    <LocationOnIcon color="disabled" />
+                    <Typography variant="body2" color="text.secondary" sx={{ verticalAlign: "middle", display: "inline-flex", ml: 1 }}>
+                      {game.location}
+                    </Typography>
+                  {/* </Grid> */}
                 </Grid>
               </Grid>
 
@@ -67,9 +72,9 @@ export default function GameList ({ games }) {
             </CardActions>
           </Card>
 
-        
 
-      </Grid>
+
+        </Grid>
       ))}
     </Grid>
 

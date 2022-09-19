@@ -6,16 +6,16 @@ export default class Game
     title = "";
     sportType = "";
     description = "";
-    date="";
-    startTime="";
-    endTime="";
+    date = new Date();
+    startTime = new Date();
+    endTime = new Date();
     location = "";
     maxPlayers = 0;
     currentPlayers = 0;
     userList: string[] = [];
 
 
-    constructor (id:string,title:string, sportType:string, description:string, date:string, startTime: string, endTime:string, location:string, maxPlayers:number, uid:string)
+    constructor (id:string,title:string, sportType:string, description:string, date: Date, startTime: Date, endTime:Date, location:string, maxPlayers:number, currentPlayers:number, uid:string)
     {
         this.gameId = id;
         this.title = title;
@@ -26,6 +26,7 @@ export default class Game
         this.endTime = endTime;
         this.location = location;
         this.maxPlayers = maxPlayers;
+        this.currentPlayers = currentPlayers;
         this.addUserToGame(uid)
         
     }
