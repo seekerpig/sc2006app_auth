@@ -1,7 +1,10 @@
 import React from 'react'
 
+
+
+
 export default function DetailedGamePage() {
   return (
-    <div>DetailedGamePage</div>
+    <div>Detailed Game Page</div>
   )
 }
