@@ -6,6 +6,10 @@ import React from "react";
 // import CardMedia from '@mui/material/CardMedia';
 // import Button from '@mui/material/Button';
 import Typography from "@mui/material/Typography";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 // import ResponsiveAppBar from './Navbar';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from "@mui/material/Container";
@@ -47,6 +51,21 @@ export default function HomePage() {
         </Typography>
       </div>
       {gameList && <Card games={gameList} />}
+
+      <Box
+        sx={{ display: "flex", justifyContent: "center", marginTop: "60px" }}
+      >
+        <Button
+          component={Link}
+          to={`./explore`}
+          variant="contained"
+          size="large"
+          style={{ minWidth: "80px", minHeight: "30px" }}
+          endIcon={<NavigateNextIcon />}
+        >
+          Explore More Games
+        </Button>
+      </Box>
     </Container>
   );
 }
