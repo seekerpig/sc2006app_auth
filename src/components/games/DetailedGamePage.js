@@ -8,6 +8,7 @@ import SendIcon from "@mui/icons-material/Send";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid"; // Grid version 1
 import Button from "@mui/material/Button";
 // import firebase connection
 import { db } from "../../firebaseconfig";
@@ -62,7 +63,7 @@ export default function DetailedGamePage() {
             <Box>
               <CardMedia
                 component="img"
-                sx={{ width: 400, margin: 3 }}
+                sx={{ width: 400, margin: 4 }}
                 image="https://img.freepik.com/free-vector/soccer-volleyball-baseball-rugby-equipment_1441-4026.jpg"
                 alt="Live from space album cover"
               />
@@ -89,112 +90,135 @@ export default function DetailedGamePage() {
             </Box>
           </Box>
 
-          <Box sx={{ display: "flex", margin: 3 }}>
-            <Box sx={{ width: "50%", flexGrow: 1, display: "flex" }}>
-              <Box sx={{ width: "30%" }}>
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  component="div"
-                >
-                  Game
-                </Typography>
-              </Box>
-              <Box sx={{ width: "70%" }}>
-                <Typography variant="body1" component="div">
-                  {game.sportType}
-                </Typography>
-              </Box>
-            </Box>
-            <Box sx={{ width: "50%", flexGrow: 1, display: "flex" }}>
-              <Box sx={{ width: "30%" }}>
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  component="div"
-                >
-                  Start Time
-                </Typography>
-              </Box>
-              <Box sx={{ width: "70%" }}>
-                <Typography variant="body1" component="div">
-                  {new Date(game.startTime.seconds * 1000).toLocaleTimeString(
-                    "en-US",
-                    {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    }
-                  )}
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
+          <Grid container sx={{ marginX: 4 }}>
+            <Grid item xs={12} md={6}>
+              <Grid container>
+                {/* <Box sx={{ display: "flex" }}> */}
+                <Grid item xs={4} marginBottom={2}>
+                  <Typography
+                    variant="body1"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    Game
+                  </Typography>
+                </Grid>
+                <Grid item xs={8} marginBottom={2}>
+                  <Typography variant="body1" component="div">
+                    {game.sportType}
+                  </Typography>
+                </Grid>
+                <Grid item xs={4} marginBottom={2}>
+                  <Typography
+                    variant="body1"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    Date
+                  </Typography>
+                </Grid>
+                <Grid item xs={8} marginBottom={2}>
+                  <Typography variant="body1" component="div">
+                    {new Date(game.date.seconds * 1000)
+                      .toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })
+                      .replace(/ /g, " ")}
+                  </Typography>
+                </Grid>
+                <Grid item xs={4} marginBottom={2}>
+                  <Typography
+                    variant="body1"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    Maximum Players
+                  </Typography>
+                </Grid>
+                <Grid item xs={8} marginBottom={2}>
+                  <Typography variant="body1" component="div">
+                    {game.maxPlayers}
+                  </Typography>
+                </Grid>
+                <Grid item xs={4} marginBottom={2}>
+                  <Typography
+                    variant="body1"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    Slots Available
+                  </Typography>
+                </Grid>
+                <Grid item xs={8} marginBottom={2}>
+                  <Typography variant="body1" component="div">
+                    {game.maxPlayers - game.currentPlayers}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} md={6} marginBottom={1}>
+              <Grid container>
+                <Grid item xs={4} marginBottom={2}>
+                  <Typography
+                    variant="body1"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    Start Time
+                  </Typography>
+                </Grid>
+                <Grid item xs={8} marginBottom={2}>
+                  <Typography variant="body1" component="div">
+                    {new Date(game.startTime.seconds * 1000).toLocaleTimeString(
+                      "en-US",
+                      {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      }
+                    )}
+                  </Typography>
+                </Grid>
+                <Grid item xs={4} marginBottom={2}>
+                  <Typography
+                    variant="body1"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    End Time
+                  </Typography>
+                </Grid>
+                <Grid item xs={8} marginBottom={2}>
+                  <Typography variant="body1" component="div">
+                    {new Date(game.endTime.seconds * 1000).toLocaleTimeString(
+                      "en-US",
+                      {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      }
+                    )}
+                  </Typography>
+                </Grid>
+                <Grid item xs={4} marginBottom={2}>
+                  <Typography
+                    variant="body1"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    Location
+                  </Typography>
+                </Grid>
+                <Grid item xs={8} marginBottom={2}>
+                  <Typography variant="body1" component="div">
+                    {game.location}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
 
-          <Box sx={{ display: "flex", margin: 3 }}>
-            <Box sx={{ width: "50%", flexGrow: 1, display: "flex" }}>
-              <Box sx={{ width: "30%" }}>
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  component="div"
-                >
-                  Date
-                </Typography>
-              </Box>
-              <Box sx={{ width: "70%" }}>
-                <Typography variant="body1" component="div">
-                  {new Date(game.date.seconds * 1000)
-                    .toLocaleDateString("en-GB", {
-                      day: "numeric",
-                      month: "short",
-                      year: "numeric",
-                    })
-                    .replace(/ /g, " ")}
-                </Typography>
-              </Box>
-            </Box>
-            <Box sx={{ width: "50%", flexGrow: 1, display: "flex" }}>
-              <Box sx={{ width: "30%" }}>
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  component="div"
-                >
-                  End Time
-                </Typography>
-              </Box>
-              <Box sx={{ width: "70%" }}>
-                <Typography variant="body1" component="div">
-                  {new Date(game.endTime.seconds * 1000).toLocaleTimeString(
-                    "en-US",
-                    {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    }
-                  )}
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
-
-          <Box sx={{ display: "flex", margin: 3 }}>
-            <Box sx={{ width: "15%" }}>
-              <Typography
-                variant="body1"
-                color="text.secondary"
-                component="div"
-              >
-                Location
-              </Typography>
-            </Box>
-            <Box sx={{ width: "85%" }}>
-              <Typography variant="body1" component="div">
-                {game.location}
-              </Typography>
-            </Box>
-          </Box>
-
-          <CardActions sx={{ margin: 3 }}>
+          <CardActions sx={{ margin: 4 }}>
             <Box sx={{ flexGrow: 1 }}></Box>
             <Box>
               <Button
