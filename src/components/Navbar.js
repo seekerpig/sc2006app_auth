@@ -1,24 +1,21 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
 //import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import AddIcon from '@mui/icons-material/Add';
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import AddIcon from "@mui/icons-material/Add";
 //import { createTheme, ThemeProvider } from '@mui/system';
 
-
-
 const Navbar = () => {
-
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -37,147 +34,153 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
-
   return (
-    <Container maxWidth={false} style={{ background: "#ffffff" }} >
+    <Container maxWidth={false} style={{ background: "#ffffff" }}>
       <AppBar position="static" color="transparent" elevation={0}>
-        <Container>
-          <Toolbar>
+        <Toolbar>
+          {/* <SportsBasketballIcon sx={{ fontSize: 28, display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            VERSA
+          </Typography>
 
-            {/* <SportsBasketballIcon sx={{ fontSize: 28, display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="/"
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
               sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
+                display: { xs: "block", md: "none" },
               }}
             >
-              VERSA
-            </Typography>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center" href="./creategame">
+                  Create Game
+                </Typography>
+              </MenuItem>
+            </Menu>
+          </Box>
+          {/*<SportsBasketballIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href=""
+            sx={{
+              mr: 2,
+              display: { xs: "flex", md: "none" },
+              flexGrow: 1,
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            VERSA
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
+          <Box sx={{ flexGrow: 0, mr: 2, display: { xs: "none", md: "flex" } }}>
+            <Button
+              sx={{ display: "inline-flex" }}
+              startIcon={<AddIcon />}
+              variant="contained"
+              color="primary"
+              enableElevation
+              href="./creategame"
+            >
+              Create Game
+            </Button>
+          </Box>
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Profile">
               <IconButton
                 size="large"
+                edge="end"
                 aria-label="account of current user"
-                aria-controls="menu-appbar"
+                //   aria-controls={menuId}
                 aria-haspopup="true"
-                onClick={handleOpenNavMenu}
+                onClick={handleOpenUserMenu}
                 color="inherit"
               >
-                <MenuIcon />
+                <AccountCircle sx={{ fontSize: 28 }} />
               </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" href="./creategame" >Create Game</Typography>
-                </MenuItem>
-              </Menu>
-            </Box>
-            {/*<SportsBasketballIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
+            </Tooltip>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
               }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
             >
-              VERSA
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-
-            </Box>
-            <Box sx={{ flexGrow: 0, mr: 2, display: { xs: 'none', md: 'flex' } }}>
-              <Button
-                sx={{ display: 'inline-flex' }}
-                startIcon={<AddIcon />}
-                variant="contained"
-                color="primary"
-                enableElevation
-                href="./creategame"
+              <MenuItem
+                onClick={handleCloseUserMenu}
+                component="a"
+                href="/profile"
               >
-                Create Game
-              </Button>
-            </Box>
-
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Profile">
-                <IconButton
-                  size="large"
-                  edge="end"
-                  aria-label="account of current user"
-                  //   aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleOpenUserMenu}
-                  color="inherit"
-                >
-                  <AccountCircle sx={{ fontSize: 28 }} />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+                <Typography textAlign="center">Profile</Typography>
+              </MenuItem>
+              <MenuItem
+                onClick={handleCloseUserMenu}
+                component="a"
+                href="/login"
               >
-
-                <MenuItem onClick={handleCloseUserMenu} component="a" href="/profile" >
-                  <Typography textAlign="center"  >Profile</Typography>
-                </MenuItem>
-                <MenuItem onClick={handleCloseUserMenu} component="a" href="/login">
-                  <Typography textAlign="center" >Login</Typography>
-                </MenuItem>
-                <MenuItem onClick={handleCloseUserMenu} component="a" href="/signup">
-                  <Typography textAlign="center" >Sign Up</Typography>
-                </MenuItem>
-                <MenuItem onClick={handleCloseUserMenu} component="a" href="/">
-                  <Typography textAlign="center" >Log Out</Typography>
-                </MenuItem>
-
-              </Menu>
-            </Box>
-          </Toolbar>
-        </Container>
+                <Typography textAlign="center">Login</Typography>
+              </MenuItem>
+              <MenuItem
+                onClick={handleCloseUserMenu}
+                component="a"
+                href="/signup"
+              >
+                <Typography textAlign="center">Sign Up</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu} component="a" href="/">
+                <Typography textAlign="center">Log Out</Typography>
+              </MenuItem>
+            </Menu>
+          </Box>
+        </Toolbar>
       </AppBar>
     </Container>
   );
