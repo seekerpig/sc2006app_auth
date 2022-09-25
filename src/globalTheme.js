@@ -15,5 +15,5 @@ export const globalTheme = createTheme({
             main: '#ffffff'
         }
     },
-    shadows: ["none"],
+    shadows: Array(25).fill('none')
 });

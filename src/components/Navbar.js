@@ -117,7 +117,6 @@ const Navbar = () => {
               startIcon={<AddIcon />}
               variant="contained"
               color="primary"
-              enableElevation
               href="./creategame"
             >
               Create Game
