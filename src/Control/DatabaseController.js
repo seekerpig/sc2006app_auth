@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import {getAuth} from "firebase/auth";
-import {getFirestore , collection, onSnapshot,getDoc, doc, getDocs } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, collection, onSnapshot, getDoc, doc, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import Game from "../Entity/Game";
 // Your web app's Firebase configuration
@@ -46,7 +46,12 @@ export const getCollection = () => {
     // return () => unsub();
   }, []);
 
-  return {games} ;
+  return { games };
+}
+
+export const login = (email, password) => {
+  console.log('trying to login');
+  return signInWithEmailAndPassword(auth, email, password);
 }
 
 

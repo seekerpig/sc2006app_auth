@@ -1,7 +1,10 @@
 import React from 'react'
+import {login} from './DatabaseController';
 
-export default function LoginValidator() {
-  return (
-    <div>LoginValidator</div>
-  )
+
+export const loginUser = (email,password) => {
+  
+  return login(email,password);
+
 }
+

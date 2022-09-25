@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react'
 import {auth} from "./DatabaseController";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signOut } from 'firebase/auth';
 
 
 const AuthContext = React.createContext();
@@ -22,16 +22,15 @@ export function AuthProvider({children}) {
         return createUserWithEmailAndPassword(auth,email,password);
     }
 
-    function login(email,password)
-    {
-        console.log('trying to login');
-        return signInWithEmailAndPassword(auth,email,password);
-    }
 
     function logout()
     {
         console.log("trying to logout");
-        return signOut(auth);
+        signOut(auth).then(() => {
+            console.log("logout successful");
+        }).catch((error)=> {
+            console.log("failed to logout");
+        });
     }
 
     useEffect(() => {
@@ -48,9 +47,7 @@ export function AuthProvider({children}) {
     const value = {
         currentUser,
         signup,
-        login,
-        logout
-
+        logout,
     };
 
   return (

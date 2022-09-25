@@ -15,14 +15,15 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useAuth} from "../Control/SessionController";
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
+import {loginUser} from "../Control/LoginValidator";
 
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <a href="https://mui.com/">
-        Your Website
+      <a href="#">
+        TechnicalWizards
       </a>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -34,7 +35,7 @@ const theme = createTheme();
 
 export default function LoginForm() {
 
-  const {currentUser, login} = useAuth();
+  const {currentUser} = useAuth();
   //console.log(currentUser);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -49,15 +50,11 @@ export default function LoginForm() {
       password: data.get('password'),
     });
 
-    if (data.get('password') === 'abc')
-    {
-      return setError('Password is wrong testing!');
-    }
 
     try{
       setLoading(true);
       setError('');
-      await login(data.get('email'), data.get('password') );
+      await loginUser(data.get('email'), data.get('password') );
       navigate('/');
     } catch {
 
