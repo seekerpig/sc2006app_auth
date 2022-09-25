@@ -15,9 +15,11 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 export default function GameList({games}) {
   console.log(games);
+  
   return (
     <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }}>
       {games.map((game) => (
+        
         <Grid item xs={6} sm={6} md={4} lg={3} key={game.gameId} display="flex">
           <Card width="100%" borderRadius="3">
             <Box display="flex" flexDirection="column" height="100%">

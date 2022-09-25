@@ -34,7 +34,7 @@ export const getCollection = () => {
       let results = [];
       snapshot.docs.forEach((doc) => {
         let id = {
-          id: doc.id,
+          gameId: doc.id,
         }
         let data = Object.assign(id, doc.data());
         results.push(
