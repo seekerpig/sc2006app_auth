@@ -10,7 +10,7 @@ import { getCollection } from "./DatabaseController";
 export const GamesInfo = () => {
   let games = [];
   let gamelist = getCollection();
-  //console.log(gamelist.games);
+  console.log(gamelist.games);
   if(gamelist.games != null)
   {
     gamelist.games.map((game)=>{

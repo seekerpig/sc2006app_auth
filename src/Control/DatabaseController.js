@@ -33,8 +33,12 @@ export const getCollection = () => {
     getDocs(ref).then((snapshot) => {
       let results = [];
       snapshot.docs.forEach((doc) => {
+        let id = {
+          id: doc.id,
+        }
+        let data = Object.assign(id, doc.data());
         results.push(
-          doc.data()
+          data
         );
       });
       setGames(results);
