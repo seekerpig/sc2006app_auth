@@ -3,10 +3,10 @@ import Container from "@mui/material/Container";
 import Card from "./Card";
 import Filter from "./Filter";
 // import Realtime Games Collection hooks
-import { GamesController } from "./hooks/GamesController";
+import { GamesInfo } from "./hooks/GamesInfoController";
 
 export default function ExplorePage() {
-  const { games: gameList } = GamesController("Games");
+  const { games: gameList } = GamesInfo();
 
   return (
     <Container>

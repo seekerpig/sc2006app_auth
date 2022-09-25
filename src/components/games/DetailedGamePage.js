@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -11,48 +10,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid"; // Grid version 1
 import Button from "@mui/material/Button";
-// import firebase connection
-import { db } from "../../firebaseconfig";
-import { getDoc, doc } from "firebase/firestore";
-// import Game entity
-import Game from "../entities/Game";
+// import GameInfo function from GamesInfoController
+import { GameInfo } from "../hooks/GamesInfoController";
 
 export default function DetailedGamePage() {
   const { gameId } = useParams();
-
-  const [game, setGame] = useState(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    const ref = doc(db, "Games", gameId);
-    setIsPending(true);
-
-    getDoc(ref).then((doc) => {
-      let results;
-      console.log(doc.data());
-      if (doc.data() == null) {
-        setIsPending(false);
-        setError("Could not find that game.");
-      } else {
-        setIsPending(false);
-        results = new Game(
-          doc.id,
-          doc.data().title,
-          doc.data().sportType,
-          doc.data().description,
-          doc.data().date,
-          doc.data().startTime,
-          doc.data().endTime,
-          doc.data().location,
-          doc.data().maxPlayers,
-          doc.data().currentPlayers,
-          doc.data().userList
-        );
-      }
-      setGame(results);
-    });
-  }, [gameId]);
+  const { error,isPending,game } = GameInfo(gameId);
 
   return (
     <div>
@@ -135,7 +98,7 @@ export default function DetailedGamePage() {
                   </Grid>
                   <Grid item xs={8} marginBottom={2}>
                     <Typography variant="body1" component="div">
-                      {new Date(game.date.seconds * 1000)
+                      {new Date(game.startTime.seconds * 1000)
                         .toLocaleDateString("en-GB", {
                           day: "numeric",
                           month: "short",
