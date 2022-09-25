@@ -30,7 +30,7 @@ export default function ProfilePage() {
       <Box sx={{
         display: "flex",
         backgroundColor: '#ffffff',
-        padding: '50px',
+        padding: '3rem',
       }}>
         <Grid container direction="column" justifyContent="center" alignItems="center">
           <Grid item>
@@ -61,7 +61,7 @@ export default function ProfilePage() {
       <Box sx={{
         display: "flex",
         backgroundColor: '#ffffff',
-        padding: '10px',
+        padding: '1rem',
         pt: 5,
         marginTop: '50px',
         align:"center",

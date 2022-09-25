@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { db } from "./DatabaseController";
 // import firebase function
-import { getDoc, doc, onSnapshot, collection } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 // Game entity
 import Game from "../Entity/Game";
 import { getCollection } from "./DatabaseController";
@@ -13,9 +13,9 @@ export const GamesInfo = () => {
   console.log(gamelist.games);
   if(gamelist.games != null)
   {
-    gamelist.games.map((game)=>{
+    gamelist.games.forEach((game)=>{
       games.push(game);
-    })
+    });
   }
   return games;
 };

@@ -22,7 +22,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <a href="#">
+      <a href="https://sc2006app.web.app/">
         TechnicalWizards
       </a>{' '}
       {new Date().getFullYear()}
