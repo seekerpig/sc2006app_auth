@@ -54,17 +54,13 @@ export const login = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
 }
 
+export const signUp = (email, password, name, phoneNo, description, profileImg) => {
+  console.log('hello sign up');
+  return createUserWithEmailAndPassword(auth, email, password);
+  //NEED CODE HERE TO DEAL W CREATING ENTITY in db with name, phone no etc.. and profile img
+}
 
 
 
 
 
-
-
-
-
-
-
-
-
-//export default app;

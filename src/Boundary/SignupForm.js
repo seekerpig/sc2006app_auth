@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAuth } from "../Control/SessionController";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {SignUp} from "../Control/SignUpController";
 
 function Copyright(props) {
   return (
@@ -21,9 +22,9 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function SignUpForm() {
 
-  const { currentUser, signup } = useAuth();
+  const { currentUser } = useAuth();
   //console.log(currentUser);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,9 +48,11 @@ export default function SignUp() {
       setError('');
       
       //CODE FOR CREATING USER:
-      await signup(data.get('email'), data.get('password'));
-      //NEED ADD ONE LINE OF CODE TO CREATE A FIRESTORE USER AND REFERENCE TO USER
-      //MAKE SURE IMAGE IS UPLOADED AND THE LINK IS CREATED FOR THE USER
+      //NEED CODE TO UPLOAD IMAGE TO FIREBASE
+      //AFTER UPLOAD, add all the parameters to the SignUp function, it needs more, see SignUpController.js for full parameters.
+
+      await SignUp(data.get('email'), data.get('password'));
+      
       setError('Signup is successful! Redirecting to login page...');
       setTimeout(function(){
         navigate('/login');

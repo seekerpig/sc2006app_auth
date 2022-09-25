@@ -1,7 +1,6 @@
 import React from 'react'
+import {signUp} from './DatabaseController';
 
-export default function SignUpController() {
-  return (
-    <div>SignUpController</div>
-  )
+export const SignUp = (email, password, name, phoneNo, description, profileImg) => {
+  return signUp(email, password, name, phoneNo, description, profileImg);
 }
