@@ -18,6 +18,9 @@ const Input = styled(MuiInput)`
   width: 42px;
 `;
 
+// RIGHT NOW THE LOCATIONS AND SPORTTYPE IS HARDCODED, YOU NEED TO RETRIEVE THE LIST OF LOCATIONS AND SPORTTYPE FROM DATABASE
+// AND STORE INTO ENTITY OBJECT
+
 const locations = [
   'Jurong Sports Hall',
   'Sengkang Community Centre',
