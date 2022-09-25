@@ -17,10 +17,10 @@ import Card from "./Card";
 import Banner from "./Banner";
 import ExploreSportsBar from "./ExploreSportsBar";
 // import Realtime Games Collection hooks
-import { useGamesCollection } from "./hooks/GamesController";
+import { GamesController } from "./hooks/GamesController";
 
 export default function HomePage() {
-  const { games: gameList } = useGamesCollection("Games");
+  const { games: gameList } = GamesController("Games");
 
   return (
     // <ThemeProvider theme={theme}>

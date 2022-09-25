@@ -5,7 +5,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 // Game entity
 import Game from "../entities/Game";
 
-export const useGamesCollection = (c) => {
+export const GamesController = (c) => {
   const [games, setGames] = useState(null);
 
   useEffect(() => {
