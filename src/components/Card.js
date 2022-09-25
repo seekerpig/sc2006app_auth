@@ -66,7 +66,7 @@ export default function GameList({ games }) {
                           ml: 1,
                         }}
                       >
-                        {new Date(game.date.seconds * 1000)
+                        {new Date(game.startTime.seconds * 1000)
                           .toLocaleDateString("en-GB", {
                             day: "numeric",
                             month: "short",

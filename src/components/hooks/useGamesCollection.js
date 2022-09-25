@@ -20,7 +20,6 @@ export const useGamesCollection = (c) => {
             doc.data().title,
             doc.data().sportType,
             doc.data().description,
-            doc.data().date,
             doc.data().startTime,
             doc.data().endTime,
             doc.data().location,

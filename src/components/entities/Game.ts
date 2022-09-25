@@ -6,7 +6,6 @@ export default class Game
     title = "";
     sportType = "";
     description = "";
-    date = new Date();
     startTime = new Date();
     endTime = new Date();
     location = "";
@@ -15,13 +14,12 @@ export default class Game
     userList: string[] = [];
 
 
-    constructor (id:string,title:string, sportType:string, description:string, date: Date, startTime: Date, endTime:Date, location:string, maxPlayers:number, currentPlayers:number, uid:string)
+    constructor (id:string,title:string, sportType:string, description:string, startTime: Date, endTime:Date, location:string, maxPlayers:number, currentPlayers:number, uid:string)
     {
         this.gameId = id;
         this.title = title;
         this.sportType = sportType;
         this.description = description;
-        this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.location = location;
