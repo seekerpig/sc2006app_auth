@@ -107,6 +107,7 @@ export default function Creategame() {
       setLoading(true);
       
       //NEED SOME CODE HERE TO CREATE A NEW DOC IN FIRESTORE
+      //NEED TO IMPORT CreateNewGame() from CreateGameController
       setError('Game is successfully created. Redirecting to profile page...');
       setTimeout(function(){
         navigate('/profile');
