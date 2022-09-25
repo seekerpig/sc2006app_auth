@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, where, query, onSnapshot } from "firebase/firestore";
 import { useState, useEffect } from "react";
 
 // Your web app's Firebase configuration
@@ -49,6 +49,31 @@ export const getCollection = () => {
   return { games };
 }
 
+export const getFilteredGames = (sportType) => {
+
+  const [games, setGames] = useState(null);
+
+
+  useEffect(() => {
+    const ref = collection(db, "Games");
+    const q = query(ref, where("sportType", "==", sportType));
+
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      const results = [];
+      querySnapshot.forEach((doc) => {
+        results.push({ id: doc.id, ...doc.data() });
+      });
+      setGames(results);
+    });
+    return () => {
+      unsub();
+    }
+  }, []);
+
+  console.log(games);
+  return { games };
+}
+
 export const login = (email, password) => {
   console.log('trying to login');
   return signInWithEmailAndPassword(auth, email, password);
@@ -58,6 +83,15 @@ export const signUp = (email, password, name, phoneNo, description, profileImg) 
   console.log('hello sign up');
   return createUserWithEmailAndPassword(auth, email, password);
   //NEED CODE HERE TO DEAL W CREATING ENTITY in db with name, phone no etc.. and profile img
+}
+
+
+
+export const getQuery = async () => {
+
+  let ref = collection(db, "Games");
+  return await getDocs(ref);
+  
 }
 
 

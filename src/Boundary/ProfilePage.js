@@ -14,6 +14,7 @@ const user1 = new User("abcd", "James Tan", "jamestan@gmail.com", "92749920", "I
 const game1 = new Game("game1", "30 minute quick game", "Badminton", "Come join for a 30mins quick game at Queenstown. Need a partner to play with! Telegram: @james02", {seconds: 1663430400, nanoseconds: 839000000}, {seconds: 1663430400, nanoseconds: 839000000}, "Queenstown Sports Centre", 4, 1, user1.uniqueId)
 const game2 = new Game("game2", "my second game!", "Badminton", "Come join for a 30mins quick game at Queenstown. Need a partner to play with! Telegram: @james02", {seconds: 1663430400, nanoseconds: 839000000}, {seconds: 1663430400, nanoseconds: 839000000}, "Queenstown Sports Centre", 4, 1, user1.uniqueId)
 //MISSING SOME LOGIC TO RETRIEVE USER FROM DATABASE INSTEAD OF HARDCODE LIKE THIS
+//IMPORT AND USE FUNCTION FROM ProfileController instead of coding it here
 //AFTER RETRIEVE USER FROM DATABASE, YOU NEED TO FIND THE GAMES OF THE USER and user1.addGameToUser()
 //ALSO FOR EACH GAME, POPULATE A CARD FOR PROFILE.
 
@@ -31,36 +32,37 @@ export default function ProfilePage() {
         display: "flex",
         backgroundColor: '#ffffff',
         padding: '3rem',
+        paddingBottom: '5rem',
       }}>
         <Grid container direction="column" justifyContent="center" alignItems="center">
           <Grid item>
-            <Typography gutterBottom variant="h6" align="center">
+            <Typography gutterBottom variant="h6" align="center" >
               Profile Page
             </Typography>
           </Grid>
-          <Grid item>
-            <img alt={user1.name} src={user1.profileImage} style={{ borderRadius: '50px', margin:'20px'}} />
+          <Grid item align="center">
+            <img alt={user1.name} src={user1.profileImage} style={{ borderRadius: '1rem', marginBottom:'20px', maxWidth:'100%', minWidth:'60%'}} />
           </Grid>
           <Grid item>
-            <Typography gutterBottom><b>Name:</b> {user1.name} </Typography>
+            <Typography align="center" gutterBottom><b>Name:</b> {user1.name} </Typography>
           </Grid>
           <Grid item>
-            <Typography gutterBottom><b>Email address:</b> {user1.email} </Typography>
+            <Typography align="center" gutterBottom><b>Email address:</b> {user1.email} </Typography>
           </Grid>
           <Grid item>
-            <Typography style={{marginBottom:'30px'}}><b>Phone Number:</b> {user1.phoneNo} </Typography>
+            <Typography  align="center" style={{marginBottom:'30px'}}><b>Phone Number:</b> {user1.phoneNo} </Typography>
           </Grid>
           <Grid item align="center" >
-            <Paper style={{ width: '80%', minHeight: '50px', backgroundColor: '#3563e9', color: '#ffffff',padding:'30px', borderRadius:'20px'}}>
-              <Typography gutterBottom variant="h6" style={{fontSize:'16px'}}>About Me / Description</Typography>
-              <Typography>{user1.description}</Typography>
+            <Paper style={{  minWidth:'60%', minHeight: '50px', backgroundColor: '#3563e9', color: '#ffffff',padding:'1.5rem', borderRadius:'1rem'}}>
+              <Typography gutterBottom variant="h6" style={{fontSize:'16px',color: '#ffffff'}}>Description:</Typography>
+              <Typography style={{fontSize:'14px'}}>{user1.description}</Typography>
             </Paper>
           </Grid>
         </Grid>
       </Box>
       <Box sx={{
         display: "flex",
-        backgroundColor: '#ffffff',
+        //backgroundColor: '#ffffff',
         padding: '1rem',
         pt: 5,
         marginTop: '50px',
@@ -70,7 +72,7 @@ export default function ProfilePage() {
         <Typography gutterBottom variant="h6" align="center" style={{marginBottom:'20px'}} >
           My Games
         </Typography>
-        {games && <Card games={games} />}
+        {games && <Card games={games}/>}
         {/* <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} sx={{width:"100%"}}>
           {user1.gameList.map((game, index) => (
             <Grid item xs={12} sm={12} md={6} lg={4} key={index} align="center" >

@@ -13,11 +13,12 @@ import { Typography } from "@mui/material";
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 import IconButton from "@mui/material/IconButton";
 import Grid from '@mui/material/Grid'; // Grid version 1
+import { Filter } from "../../Control/Filter"
 
 const sportList = ['Badminton', 'Basketball', 'Tennis', 'Soccer']
 const locationList = ['Jurong Corut', 'Sengkang Court', 'NTU Sports Complex']
 // const dateList = ['date 1', 'date 2', 'date 3']
-
+const q = Filter();
 
 export default function SelectVariants() {
     const today = new Date()
@@ -34,6 +35,7 @@ export default function SelectVariants() {
     const handleDate = (newValue) => {
         setValue(newValue);
     };
+
 
     return (
         <Box

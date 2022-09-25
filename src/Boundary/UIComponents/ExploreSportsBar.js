@@ -31,7 +31,7 @@ export default function ExploreSportsBar() {
                 alignItems="center"
                 justifyContent="space-evenly">
                 <Grid item xs align="center">
-                    <Link to="./explore"> {/*currently only link to explore page but does not trigger filter*/}
+                    <Link to="./explore?sports=Badminton"> {/*currently only link to explore page but does not trigger filter*/}
                         <Paper style={{ display: 'flex', justifyContent: 'center' }}
                             sx={{
                                 minHeight: 150,
@@ -53,7 +53,7 @@ export default function ExploreSportsBar() {
 
                 </Grid>
                 <Grid item xs align="center">
-                    <Link to="./explore" > {/*currently only link to explore page but does not trigger filter*/}
+                    <Link to="./explore?sports=Basketball" > {/*currently only link to explore page but does not trigger filter*/}
                         <Paper style={{ display: 'flex', justifyContent: 'center' }}
                             sx={{
                                 minHeight: 150,
@@ -75,7 +75,7 @@ export default function ExploreSportsBar() {
 
                 </Grid>
                 <Grid item xs align="center">
-                    <Link to="./explore"> {/*currently only link to explore page but does not trigger filter*/}
+                    <Link to="./explore?sports=Soccer"> {/*currently only link to explore page but does not trigger filter*/}
                         <Paper style={{ display: 'flex', justifyContent: 'center' }}
                             sx={{
                                 minHeight: 150,
@@ -98,7 +98,7 @@ export default function ExploreSportsBar() {
                 </Grid>
 
                 <Grid item xs align="center">
-                    <Link to="./explore"> {/*currently only link to explore page but does not trigger filter*/}
+                    <Link to="./explore?sports=Pingpong"> {/*currently only link to explore page but does not trigger filter*/}
                         <Paper style={{ display: 'flex', justifyContent: 'center' }}
                             sx={{
                                 minHeight: 150,
@@ -121,7 +121,7 @@ export default function ExploreSportsBar() {
                 </Grid>
 
                 <Grid item xs align="center">
-                    <Link to="./explore"> {/*currently only link to explore page but does not trigger filter*/}
+                    <Link to="./explore?sports=Volleyball"> {/*currently only link to explore page but does not trigger filter*/}
                         <Paper style={{ display: 'flex', justifyContent: 'center' }}
                             sx={{
                                 minHeight: 150,
@@ -143,7 +143,7 @@ export default function ExploreSportsBar() {
 
                 </Grid>
                 <Grid item xs align="center">
-                    <Link to="./explore"> {/*currently only link to explore page but does not trigger filter*/}
+                    <Link to="./explore?sports=Cycling"> {/*currently only link to explore page but does not trigger filter*/}
                         <Paper style={{ display: 'flex', justifyContent: 'center' }}
                             sx={{
                                 minHeight: 150,
