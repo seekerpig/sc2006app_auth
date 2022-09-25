@@ -1,6 +1,7 @@
 import React from 'react'
 import { Avatar, Button, CssBaseline, TextField, Grid, Box, Typography, Container, Alert, MenuItem, InputLabel, FormControl, Select, Slider, Stack } from '@mui/material/';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import GroupIcon from '@mui/icons-material/Group';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import { useAuth } from "../Control/SessionController";
@@ -134,8 +135,8 @@ export default function Creategame() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+          <AddCircleIcon/>
           </Avatar>
           <Typography component="h1" variant="h5">
             Create A Game
