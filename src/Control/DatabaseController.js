@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, collection, getDocs, where, query, onSnapshot } from "firebase/firestore";
-import { useState, useEffect } from "react";
+import { getFirestore, collection, getDocs, doc, getDoc } from "firebase/firestore";
+
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -23,56 +23,31 @@ const auth = getAuth(app);
 
 export { db, auth }
 
-// Generic function to get a entire collection from Firebase (Games, Users, or Facilities)
-export const getCollection = () => {
+// export const getCollection = () => {
 
-  const [games, setGames] = useState(null);
+//   const [games, setGames] = useState(null);
 
-  useEffect(() => {
-    let ref = collection(db, "Games");
-    getDocs(ref).then((snapshot) => {
-      let results = [];
-      snapshot.docs.forEach((doc) => {
-        let id = {
-          gameId: doc.id,
-        }
-        let data = Object.assign(id, doc.data());
-        results.push(
-          data
-        );
-      });
-      setGames(results);
-    });
-    // return () => unsub();
-  }, []);
+//   useEffect(() => {
+//     let ref = collection(db, "Games");
+//     getDocs(ref).then((snapshot) => {
+//       let results = [];
+//       snapshot.docs.forEach((doc) => {
+//         let id = {
+//           gameId: doc.id,
+//         }
+//         let data = Object.assign(id, doc.data());
+//         results.push(
+//           data
+//         );
+//       });
+//       setGames(results);
+//     });
+//     // return () => unsub();
+//   }, []);
 
-  return { games };
-}
+//   return { games };
+// }
 
-export const getFilteredGames = (sportType) => {
-
-  const [games, setGames] = useState(null);
-
-
-  useEffect(() => {
-    const ref = collection(db, "Games");
-    const q = query(ref, where("sportType", "==", sportType));
-
-    const unsub = onSnapshot(q, (querySnapshot) => {
-      const results = [];
-      querySnapshot.forEach((doc) => {
-        results.push({ id: doc.id, ...doc.data() });
-      });
-      setGames(results);
-    });
-    return () => {
-      unsub();
-    }
-  }, []);
-
-  console.log(games);
-  return { games };
-}
 
 export const login = (email, password) => {
   console.log('trying to login');
@@ -87,13 +62,19 @@ export const signUp = (email, password, name, phoneNo, description, profileImg) 
 
 
 
-export const getQuery = async () => {
+export const getGames = async () => {
 
   let ref = collection(db, "Games");
   return await getDocs(ref);
   
 }
 
+export const getAGame = async (gameId) => {
+
+  const ref = doc(db, "Games", gameId);
+  return await getDoc(ref);
+  
+}
 
 
 

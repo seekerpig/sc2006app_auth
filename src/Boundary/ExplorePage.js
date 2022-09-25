@@ -1,17 +1,13 @@
 import React, { useEffect } from "react";
-import { db } from "../Control/DatabaseController";
 import Card from "./UIComponents/Card";
-// import Realtime Games Collection hooks
-import { GamesInfo } from "../Control/GamesInfoController";
 import { useSearchParams } from "react-router-dom";
-import { Container, MenuItem, FormControl, Select, Box, Stack, TextField, Grid, Typography, IconButton } from "@mui/material/";
-import dayjs from 'dayjs';
+import { Container, MenuItem, FormControl, Select, Box, Stack, TextField, Grid, Typography, IconButton, Alert, AlertTitle } from "@mui/material/";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 import { FilterByFacility, FilterBySports, FilterByDate } from "../Control/Filter";
-import { getQuery } from "../Control/DatabaseController";
+import { GetGames } from "../Control/GamesInfoController";
 import Game from "../Entity/Game";
 export default function ExplorePage() {
   const [ogList, setOGList] = React.useState([]);
@@ -24,7 +20,7 @@ export default function ExplorePage() {
     (async () => {
       try {
         // await async "fetchBooks()" function
-        const games = await getQuery();
+        const games = await GetGames();
 
         // get the dropdown filter list based on existing data
         setSportList(games.docs.map((doc) => (
@@ -68,7 +64,7 @@ export default function ExplorePage() {
         {
           setSport(searchParams.get('sports')[0].toUpperCase() + searchParams.get('sports').substring(1));
           games.docs.map((doc) => (
-            doc.data().sportType.toUpperCase() == searchParams.get('sports').toUpperCase() &&
+            doc.data().sportType.toUpperCase() === searchParams.get('sports').toUpperCase() &&
               results.push(new Game(
                 doc.id,
                 doc.data().title,
@@ -197,7 +193,7 @@ export default function ExplorePage() {
           </Box>
         </Stack>
       </Box>
-      {filteredList && <Card games={filteredList} />}
+      {filteredList.length ===0?<Alert severity="error"> <AlertTitle>Error</AlertTitle>No Games Found, Try Other Filter Options</Alert> : <Card games={filteredList} />}
     </Container>
   );
 }

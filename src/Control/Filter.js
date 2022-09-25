@@ -1,15 +1,13 @@
-import { db } from "./DatabaseController";
-// import firebase function
-import { collection, query, where, getDocs } from "firebase/firestore";
 
+// import firebase function
 export const FilterBySports = (games, sport ) =>{
     let newGamesArr = [];
-    if (sport == ""){ return games; }
+    if (sport === ""){ return games; }
     else
     {
         for (let i = 0; i < games.length;i++)
         {
-            if (games[i].sportType.toUpperCase() == sport.toUpperCase())
+            if (games[i].sportType.toUpperCase() === sport.toUpperCase())
             {
                 newGamesArr.push(games[i]);
             }
@@ -21,12 +19,12 @@ export const FilterBySports = (games, sport ) =>{
 export const FilterByFacility = (games, location ) =>{
     let newLocationArr = [];
     console.log(location);
-    if (location == "") { return games; }
+    if (location === "") { return games; }
     else
     {
         for (let i = 0; i < games.length;i++)
         {
-            if (games[i].location.toUpperCase() == location.toUpperCase())
+            if (games[i].location.toUpperCase() === location.toUpperCase())
             {
                 newLocationArr.push(games[i]);
             }
@@ -39,7 +37,7 @@ export const FilterByFacility = (games, location ) =>{
 export const FilterByDate = (games, date ) =>{
     let newDateArr = [];
     console.log(date.format('DD/MM/YYYY'));
-    if (date == "") { return games; }
+    if (date === "") { return games; }
     else
     {
         for (let i = 0; i < games.length;i++)
@@ -48,7 +46,7 @@ export const FilterByDate = (games, date ) =>{
                 'en-GB', {
                   day: 'numeric', month: 'numeric', year: 'numeric'
                 }
-              ).replace(/ /g, '/') == date.format('DD/MM/YYYY'))
+              ).replace(/ /g, '/') === date.format('DD/MM/YYYY'))
             {
                 newDateArr.push(games[i]);
             }

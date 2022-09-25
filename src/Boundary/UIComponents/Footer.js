@@ -22,15 +22,23 @@ const footers = [
 
 export default function Footer() {
   return (
-    <div
+    <Box
       id="footer"
-      style={{
-        backgroundColor: "white",
-        minHeight: "300px",
-        marginTop: "60px",
-        borderTop: "1px solid #dedede",
-        padding: "60px",
-      }}
+      sx={{marginTop: '60px',
+    width: '100%',
+    bottom: 0,
+    backgroundColor:'white',
+    padding:'60px',
+    minHeight:'350px',
+    borderTop:'1px solid #dedede',}}
+
+      // style={{
+      //   backgroundColor: "white",
+      //   marginTop: "60px",
+      //   borderTop: "1px solid #dedede",
+      //   padding: "60px",
+
+      // }}
     >
       <Container>
         <Grid container>
@@ -88,6 +96,6 @@ export default function Footer() {
           ))}
         </Grid>
       </Container>
-    </div>
+    </Box>
   );
 }

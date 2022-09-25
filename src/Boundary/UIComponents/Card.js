@@ -21,7 +21,7 @@ export default function GameList({games}) {
       {games.map((game) => (
         
         <Grid item xs={12} sm={6} md={4} lg={3} key={game.gameId} display="flex">
-          <Card width="100%" style={{borderRadius:'1rem'}}>
+          <Card width="100%" style={{borderRadius:'0.5rem'}}>
             <Box display="flex" flexDirection="column" height="100%">
               <Box>
                 <CardMedia

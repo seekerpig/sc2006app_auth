@@ -1,26 +1,29 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
+import {Typography, Card, CardActions, Alert, AlertTitle, CardMedia, Box, Grid, Button} from "@mui/material/";
+import LinearProgress from '@mui/material/LinearProgress';
 import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { Link } from "react-router-dom";
-import CardMedia from "@mui/material/CardMedia";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid"; // Grid version 1
-import Button from "@mui/material/Button";
+import { Link,useNavigate } from "react-router-dom";
+
 // import GameInfo function from GamesInfoController
 import { GameInfo } from "../Control/GamesInfoController";
 
 export default function DetailedGamePage() {
   const { gameId } = useParams();
   const { error,isPending,game } = GameInfo(gameId);
-
+  const navigate = useNavigate();
+  if (error)
+  {
+    setTimeout(function(){
+      navigate('/');
+    }, 5000); 
+  }
   return (
     <div>
-      {error && <Typography>{error}</Typography>}
-      {isPending && <Typography>Loading...</Typography>}
+      
+      {error && <Alert severity="error"> <AlertTitle>Error</AlertTitle>Game not found. Redirecting...</Alert>}
+      {isPending && <LinearProgress />}
       {game && (
         <Box>
           <Box paddingBottom={2}>

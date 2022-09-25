@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 //import { useAuth } from "../contexts/AuthContext";
 // import Card from "@mui/material/Card";
 // import CardActions from '@mui/material/CardActions';
@@ -12,20 +12,45 @@ import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 // import ResponsiveAppBar from './Navbar';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Game from "../Entity/Game";
 import Container from "@mui/material/Container";
 import Card from "./UIComponents/Card";
 import Banner from "./UIComponents/Banner";
 import ExploreSportsBar from "./UIComponents/ExploreSportsBar";
 // import Realtime Games Collection hooks
-import { GamesInfo } from "../Control/GamesInfoController";
+import { GetGames } from "../Control/GamesInfoController";
 
 
 
 
 export default function HomePage() {
-  const gameList = GamesInfo();
+  const [gameList, setList] = React.useState([]);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const games = await GetGames();
+        setList(games.docs.map((doc) => (
+          new Game(
+            doc.id,
+            doc.data().title,
+            doc.data().sportType,
+            doc.data().description,
+            doc.data().startTime,
+            doc.data().endTime,
+            doc.data().location,
+            doc.data().maxPlayers,
+            doc.data().currentPlayers,
+            doc.data().userList
+          )
+        )));
 
+        
+      } catch (err) {
+        console.log('Error occured when fetching games');
+      }
+    })();
+  }, []);
   return (
     // <ThemeProvider theme={theme}>
     //   <ResponsiveAppBar/>
