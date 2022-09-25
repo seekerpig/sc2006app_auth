@@ -238,7 +238,7 @@ export default function Creategame() {
                       value={typeof players === 'number' ? players : 0}
                       onChange={handleSliderChange}
                       aria-labelledby="input-slider"
-                      max='10'
+                      max='12'
                     />
                   </Grid>
                   <Grid item>
@@ -251,7 +251,7 @@ export default function Creategame() {
                       inputProps={{
                         step: 1,
                         min: 1,
-                        max: 10,
+                        max: 12,
                         type: 'number',
                         'aria-labelledby': 'input-slider',
                       }}
