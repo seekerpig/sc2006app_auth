@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid"; // Grid version 1
 import Button from "@mui/material/Button";
 // import GameInfo function from GamesInfoController
-import { GameInfo } from "../hooks/GamesInfoController";
+import { GameInfo } from "../Control/GamesInfoController";
 
 export default function DetailedGamePage() {
   const { gameId } = useParams();

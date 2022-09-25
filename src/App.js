@@ -1,12 +1,12 @@
 import * as React from "react";
-import SignupForm from "./SignupForm";
-import LoginForm from "./LoginForm";
-import HomePage from "./HomePage";
-import CreateGameForm from "./CreateGameForm";
-import ProfilePage from "./ProfilePage";
-import ExplorePage from "./ExplorePage";
-import DetailedGamePage from "./games/DetailedGamePage";
-import { AuthProvider } from "../contexts/AuthContext";
+import SignupForm from "./Boundary/SignupForm";
+import LoginForm from "./Boundary/LoginForm";
+import HomePage from "./Boundary/HomePage";
+import CreateGameForm from "./Boundary/CreateGameForm";
+import ProfilePage from "./Boundary/ProfilePage";
+import ExplorePage from "./Boundary/ExplorePage";
+import DetailedGamePage from "./Boundary/DetailedGamePage";
+import { AuthProvider } from "./Control/SessionController";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //import Navbar from './Navbar';

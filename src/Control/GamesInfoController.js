@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { db } from "../../firebaseconfig";
+import { db } from "../firebaseconfig";
 // import firebase function
 import { collection, onSnapshot } from "firebase/firestore";
 import { getDoc, doc } from "firebase/firestore";
 // Game entity
-import Game from "../entities/Game";
+import Game from "../Entity/Game";
 
 
 // Function to get ALL games

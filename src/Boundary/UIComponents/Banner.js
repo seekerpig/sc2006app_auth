@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Grid, Button, Paper } from "@mui/material/";
 //import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 //import { Link } from "react-router-dom";
-import Image from './bluebg.jpg'; // Import using relative path
+import Image from './images/bluebg.jpg'; // Import using relative path
 
 
 

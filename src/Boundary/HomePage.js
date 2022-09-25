@@ -13,11 +13,11 @@ import { Link } from "react-router-dom";
 // import ResponsiveAppBar from './Navbar';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from "@mui/material/Container";
-import Card from "./Card";
-import Banner from "./Banner";
-import ExploreSportsBar from "./ExploreSportsBar";
+import Card from "./UIComponents/Card";
+import Banner from "./UIComponents/Banner";
+import ExploreSportsBar from "./UIComponents/ExploreSportsBar";
 // import Realtime Games Collection hooks
-import { GamesInfo } from "./hooks/GamesInfoController";
+import { GamesInfo } from "../Control/GamesInfoController";
 
 export default function HomePage() {
   const { games: gameList } = GamesInfo();

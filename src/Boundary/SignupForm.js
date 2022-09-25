@@ -1,29 +1,18 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-//import FormControlLabel from '@mui/material/FormControlLabel';
-//import Checkbox from '@mui/material/Checkbox';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container, Alert } from '@mui/material/';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Alert from '@mui/material/Alert'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {useAuth} from "../contexts/AuthContext";
-import {useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
-
+import { useAuth } from "../Control/SessionController";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <a href="https://mui.com/">
-        Your Website
-      </a>{' '}
+      <Link color="inherit" href="#">
+        TechnicalWizards
+      </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -32,14 +21,13 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function LoginForm() {
+export default function SignUp() {
 
-  const {currentUser, login} = useAuth();
+  const { currentUser, signup } = useAuth();
   //console.log(currentUser);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -49,26 +37,25 @@ export default function LoginForm() {
       password: data.get('password'),
     });
 
-    if (data.get('password') === 'abc')
-    {
+    if (data.get('password') === 'abc') {
       return setError('Password is wrong testing!');
     }
 
-    try{
+    try {
       setLoading(true);
       setError('');
-      await login(data.get('email'), data.get('password') );
-      navigate('/');
+      await signup(data.get('email'), data.get('password'));
+      navigate('/login');
     } catch {
 
-      setError('Failed to Login');
+      setError('Failed to Create Account');
     }
 
     setLoading(false);
-    
+
   };
 
-  
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -86,10 +73,31 @@ export default function LoginForm() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            Sign up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="firstName"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="family-name"
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -111,6 +119,38 @@ export default function LoginForm() {
                   autoComplete="new-password"
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="phoneNumber"
+                  label="Phone Number"
+                  type="number"
+                  id="phoneNumber"
+                  autoComplete="tel-national"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  multiline
+                  fullWidth
+                  rows={4}
+                  name="description"
+                  label="Description"
+                  id="description"
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <Button variant="outlined" component="label">
+                  Upload Your Profile Picture
+                  <input accept="image/*" type="file" id="img" name="img" />
+                </Button>
+
+              </Grid>
+
+              
             </Grid>
             <Button
               disabled={loading}
@@ -119,14 +159,14 @@ export default function LoginForm() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Login
+              Sign Up
             </Button>
             {error && <Alert severity="error">{error}</Alert>}
             {currentUser && <p>Current logged user is {currentUser.email}</p>}
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/signup">
-                  Sign Up
+                <Link href="#" variant="body2">
+                  Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
