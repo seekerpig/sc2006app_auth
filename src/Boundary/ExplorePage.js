@@ -6,12 +6,12 @@ import Filter from "./UIComponents/FilterUI";
 import { GamesInfo } from "../Control/GamesInfoController";
 
 export default function ExplorePage() {
-  const { games: gameList } = GamesInfo();
+  const gameList = GamesInfo();
 
   return (
     <Container>
       <Filter />
-      {gameList && <Card games={gameList} />}
+      {gameList.length !== 0 && <Card games={gameList} />}
     </Container>
   );
 }

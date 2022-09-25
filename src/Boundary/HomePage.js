@@ -19,8 +19,12 @@ import ExploreSportsBar from "./UIComponents/ExploreSportsBar";
 // import Realtime Games Collection hooks
 import { GamesInfo } from "../Control/GamesInfoController";
 
+
+
+
 export default function HomePage() {
-  const { games: gameList } = GamesInfo();
+  const gameList = GamesInfo();
+
 
   return (
     // <ThemeProvider theme={theme}>
@@ -50,7 +54,7 @@ export default function HomePage() {
           Find Games to Play
         </Typography>
       </div>
-      {gameList && <Card games={gameList} />}
+      {gameList.length !== 0 && <Card games={gameList} />}
 
       <Box
         sx={{ display: "flex", justifyContent: "center", marginTop: "60px" }}

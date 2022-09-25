@@ -1,10 +1,8 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"
 import {getAuth} from "firebase/auth";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
+import {getFirestore , collection, onSnapshot,getDoc, doc, getDocs } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import Game from "../Entity/Game";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -24,8 +22,40 @@ const db = getFirestore();
 const auth = getAuth(app);
 
 export { db, auth }
-// export { auth }
 
-// export const auth = getAuth(app);
+// Generic function to get a entire collection from Firebase (Games, Users, or Facilities)
+export const getCollection = () => {
 
-// export default app;
+  const [games, setGames] = useState(null);
+
+  useEffect(() => {
+    let ref = collection(db, "Games");
+    getDocs(ref).then((snapshot) => {
+      let results = [];
+      snapshot.docs.forEach((doc) => {
+        results.push(
+          doc.data()
+        );
+      });
+      setGames(results);
+    });
+    // return () => unsub();
+  }, []);
+
+  return {games} ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//export default app;

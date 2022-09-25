@@ -10,7 +10,7 @@ import Image from './images/bluebg.jpg'; // Import using relative path
 function Banner() {
     return (
         <div style={{ margin: '20px 0px' }}>
-            <Paper classname="paperContainer" style={{ backgroundImage: `url(${Image})` }} sx={{
+            <Paper className="paperContainer" style={{ backgroundImage: `url(${Image})` }} sx={{
                 minHeight: 300,
                 borderRadius: '16px',
 

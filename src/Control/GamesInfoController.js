@@ -1,47 +1,27 @@
 import { useState, useEffect } from "react";
 import { db } from "./DatabaseController";
 // import firebase function
-import { collection, onSnapshot } from "firebase/firestore";
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, onSnapshot, collection } from "firebase/firestore";
 // Game entity
 import Game from "../Entity/Game";
+import { getCollection } from "./DatabaseController";
 
-
-// Function to get ALL games
+// Function to get ALL games from databasecontroller
 export const GamesInfo = () => {
-  const [games, setGames] = useState(null);
-
-  useEffect(() => {
-    let ref = collection(db, "Games");
-
-    const unsub = onSnapshot(ref, (snapshot) => {
-      let results = [];
-      snapshot.docs.forEach((doc) => {
-        results.push(
-          new Game(
-            doc.id,
-            doc.data().title,
-            doc.data().sportType,
-            doc.data().description,
-            doc.data().startTime,
-            doc.data().endTime,
-            doc.data().location,
-            doc.data().maxPlayers,
-            doc.data().currentPlayers,
-            doc.data().userList
-          )
-        );
-      });
-      setGames(results);
-    });
-    return () => unsub();
-  }, ["Games"]);
-
-  return { games };
+  let games = [];
+  let gamelist = getCollection();
+  //console.log(gamelist.games);
+  if(gamelist.games != null)
+  {
+    gamelist.games.map((game)=>{
+      games.push(game);
+    })
+  }
+  return games;
 };
 
 // Function to get ONE game
-export const GameInfo = (gameId) =>{
+export const GameInfo = (gameId) => {
 
   const [game, setGame] = useState(null);
   const [isPending, setIsPending] = useState(false);
@@ -53,7 +33,7 @@ export const GameInfo = (gameId) =>{
 
     getDoc(ref).then((doc) => {
       let results;
-      console.log(doc.data());
+      //console.log(doc.data());
       if (doc.data() == null) {
         setIsPending(false);
         setError("Could not find that game.");
@@ -76,5 +56,5 @@ export const GameInfo = (gameId) =>{
     });
   }, [gameId]);
 
-  return {error, isPending, game};
+  return { error, isPending, game };
 }

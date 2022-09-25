@@ -33,19 +33,27 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      name: data.get('firstName') + data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
+      phoneNumber: data.get('phoneNumber'),
+      description: data.get('description'),
+      fileName: data.get('img'),
     });
 
-    if (data.get('password') === 'abc') {
-      return setError('Password is wrong testing!');
-    }
 
     try {
       setLoading(true);
       setError('');
+      
+      //CODE FOR CREATING USER:
       await signup(data.get('email'), data.get('password'));
-      navigate('/login');
+      //NEED ADD ONE LINE OF CODE TO CREATE A FIRESTORE USER AND REFERENCE TO USER
+      //MAKE SURE IMAGE IS UPLOADED AND THE LINK IS CREATED FOR THE USER
+      setError('Signup is successful! Redirecting to login page...');
+      setTimeout(function(){
+        navigate('/login');
+      }, 3000); 
     } catch {
 
       setError('Failed to Create Account');

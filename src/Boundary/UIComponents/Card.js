@@ -13,7 +13,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
-export default function GameList({ games }) {
+export default function GameList({games}) {
   console.log(games);
   return (
     <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }}>
