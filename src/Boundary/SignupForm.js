@@ -1,29 +1,44 @@
-import * as React from 'react';
-import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container, Alert } from '@mui/material/';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import * as React from "react";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  Alert,
+} from "@mui/material/";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+// import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth } from "../Control/SessionController";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {SignUp} from "../Control/SignUpController";
+import { SignUp } from "../Control/SignUpController";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
       <Link color="inherit" href="#">
         TechnicalWizards
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
-const theme = createTheme();
+// const theme = createTheme();
 
 export default function SignUpForm() {
-
   const { currentUser } = useAuth();
   //console.log(currentUser);
   const [error, setError] = useState("");
@@ -34,59 +49,59 @@ export default function SignUpForm() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      name: data.get('firstName') + data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
-      phoneNumber: data.get('phoneNumber'),
-      description: data.get('description'),
-      fileName: data.get('img'),
+      name: data.get("firstName") + data.get("lastName"),
+      email: data.get("email"),
+      password: data.get("password"),
+      phoneNumber: data.get("phoneNumber"),
+      description: data.get("description"),
+      fileName: data.get("img"),
     });
-
 
     try {
       setLoading(true);
-      setError('');
-      
+      setError("");
+
       //CODE FOR CREATING USER:
       //NEED CODE TO UPLOAD IMAGE TO FIREBASE
       //AFTER UPLOAD, add all the parameters to the SignUp function, it needs more, see SignUpController.js for full parameters.
 
-      await SignUp(data.get('email'), data.get('password'));
-      
-      setError('Signup is successful! Redirecting to login page...');
-      setTimeout(function(){
-        navigate('/login');
-      }, 3000); 
-    } catch {
+      await SignUp(data.get("email"), data.get("password"));
 
-      setError('Failed to Create Account');
+      setError("Signup is successful! Redirecting to login page...");
+      setTimeout(function() {
+        navigate("/login");
+      }, 3000);
+    } catch {
+      setError("Failed to Create Account");
     }
 
     setLoading(false);
-
-  };
-
-
+  }
 
   return (
-    <ThemeProvider theme={theme}>
+    <Box sx={{ bgcolor: "secondary.main", padding: 2, borderRadius: "8px" }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            py: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -158,10 +173,7 @@ export default function SignUpForm() {
                   Upload Your Profile Picture
                   <input accept="image/*" type="file" id="img" name="img" />
                 </Button>
-
               </Grid>
-
-              
             </Grid>
             <Button
               disabled={loading}
@@ -185,6 +197,6 @@ export default function SignUpForm() {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
+    </Box>
   );
 }

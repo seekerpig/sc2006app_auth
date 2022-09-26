@@ -24,13 +24,15 @@ export default function Footer() {
   return (
     <Box
       id="footer"
-      sx={{marginTop: '60px',
-    width: '100%',
-    bottom: 0,
-    backgroundColor:'white',
-    padding:'60px',
-    minHeight:'350px',
-    borderTop:'1px solid #dedede',}}
+      sx={{
+        marginTop: "60px",
+        width: "100%",
+        bottom: 0,
+        backgroundColor: "white",
+        padding: "60px",
+        minHeight: "350px",
+        borderTop: "1px solid #dedede",
+      }}
 
       // style={{
       //   backgroundColor: "white",

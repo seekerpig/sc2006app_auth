@@ -1,19 +1,35 @@
-import React from 'react'
-import { Avatar, Button, CssBaseline, TextField, Grid, Box, Typography, Container, Alert, MenuItem, InputLabel, FormControl, Select, Slider, Stack } from '@mui/material/';
+import React from "react";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  Alert,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Select,
+  Slider,
+  Stack,
+} from "@mui/material/";
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import GroupIcon from '@mui/icons-material/Group';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+
+import { styled } from "@mui/material/styles";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import GroupIcon from "@mui/icons-material/Group";
 import { useAuth } from "../Control/SessionController";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import Game from "./entities/Game";
-import dayjs from 'dayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import MuiInput from '@mui/material/Input';
-
+import dayjs from "dayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import MuiInput from "@mui/material/Input";
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -23,31 +39,29 @@ const Input = styled(MuiInput)`
 // AND STORE INTO ENTITY OBJECT
 
 const locations = [
-  'Jurong Sports Hall',
-  'Sengkang Community Centre',
-  'Queenstown Sports Centre',
+  "Jurong Sports Hall",
+  "Sengkang Community Centre",
+  "Queenstown Sports Centre",
 ];
 
 const sportType = [
-  'Badminton',
-  'Basketball',
-  'Pingpong',
-  'Soccer',
-  'Cycling',
-  'VolleyBall'
+  "Badminton",
+  "Basketball",
+  "Pingpong",
+  "Soccer",
+  "Cycling",
+  "VolleyBall",
 ];
 
-const theme = createTheme();
 export default function Creategame() {
-  const { currentUser} = useAuth();
-  const today = new Date()
+  const { currentUser } = useAuth();
+  const today = new Date();
 
   const [date, setDate] = React.useState(dayjs(today));
-  const [endDate, setEndDate] = React.useState(dayjs(today).add(60, 'minutes'));
+  const [endDate, setEndDate] = React.useState(dayjs(today).add(60, "minutes"));
   const [location, setLocation] = React.useState("");
   const [sport, setSport] = React.useState("");
   const [players, setPlayers] = React.useState(2);
-  
 
   const handleChangeLocation = (event) => {
     setLocation(event.target.value);
@@ -63,18 +77,16 @@ export default function Creategame() {
   const handleChangeEndDate = (newValue) => {
     if (newValue >= date) {
       setEndDate(newValue);
+    } else {
+      alert("End Date & Time cannot be earlier than Starting Date & Time");
     }
-    else {
-      alert("End Date & Time cannot be earlier than Starting Date & Time")
-    }
-
   };
 
   const handleSliderChange = (event, newValue) => {
     setPlayers(newValue);
   };
   const handleSliderInputChange = (event) => {
-    setPlayers(event.target.value === '' ? '' : Number(event.target.value));
+    setPlayers(event.target.value === "" ? "" : Number(event.target.value));
   };
 
   const handleBlur = () => {
@@ -85,7 +97,6 @@ export default function Creategame() {
     }
   };
 
-
   //console.log(currentUser);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -95,48 +106,45 @@ export default function Creategame() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      title: data.get('title'),
+      title: data.get("title"),
       location: location,
       sportType: sport,
       startDate: date,
       endDate: endDate,
-      description: data.get('description'),
+      description: data.get("description"),
       maxPlayers: players,
     });
 
     try {
       setLoading(true);
-      
+
       //NEED SOME CODE HERE TO CREATE A NEW DOC IN FIRESTORE
       //NEED TO IMPORT CreateNewGame() from CreateGameController
-      setError('Game is successfully created. Redirecting to profile page...');
-      setTimeout(function(){
-        navigate('/profile');
-      }, 3000); 
-      
+      setError("Game is successfully created. Redirecting to profile page...");
+      setTimeout(function() {
+        navigate("/profile");
+      }, 3000);
     } catch {
-
-      setError('Failed to Create A Game');
+      setError("Failed to Create A Game");
     }
 
     setLoading(false);
-
-  };
+  }
 
   return (
-    <ThemeProvider theme={theme}>
+    <Box sx={{ bgcolor: "secondary.main", padding: 2, borderRadius: "8px" }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            py: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-          <AddCircleIcon/>
+          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+            <AddCircleIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Create A Game
@@ -154,7 +162,9 @@ export default function Creategame() {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth required>
-                  <InputLabel required id="location">Location</InputLabel>
+                  <InputLabel required id="location">
+                    Location
+                  </InputLabel>
                   <Select
                     labelId="location"
                     id="location"
@@ -175,7 +185,9 @@ export default function Creategame() {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth required>
-                  <InputLabel required id="sportType">Sports Type</InputLabel>
+                  <InputLabel required id="sportType">
+                    Sports Type
+                  </InputLabel>
                   <Select
                     labelId="sportType"
                     id="sportType"
@@ -236,10 +248,10 @@ export default function Creategame() {
                   </Grid>
                   <Grid item xs>
                     <Slider
-                      value={typeof players === 'number' ? players : 0}
+                      value={typeof players === "number" ? players : 0}
                       onChange={handleSliderChange}
                       aria-labelledby="input-slider"
-                      max='12'
+                      max="12"
                     />
                   </Grid>
                   <Grid item>
@@ -253,8 +265,8 @@ export default function Creategame() {
                         step: 1,
                         min: 1,
                         max: 12,
-                        type: 'number',
-                        'aria-labelledby': 'input-slider',
+                        type: "number",
+                        "aria-labelledby": "input-slider",
                       }}
                     />
                   </Grid>
@@ -275,6 +287,6 @@ export default function Creategame() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
-  )
+    </Box>
+  );
 }

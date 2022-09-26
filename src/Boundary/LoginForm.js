@@ -1,91 +1,88 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
 //import FormControlLabel from '@mui/material/FormControlLabel';
 //import Checkbox from '@mui/material/Checkbox';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Alert from '@mui/material/Alert'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {useAuth} from "../Control/SessionController";
-import {useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
-import {loginUser} from "../Control/LoginValidator";
-
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Alert from "@mui/material/Alert";
+import { useAuth } from "../Control/SessionController";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../Control/LoginValidator";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <a href="https://sc2006app.web.app/">
-        TechnicalWizards
-      </a>{' '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <a href="https://sc2006app.web.app/">TechnicalWizards</a>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
-const theme = createTheme();
-
 export default function LoginForm() {
-
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
   //console.log(currentUser);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-
   async function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      email: data.get("email"),
+      password: data.get("password"),
     });
 
-
-    try{
+    try {
       setLoading(true);
-      setError('');
-      await loginUser(data.get('email'), data.get('password') );
-      navigate('/');
+      setError("");
+      await loginUser(data.get("email"), data.get("password"));
+      navigate("/");
     } catch {
-
-      setError('Failed to Login');
+      setError("Failed to Login");
     }
 
     setLoading(false);
-    
-  };
-
-  
+  }
 
   return (
-    <ThemeProvider theme={theme}>
+    <Box sx={{ bgcolor: "secondary.main", padding: 2, borderRadius: "8px" }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            py: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -122,15 +119,13 @@ export default function LoginForm() {
             {currentUser && <p>Current logged user is {currentUser.email}</p>}
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/signup">
-                  Sign Up
-                </Link>
+                <Link to="/signup">Sign Up</Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
+    </Box>
   );
 }

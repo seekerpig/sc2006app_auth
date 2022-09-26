@@ -12,14 +12,14 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 //import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import AddIcon from "@mui/icons-material/Add"; 
-import {useAuth} from "../../Control/SessionController";
+import AddIcon from "@mui/icons-material/Add";
+import { useAuth } from "../../Control/SessionController";
 //import { createTheme, ThemeProvider } from '@mui/system';
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const {logout} = useAuth();
+  const { logout } = useAuth();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -123,7 +123,7 @@ const Navbar = () => {
               sx={{ display: "inline-flex" }}
               startIcon={<AddIcon />}
               variant="contained"
-              color="primary"
+              // color="primary"
               href="./creategame"
             >
               Create Game

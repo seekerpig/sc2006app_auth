@@ -1,12 +1,29 @@
 import React, { useEffect } from "react";
 import Card from "./UIComponents/Card";
 import { useSearchParams } from "react-router-dom";
-import { Container, MenuItem, FormControl, Select, Box, Stack, TextField, Grid, Typography, IconButton, Alert, AlertTitle } from "@mui/material/";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
-import { FilterByFacility, FilterBySports, FilterByDate } from "../Control/Filter";
+import {
+  Container,
+  MenuItem,
+  FormControl,
+  Select,
+  Box,
+  Stack,
+  TextField,
+  Grid,
+  Typography,
+  IconButton,
+  Alert,
+  AlertTitle,
+} from "@mui/material/";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
+import {
+  FilterByFacility,
+  FilterBySports,
+  FilterByDate,
+} from "../Control/Filter";
 import { GetGames } from "../Control/GamesInfoController";
 import Game from "../Entity/Game";
 export default function ExplorePage() {
@@ -23,49 +40,13 @@ export default function ExplorePage() {
         const games = await GetGames();
 
         // get the dropdown filter list based on existing data
-        setSportList(games.docs.map((doc) => (
-          doc.data().sportType
-        )));
-        setLocationsList(games.docs.map((doc) => (
-          doc.data().location
-        )));
+        setSportList(games.docs.map((doc) => doc.data().sportType));
+        setLocationsList(games.docs.map((doc) => doc.data().location));
 
-        setOGList(games.docs.map((doc) => (
-          new Game(
-            doc.id,
-            doc.data().title,
-            doc.data().sportType,
-            doc.data().description,
-            doc.data().startTime,
-            doc.data().endTime,
-            doc.data().location,
-            doc.data().maxPlayers,
-            doc.data().currentPlayers,
-            doc.data().userList
-          )
-        )));
-
-        let results = [];
-        setList(games.docs.map((doc) => (
-          new Game(
-            doc.id,
-            doc.data().title,
-            doc.data().sportType,
-            doc.data().description,
-            doc.data().startTime,
-            doc.data().endTime,
-            doc.data().location,
-            doc.data().maxPlayers,
-            doc.data().currentPlayers,
-            doc.data().userList
-          )
-        )));
-        if (searchParams.get('sports') !== "")
-        {
-          setSport(searchParams.get('sports')[0].toUpperCase() + searchParams.get('sports').substring(1));
-          games.docs.map((doc) => (
-            doc.data().sportType.toUpperCase() === searchParams.get('sports').toUpperCase() &&
-              results.push(new Game(
+        setOGList(
+          games.docs.map(
+            (doc) =>
+              new Game(
                 doc.id,
                 doc.data().title,
                 doc.data().sportType,
@@ -75,15 +56,59 @@ export default function ExplorePage() {
                 doc.data().location,
                 doc.data().maxPlayers,
                 doc.data().currentPlayers,
-                doc.data().userList,
-              ))
-          ))
-          searchParams.delete('sports');
+                doc.data().userList
+              )
+          )
+        );
+
+        let results = [];
+        setList(
+          games.docs.map(
+            (doc) =>
+              new Game(
+                doc.id,
+                doc.data().title,
+                doc.data().sportType,
+                doc.data().description,
+                doc.data().startTime,
+                doc.data().endTime,
+                doc.data().location,
+                doc.data().maxPlayers,
+                doc.data().currentPlayers,
+                doc.data().userList
+              )
+          )
+        );
+        if (searchParams.get("sports") !== "") {
+          setSport(
+            searchParams.get("sports")[0].toUpperCase() +
+              searchParams.get("sports").substring(1)
+          );
+          games.docs.map(
+            (doc) =>
+              doc.data().sportType.toUpperCase() ===
+                searchParams.get("sports").toUpperCase() &&
+              results.push(
+                new Game(
+                  doc.id,
+                  doc.data().title,
+                  doc.data().sportType,
+                  doc.data().description,
+                  doc.data().startTime,
+                  doc.data().endTime,
+                  doc.data().location,
+                  doc.data().maxPlayers,
+                  doc.data().currentPlayers,
+                  doc.data().userList
+                )
+              )
+          );
+          searchParams.delete("sports");
           setSearchParams(searchParams);
           setList(results);
         }
       } catch (err) {
-        console.log('Error occured when fetching games');
+        console.log("Error occured when fetching games");
       }
     })();
   }, []);
@@ -111,64 +136,73 @@ export default function ExplorePage() {
       list = FilterByDate(list, date);
     }
     setList(list);
-  }
+  };
 
   return (
-    <Container>
+    <Container sx={{ minHeight: 800 }}>
       <Box
         sx={{
-          mt: 3,
-          mb: 3,
+          mt: 2,
+          mb: 5,
           mx: "auto",
           backgroundColor: "secondary.main",
-          borderRadius: 3,
+          borderRadius: 2,
           maxWidth: 800,
         }}
       >
         <Stack
-          direction={{ sm: 'column', md: 'row' }}
+          direction={{ sm: "column", md: "row" }}
           spacing={{ xs: 1, sm: 2, md: 3 }}
-          sx={{ mx: 3, justifyContent: 'space-evenly', py: 3 }}
-
+          sx={{ mx: 3, justifyContent: "space-evenly", py: 3 }}
         >
           <Box width={{ xs: "100%", md: "30%" }}>
             <FormControl fullWidth>
-              <Typography sx={{ typography: 'body1', fontWeight: 'Medium', mb: 1 }}>Sports</Typography>
-              <Select
-                value={sport}
-                onChange={handleSport}
-                displayEmpty
+              <Typography
+                sx={{ typography: "body1", fontWeight: "Medium", mb: 1 }}
               >
+                Sports
+              </Typography>
+              <Select value={sport} onChange={handleSport} displayEmpty>
                 <MenuItem value="">
                   <em>All</em>
                 </MenuItem>
                 {[...new Set(sportList)].map((sport) => (
-                  <MenuItem key={sport} value={sport} > {sport} </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
-          <Box width={{ xs: "100%", md: "30%" }}>
-            <FormControl fullWidth >
-              <Typography sx={{ typography: 'body1', fontWeight: 'Medium', mb: 1 }}>Facility</Typography>
-              <Select
-                value={location}
-                onChange={handleLocation}
-                displayEmpty
-              >
-                <MenuItem value="">
-                  <em>All</em>
-                </MenuItem>
-                {[...new Set(locationList)].map((location) => (
-                  <MenuItem key={location} value={location} > {location} </MenuItem>
+                  <MenuItem key={sport} value={sport}>
+                    {" "}
+                    {sport}{" "}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
           </Box>
           <Box width={{ xs: "100%", md: "30%" }}>
             <FormControl fullWidth>
-              <LocalizationProvider dateAdapter={AdapterDayjs} >
-                <Typography sx={{ typography: 'body1', fontWeight: 'Medium', mb: 1 }}>Date</Typography>
+              <Typography
+                sx={{ typography: "body1", fontWeight: "Medium", mb: 1 }}
+              >
+                Facility
+              </Typography>
+              <Select value={location} onChange={handleLocation} displayEmpty>
+                <MenuItem value="">
+                  <em>All</em>
+                </MenuItem>
+                {[...new Set(locationList)].map((location) => (
+                  <MenuItem key={location} value={location}>
+                    {" "}
+                    {location}{" "}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box width={{ xs: "100%", md: "30%" }}>
+            <FormControl fullWidth>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Typography
+                  sx={{ typography: "body1", fontWeight: "Medium", mb: 1 }}
+                >
+                  Date
+                </Typography>
 
                 <DesktopDatePicker
                   views={["day"]}
@@ -176,24 +210,37 @@ export default function ExplorePage() {
                   value={date}
                   onChange={handleDate}
                   renderInput={(params) => <TextField {...params} />}
-                  width='100%'
+                  width="100%"
                 />
               </LocalizationProvider>
             </FormControl>
           </Box>
-          <Box width={{ xs: "100%", md: "10%" }} sx={{ display: 'flex', alignItems: 'center' }} >
+          <Box
+            width={{ xs: "100%", md: "10%" }}
+            sx={{ display: "flex", alignItems: "center" }}
+          >
             <Grid container direction="column" alignItems="center">
               <Grid item>
-                <IconButton color="primary" aria-label="Filter" onClick={handleSubmit}>
+                <IconButton
+                  color="primary"
+                  aria-label="Filter"
+                  onClick={handleSubmit}
+                >
                   <FilterListRoundedIcon sx={{ fontSize: 60 }} />
                 </IconButton>
               </Grid>
-
             </Grid>
           </Box>
         </Stack>
       </Box>
-      {filteredList.length ===0?<Alert severity="error"> <AlertTitle>Error</AlertTitle>No Games Found, Try Other Filter Options</Alert> : <Card games={filteredList} />}
+      {filteredList.length === 0 ? (
+        <Alert severity="error">
+          {" "}
+          <AlertTitle>Error</AlertTitle>No Games Found, Try Other Filter Options
+        </Alert>
+      ) : (
+        <Card games={filteredList} />
+      )}
     </Container>
   );
 }
