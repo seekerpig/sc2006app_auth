@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react'
-import {auth} from "../firebaseconfig";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import {auth} from "./DatabaseController";
+import {signOut } from 'firebase/auth';
 
 
 const AuthContext = React.createContext();
@@ -16,22 +16,17 @@ export function AuthProvider({children}) {
     const[currentUser, setCurrentUser] = useState();
     const[loading, setLoading] = useState(true);
 
-    function signup(email,password)
-    {
-        console.log('hello sign up');
-        return createUserWithEmailAndPassword(auth,email,password);
-    }
+    
 
-    function login(email,password)
-    {
-        console.log('trying to login');
-        return signInWithEmailAndPassword(auth,email,password);
-    }
 
     function logout()
     {
         console.log("trying to logout");
-        return signOut(auth);
+        signOut(auth).then(() => {
+            console.log("logout successful");
+        }).catch((error)=> {
+            console.log("failed to logout");
+        });
     }
 
     useEffect(() => {
@@ -47,10 +42,7 @@ export function AuthProvider({children}) {
 
     const value = {
         currentUser,
-        signup,
-        login,
-        logout
-
+        logout,
     };
 
   return (

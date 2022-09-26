@@ -1,28 +1,18 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container, Alert } from '@mui/material/';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Alert from '@mui/material/Alert'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {useAuth} from "../contexts/AuthContext";
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useAuth } from "../Control/SessionController";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {SignUp} from "../Control/SignUpController";
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="#">
+        TechnicalWizards
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -32,9 +22,9 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function SignUpForm() {
 
-  const {currentUser, signup} = useAuth();
+  const { currentUser } = useAuth();
   //console.log(currentUser);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -44,30 +34,39 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      name: data.get('firstName') + data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
+      phoneNumber: data.get('phoneNumber'),
+      description: data.get('description'),
+      fileName: data.get('img'),
     });
 
-    if (data.get('password') === 'abc')
-    {
-      return setError('Password is wrong testing!');
-    }
 
-    try{
+    try {
       setLoading(true);
       setError('');
-      await signup(data.get('email'), data.get('password') );
-      navigate('/login');
+      
+      //CODE FOR CREATING USER:
+      //NEED CODE TO UPLOAD IMAGE TO FIREBASE
+      //AFTER UPLOAD, add all the parameters to the SignUp function, it needs more, see SignUpController.js for full parameters.
+
+      await SignUp(data.get('email'), data.get('password'));
+      
+      setError('Signup is successful! Redirecting to login page...');
+      setTimeout(function(){
+        navigate('/login');
+      }, 3000); 
     } catch {
 
       setError('Failed to Create Account');
     }
 
     setLoading(false);
-    
+
   };
 
-  
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -132,11 +131,37 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                <TextField
+                  required
+                  fullWidth
+                  name="phoneNumber"
+                  label="Phone Number"
+                  type="number"
+                  id="phoneNumber"
+                  autoComplete="tel-national"
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  multiline
+                  fullWidth
+                  rows={4}
+                  name="description"
+                  label="Description"
+                  id="description"
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <Button variant="outlined" component="label">
+                  Upload Your Profile Picture
+                  <input accept="image/*" type="file" id="img" name="img" />
+                </Button>
+
+              </Grid>
+
+              
             </Grid>
             <Button
               disabled={loading}

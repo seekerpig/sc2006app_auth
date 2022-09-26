@@ -3,8 +3,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+//import FormControlLabel from '@mui/material/FormControlLabel';
+//import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -12,17 +12,18 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Alert from '@mui/material/Alert'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {useAuth} from "../contexts/AuthContext";
+import {useAuth} from "../Control/SessionController";
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
+import {loginUser} from "../Control/LoginValidator";
 
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <a href="https://mui.com/">
-        Your Website
+      <a href="https://sc2006app.web.app/">
+        TechnicalWizards
       </a>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -34,7 +35,7 @@ const theme = createTheme();
 
 export default function LoginForm() {
 
-  const {currentUser, login} = useAuth();
+  const {currentUser} = useAuth();
   //console.log(currentUser);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -49,15 +50,11 @@ export default function LoginForm() {
       password: data.get('password'),
     });
 
-    if (data.get('password') === 'abc')
-    {
-      return setError('Password is wrong testing!');
-    }
 
     try{
       setLoading(true);
       setError('');
-      await login(data.get('email'), data.get('password') );
+      await loginUser(data.get('email'), data.get('password') );
       navigate('/');
     } catch {
 
