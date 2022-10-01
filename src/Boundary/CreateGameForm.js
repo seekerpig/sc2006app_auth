@@ -30,6 +30,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import MuiInput from "@mui/material/Input";
+import {CreateNewGame } from "../Control/CreateGameController"
+
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -117,7 +119,17 @@ export default function Creategame() {
 
     try {
       setLoading(true);
-
+      console.log({
+        titleA: data.get("title"),
+        locationA: location,
+        sportTypeA: sport,
+        startDateA: date,
+        endDateA: endDate,
+        descriptionA: data.get("description"),
+        maxPlayersA: players,
+      });
+      CreateNewGame(data.get("title"),location,sport,date,endDate,data.get("description"),players,currentUser);
+      console.log("Here Alrdy")
       //NEED SOME CODE HERE TO CREATE A NEW DOC IN FIRESTORE
       //NEED TO IMPORT CreateNewGame() from CreateGameController
       setError("Game is successfully created. Redirecting to profile page...");
@@ -289,4 +301,5 @@ export default function Creategame() {
       </Container>
     </Box>
   );
-}
+                    }
+                    

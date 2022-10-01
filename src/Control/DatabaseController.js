@@ -1,6 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { useContext } from "react";
+import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getFirestore,useAuth, collection, getDocs, doc, getDoc,setDoc,addDoc } from "firebase/firestore";
+import Game from "../Entity/Game";
+import { getStorage, ref, uploadBytes,uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import * as React from "react";
+
 
 
 // Your web app's Firebase configuration
@@ -56,7 +61,81 @@ export const login = (email, password) => {
 
 export const signUp = (email, password, name, phoneNo, description, profileImg) => {
   console.log('hello sign up');
-  return createUserWithEmailAndPassword(auth, email, password);
+  const storage = getStorage();
+  
+  
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    const storageRef = ref(storage, 'images/' + user.uid);
+    console.log(user.uid);
+    const uploadTask = uploadBytesResumable(storageRef, profileImg);
+  
+  // Register three observers:
+  // 1. 'state_changed' observer, called any time the state changes
+  // 2. Error observer, called on failure
+  // 3. Completion observer, called on successful completion
+  uploadTask.on('state_changed', 
+    (snapshot) => {
+      // Observe state change events such as progress, pause, and resume
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case 'paused':
+          console.log('Upload is paused');
+          break;
+        case 'running':
+          console.log('Upload is running');
+          break;
+      }
+    }, 
+    (error) => {
+      // Handle unsuccessful uploads
+      switch (error.code) {
+        case 'storage/unauthorized':
+          // User doesn't have permission to access the object
+          break;
+        case 'storage/canceled':
+          // User canceled the upload
+          break;
+        case 'storage/unknown':
+          // Unknown error occurred, inspect error.serverResponse
+          break;
+      }
+    }, 
+    () => {
+      // Handle successful uploads on complete
+      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        setDoc(doc(db,"Users",user.uid),{
+          name: name,
+          email:email,
+          phoneNo:phoneNo,
+          description:description,
+          profileUrl:downloadURL,
+          gameList: []
+  
+  
+        });
+      });
+    }
+  );
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+
+  
+  
+  
+  //return signInWithEmailAndPassword(auth, email, password);
+  
+
   //NEED CODE HERE TO DEAL W CREATING ENTITY in db with name, phone no etc.. and profile img
 }
 
@@ -70,10 +149,26 @@ export const getGames = async () => {
 }
 
 export const getAGame = async (gameId) => {
-
+  console.log("Get a Game");
   const ref = doc(db, "Games", gameId);
   return await getDoc(ref);
   
+}
+
+export const createAGame = async (title, location, sportType, startDate, endDate, description, maxPlayers,creator) => {
+  //const gameDocRef = doc(db, "Games");
+  
+  await addDoc(collection(db, "Games"), {
+    currentPlayers: 1,
+    description: description,
+    startTime: new Date(startDate),
+    endTime: new Date(endDate),
+    location: location,
+    sportType: sportType,
+    title: title,
+    maxPlayers: maxPlayers,
+    userList: {0:creator }
+  });
 }
 
 

@@ -65,11 +65,11 @@ export default function SignUpForm() {
       //NEED CODE TO UPLOAD IMAGE TO FIREBASE
       //AFTER UPLOAD, add all the parameters to the SignUp function, it needs more, see SignUpController.js for full parameters.
 
-      await SignUp(data.get("email"), data.get("password"));
+      await SignUp(data.get("email"), data.get("password"),data.get("firstName") + data.get("lastName"),data.get("phoneNumber"),data.get("description"),data.get("img"));
 
       setError("Signup is successful! Redirecting to login page...");
       setTimeout(function() {
-        navigate("/login");
+        navigate("/profile");
       }, 3000);
     } catch {
       setError("Failed to Create Account");
