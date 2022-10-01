@@ -19,7 +19,15 @@ import { useAuth } from "../../Control/SessionController";
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const { logout } = useAuth();
+  const [userExist, setUserExist] = React.useState(false);
+  const { currentUser, logout } = useAuth();
+
+  React.useEffect(() => {
+    if (currentUser !== null){
+      setUserExist(true);
+    }
+  }, []);
+  
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -167,23 +175,23 @@ const Navbar = () => {
               >
                 <Typography textAlign="center">Profile</Typography>
               </MenuItem>
-              <MenuItem
+              {!userExist &&<MenuItem
                 onClick={handleCloseUserMenu}
                 component="a"
                 href="/login"
               >
                 <Typography textAlign="center">Login</Typography>
-              </MenuItem>
-              <MenuItem
+              </MenuItem>}
+              {!userExist &&<MenuItem
                 onClick={handleCloseUserMenu}
                 component="a"
                 href="/signup"
               >
                 <Typography textAlign="center">Sign Up</Typography>
-              </MenuItem>
-              <MenuItem onClick={SignOut} component="a" href="/">
+              </MenuItem>}
+              {userExist && <MenuItem onClick={SignOut} component="a" href="/">
                 <Typography textAlign="center">Log Out</Typography>
-              </MenuItem>
+              </MenuItem>}
             </Menu>
           </Box>
         </Toolbar>
