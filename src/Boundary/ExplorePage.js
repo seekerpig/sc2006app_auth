@@ -153,7 +153,7 @@ export default function ExplorePage() {
         <Stack
           direction={{ sm: "column", md: "row" }}
           spacing={{ xs: 1, sm: 2, md: 3 }}
-          sx={{ mx: 3, justifyContent: "space-evenly", py: 3 }}
+          sx={{ mx: 3, justifyContent: "space-evenly", py: 3, paddingLeft:'1rem',paddingRight:'1rem'}}
         >
           <Box width={{ xs: "100%", md: "30%" }}>
             <FormControl fullWidth>
@@ -220,13 +220,15 @@ export default function ExplorePage() {
             sx={{ display: "flex", alignItems: "center" }}
           >
             <Grid container direction="column" alignItems="center">
-              <Grid item>
+              <Grid item align="center">
                 <IconButton
                   color="primary"
                   aria-label="Filter"
                   onClick={handleSubmit}
+                  sx={{borderRadius:'50%',backgroundColor:'#3563E9',color:'white'}}
                 >
-                  <FilterListRoundedIcon sx={{ fontSize: 60 }} />
+                  
+                  <FilterListRoundedIcon sx={{ fontSize: 40,  }} />
                 </IconButton>
               </Grid>
             </Grid>
