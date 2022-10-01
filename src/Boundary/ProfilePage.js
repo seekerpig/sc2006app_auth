@@ -70,8 +70,8 @@ export default function ProfilePage() {
           alignItems="center"
         >
           <Grid item sx={{ mb: 2 }}>
-            <Typography gutterBottom variant="h6" align="center">
-              My Profile
+            <Typography gutterBottom variant="overline" align="center" style={{fontSize:'14px'}}>
+              <b>My Profile</b>
             </Typography>
           </Grid>
           <Grid item align="center">
@@ -79,7 +79,7 @@ export default function ProfilePage() {
               alt={user1.name}
               src={user1.profileImage}
               style={{
-                borderRadius: "1rem",
+                borderRadius: "50%",
                 marginBottom: "20px",
                 maxWidth: "100%",
                 minWidth: "60%",
@@ -87,21 +87,21 @@ export default function ProfilePage() {
             />
           </Grid>
           <Grid item>
-            <Typography align="center" gutterBottom>
+            <Typography align="center" gutterBottom variant="overline">
               <b>Name:</b> {user1.name}{" "}
             </Typography>
           </Grid>
           <Grid item>
-            <Typography align="center" gutterBottom>
-              <b>Email address:</b> {user1.email}{" "}
+            <Typography align="center" gutterBottom variant="overline">
+              <b>Email Address:</b> {user1.email}{" "}
             </Typography>
           </Grid>
           <Grid item>
-            <Typography align="center" style={{ marginBottom: "30px" }}>
+            <Typography align="center" style={{ marginBottom: "30px" }} variant="overline">
               <b>Phone Number:</b> {user1.phoneNo}{" "}
             </Typography>
           </Grid>
-          <Grid item align="center">
+          <Grid item align="center" mt={3}>
             <Paper
               style={{
                 minWidth: "60%",
@@ -114,12 +114,12 @@ export default function ProfilePage() {
             >
               <Typography
                 gutterBottom
-                variant="h6"
-                style={{ fontSize: "16px", color: "#ffffff" }}
+                
+                style={{ fontSize: "16px", color: "#ffffff", width:"100%" }}
               >
-                Description:
+                <b>Description:</b>
               </Typography>
-              <Typography style={{ fontSize: "14px" }}>
+              <Typography variant="subtitle1" style={{ fontSize: "14px" }} >
                 {user1.description}
               </Typography>
             </Paper>
@@ -137,22 +137,10 @@ export default function ProfilePage() {
           flexDirection: "column",
         }}
       >
-        <Typography
-          gutterBottom
-          variant="h6"
-          align="center"
-          style={{ marginBottom: "20px" }}
-        >
-          My Games
+       <Typography gutterBottom variant="overline" align="center" style={{fontSize:'14px', marginBottom:'1rem'}}>
+          <b>My Games</b>
         </Typography>
         {games && <Card games={games} />}
-        {/* <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} sx={{width:"100%"}}>
-          {user1.gameList.map((game, index) => (
-            <Grid item xs={12} sm={12} md={6} lg={4} key={index} align="center" >
-              <Card style={{}} elevation={2} title={game.title} sportType={game.sportType} date={game.date} startTime={game.startTime} location={game.location} currentPlayers={game.currentPlayers} maxPlayers={game.maxPlayers} border="true"/>
-            </Grid>
-          ))}
-        </Grid> */}
       </Box>
     </Container>
   );
