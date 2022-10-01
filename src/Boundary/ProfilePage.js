@@ -128,18 +128,18 @@ export default function ProfilePage() {
       </Box>
       <Box
         sx={{
-          display: "flex",
           //backgroundColor: '#ffffff',
-          padding: "1rem",
-          pt: 5,
-          marginTop: "50px",
-          align: "center",
-          flexDirection: "column",
+          marginTop: "7rem",
+          marginBottom:'10rem',
         }}
       >
-       <Typography gutterBottom variant="overline" align="center" style={{fontSize:'14px', marginBottom:'1rem'}}>
+        
+        <div style={{textAlign:'center', marginBottom:'2rem'}}>
+        <Typography gutterBottom variant="overline" align="center" style={{fontSize:'14px', marginBottom:'1rem'}}>
           <b>My Games</b>
         </Typography>
+        </div>
+       
         {games && <Card games={games} />}
       </Box>
     </Container>
