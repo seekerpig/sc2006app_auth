@@ -26,7 +26,11 @@ const Navbar = () => {
     if (currentUser !== null){
       setUserExist(true);
     }
-  }, []);
+    else
+    {
+      setUserExist(false);
+    }
+  });
   
 
   const handleOpenNavMenu = (event) => {

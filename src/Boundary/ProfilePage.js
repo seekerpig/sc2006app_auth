@@ -1,7 +1,9 @@
 import React from "react";
 import Container from "@mui/material/Container";
 import Card from "./UIComponents/Card";
-import { Grid, Typography, Box, Paper } from "@mui/material";
+import { Grid, Typography, Box, Paper, Button, Alert } from "@mui/material";
+import { useAuth } from "../Control/SessionController";
+import {useNavigate } from "react-router-dom";
 // firebase connection
 // import { db } from '../../src/firebaseconfig';
 // import { collection, getDocs } from 'firebase/firestore'
@@ -52,7 +54,24 @@ const games = [game1, game2];
 user1.addGameToUser(game1.gameId);
 user1.addGameToUser(game2.gameId);
 
+
+
+
 export default function ProfilePage() {
+
+  const {logout } = useAuth();
+  const navigate = useNavigate();
+
+  const [logoutMsg, setLogOutMsg] = React.useState("");
+  const SignOut = () => {
+      logout();
+      setLogOutMsg("Successfully Logged Out. Redirecting...");
+      setTimeout(function() {
+        navigate("/");
+      }, 2000);
+
+    
+  };
   return (
     <Container>
       <Box
@@ -70,7 +89,7 @@ export default function ProfilePage() {
           alignItems="center"
         >
           <Grid item sx={{ mb: 2 }}>
-            <Typography gutterBottom variant="overline" align="center" style={{fontSize:'14px'}}>
+            <Typography gutterBottom variant="overline" align="center" style={{ fontSize: '14px' }}>
               <b>My Profile</b>
             </Typography>
           </Grid>
@@ -114,8 +133,8 @@ export default function ProfilePage() {
             >
               <Typography
                 gutterBottom
-                
-                style={{ fontSize: "16px", color: "#ffffff", width:"100%" }}
+
+                style={{ fontSize: "16px", color: "#ffffff", width: "100%" }}
               >
                 <b>Description:</b>
               </Typography>
@@ -129,19 +148,33 @@ export default function ProfilePage() {
       <Box
         sx={{
           //backgroundColor: '#ffffff',
-          marginTop: "7rem",
-          marginBottom:'10rem',
+          marginTop: "5rem",
+          marginBottom: '5rem',
         }}
       >
-        
-        <div style={{textAlign:'center', marginBottom:'2rem'}}>
-        <Typography gutterBottom variant="overline" align="center" style={{fontSize:'14px', marginBottom:'1rem'}}>
-          <b>My Games</b>
-        </Typography>
+
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <Typography gutterBottom variant="overline" align="center" style={{ fontSize: '14px', marginBottom: '1rem' }}>
+            <b>My Games</b>
+          </Typography>
         </div>
-       
+
         {games && <Card games={games} />}
+        
+        
       </Box>
+      <div style={{ textAlign: 'center' ,marginBottom: '1rem'}}>
+        <Button
+        align="center"
+        type="submit"
+        variant="outlined"
+        onClick={SignOut}
+        sx={{ mt: 3, mb: 2, width:'100px' }}
+      >
+        Logout
+      </Button>
+      {logoutMsg != "" && <Alert severity="success">{logoutMsg}</Alert>}
+        </div>
     </Container>
   );
 }

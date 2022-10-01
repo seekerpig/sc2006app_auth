@@ -51,7 +51,10 @@ export default function LoginForm() {
       setLoading(true);
       setError("");
       await loginUser(data.get("email"), data.get("password"));
-      navigate("/");
+      setError("Login Successful!");
+      setTimeout(function() {
+        navigate("/");
+      }, 2000);
     } catch {
       setError("Failed to Login");
     }
