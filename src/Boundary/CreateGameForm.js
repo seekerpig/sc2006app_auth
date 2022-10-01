@@ -58,6 +58,7 @@ const sportType = [
 export default function Creategame() {
   const { currentUser } = useAuth();
   const today = new Date();
+  
 
   const [date, setDate] = React.useState(dayjs(today));
   const [endDate, setEndDate] = React.useState(dayjs(today).add(60, "minutes"));
@@ -103,8 +104,14 @@ export default function Creategame() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  if(currentUser === null){
+  setTimeout(function() {
+    navigate("/login");
+  }, 100);}
+     
+  
   async function handleSubmit(event) {
+    setLoading(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -118,7 +125,7 @@ export default function Creategame() {
     });
 
     try {
-      setLoading(true);
+      
       console.log({
         titleA: data.get("title"),
         locationA: location,
@@ -136,14 +143,23 @@ export default function Creategame() {
       setTimeout(function() {
         navigate("/profile");
       }, 3000);
-    } catch {
+    } catch(e) {
+      if(e ==400){
+        setError("User not found. Please login to create game.");
+        setTimeout(function() {
+          navigate("/login");
+        }, 3000);
+      }
+      else{
       setError("Failed to Create A Game");
+      }
     }
 
     setLoading(false);
   }
 
   return (
+    
     <Box sx={{ bgcolor: "secondary.main", padding: 2, borderRadius: "8px" }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
