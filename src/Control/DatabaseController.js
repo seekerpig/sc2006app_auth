@@ -171,7 +171,7 @@ export const createAGame = async (title, location, sportType, startDate, endDate
   //console.log(activeUser.data().gameList);
 
   await addDoc(collection(db, "Games"), {
-    currentPlayers: 1,
+    currentPlayers: 0,
     description: description,
     startTime: new Date(startDate),
     endTime: new Date(endDate),
@@ -179,7 +179,7 @@ export const createAGame = async (title, location, sportType, startDate, endDate
     sportType: sportType,
     title: title,
     maxPlayers: maxPlayers,
-    userList: {0:creator }
+    userList: []
   }).then(docRef => {
     console.log(docRef.id);
     console.log(creator);
@@ -189,17 +189,19 @@ export const createAGame = async (title, location, sportType, startDate, endDate
 
   export const joinAGame = async(gameId,userId)=>{
     const game = await getDoc(doc(db,"Games",gameId));
-    console.log(game.data().userList)
+ 
     const gameListArray = Object.values(game.data().userList);
     gameListArray.push(userId);
-    //game.data().userList.push(userId);
+
     const user = await getDoc(doc(db,"Users",userId));
     const userListArray = Object.values(user.data().gameList);
+    
     userListArray.push(gameId);
-   // user.data().gameList.push(gameId);
+   
     console.log("Game is here");
     console.log(game.data());
     updateDoc(doc(db,"Games",gameId),{
+        currentPlayers: user.data().currentPlayers+1,
         userList: gameListArray
     })
     updateDoc(doc(db,"Users",userId),{

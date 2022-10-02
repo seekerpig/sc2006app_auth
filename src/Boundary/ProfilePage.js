@@ -9,7 +9,7 @@ import { useAuth } from "../Control/SessionController";
 // get entities
 import User from "../Entity/User";
 import Game from "../Entity/Game";
-import { retrieveProfile } from "../Control/ProfileController";
+import { retrieveProfile,retrieveUserGame } from "../Control/ProfileController";
 import { Link, useNavigate } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Logout } from "@mui/icons-material";
@@ -71,7 +71,9 @@ export default function ProfilePage() {
   const navigate = useNavigate();
   console.log("User is right below here")
   //console.log(activeUser);
-  const { error, isPending, user2=new User} = retrieveProfile(currentUser.uid);
+  const { error, isPending, user2=new User()} = retrieveProfile(currentUser.uid);
+  const {games2}=retrieveUserGame(currentUser.uid);
+  console.log(games2);
 
   const [logoutMsg, setLogOutMsg] = React.useState("");
   const SignOut = () => {
@@ -88,6 +90,7 @@ export default function ProfilePage() {
    //   navigate("/");
    // }, 5000);
   //}
+  //
   //{isPending && <LinearProgress />}
   return (
     
@@ -181,8 +184,8 @@ export default function ProfilePage() {
             <b>My Games</b>
           </Typography>
         </div>
-
-        {games && <Card games={games} />}
+        
+        {games2 && <Card games={games2} />}
         
         
       </Box>
@@ -196,7 +199,7 @@ export default function ProfilePage() {
       >
         Logout
       </Button>
-      {logoutMsg != "" && <Alert severity="success">{logoutMsg}</Alert>}
+      {logoutMsg !== "" && <Alert severity="success">{logoutMsg}</Alert>}
         </div>
     </Container>
   );

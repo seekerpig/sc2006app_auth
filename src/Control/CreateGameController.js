@@ -13,7 +13,7 @@ export const CreateNewGame = async (title, location, sportType, startDate, endDa
       //useAuth()
     if(currentUser === null){
       console.log("No user detected do something");
-      throw 400
+      throw 400;  
     }
     
 
