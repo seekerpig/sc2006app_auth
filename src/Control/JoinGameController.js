@@ -1,8 +1,16 @@
 import React from 'react'
+import {joinAGame} from "./DatabaseController"
 
-export const JoinGame = (gameId) => {
+export const JoinGame = (gameId,userId) => {
   //SO basically here, need to first useAuth from sessioncontroller and check whether if there is a currentUser
   //If no current User, then show alert or something
+  console.log("In join game");
+  if(userId === null){
+    console.log("somethign wong");
+    throw 400;
+  }
+  joinAGame(gameId,userId);
+
 
   //if there is a current user, add user to the game in firestore
   //AND change the attribute of the user gamelist in database by creating a new function in DatabaseController.js

@@ -8,25 +8,60 @@ import {
   AlertTitle,
   CardMedia,
   Box,
-  Grid,
-  Button,
+  Grid, Button,
 } from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
 import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../Control/SessionController";
 
 // import GameInfo function from GamesInfoController
 import { GameInfo } from "../Control/GamesInfoController";
+import { JoinGame } from "../Control/JoinGameController";
 
 export default function DetailedGamePage() {
   const { gameId } = useParams();
   const { error, isPending, game } = GameInfo(gameId);
+  const [error1, setError] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const {currentUser} = useAuth();
   const navigate = useNavigate();
   if (error) {
     setTimeout(function() {
       navigate("/");
     }, 5000);
+  }
+  async function handleSubmit(event) {
+    setLoading(true);
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    
+    
+
+    try {
+      console.log(currentUser.uid);
+      
+      console.log("Here Alrdy")
+      JoinGame(gameId,currentUser.uid);
+      setError("Game is successfully created. Redirecting to profile page...");
+      setTimeout(function() {
+        navigate("/profile");
+      } ,3000);
+      
+    } catch(e) {
+      if(e ==400){
+        setError("User not found. Please login to create game.");
+        setTimeout(function() {
+          navigate("/login");
+        }, 3000);
+      }
+      else{
+      setError("Failed to Create A Game");
+      }
+    }
+
+    setLoading(false);
   }
   return (
     <div>
@@ -38,7 +73,7 @@ export default function DetailedGamePage() {
       )}
       {isPending && <LinearProgress />}
       {game && (
-        <Box sx={{ minHeight: 800 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ minHeight: 800 }}>
           <Box paddingBottom={2}>
             <Link to="../explore" style={{ textDecorationLine: "none" }}>
               <ArrowBackIosIcon
@@ -219,6 +254,7 @@ export default function DetailedGamePage() {
               <Box>
                 <Button
                   variant="contained"
+                  type="submit"
                   size="large"
                   style={{ minWidth: "80px", minHeight: "30px" }}
                   endIcon={<SendIcon />}

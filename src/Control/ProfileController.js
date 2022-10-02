@@ -15,17 +15,19 @@ export const retrieveProfile = (userId) => {
     const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState(false);
   
-  
+    console.log(userId);
     useLayoutEffect(() => {
       (async () => {
         try {
           const doc =  await retrieveAUser(userId);
-          console.log(doc.data());
+          
           let results;
           if (doc.data() == null) {
             setIsPending(false);
             setError("Could not find that user");
           } else {
+            console.log("Data successfully retrieved");
+            console.log(doc.data());
             results = new User( 
               
               userId,

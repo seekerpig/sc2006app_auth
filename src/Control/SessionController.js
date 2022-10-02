@@ -3,6 +3,7 @@ import {auth} from "./DatabaseController";
 import {signOut } from 'firebase/auth';
 
 
+
 const AuthContext = React.createContext();
 
 
@@ -24,7 +25,6 @@ export function AuthProvider({children}) {
         console.log("trying to logout");
         signOut(auth).then(() => {
             console.log("logout successful");
-            return true;
         }).catch((error)=> {
             console.log("failed to logout");
         });

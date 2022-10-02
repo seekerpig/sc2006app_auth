@@ -3,17 +3,16 @@ import Container from "@mui/material/Container";
 import Card from "./UIComponents/Card";
 import { Grid, Typography, Box, Paper, Button, Alert } from "@mui/material";
 import { useAuth } from "../Control/SessionController";
-import {useNavigate } from "react-router-dom";
 // firebase connection
 // import { db } from '../../src/firebaseconfig';
 // import { collection, getDocs } from 'firebase/firestore'
 // get entities
 import User from "../Entity/User";
 import Game from "../Entity/Game";
-import {useAuth} from "../Control/SessionController";
 import { retrieveProfile } from "../Control/ProfileController";
 import { Link, useNavigate } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
+import { Logout } from "@mui/icons-material";
 //import { useAuth } from "../Control/SessionController";
 
 // manually hard code some objects
@@ -64,26 +63,15 @@ user1.addGameToUser(game2.gameId);
 
 
 export default function ProfilePage() {
-<<<<<<< HEAD
-  
-  //const { error, isPending, user2 } = retrieveProfile(currentUser.uid);
-  const { currentUser } = useAuth();
-  
-  const { error, isPending, user2=new User,games1 } = retrieveProfile(currentUser.uid);
-  //games = user2.gameList;
-  const navigate = useNavigate();
-  if (error) {
-    setTimeout(function() {
-      navigate("/");
-    }, 5000);
-  }
-  console.log("This is user2");
-  console.log(user2);
-  
-=======
 
-  const {logout } = useAuth();
+  const {logout} = useAuth();
+  const {currentUser} = useAuth();
+  //console.log(currentUser);
+  
   const navigate = useNavigate();
+  console.log("User is right below here")
+  //console.log(activeUser);
+  const { error, isPending, user2=new User} = retrieveProfile(currentUser.uid);
 
   const [logoutMsg, setLogOutMsg] = React.useState("");
   const SignOut = () => {
@@ -95,12 +83,17 @@ export default function ProfilePage() {
 
     
   };
->>>>>>> 15bffaa2de8664ab2454fa960f71c8758ce01693
+ // if (error) {
+   // setTimeout(function() {
+   //   navigate("/");
+   // }, 5000);
+  //}
+  //{isPending && <LinearProgress />}
   return (
     
     <Container>
       
-      {isPending && <LinearProgress />}
+      
       {user2 && (
       <Box
         sx={{
@@ -123,44 +116,31 @@ export default function ProfilePage() {
           </Grid>
           <Grid item align="center">
             <img
-              alt={user2.name}
-              src={user2.profileImage}
+              alt={user2.namse}
+              src={user2.profileUrl}
               style={{
                 borderRadius: "50%",
                 marginBottom: "20px",
                 maxWidth: "100%",
                 minWidth: "60%",
+                height: "200px",
+                width:"200px",
               }}
             />
           </Grid>
           <Grid item>
-<<<<<<< HEAD
-            <Typography align="center" gutterBottom>
+            <Typography align="center" gutterBottom variant="overline">
               <b>Name:</b> {user2.name}{" "}
             </Typography>
           </Grid>
           <Grid item>
-            <Typography align="center" gutterBottom>
-              <b>Email address:</b> {user2.email}{" "}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography align="center" style={{ marginBottom: "30px" }}>
-              <b>Phone Number:</b> {user2.phoneNo}{" "}
-=======
             <Typography align="center" gutterBottom variant="overline">
-              <b>Name:</b> {user1.name}{" "}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography align="center" gutterBottom variant="overline">
-              <b>Email Address:</b> {user1.email}{" "}
+              <b>Email Address:</b> {user2.email}{" "}
             </Typography>
           </Grid>
           <Grid item>
             <Typography align="center" style={{ marginBottom: "30px" }} variant="overline">
-              <b>Phone Number:</b> {user1.phoneNo}{" "}
->>>>>>> 15bffaa2de8664ab2454fa960f71c8758ce01693
+              <b>Phone Number:</b> {user2.phoneNo}{" "}
             </Typography>
           </Grid>
           <Grid item align="center" mt={3}>
@@ -181,13 +161,8 @@ export default function ProfilePage() {
               >
                 <b>Description:</b>
               </Typography>
-<<<<<<< HEAD
-              <Typography style={{ fontSize: "14px" }}>
-                {user2.description}
-=======
               <Typography variant="subtitle1" style={{ fontSize: "14px" }} >
-                {user1.description}
->>>>>>> 15bffaa2de8664ab2454fa960f71c8758ce01693
+                {user2.description}
               </Typography>
             </Paper>
           </Grid>
@@ -208,17 +183,6 @@ export default function ProfilePage() {
         </div>
 
         {games && <Card games={games} />}
-<<<<<<< HEAD
-        {/* <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} sx={{width:"100%"}}>
-          {user1.gameList.map((game, index) => (
-            <Grid item xs={12} sm={12} md={6} lg={4} key={index} align="center" >
-              <Card style={{}} elevation={2} title={game.title} sportType={game.sportType} date={game.date} startTime={game.startTime} location={game.location} currentPlayers={game.currentPlayers} maxPlayers={game.maxPlayers} border="true"/>
-            </Grid>
-          ))}
-        </Grid> */}
-      </Box> 
-      
-=======
         
         
       </Box>
@@ -234,7 +198,6 @@ export default function ProfilePage() {
       </Button>
       {logoutMsg != "" && <Alert severity="success">{logoutMsg}</Alert>}
         </div>
->>>>>>> 15bffaa2de8664ab2454fa960f71c8758ce01693
     </Container>
   );
 }

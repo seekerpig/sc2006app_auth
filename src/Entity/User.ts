@@ -6,17 +6,17 @@ export default class User {
     email = "";
     phoneNo = 0;
     description = "";
-    profileImage = "";
+    profileUrl = "";
     gameList:string[] = []
     
-    constructor(userID:string, name:string, email:string, phoneNo:number, description:string, profileImage:string)
+    constructor(userID:string, name:string, email:string, phoneNo:number, description:string, profileImage:string,gameList:string[])
     {
         this.userID = userID;
         this.name = name;
         this.email = email;
         this.phoneNo = phoneNo;
         this.description = description;
-        this.profileImage = profileImage;
+        this.profileUrl = profileImage;
     }
 
     addGameToUser(game:string)

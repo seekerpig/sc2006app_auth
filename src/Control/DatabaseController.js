@@ -6,7 +6,7 @@ import Game from "../Entity/Game";
 import User from "../Entity/User";
 import { getStorage, ref, uploadBytes,uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import * as React from "react";
-
+import {JoinGame} from "./JoinGameController";
 
 
 // Your web app's Firebase configuration
@@ -165,7 +165,9 @@ export const retrieveAUser = async  (userId) => {
 
 export const createAGame = async (title, location, sportType, startDate, endDate, description, maxPlayers,creator) => {
   //const gameDocRef = doc(db, "Games");
-  const activeUser = await getDoc(doc(db,"Users",creator))
+  const activeUser = await getDoc(doc(db,"Users",creator));
+  console.log(activeUser.data().uid);
+
   //console.log(activeUser.data().gameList);
 
   await addDoc(collection(db, "Games"), {
@@ -178,7 +180,31 @@ export const createAGame = async (title, location, sportType, startDate, endDate
     title: title,
     maxPlayers: maxPlayers,
     userList: {0:creator }
-  }).then(docRef => {updateDoc(doc(db,"Users",creator),{
-    gameList:activeUser.data().gameList.push(docRef.id)
-  })})
+  }).then(docRef => {
+    console.log(docRef.id);
+    console.log(creator);
+    JoinGame(docRef.id,creator);
+  })
+  }
+
+  export const joinAGame = async(gameId,userId)=>{
+    const game = await getDoc(doc(db,"Games",gameId));
+    console.log(game.data().userList)
+    const gameListArray = Object.values(game.data().userList);
+    gameListArray.push(userId);
+    //game.data().userList.push(userId);
+    const user = await getDoc(doc(db,"Users",userId));
+    const userListArray = Object.values(user.data().gameList);
+    userListArray.push(gameId);
+   // user.data().gameList.push(gameId);
+    console.log("Game is here");
+    console.log(game.data());
+    updateDoc(doc(db,"Games",gameId),{
+        userList: gameListArray
+    })
+    updateDoc(doc(db,"Users",userId),{
+      gameList:userListArray
+    })
+
+
   }
