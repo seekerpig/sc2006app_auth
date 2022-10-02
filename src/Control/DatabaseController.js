@@ -1,8 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { useContext } from "react";
 import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore,useAuth, collection, getDocs, doc, getDoc,setDoc,addDoc } from "firebase/firestore";
+import { getFirestore,useAuth, collection, getDocs, doc, getDoc,setDoc,addDoc,updateDoc } from "firebase/firestore";
 import Game from "../Entity/Game";
+import User from "../Entity/User";
 import { getStorage, ref, uploadBytes,uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import * as React from "react";
 
@@ -155,9 +156,18 @@ export const getAGame = async (gameId) => {
   
 }
 
+export const retrieveAUser = async  (userId) => {
+  //console.log("Get a Game");
+  const ref = doc(db, "Users", userId);
+  return await getDoc(ref);
+  
+}
+
 export const createAGame = async (title, location, sportType, startDate, endDate, description, maxPlayers,creator) => {
   //const gameDocRef = doc(db, "Games");
-  
+  const activeUser = await getDoc(doc(db,"Users",creator))
+  //console.log(activeUser.data().gameList);
+
   await addDoc(collection(db, "Games"), {
     currentPlayers: 1,
     description: description,
@@ -168,9 +178,7 @@ export const createAGame = async (title, location, sportType, startDate, endDate
     title: title,
     maxPlayers: maxPlayers,
     userList: {0:creator }
-  });
-}
-
-
-
-
+  }).then(docRef => {updateDoc(doc(db,"Users",creator),{
+    gameList:activeUser.data().gameList.push(docRef.id)
+  })})
+  }

@@ -8,6 +8,11 @@ import { Grid, Typography, Box, Paper } from "@mui/material";
 // get entities
 import User from "../Entity/User";
 import Game from "../Entity/Game";
+import {useAuth} from "../Control/SessionController";
+import { retrieveProfile } from "../Control/ProfileController";
+import { Link, useNavigate } from "react-router-dom";
+import LinearProgress from "@mui/material/LinearProgress";
+//import { useAuth } from "../Control/SessionController";
 
 // manually hard code some objects
 const user1 = new User(
@@ -18,6 +23,7 @@ const user1 = new User(
   "I am a casual badminton player living in the northeast side of Singapore. Looking to play usually during friday nights!",
   "https://images.generated.photos/Ba_z-g_9fZ7h9GVAr0nSYFqfqLwwrj0RPlTlUi2I2Vs/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NjQ4MzM4LmpwZw.jpg"
 );
+
 const game1 = new Game(
   "game1",
   "30 minute quick game",
@@ -53,8 +59,27 @@ user1.addGameToUser(game1.gameId);
 user1.addGameToUser(game2.gameId);
 
 export default function ProfilePage() {
+  
+  //const { error, isPending, user2 } = retrieveProfile(currentUser.uid);
+  const { currentUser } = useAuth();
+  
+  const { error, isPending, user2=new User,games1 } = retrieveProfile(currentUser.uid);
+  //games = user2.gameList;
+  const navigate = useNavigate();
+  if (error) {
+    setTimeout(function() {
+      navigate("/");
+    }, 5000);
+  }
+  console.log("This is user2");
+  console.log(user2);
+  
   return (
+    
     <Container>
+      
+      {isPending && <LinearProgress />}
+      {user2 && (
       <Box
         sx={{
           display: "flex",
@@ -76,8 +101,8 @@ export default function ProfilePage() {
           </Grid>
           <Grid item align="center">
             <img
-              alt={user1.name}
-              src={user1.profileImage}
+              alt={user2.name}
+              src={user2.profileImage}
               style={{
                 borderRadius: "1rem",
                 marginBottom: "20px",
@@ -88,17 +113,17 @@ export default function ProfilePage() {
           </Grid>
           <Grid item>
             <Typography align="center" gutterBottom>
-              <b>Name:</b> {user1.name}{" "}
+              <b>Name:</b> {user2.name}{" "}
             </Typography>
           </Grid>
           <Grid item>
             <Typography align="center" gutterBottom>
-              <b>Email address:</b> {user1.email}{" "}
+              <b>Email address:</b> {user2.email}{" "}
             </Typography>
           </Grid>
           <Grid item>
             <Typography align="center" style={{ marginBottom: "30px" }}>
-              <b>Phone Number:</b> {user1.phoneNo}{" "}
+              <b>Phone Number:</b> {user2.phoneNo}{" "}
             </Typography>
           </Grid>
           <Grid item align="center">
@@ -120,12 +145,12 @@ export default function ProfilePage() {
                 Description:
               </Typography>
               <Typography style={{ fontSize: "14px" }}>
-                {user1.description}
+                {user2.description}
               </Typography>
             </Paper>
           </Grid>
         </Grid>
-      </Box>
+      </Box> )}
       <Box
         sx={{
           display: "flex",
@@ -153,7 +178,8 @@ export default function ProfilePage() {
             </Grid>
           ))}
         </Grid> */}
-      </Box>
+      </Box> 
+      
     </Container>
   );
 }
