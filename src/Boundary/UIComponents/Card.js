@@ -17,11 +17,11 @@ export default function GameList({games}) {
   console.log(games);
   
   return (
-    <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }}>
+    <Grid container spacing={{ xs: 2, sm: 2, md: 2 }} alignItems="stretch" justifyContent="center">
       {games.map((game) => (
         
-        <Grid item xs={12} sm={6} md={4} lg={3} key={game.gameId} display="flex">
-          <Card width="100%" style={{borderRadius:'0.5rem'}}>
+        <Grid item xs={12} sm={6} md={4} lg={3} key={game.gameId}>
+          <Card width="100%" style={{height:'100%', borderRadius:'0.5rem', paddingLeft:'10px',paddingRight:'10px', paddingBottom:'10px'}}>
             <Box display="flex" flexDirection="column" height="100%">
               <Box>
                 <CardMedia

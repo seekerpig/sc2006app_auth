@@ -24,6 +24,7 @@ export function AuthProvider({children}) {
         console.log("trying to logout");
         signOut(auth).then(() => {
             console.log("logout successful");
+            return true;
         }).catch((error)=> {
             console.log("failed to logout");
         });

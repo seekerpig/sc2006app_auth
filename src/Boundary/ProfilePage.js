@@ -1,7 +1,9 @@
 import React from "react";
 import Container from "@mui/material/Container";
 import Card from "./UIComponents/Card";
-import { Grid, Typography, Box, Paper } from "@mui/material";
+import { Grid, Typography, Box, Paper, Button, Alert } from "@mui/material";
+import { useAuth } from "../Control/SessionController";
+import {useNavigate } from "react-router-dom";
 // firebase connection
 // import { db } from '../../src/firebaseconfig';
 // import { collection, getDocs } from 'firebase/firestore'
@@ -58,7 +60,11 @@ const games = [game1, game2];
 user1.addGameToUser(game1.gameId);
 user1.addGameToUser(game2.gameId);
 
+
+
+
 export default function ProfilePage() {
+<<<<<<< HEAD
   
   //const { error, isPending, user2 } = retrieveProfile(currentUser.uid);
   const { currentUser } = useAuth();
@@ -74,6 +80,22 @@ export default function ProfilePage() {
   console.log("This is user2");
   console.log(user2);
   
+=======
+
+  const {logout } = useAuth();
+  const navigate = useNavigate();
+
+  const [logoutMsg, setLogOutMsg] = React.useState("");
+  const SignOut = () => {
+      logout();
+      setLogOutMsg("Successfully Logged Out. Redirecting...");
+      setTimeout(function() {
+        navigate("/");
+      }, 2000);
+
+    
+  };
+>>>>>>> 15bffaa2de8664ab2454fa960f71c8758ce01693
   return (
     
     <Container>
@@ -95,8 +117,8 @@ export default function ProfilePage() {
           alignItems="center"
         >
           <Grid item sx={{ mb: 2 }}>
-            <Typography gutterBottom variant="h6" align="center">
-              My Profile
+            <Typography gutterBottom variant="overline" align="center" style={{ fontSize: '14px' }}>
+              <b>My Profile</b>
             </Typography>
           </Grid>
           <Grid item align="center">
@@ -104,7 +126,7 @@ export default function ProfilePage() {
               alt={user2.name}
               src={user2.profileImage}
               style={{
-                borderRadius: "1rem",
+                borderRadius: "50%",
                 marginBottom: "20px",
                 maxWidth: "100%",
                 minWidth: "60%",
@@ -112,6 +134,7 @@ export default function ProfilePage() {
             />
           </Grid>
           <Grid item>
+<<<<<<< HEAD
             <Typography align="center" gutterBottom>
               <b>Name:</b> {user2.name}{" "}
             </Typography>
@@ -124,9 +147,23 @@ export default function ProfilePage() {
           <Grid item>
             <Typography align="center" style={{ marginBottom: "30px" }}>
               <b>Phone Number:</b> {user2.phoneNo}{" "}
+=======
+            <Typography align="center" gutterBottom variant="overline">
+              <b>Name:</b> {user1.name}{" "}
             </Typography>
           </Grid>
-          <Grid item align="center">
+          <Grid item>
+            <Typography align="center" gutterBottom variant="overline">
+              <b>Email Address:</b> {user1.email}{" "}
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography align="center" style={{ marginBottom: "30px" }} variant="overline">
+              <b>Phone Number:</b> {user1.phoneNo}{" "}
+>>>>>>> 15bffaa2de8664ab2454fa960f71c8758ce01693
+            </Typography>
+          </Grid>
+          <Grid item align="center" mt={3}>
             <Paper
               style={{
                 minWidth: "60%",
@@ -139,13 +176,18 @@ export default function ProfilePage() {
             >
               <Typography
                 gutterBottom
-                variant="h6"
-                style={{ fontSize: "16px", color: "#ffffff" }}
+
+                style={{ fontSize: "16px", color: "#ffffff", width: "100%" }}
               >
-                Description:
+                <b>Description:</b>
               </Typography>
+<<<<<<< HEAD
               <Typography style={{ fontSize: "14px" }}>
                 {user2.description}
+=======
+              <Typography variant="subtitle1" style={{ fontSize: "14px" }} >
+                {user1.description}
+>>>>>>> 15bffaa2de8664ab2454fa960f71c8758ce01693
               </Typography>
             </Paper>
           </Grid>
@@ -153,24 +195,20 @@ export default function ProfilePage() {
       </Box> )}
       <Box
         sx={{
-          display: "flex",
           //backgroundColor: '#ffffff',
-          padding: "1rem",
-          pt: 5,
-          marginTop: "50px",
-          align: "center",
-          flexDirection: "column",
+          marginTop: "5rem",
+          marginBottom: '5rem',
         }}
       >
-        <Typography
-          gutterBottom
-          variant="h6"
-          align="center"
-          style={{ marginBottom: "20px" }}
-        >
-          My Games
-        </Typography>
+
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <Typography gutterBottom variant="overline" align="center" style={{ fontSize: '14px', marginBottom: '1rem' }}>
+            <b>My Games</b>
+          </Typography>
+        </div>
+
         {games && <Card games={games} />}
+<<<<<<< HEAD
         {/* <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} sx={{width:"100%"}}>
           {user1.gameList.map((game, index) => (
             <Grid item xs={12} sm={12} md={6} lg={4} key={index} align="center" >
@@ -180,6 +218,23 @@ export default function ProfilePage() {
         </Grid> */}
       </Box> 
       
+=======
+        
+        
+      </Box>
+      <div style={{ textAlign: 'center' ,marginBottom: '1rem'}}>
+        <Button
+        align="center"
+        type="submit"
+        variant="outlined"
+        onClick={SignOut}
+        sx={{ mt: 3, mb: 2, width:'100px' }}
+      >
+        Logout
+      </Button>
+      {logoutMsg != "" && <Alert severity="success">{logoutMsg}</Alert>}
+        </div>
+>>>>>>> 15bffaa2de8664ab2454fa960f71c8758ce01693
     </Container>
   );
 }
