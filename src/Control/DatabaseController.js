@@ -171,7 +171,7 @@ export const createAGame = async (title, location, sportType, startDate, endDate
   //console.log(activeUser.data().gameList);
 
   await addDoc(collection(db, "Games"), {
-    currentPlayers: 0,
+    currentPlayers: 1,
     description: description,
     startTime: new Date(startDate),
     endTime: new Date(endDate),
@@ -197,11 +197,12 @@ export const createAGame = async (title, location, sportType, startDate, endDate
     const userListArray = Object.values(user.data().gameList);
     
     userListArray.push(gameId);
-   
+    const player = user.data().currentPlayers + 1;
+    console.log(player)
     console.log("Game is here");
     console.log(game.data());
     updateDoc(doc(db,"Games",gameId),{
-        currentPlayers: user.data().currentPlayers+1,
+        currentPlayers:Number(player),
         userList: gameListArray
     })
     updateDoc(doc(db,"Users",userId),{

@@ -14,7 +14,7 @@ export default class Game
     userList: string[] = [];
 
 
-    constructor (id:string,title:string, sportType:string, description:string, startTime: Date, endTime:Date, location:string, maxPlayers:number, currentPlayers:number, uid:string)
+    constructor (id:string,title:string, sportType:string, description:string, startTime: Date, endTime:Date, location:string, maxPlayers:number, currentPlayers:number, uid:string[])
     {
         this.gameId = id;
         this.title = title;
@@ -25,7 +25,8 @@ export default class Game
         this.location = location;
         this.maxPlayers = maxPlayers;
         this.currentPlayers = currentPlayers;
-        this.addUserToGame(uid)
+        this.userList = uid;
+        //this.addUserToGame(uid)
         
     }
 

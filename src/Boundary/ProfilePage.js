@@ -69,12 +69,17 @@ export default function ProfilePage() {
   //console.log(currentUser);
   
   const navigate = useNavigate();
+  if(currentUser === null){
+    setTimeout(function() {
+      navigate("/login");
+    }, 100);}
+  else{
   console.log("User is right below here")
   //console.log(activeUser);
   const { error, isPending, user2=new User()} = retrieveProfile(currentUser.uid);
   const {games2}=retrieveUserGame(currentUser.uid);
   console.log(games2);
-
+  
   const [logoutMsg, setLogOutMsg] = React.useState("");
   const SignOut = () => {
       logout();
@@ -203,4 +208,4 @@ export default function ProfilePage() {
         </div>
     </Container>
   );
-}
+}}
