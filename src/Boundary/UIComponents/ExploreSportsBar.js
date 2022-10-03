@@ -52,7 +52,9 @@ export default function ExploreSportsBar() {
               sx={{
                 minHeight: 150,
                 minWidth: 150,
-
+                ':hover': {
+                  boxShadow: 5, // theme.shadows[20]
+                },
                 borderRadius: "16px",
               }}
             >
@@ -71,7 +73,9 @@ export default function ExploreSportsBar() {
                   minWidth: 100,
                   boxShadow: 0,
                   borderRadius: "16px",
+                  
                 }}
+                
               ></Paper>
             </Paper>
           </Link>
@@ -85,7 +89,9 @@ export default function ExploreSportsBar() {
               sx={{
                 minHeight: 150,
                 minWidth: 150,
-
+                ':hover': {
+                  boxShadow: 5, // theme.shadows[20]
+                },
                 borderRadius: "16px",
               }}
             >
@@ -118,7 +124,9 @@ export default function ExploreSportsBar() {
               sx={{
                 minHeight: 150,
                 minWidth: 150,
-
+                ':hover': {
+                  boxShadow: 5, // theme.shadows[20]
+                },
                 borderRadius: "16px",
               }}
             >
@@ -152,7 +160,9 @@ export default function ExploreSportsBar() {
               sx={{
                 minHeight: 150,
                 minWidth: 150,
-
+                ':hover': {
+                  boxShadow: 5, // theme.shadows[20]
+                },
                 borderRadius: "16px",
               }}
             >
@@ -186,7 +196,9 @@ export default function ExploreSportsBar() {
               sx={{
                 minHeight: 150,
                 minWidth: 150,
-
+                ':hover': {
+                  boxShadow: 5, // theme.shadows[20]
+                },
                 borderRadius: "16px",
               }}
             >
@@ -220,6 +232,9 @@ export default function ExploreSportsBar() {
                 minHeight: 150,
                 minWidth: 150,
                 borderRadius: "16px",
+                ':hover': {
+                  boxShadow: 5, // theme.shadows[20]
+                },
               }}
             >
               <Paper
