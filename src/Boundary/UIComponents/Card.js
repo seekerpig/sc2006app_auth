@@ -17,7 +17,7 @@ export default function GameList({games}) {
   console.log(games);
   
   return (
-    <Grid container spacing={{ xs: 2, sm: 2, md: 2 }} alignItems="stretch" justifyContent="center">
+    <Grid container spacing={{ xs: 2, sm: 2, md: 2 }} alignItems="stretch" justifyContent="flex-start">
       {games.map((game) => (
         
         <Grid item xs={12} sm={6} md={4} lg={3} key={game.gameId}>

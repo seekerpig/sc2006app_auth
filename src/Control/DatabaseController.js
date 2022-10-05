@@ -206,6 +206,7 @@ export const createAGame = async (title, location, sportType, startDate, endDate
     userListArray.push(gameId);
     const player = user.data().currentPlayers + 1;
     const d = parseInt(player);
+    console.log(user.data().currentPlayers);
     console.log("Player below");
     console.log(player);
     console.log("Game is here");

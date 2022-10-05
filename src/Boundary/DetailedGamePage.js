@@ -20,6 +20,8 @@ import { useAuth } from "../Control/SessionController";
 import { GameInfo } from "../Control/GamesInfoController";
 import { JoinGame } from "../Control/JoinGameController";
 
+
+
 export default function DetailedGamePage() {
   const { gameId } = useParams();
   const { error, isPending, game } = GameInfo(gameId);
@@ -65,6 +67,10 @@ export default function DetailedGamePage() {
 
     setLoading(false);
   }
+
+  
+
+
   return (
     <div>
       {error1 && (
@@ -265,7 +271,7 @@ export default function DetailedGamePage() {
                 </Button>
               </Box>
             </CardActions>
-            //CAN KEEP JOIN GAME
+            
             {success && <Alert severity="success">{success}</Alert>} 
           </Card>
           
