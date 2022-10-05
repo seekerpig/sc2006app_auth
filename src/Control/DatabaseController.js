@@ -200,21 +200,24 @@ export const createAGame = async (title, location, sportType, startDate, endDate
       
     }
     else{
+    
     gameListArray.push(userId);
 
     const user = await getDoc(doc(db,"Users",userId));
     const userListArray = Object.values(user.data().gameList);
     
     userListArray.push(gameId);
-    const player = user.data().currentPlayers + 1;
-    const d = parseInt(player);
-    console.log(user.data().currentPlayers);
+    const player = game.data().currentPlayers+1;
+    //player = player +1;
+    //console.log(player);
+    console.log("Player count = ");
+    console.log(user.data());
     console.log("Player below");
     console.log(player);
     console.log("Game is here");
     console.log(game.data());
     updateDoc(doc(db,"Games",gameId),{
-        currentPlayers: d,
+        currentPlayers: player,
         userList: gameListArray
     })
     updateDoc(doc(db,"Users",userId),{
