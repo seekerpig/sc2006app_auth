@@ -23,6 +23,7 @@ import { JoinGame } from "../Control/JoinGameController";
 export default function DetailedGamePage() {
   const { gameId } = useParams();
   const { error, isPending, game } = GameInfo(gameId);
+  const [success, setSuccess] = React.useState("");
   const [error1, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const {currentUser} = useAuth();
@@ -65,7 +66,7 @@ export default function DetailedGamePage() {
   }
   return (
     <div>
-      {error && (
+      {error1 && (
         <Alert severity="error">
           {" "}
           <AlertTitle>Error</AlertTitle>Game not found. Redirecting...
