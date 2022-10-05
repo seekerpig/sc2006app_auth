@@ -192,9 +192,11 @@ export const createAGame = async (title, location, sportType, startDate, endDate
  
     const gameListArray = Object.values(game.data().userList);
     if (gameListArray.includes(userId)){
-      //console.log(gameListArray);
+      
       console.log("Duplicate games");
-      throw 200;
+      return 200;
+      
+      
       
     }
     else{
@@ -218,6 +220,7 @@ export const createAGame = async (title, location, sportType, startDate, endDate
     updateDoc(doc(db,"Users",userId),{
       gameList:userListArray
     })
+    return 100;
   }
 
   }

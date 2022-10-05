@@ -39,40 +39,62 @@ export default function DetailedGamePage() {
     setLoading(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    if(currentUser === null){
+      setError("User not found. Please login to create game.");
+        setTimeout(function() {
+          navigate("/login");
+        }, 3000);
+
+    }
+    else{
     
-    
+    if(game.currentPlayers >= game.maxPlayers){
+      setError("Game is full");
+        setTimeout(function() {
+          navigate("/profile");
+        }, 3000);
+
+    }
+    else{
 
     try {
-      console.log(currentUser.uid);
+      //console.log(currentUser.uid);
 
       
       console.log("Here Alrdy")
-      await JoinGame(gameId,currentUser.uid);
+      await JoinGame(gameId, currentUser.uid);
       setSuccess("Game is successfully joined. Redirecting to profile page...");
       setTimeout(function() {
         navigate("/profile");
       } ,3000);
       
     } catch(e) {
-      if(e ==400){
+      console.log("e");
+      console.log(e);
+      if(e ===400){
         setError("User not found. Please login to create game.");
         setTimeout(function() {
           navigate("/login");
         }, 3000);
       }
-      else if (e === 200){
-        setError("Duplicate Games");
-        setTimeout(function() {
-          navigate("/profile");
-        }, 3000);
-      }
+      
       else{
+        if (e === 200){
+          console.log("Hello")
+          setError("Duplicate Games");
+          setTimeout(function() {
+            navigate("/profile");
+          }, 3000);
+        } 
+        else{
       setError("Failed to Create A Game");
+        }
       }
     }
 
     setLoading(false);
-  }
+  }}
+}
 
   
 
@@ -82,7 +104,7 @@ export default function DetailedGamePage() {
       {error1 && (
         <Alert severity="error">
           {" "}
-          <AlertTitle>Error</AlertTitle>Game not found. Redirecting...
+          <AlertTitle>Error</AlertTitle>{error1}
         </Alert>
       )}
       {isPending && <LinearProgress />}
