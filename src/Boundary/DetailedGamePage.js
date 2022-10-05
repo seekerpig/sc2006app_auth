@@ -20,7 +20,13 @@ import { useAuth } from "../Control/SessionController";
 import { GameInfo } from "../Control/GamesInfoController";
 import { JoinGame } from "../Control/JoinGameController";
 
+
+function Iframe(props) {
+  return (<div dangerouslySetInnerHTML={ {__html:  props.iframe?props.iframe:""}} />);
+}
+
 export default function DetailedGamePage() {
+
   const { gameId } = useParams();
   const { error, isPending, game } = GameInfo(gameId);
   const [success, setSuccess] = React.useState("");
@@ -64,6 +70,9 @@ export default function DetailedGamePage() {
 
     setLoading(false);
   }
+
+  const iframe = '<iframe  width="450" height="250" frameborder="0" style="border:0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&q=Eiffel+Tower,Paris+France"> </iframe>';
+
   return (
     <div>
       {error1 && (
@@ -98,6 +107,9 @@ export default function DetailedGamePage() {
                   image="https://img.freepik.com/free-vector/soccer-volleyball-baseball-rugby-equipment_1441-4026.jpg"
                   alt="Live from space album cover"
                 />
+              </Grid>
+              <Grid item xs={12} md={5}>
+              <Iframe iframe={iframe} />,
               </Grid>
               <Grid item xs={12} md={7}>
                 <Box sx={{ paddingX: 4, marginBottom: 6 }}>
@@ -264,7 +276,7 @@ export default function DetailedGamePage() {
                 </Button>
               </Box>
             </CardActions>
-            //CAN KEEP JOIN GAME
+            
             {success && <Alert severity="success">{success}</Alert>} 
           </Card>
           
