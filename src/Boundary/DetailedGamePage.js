@@ -264,8 +264,10 @@ export default function DetailedGamePage() {
                 </Button>
               </Box>
             </CardActions>
+            //CAN KEEP JOIN GAME
+            {success && <Alert severity="success">{success}</Alert>} 
           </Card>
-          {success && <Alert severity="success">{success}</Alert>}
+          
         </Box>
       )}
     </div>
