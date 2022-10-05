@@ -7,6 +7,8 @@ export const JoinGame = (gameId,userId) => {
   //If no current User, then show alert or something
   console.log("In join game");
   
+  React.useEffect(() => {
+    (async () => {
   try{
     console.log(joinAGame(gameId,userId));
   }
@@ -15,6 +17,8 @@ export const JoinGame = (gameId,userId) => {
     console.log(e);
     throw e;
   }
+})();
+}, []);
 
   
 

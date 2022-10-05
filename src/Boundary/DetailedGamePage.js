@@ -60,6 +60,12 @@ export default function DetailedGamePage() {
           navigate("/login");
         }, 3000);
       }
+      else if (e === 200){
+        setError("Duplicate Games");
+        setTimeout(function() {
+          navigate("/profile");
+        }, 3000);
+      }
       else{
       setError("Failed to Create A Game");
       }
