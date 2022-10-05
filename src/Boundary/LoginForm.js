@@ -36,6 +36,7 @@ export default function LoginForm() {
   const { currentUser } = useAuth();
   //console.log(currentUser);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -50,8 +51,9 @@ export default function LoginForm() {
     try {
       setLoading(true);
       setError("");
+      setSuccess("");
       await loginUser(data.get("email"), data.get("password"));
-      setError("Login Successful!");
+      setSuccess("Login Successful! Redirecting...");
       setTimeout(function() {
         navigate("/");
       }, 2000);
@@ -118,6 +120,7 @@ export default function LoginForm() {
             >
               Login
             </Button>
+            {success && <Alert severity="success">{success}</Alert>}
             {error && <Alert severity="error">{error}</Alert>}
             {currentUser && <p>Current logged user is {currentUser.email}</p>}
             <Grid container justifyContent="flex-end">

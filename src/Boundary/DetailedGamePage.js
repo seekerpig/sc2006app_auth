@@ -44,7 +44,7 @@ export default function DetailedGamePage() {
       
       console.log("Here Alrdy")
       JoinGame(gameId,currentUser.uid);
-      setError("Game is successfully created. Redirecting to profile page...");
+      setSuccess("Game is successfully joined. Redirecting to profile page...");
       setTimeout(function() {
         navigate("/profile");
       } ,3000);
@@ -264,6 +264,7 @@ export default function DetailedGamePage() {
               </Box>
             </CardActions>
           </Card>
+          {success && <Alert severity="success">{success}</Alert>}
         </Box>
       )}
     </div>

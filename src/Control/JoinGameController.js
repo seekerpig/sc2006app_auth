@@ -6,7 +6,7 @@ export const JoinGame = (gameId,userId) => {
   //If no current User, then show alert or something
   console.log("In join game");
   if(userId === null){
-    console.log("somethign wong");
+    console.log("something wong");
     throw 400;
   }
   joinAGame(gameId,userId);

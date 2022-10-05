@@ -42,6 +42,7 @@ export default function SignUpForm() {
   const { currentUser } = useAuth();
   //console.log(currentUser);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -60,6 +61,7 @@ export default function SignUpForm() {
     try {
       setLoading(true);
       setError("");
+      setSuccess("");
 
       //CODE FOR CREATING USER:
       //NEED CODE TO UPLOAD IMAGE TO FIREBASE
@@ -67,7 +69,7 @@ export default function SignUpForm() {
 
       await SignUp(data.get("email"), data.get("password"),data.get("firstName") + data.get("lastName"),data.get("phoneNumber"),data.get("description"),data.get("img"));
 
-      setError("Signup is successful! Redirecting to login page...");
+      setSuccess("Signup is successful! Redirecting to login page...");
       setTimeout(function() {
         navigate("/profile");
       }, 3000);
@@ -185,6 +187,7 @@ export default function SignUpForm() {
               Sign Up
             </Button>
             {error && <Alert severity="error">{error}</Alert>}
+            {success && <Alert severity="success">{success}</Alert>}
             {currentUser && <p>Current logged user is {currentUser.email}</p>}
             <Grid container justifyContent="flex-end">
               <Grid item>

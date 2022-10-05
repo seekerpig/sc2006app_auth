@@ -102,6 +102,7 @@ export default function Creategame() {
 
   //console.log(currentUser);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   if(currentUser === null){
@@ -125,7 +126,8 @@ export default function Creategame() {
     });
 
     try {
-      
+      setError("")
+      setSuccess("")
       console.log({
         titleA: data.get("title"),
         locationA: location,
@@ -139,7 +141,7 @@ export default function Creategame() {
       console.log("Here Alrdy")
       //NEED SOME CODE HERE TO CREATE A NEW DOC IN FIRESTORE
       //NEED TO IMPORT CreateNewGame() from CreateGameController
-      setError("Game is successfully created. Redirecting to profile page...");
+      setSuccess("Game is successfully created. Redirecting to profile page...");
       setTimeout(function() {
         navigate("/profile");
       }, 3000);
@@ -310,6 +312,7 @@ export default function Creategame() {
             >
               Create Game
             </Button>
+            {success && <Alert severity="success">{success}</Alert>}
             {error && <Alert severity="error">{error}</Alert>}
             {currentUser && <p>Current logged user is {currentUser.email}</p>}
           </Box>
