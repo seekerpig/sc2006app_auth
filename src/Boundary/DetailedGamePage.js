@@ -42,9 +42,10 @@ export default function DetailedGamePage() {
 
     try {
       console.log(currentUser.uid);
+
       
       console.log("Here Alrdy")
-      JoinGame(gameId,currentUser.uid);
+      await JoinGame(gameId,currentUser.uid);
       setSuccess("Game is successfully joined. Redirecting to profile page...");
       setTimeout(function() {
         navigate("/profile");

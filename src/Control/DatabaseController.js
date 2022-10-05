@@ -191,6 +191,13 @@ export const createAGame = async (title, location, sportType, startDate, endDate
     const game = await getDoc(doc(db,"Games",gameId));
  
     const gameListArray = Object.values(game.data().userList);
+    if (gameListArray.includes(userId)){
+      //console.log(gameListArray);
+      console.log("Duplicate games");
+      throw 200;
+      
+    }
+    else{
     gameListArray.push(userId);
 
     const user = await getDoc(doc(db,"Users",userId));
@@ -198,16 +205,18 @@ export const createAGame = async (title, location, sportType, startDate, endDate
     
     userListArray.push(gameId);
     const player = user.data().currentPlayers + 1;
-    console.log(player)
+    const d = parseInt(player);
+    console.log("Player below");
+    console.log(player);
     console.log("Game is here");
     console.log(game.data());
     updateDoc(doc(db,"Games",gameId),{
-        currentPlayers:Number(player),
+        currentPlayers: d,
         userList: gameListArray
     })
     updateDoc(doc(db,"Users",userId),{
       gameList:userListArray
     })
-
+  }
 
   }
