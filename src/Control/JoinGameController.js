@@ -1,4 +1,4 @@
-import React from 'react'
+//import React from 'react'
 import {joinAGame} from "./DatabaseController"
 
 export const JoinGame = async (gameId,userId) => {
@@ -8,14 +8,20 @@ export const JoinGame = async (gameId,userId) => {
   
   if(userId === null){
     console.log("something wong");
-    throw 400;
+    const error = {
+      type:400
+    }
+    throw error;
   }
   
     const result = await joinAGame(gameId,userId);
     console.log(result);
     if(result === 200){
       console.log("triggered");
-      throw 200;
+      const error = {
+        type:200
+      }
+      throw error;
     }
     
   

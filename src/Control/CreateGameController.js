@@ -1,7 +1,6 @@
-import React,{useRef,useState} from 'react'
-import {useAuth} from './SessionController'
+
 import {createAGame} from'./DatabaseController'
-import { useNavigate } from "react-router-dom"
+
 
 
 export const CreateNewGame = async (title, location, sportType, startDate, endDate, description, maxPlayers,currentUser) => {
@@ -13,7 +12,10 @@ export const CreateNewGame = async (title, location, sportType, startDate, endDa
       //useAuth()
     if(currentUser === null){
       console.log("No user detected do something");
-      throw 400;  
+      const error = {
+        type:400
+      }
+      throw error;  
     }
     
 

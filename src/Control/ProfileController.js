@@ -1,12 +1,9 @@
-import { async } from '@firebase/util';
-import { areArraysEqual } from '@mui/base';
-import { amber } from '@mui/material/colors';
-import React from 'react'
+
 import { useState, useEffect,useLayoutEffect } from "react";
 import Game from '../Entity/Game';
 import User from "../Entity/User";
-import { getAGame, getGames, retrieveAUser } from "./DatabaseController";
-import { GameInfo,GetGames } from './GamesInfoController';
+import {  getGames, retrieveAUser } from "./DatabaseController";
+
 
 
 
@@ -85,7 +82,7 @@ export const retrieveUserGame = (userId) => {
     const gameObjectList = [];
     const listOfGame = Object.values(doc.data().gameList);
     
-    let result;
+
 
     listOfGame.forEach(x => {
       allData.forEach((doc) => {
@@ -116,10 +113,3 @@ console.log("Game Results");
 return{games2 };
 }
 
-const listGenerator = (gameId) => {
-  console.log("Called");
-  console.log(gameId);
-  
-  
-
-}

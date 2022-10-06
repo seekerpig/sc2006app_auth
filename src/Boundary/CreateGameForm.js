@@ -146,7 +146,7 @@ export default function Creategame() {
         navigate("/profile");
       }, 3000);
     } catch(e) {
-      if(e ===400){
+      if(e.type ===400){
         setError("User not found. Please login to create game.");
         setTimeout(function() {
           navigate("/login");

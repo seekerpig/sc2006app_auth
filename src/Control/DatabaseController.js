@@ -1,11 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { useContext } from "react";
+
 import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore,useAuth, collection, getDocs, doc, getDoc,setDoc,addDoc,updateDoc } from "firebase/firestore";
-import Game from "../Entity/Game";
-import User from "../Entity/User";
-import { getStorage, ref, uploadBytes,uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import * as React from "react";
+import { getFirestore, collection, getDocs, doc, getDoc,setDoc,addDoc,updateDoc } from "firebase/firestore";
+
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
 import {JoinGame} from "./JoinGameController";
 
 
@@ -90,6 +89,9 @@ export const signUp = (email, password, name, phoneNo, description, profileImg) 
         case 'running':
           console.log('Upload is running');
           break;
+        default:
+          console.log("Do something");
+          break;
       }
     }, 
     (error) => {
@@ -103,6 +105,9 @@ export const signUp = (email, password, name, phoneNo, description, profileImg) 
           break;
         case 'storage/unknown':
           // Unknown error occurred, inspect error.serverResponse
+          break;
+        default:
+          console.log("Do something");
           break;
       }
     }, 
@@ -126,8 +131,8 @@ export const signUp = (email, password, name, phoneNo, description, profileImg) 
     // ...
   })
   .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
+    //const errorCode = error.code;
+    //const errorMessage = error.message;
     // ..
   });
 

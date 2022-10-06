@@ -28,6 +28,7 @@ export default function DetailedGamePage() {
   const [success, setSuccess] = React.useState("");
   const [error1, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  
   const {currentUser} = useAuth();
   const navigate = useNavigate();
   if (error) {
@@ -37,8 +38,10 @@ export default function DetailedGamePage() {
   }
   async function handleSubmit(event) {
     setLoading(true);
+    console.log(loading);
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    //const data = new FormData(event.currentTarget);
+    // If no user redirect to login page
     if(currentUser === null){
       setError("User not found. Please login to create game.");
         setTimeout(function() {
@@ -47,7 +50,7 @@ export default function DetailedGamePage() {
 
     }
     else{
-    
+    // If game is full show game is full and redirect to other pages
     if(game.currentPlayers >= game.maxPlayers){
       setError("Game is full");
         setTimeout(function() {
@@ -58,9 +61,8 @@ export default function DetailedGamePage() {
     else{
 
     try {
-      //console.log(currentUser.uid);
 
-      
+      //Call for join game and catch any error
       console.log("Here Alrdy")
       await JoinGame(gameId, currentUser.uid);
       setSuccess("Game is successfully joined. Redirecting to profile page...");
@@ -71,7 +73,8 @@ export default function DetailedGamePage() {
     } catch(e) {
       console.log("e");
       console.log(e);
-      if(e ===400){
+      //fail safe if user still managed to call function
+      if(e.type ===400){
         setError("User not found. Please login to create game.");
         setTimeout(function() {
           navigate("/login");
@@ -79,7 +82,8 @@ export default function DetailedGamePage() {
       }
       
       else{
-        if (e === 200){
+        // If user already in game redirect to profile
+        if (e.type === 200){
           console.log("Hello")
           setError("Duplicate Games");
           setTimeout(function() {
@@ -87,6 +91,7 @@ export default function DetailedGamePage() {
           }, 3000);
         } 
         else{
+          //any other reason that led to failure 
       setError("Failed to Create A Game");
         }
       }

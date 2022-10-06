@@ -10,9 +10,9 @@ import { useAuth } from "../Control/SessionController";
 import User from "../Entity/User";
 import Game from "../Entity/Game";
 import { retrieveProfile,retrieveUserGame } from "../Control/ProfileController";
-import { Link, useNavigate } from "react-router-dom";
-import LinearProgress from "@mui/material/LinearProgress";
-import { Logout } from "@mui/icons-material";
+import {  useNavigate } from "react-router-dom";
+//import LinearProgress from "@mui/material/LinearProgress";
+//import { Logout } from "@mui/icons-material";
 //import { useAuth } from "../Control/SessionController";
 
 // manually hard code some objects
@@ -54,7 +54,7 @@ const game2 = new Game(
 //AFTER RETRIEVE USER FROM DATABASE, YOU NEED TO FIND THE GAMES OF THE USER and user1.addGameToUser()
 //ALSO FOR EACH GAME, POPULATE A CARD FOR PROFILE.
 
-const games = [game1, game2];
+//const games = [game1, game2];
 
 user1.addGameToUser(game1.gameId);
 user1.addGameToUser(game2.gameId);
@@ -77,6 +77,8 @@ export default function ProfilePage() {
   console.log("User is right below here")
   //console.log(activeUser);
   const { error, isPending, user2=new User()} = retrieveProfile(currentUser.uid);
+  console.log(error);
+  console.log(isPending);
   const {games2}=retrieveUserGame(currentUser.uid);
   console.log(games2);
   
