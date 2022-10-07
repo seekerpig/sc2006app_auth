@@ -50,7 +50,7 @@ export default function SignUpForm() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      name: data.get("firstName") +" " + data.get("lastName"),
+      name: data.get("firstName") + " " + data.get("lastName"),
       email: data.get("email"),
       password: data.get("password"),
       phoneNumber: data.get("phoneNumber"),
@@ -63,8 +63,7 @@ export default function SignUpForm() {
       setError("");
       setSuccess("");
 
-      if(data.get("password").length <= 5)
-      {
+      if (data.get("password").length <= 5) {
         setError("Password Length is Not Long Enough");
         return;
       }
@@ -73,7 +72,14 @@ export default function SignUpForm() {
       //NEED CODE TO UPLOAD IMAGE TO FIREBASE
       //AFTER UPLOAD, add all the parameters to the SignUp function, it needs more, see SignUpController.js for full parameters.
 
-      await SignUp(data.get("email"), data.get("password"),data.get("firstName") +" "+ data.get("lastName"),data.get("phoneNumber"),data.get("description"),data.get("img"));
+      await SignUp(
+        data.get("email"),
+        data.get("password"),
+        data.get("firstName") + " " + data.get("lastName"),
+        data.get("phoneNumber"),
+        data.get("description"),
+        data.get("img")
+      );
 
       setSuccess("Signup is successful! Redirecting to login page...");
       setTimeout(function() {
@@ -87,8 +93,15 @@ export default function SignUpForm() {
   }
 
   return (
-    <Box sx={{ bgcolor: "secondary.main", padding: 2, borderRadius: "8px" }}>
-      <Container component="main" maxWidth="xs">
+    <Box
+      sx={{
+        bgcolor: "secondary.main",
+        padding: 2,
+        borderRadius: "8px",
+        minHeight: 1000,
+      }}
+    >
+      <Container component="main" maxWidth="xs" sx={{ pt: 5 }}>
         <CssBaseline />
         <Box
           sx={{

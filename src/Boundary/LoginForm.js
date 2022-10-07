@@ -65,8 +65,15 @@ export default function LoginForm() {
   }
 
   return (
-    <Box sx={{ bgcolor: "secondary.main", padding: 2, borderRadius: "8px" }}>
-      <Container component="main" maxWidth="xs">
+    <Box
+      sx={{
+        bgcolor: "secondary.main",
+        padding: 2,
+        borderRadius: "8px",
+        minHeight: 800,
+      }}
+    >
+      <Container component="main" maxWidth="xs" sx={{ py: 12 }}>
         <CssBaseline />
         <Box
           sx={{
@@ -125,7 +132,9 @@ export default function LoginForm() {
             {currentUser && <p>Current logged user is {currentUser.email}</p>}
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/signup">Sign Up</Link>
+                <Link to="/signup" variant="body2">
+                  New Here? Sign Up
+                </Link>
               </Grid>
             </Grid>
           </Box>
