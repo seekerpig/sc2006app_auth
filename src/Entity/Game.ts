@@ -1,4 +1,3 @@
-import User from "./User";
 
 export default class Game
 {
@@ -15,7 +14,7 @@ export default class Game
     
 
 
-    constructor (id:string,title:string, sportType:string, description:string, startTime: Date, endTime:Date, location:string, maxPlayers:number, currentPlayers:number, uid:string[])
+    constructor (id:string,title:string, sportType:string, description:string, startTime: Date, endTime:Date, location:string, maxPlayers:number, currentPlayers:number, userList:string[])
     {
         this.gameId = id;
         this.title = title;
@@ -26,15 +25,8 @@ export default class Game
         this.location = location;
         this.maxPlayers = maxPlayers;
         this.currentPlayers = currentPlayers;
-        this.userList = uid;
-        //this.addUserToGame(uid)
+        this.userList = userList;
         
-    }
-
-    //add a new user into userList.
-    public addUserToGame(user:string)
-    {
-        this.userList.push(user);
     }
 
 

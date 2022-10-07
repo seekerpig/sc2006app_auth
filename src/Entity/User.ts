@@ -18,10 +18,8 @@ export default class User {
         this.profileUrl = profileImage;
     }
 
-    addGameToUser(game:string){
-        this.gameList.push(game);
-    }
 
+    //getter and setter functions to prevent users from editing attributes directly!
     public getUserID(){
         return this.userID;
     }

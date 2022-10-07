@@ -77,8 +77,8 @@ export default function ProfilePage() {
           </Grid>
           <Grid item align="center">
             <img
-              alt={user2.namse}
-              src={user2.profileUrl}
+              alt={user2.getName()}
+              src={user2.getProfileUrl()}
               style={{
                 borderRadius: "50%",
                 marginBottom: "20px",
@@ -91,17 +91,17 @@ export default function ProfilePage() {
           </Grid>
           <Grid item>
             <Typography align="center" gutterBottom variant="overline">
-              <b>Name:</b> {user2.name}{" "}
+              <b>Name:</b> {user2.getName()}{" "}
             </Typography>
           </Grid>
           <Grid item>
             <Typography align="center" gutterBottom variant="overline">
-              <b>Email Address:</b> {user2.email}{" "}
+              <b>Email Address:</b> {user2.getEmail()}{" "}
             </Typography>
           </Grid>
           <Grid item>
             <Typography align="center" style={{ marginBottom: "30px" }} variant="overline">
-              <b>Phone Number:</b> {user2.phoneNo}{" "}
+              <b>Phone Number:</b> {user2.getPhoneNo()}{" "}
             </Typography>
           </Grid>
           <Grid item align="center" mt={3}>
@@ -123,7 +123,7 @@ export default function ProfilePage() {
                 <b>Description:</b>
               </Typography>
               <Typography variant="subtitle1" style={{ fontSize: "14px" }} >
-                {user2.description}
+                {user2.getDescription()}
               </Typography>
             </Paper>
           </Grid>

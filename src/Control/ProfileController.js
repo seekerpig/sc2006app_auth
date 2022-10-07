@@ -40,7 +40,6 @@ export const retrieveProfile = (userId) => {
             console.log("Data successfully retrieved");
             console.log(doc.data());
             results = new User( 
-              
               userId,
               doc.data().name,
               doc.data().email,
