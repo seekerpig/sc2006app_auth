@@ -40,19 +40,25 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  async function handleSubmit(event) {
+  let email = "";
+  let password = "";
+
+  async function handleSubmitLogin(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    email = data.get("email");
+    password = data.get("password");
+
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
 
     try {
       setLoading(true);
       setError("");
       setSuccess("");
-      await loginUser(data.get("email"), data.get("password"));
+      await loginUser(email, password);
       setSuccess("Login Successful! Redirecting...");
       setTimeout(function() {
         navigate("/");
@@ -92,7 +98,7 @@ export default function LoginForm() {
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmitLogin}
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
