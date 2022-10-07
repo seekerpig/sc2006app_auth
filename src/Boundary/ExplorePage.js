@@ -1,33 +1,16 @@
 import React, { useEffect } from "react";
-import Card from "./UIComponents/Card";
+import DisplayGameList from "./UIComponents/Card";
 import { useSearchParams } from "react-router-dom";
-import {
-  Container,
-  MenuItem,
-  FormControl,
-  Select,
-  Box,
-  Stack,
-  TextField,
-  Grid,
-  Typography,
-  IconButton,
-  Alert,
-  AlertTitle,
-} from "@mui/material/";
+import {Container, MenuItem,FormControl,Select,Box,Stack,TextField,Grid,Typography,IconButton,Alert,AlertTitle} from "@mui/material/";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
-import {
-  FilterByFacility,
-  FilterBySports,
-  FilterByDate,
-} from "../Control/Filter";
+import {  FilterByFacility,  FilterBySports,  FilterByDate,} from "../Control/Filter";
 import { GetGames } from "../Control/GamesInfoController";
 import Game from "../Entity/Game";
 export default function ExplorePage() {
-  const [ogList, setOGList] = React.useState([]);
+  const [gameList, setGameList] = React.useState([]);
   const [filteredList, setList] = React.useState([]);
   const [sportList, setSportList] = React.useState([]);
   const [locationList, setLocationsList] = React.useState([]);
@@ -36,14 +19,13 @@ export default function ExplorePage() {
   useEffect(() => {
     (async () => {
       try {
-        // await async "fetchBooks()" function
         const games = await GetGames();
 
         // get the dropdown filter list based on existing data
         setSportList(games.docs.map((doc) => doc.data().sportType));
         setLocationsList(games.docs.map((doc) => doc.data().location));
 
-        setOGList(
+        setGameList(
           games.docs.map(
             (doc) =>
               new Game(
@@ -130,7 +112,7 @@ export default function ExplorePage() {
   };
 
   const handleSubmit = () => {
-    let list = FilterBySports(ogList, sport);
+    let list = FilterBySports(gameList, sport);
     list = FilterByFacility(list, location);
     if (date !== null) {
       list = FilterByDate(list, date);
@@ -241,7 +223,7 @@ export default function ExplorePage() {
           <AlertTitle>Error</AlertTitle>No Games Found, Try Other Filter Options
         </Alert>
       ) : (
-        <Card games={filteredList} />
+        <DisplayGameList games={filteredList} />
       )}
     </Container>
   );

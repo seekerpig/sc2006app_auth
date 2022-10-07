@@ -19,7 +19,7 @@ export const retrieveProfile = (userId) => {
   //if there is currentUser, retrieve data from databasecontroller (need create a new function in databasecontroller.js to retrieve data based on id and collection)
   
 
-    const [user2, setUser] = useState(null);
+    const [user, setUser] = useState(null);
     
     const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState(false);
@@ -61,14 +61,14 @@ export const retrieveProfile = (userId) => {
       })();
     }, []);
     
-    console.log(user2);
+    console.log(user);
   
-    return { error, isPending, user2 };
+    return { error, isPending, user };
   //this function is not yet implemented in profile page, so need to import into profile page also, cause profile page is currently hardcoded.
 }
 
-export const retrieveUserGame = (userId) => {
-  const [games2, setGame] = useState(null);
+export const retrieveUserGames = (userId) => {
+  const [games, setGames] = useState(null);
     
    // const [isPending, setIsPending] = useState(false);
     //const [error, setError] = useState(false);
@@ -93,7 +93,7 @@ export const retrieveUserGame = (userId) => {
       })
     })
         
-      setGame(gameObjectList);
+      setGames(gameObjectList);
     //console.log(allData);
     //console.log("List of game");
     //console.log(listOfGame);
@@ -109,6 +109,6 @@ export const retrieveUserGame = (userId) => {
 console.log("Game Results");
 //console.log(gameObjectList)
 //return gameObjectList
-return{games2 };
+return{games };
 }
 

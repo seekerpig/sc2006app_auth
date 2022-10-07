@@ -8,7 +8,7 @@ import { useAuth } from "../Control/SessionController";
 // import { collection, getDocs } from 'firebase/firestore'
 // get entities
 import User from "../Entity/User";
-import { retrieveProfile,retrieveUserGame } from "../Control/ProfileController";
+import { retrieveProfile,retrieveUserGames } from "../Control/ProfileController";
 import {  useNavigate } from "react-router-dom";
 
 
@@ -30,7 +30,7 @@ export default function ProfilePage() {
   const { error, isPending, user2=new User()} = retrieveProfile(currentUser.uid);
   console.log(error);
   console.log(isPending);
-  const {games2}=retrieveUserGame(currentUser.uid);
+  const {games2}=retrieveUserGames(currentUser.uid);
   console.log(games2);
   
   const [logoutMsg, setLogOutMsg] = React.useState("");

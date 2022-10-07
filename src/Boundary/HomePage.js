@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 import Game from "../Entity/Game";
 import Container from "@mui/material/Container";
-import Card from "./UIComponents/Card";
+import DisplayGameList from "./UIComponents/Card";
 import Banner from "./UIComponents/Banner";
 import ExploreSportsBar from "./UIComponents/ExploreSportsBar";
 // import Realtime Games Collection hooks
@@ -52,7 +52,7 @@ export default function HomePage() {
           Find Games to Play
         </Typography>
       </div>
-      {gameList.length !== 0 && <Card games={gameList} />}
+      {gameList.length !== 0 && <DisplayGameList games={gameList} />}
 
       <Box
         sx={{ display: "flex", justifyContent: "center", marginTop: "60px" }}
