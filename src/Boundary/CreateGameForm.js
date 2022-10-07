@@ -122,7 +122,6 @@ export default function Creategame() {
   async function handleSubmitCreateGame(event) {
     setLoading(true);
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
     try {
       setError("")
