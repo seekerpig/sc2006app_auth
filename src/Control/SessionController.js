@@ -8,7 +8,7 @@ const AuthContext = React.createContext();
 
 
 export function useAuth(){
-    return useContext(AuthContext);
+    return useContext(AuthContext); //returns currentUser and logout function
 }
 
 
