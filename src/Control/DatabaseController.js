@@ -10,6 +10,8 @@ import {JoinGame} from "./JoinGameController";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// the firebaseConfig is only stored here for reference purpose
+// during production, it will be stored into a env file
 const firebaseConfig = {
   apiKey: "AIzaSyAtIYhQTwSkF8ZL75Vrd18lRLHsVsPx57E",
   authDomain: "sc2006app.firebaseapp.com",
