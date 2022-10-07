@@ -43,7 +43,7 @@ export default function LoginForm() {
   let email = "";
   let password = "";
 
-  async function handleSubmit(event) {
+  async function handleSubmitLogin(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     email = data.get("email");
@@ -98,7 +98,7 @@ export default function LoginForm() {
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmitLogin}
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
