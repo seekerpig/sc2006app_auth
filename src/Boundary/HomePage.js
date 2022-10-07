@@ -44,25 +44,6 @@ export default function HomePage() {
     })();
   }, []);
   return (
-    // <ThemeProvider theme={theme}>
-    //   <ResponsiveAppBar/>
-    //   <Container component="main">
-    //     <Card sx={{ maxWidth: 345 }}>
-    //       <CardContent>
-    //           <Typography gutterBottom variant="h5" component="div">
-    //               {currentUser && currentUser.email}
-    //           </Typography>
-    //           <Typography variant="body2" color="text.secondary">
-    //           my password is {currentUser && currentUser.password}
-    //           </Typography>
-    //       </CardContent>
-    //       <CardActions>
-    //       <Button size="small" onClick={() => {logout();}}>Logout</Button>
-    //     </CardActions>
-    //   </Card>
-
-    //   </Container>
-    // </ThemeProvider>
     <Container>
       <Banner />
       <ExploreSportsBar />

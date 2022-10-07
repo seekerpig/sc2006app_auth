@@ -20,7 +20,7 @@ export default function GameList({games}) {
     <Grid container spacing={{ xs: 2, sm: 2, md: 2 }} alignItems="stretch" justifyContent="flex-start">
       {games.map((game) => (
         
-        <Grid item xs={12} sm={6} md={4} lg={3} key={game.gameId}>
+        <Grid item xs={12} sm={6} md={4} lg={3} key={game.getGameId()}>
           <Card sx={{':hover': {
                   boxShadow: 5, // theme.shadows[20]
                 },}} width="100%" style={{height:'100%', borderRadius:'0.5rem', paddingLeft:'10px',paddingRight:'10px', paddingBottom:'10px'}}>
@@ -40,7 +40,7 @@ export default function GameList({games}) {
                     component="div"
                     style={{ fontSize: 15 }}
                   >
-                    {game.title}
+                    {game.getTitle()}
                   </Typography>
                   <Typography
                     gutterBottom
@@ -48,7 +48,7 @@ export default function GameList({games}) {
                     component="div"
                     style={{ fontSize: 11 }}
                   >
-                    {game.sportType}
+                    {game.getSportType()}
                   </Typography>
 
                   <Grid
@@ -70,7 +70,7 @@ export default function GameList({games}) {
                           ml: 1,
                         }}
                       >
-                        {new Date(game.startTime.seconds * 1000)
+                        {new Date(game.getStartTime().seconds * 1000)
                           .toLocaleDateString("en-GB", {
                             day: "numeric",
                             month: "short",
@@ -94,7 +94,7 @@ export default function GameList({games}) {
                         }}
                       >
                         {new Date(
-                          game.startTime.seconds * 1000
+                          game.getStartTime().seconds * 1000
                         ).toLocaleTimeString("en-US", {
                           hour: "2-digit",
                           minute: "2-digit",
@@ -113,7 +113,7 @@ export default function GameList({games}) {
                           ml: 1,
                         }}
                       >
-                        {game.location}
+                        {game.getLocation()}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -136,13 +136,13 @@ export default function GameList({games}) {
                         ml: 1,
                       }}
                     >
-                      {game.currentPlayers} / {game.maxPlayers}
+                      {game.getCurrentPlayers()} / {game.getMaxPlayers()}
                     </Typography>
                   </Box>
                   <Box>
                     <Button
                       component={Link}
-                      to={`/games/${game.gameId}`}
+                      to={`/games/${game.getGameId()}`}
                       variant="contained"
                       style={{ minWidth: "80px", minHeight: "30px" }}
                     >

@@ -2,16 +2,16 @@ import User from "./User";
 
 export default class Game
 {
-    private _gameId = "";
-    private _title = "";
-    private _sportType = "";
-    private _description = "";
-    private _startTime = new Date();
-    private _endTime = new Date();
-    private _location = "";
-    private _maxPlayers = 0;
-    private _currentPlayers = 0;
-    private _userList: string[] = [];
+    private gameId:string;
+    private title:string;
+    private sportType:string;
+    private description:string;
+    private startTime:Date;
+    private endTime:Date;
+    private location:string;
+    private maxPlayers:number;
+    private currentPlayers:number;
+    private userList: string[] = [];
     
 
 
@@ -39,72 +39,72 @@ export default class Game
 
 
     //getter and setter functions to prevent users from editing attributes directly!
-    public get gameId() {
-        return this._gameId;
+    public getGameId() {
+        return this.gameId;
     }
-    public set gameId(value) {
-        this._gameId = value;
-    }
-
-    public get title() {
-        return this._title;
-    }
-    public set title(value) {
-        this._title = value;
-    }
-    public get sportType() {
-        return this._sportType;
-    }
-    public set sportType(value) {
-        this._sportType = value;
+    public setGameId(value:string) {
+        this.gameId = value;
     }
 
-    public get description() {
-        return this._description;
+    public getTitle() {
+        return this.title;
     }
-    public set description(value) {
-        this._description = value;
+    public setTitle(value:string) {
+        this.title = value;
     }
-
-    public get startTime() {
-        return this._startTime;
+    public getSportType() {
+        return this.sportType;
     }
-    public set startTime(value) {
-        this._startTime = value;
-    }
-
-    public get endTime() {
-        return this._endTime;
-    }
-    public set endTime(value) {
-        this._endTime = value;
+    public setSportType(value:string) {
+        this.sportType = value;
     }
 
-    public get location() {
-        return this._location;
+    public getDescription() {
+        return this.description;
     }
-    public set location(value) {
-        this._location = value;
-    }
-
-    public get maxPlayers() {
-        return this._maxPlayers;
-    }
-    public set maxPlayers(value) {
-        this._maxPlayers = value;
+    public setDescription(value:string) {
+        this.description = value;
     }
 
-    public get currentPlayers() {
-        return this._currentPlayers;
+    public getStartTime() {
+        return this.startTime;
     }
-    public set currentPlayers(value) {
-        this._currentPlayers = value;
+    public setStartTime(value:Date) {
+        this.startTime = value;
     }
-    public get userList(): string[] {
-        return this._userList;
+
+    public getEndTime() {
+        return this.endTime;
     }
-    public set userList(value: string[]) {
-        this._userList = value;
+    public setEndTime(value:Date) {
+        this.endTime = value;
+    }
+
+    public getLocation() {
+        return this.location;
+    }
+    public setLocation(value:string) {
+        this.location = value;
+    }
+
+    public getMaxPlayers() {
+        return this.maxPlayers;
+    }
+    public setMaxPlayers(value:number) {
+        this.maxPlayers = value;
+    }
+
+    public getCurrentPlayers() {
+        return this.currentPlayers;
+    }
+    public setCurrentPlayers(value:number) {
+        this.currentPlayers = value;
+    }
+    public getUserList(): string[] {
+        return this.userList;
+    }
+    public setUserList(value: string[]) {
+        this.userList = value;
     }
 
 }
