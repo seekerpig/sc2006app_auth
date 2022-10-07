@@ -36,8 +36,6 @@ function Copyright(props) {
   );
 }
 
-// const theme = createTheme();
-
 export default function SignUpForm() {
   const { currentUser } = useAuth();
   //console.log(currentUser);
@@ -46,17 +44,31 @@ export default function SignUpForm() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  let name = "";
+  let email = "";
+  let password = "";
+  let phoneNumber;
+  let description = "";
+  let fileName = "";
+
   async function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      name: data.get("firstName") + " " + data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-      phoneNumber: data.get("phoneNumber"),
-      description: data.get("description"),
-      fileName: data.get("img"),
-    });
+    name = data.get("firstName") + " " + data.get("lastName");
+    email = data.get("email");
+    password = data.get("password");
+    phoneNumber = data.get("phoneNumber");
+    description = data.get("description");
+    fileName = data.get("img");
+
+    // console.log({
+    //   name: data.get("firstName") + " " + data.get("lastName"),
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    //   phoneNumber: data.get("phoneNumber"),
+    //   description: data.get("description"),
+    //   fileName: data.get("img"),
+    // });
 
     try {
       setLoading(true);
@@ -73,12 +85,12 @@ export default function SignUpForm() {
       //AFTER UPLOAD, add all the parameters to the SignUp function, it needs more, see SignUpController.js for full parameters.
 
       await SignUp(
-        data.get("email"),
-        data.get("password"),
-        data.get("firstName") + " " + data.get("lastName"),
-        data.get("phoneNumber"),
-        data.get("description"),
-        data.get("img")
+        email,
+        password,
+        name,
+        phoneNumber,
+        description,
+        fileName,
       );
 
       setSuccess("Signup is successful! Redirecting to login page...");
