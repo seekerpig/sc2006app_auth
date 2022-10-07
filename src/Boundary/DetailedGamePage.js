@@ -1,6 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Typography, Card, CardActions, Alert, AlertTitle, CardMedia, Box, Grid, Button } from "@mui/material/";
+import {
+  Typography,
+  Card,
+  CardActions,
+  Alert,
+  AlertTitle,
+  CardMedia,
+  Box,
+  Grid,
+  Button,
+} from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
 import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -10,23 +20,42 @@ import { useAuth } from "../Control/SessionController";
 import { GameInfo } from "../Control/GamesInfoController";
 import { JoinGame } from "../Control/JoinGameController";
 
-
-
 export default function DetailedGamePage() {
+  let title = "";
+  let description = "";
+  let maxPlayers = "";
+  let currentPlayers = "";
+  let sportType = "";
+  let startTime = "";
+  let endTime = "";
+  let location = "";
+
   const { gameId } = useParams();
   const { error, isPending, game } = GameInfo(gameId);
   const [success, setSuccess] = React.useState("");
   const [error1, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
+  if (game != null) {
+    title = game.getTitle();
+    description = game.getDescription();
+    maxPlayers = game.getMaxPlayers();
+    currentPlayers = game.getCurrentPlayers();
+    sportType = game.getSportType();
+    startTime = game.getStartTime();
+    endTime = game.getEndTime();
+    location = game.getLocation();
+  }
+
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   if (error) {
-    setTimeout(function () {
+    setTimeout(function() {
       navigate("/");
     }, 5000);
   }
-  async function handleSubmit(event) {
+
+  async function handleSubmitJoinGame(event) {
     setLoading(true);
     console.log(loading);
     event.preventDefault();
@@ -34,51 +63,43 @@ export default function DetailedGamePage() {
     // If no user redirect to login page
     if (currentUser === null) {
       setError("User not found. Please login to create game.");
-      setTimeout(function () {
+      setTimeout(function() {
         navigate("/login");
       }, 3000);
-
-    }
-    else {
+    } else {
       // If game is full show game is full and redirect to other pages
-      if (game.currentPlayers >= game.maxPlayers) {
+      if (currentPlayers >= maxPlayers) {
         setError("Game is full");
-        setTimeout(function () {
+        setTimeout(function() {
           navigate("/profile");
         }, 3000);
-
-      }
-      else {
-
+      } else {
         try {
-
           //Call for join game and catch any error
-          console.log("Here Alrdy")
+          console.log("Here Alrdy");
           await JoinGame(gameId, currentUser.uid);
-          setSuccess("Game is successfully joined. Redirecting to profile page...");
-          setTimeout(function () {
+          setSuccess(
+            "Game is successfully joined. Redirecting to profile page..."
+          );
+          setTimeout(function() {
             navigate("/profile");
           }, 3000);
-
         } catch (e) {
           console.log("e");
           console.log(e);
           //fail safe if user still managed to call function
           if (e.type === 400) {
             setError("User not found. Please login to create game.");
-            setTimeout(function () {
+            setTimeout(function() {
               navigate("/login");
             }, 3000);
-          }
-
-          else {
+          } else {
             // If user already in game redirect to profile
             if (e.type === 200) {
-              console.log("Hello")
+              console.log("Hello");
               setError("You are already joined");
-            }
-            else {
-              //any other reason that led to failure 
+            } else {
+              //any other reason that led to failure
               setError("Failed to Create A Game");
             }
           }
@@ -89,20 +110,22 @@ export default function DetailedGamePage() {
     }
   }
 
-
-
-
   return (
     <div>
       {error1 && (
         <Alert severity="error">
           {" "}
-          <AlertTitle>Error</AlertTitle>{error1}
+          <AlertTitle>Error</AlertTitle>
+          {error1}
         </Alert>
       )}
       {isPending && <LinearProgress />}
       {game && (
-        <Box component="form" onSubmit={handleSubmit} sx={{ minHeight: 800 }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmitJoinGame}
+          sx={{ minHeight: 800 }}
+        >
           <Box paddingBottom={2}>
             <Link to="../explore" style={{ textDecorationLine: "none" }}>
               <ArrowBackIosIcon
@@ -135,14 +158,15 @@ export default function DetailedGamePage() {
                     marginY={1}
                     marginTop={4}
                   >
-                    {game.title}
+                    {title}
                   </Typography>
-                  <Typography variant="body1"
+                  <Typography
+                    variant="body1"
                     color="text.secondary"
                     component="div"
                     marginY={2}
                   >
-                    {game.description}
+                    {description}
                   </Typography>
                 </Box>
               </Grid>
@@ -163,7 +187,7 @@ export default function DetailedGamePage() {
                   </Grid>
                   <Grid item xs={8} marginBottom={2}>
                     <Typography variant="body1" component="div">
-                      {game.sportType}
+                      {sportType}
                     </Typography>
                   </Grid>
                   <Grid item xs={4} marginBottom={2}>
@@ -177,7 +201,7 @@ export default function DetailedGamePage() {
                   </Grid>
                   <Grid item xs={8} marginBottom={2}>
                     <Typography variant="body1" component="div">
-                      {new Date(game.startTime.seconds * 1000)
+                      {new Date(startTime.seconds * 1000)
                         .toLocaleDateString("en-GB", {
                           day: "numeric",
                           month: "short",
@@ -197,7 +221,7 @@ export default function DetailedGamePage() {
                   </Grid>
                   <Grid item xs={8} marginBottom={2}>
                     <Typography variant="body1" component="div">
-                      {game.maxPlayers}
+                      {maxPlayers}
                     </Typography>
                   </Grid>
                   <Grid item xs={4} marginBottom={2}>
@@ -211,7 +235,7 @@ export default function DetailedGamePage() {
                   </Grid>
                   <Grid item xs={8} marginBottom={2}>
                     <Typography variant="body1" component="div">
-                      {game.maxPlayers - game.currentPlayers}
+                      {maxPlayers - currentPlayers}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -229,12 +253,13 @@ export default function DetailedGamePage() {
                   </Grid>
                   <Grid item xs={8} marginBottom={2}>
                     <Typography variant="body1" component="div">
-                      {new Date(
-                        game.startTime.seconds * 1000
-                      ).toLocaleTimeString("en-US", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
+                      {new Date(startTime.seconds * 1000).toLocaleTimeString(
+                        "en-US",
+                        {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        }
+                      )}
                     </Typography>
                   </Grid>
                   <Grid item xs={4} marginBottom={2}>
@@ -248,7 +273,7 @@ export default function DetailedGamePage() {
                   </Grid>
                   <Grid item xs={8} marginBottom={2}>
                     <Typography variant="body1" component="div">
-                      {new Date(game.endTime.seconds * 1000).toLocaleTimeString(
+                      {new Date(endTime.seconds * 1000).toLocaleTimeString(
                         "en-US",
                         {
                           hour: "2-digit",
@@ -258,13 +283,17 @@ export default function DetailedGamePage() {
                     </Typography>
                   </Grid>
                   <Grid item xs={4} marginBottom={2}>
-                    <Typography variant="body1" color="text.secondary" component="div">
+                    <Typography
+                      variant="body1"
+                      color="text.secondary"
+                      component="div"
+                    >
                       Location
                     </Typography>
                   </Grid>
                   <Grid item xs={8} marginBottom={2}>
                     <Typography variant="body1" component="div">
-                      {game.location}
+                      {location}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -272,10 +301,17 @@ export default function DetailedGamePage() {
             </Grid>
 
             <CardActions
-              sx={{ paddingTop: 1, paddingRight: 4, paddingBottom: 4 }}>
+              sx={{ paddingTop: 1, paddingRight: 4, paddingBottom: 4 }}
+            >
               <Box sx={{ flexGrow: 1 }}></Box>
               <Box>
-                <Button variant="contained" type="submit" size="large" style={{ minWidth: "80px", minHeight: "30px" }} endIcon={<SendIcon />}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  size="large"
+                  style={{ minWidth: "80px", minHeight: "30px" }}
+                  endIcon={<SendIcon />}
+                >
                   JOIN NOW
                 </Button>
               </Box>
@@ -283,7 +319,6 @@ export default function DetailedGamePage() {
 
             {success && <Alert severity="success">{success}</Alert>}
           </Card>
-
         </Box>
       )}
     </div>
