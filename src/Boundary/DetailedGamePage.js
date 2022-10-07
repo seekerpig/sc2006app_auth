@@ -31,7 +31,7 @@ export default function DetailedGamePage() {
   let location = "";
 
   const { gameId } = useParams();
-  const { error, isPending, game } = GameInfo(gameId).then();
+  const { error, isPending, game } = GameInfo(gameId);
   const [success, setSuccess] = React.useState("");
   const [error1, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
@@ -70,9 +70,6 @@ export default function DetailedGamePage() {
       // If game is full show game is full and redirect to other pages
       if (currentPlayers >= maxPlayers) {
         setError("Game is full");
-        setTimeout(function() {
-          navigate("/profile");
-        }, 3000);
       } else {
         try {
           //Call for join game and catch any error

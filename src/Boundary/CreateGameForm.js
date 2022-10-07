@@ -136,7 +136,7 @@ export default function Creategame() {
         descriptionA: description,
         maxPlayersA: maxPlayers,
       });
-      CreateNewGame(title,location,sportType,startDate,endDate,data.description,maxPlayers,currentUser);
+      CreateNewGame(title,location,sportType,startDate,endDate,description,maxPlayers,currentUser);
       console.log("Here Alrdy")
       //NEED SOME CODE HERE TO CREATE A NEW DOC IN FIRESTORE
       //NEED TO IMPORT CreateNewGame() from CreateGameController

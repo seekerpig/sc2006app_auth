@@ -27,11 +27,11 @@ export default function ProfilePage() {
   else{
   console.log("User is right below here")
   //console.log(activeUser);
-  const { error, isPending, user2=new User()} = retrieveProfile(currentUser.uid);
+  const { error, isPending, user=new User()} = retrieveProfile(currentUser.uid);
   console.log(error);
   console.log(isPending);
-  const {games2}=retrieveUserGames(currentUser.uid);
-  console.log(games2);
+  const {games}=retrieveUserGames(currentUser.uid);
+  console.log(games);
   
   const [logoutMsg, setLogOutMsg] = React.useState("");
   const signOut = () => {
@@ -55,7 +55,7 @@ export default function ProfilePage() {
     <Container>
       
       
-      {user2 && (
+      {user && (
       <Box
         sx={{
           display: "flex",
@@ -77,8 +77,8 @@ export default function ProfilePage() {
           </Grid>
           <Grid item align="center">
             <img
-              alt={user2.getName()}
-              src={user2.getProfileUrl()}
+              alt={user.getName()}
+              src={user.getProfileUrl()}
               style={{
                 borderRadius: "50%",
                 marginBottom: "20px",
@@ -91,17 +91,17 @@ export default function ProfilePage() {
           </Grid>
           <Grid item>
             <Typography align="center" gutterBottom variant="overline">
-              <b>Name:</b> {user2.getName()}{" "}
+              <b>Name:</b> {user.getName()}{" "}
             </Typography>
           </Grid>
           <Grid item>
             <Typography align="center" gutterBottom variant="overline">
-              <b>Email Address:</b> {user2.getEmail()}{" "}
+              <b>Email Address:</b> {user.getEmail()}{" "}
             </Typography>
           </Grid>
           <Grid item>
             <Typography align="center" style={{ marginBottom: "30px" }} variant="overline">
-              <b>Phone Number:</b> {user2.getPhoneNo()}{" "}
+              <b>Phone Number:</b> {user.getPhoneNo()}{" "}
             </Typography>
           </Grid>
           <Grid item align="center" mt={3}>
@@ -123,7 +123,7 @@ export default function ProfilePage() {
                 <b>Description:</b>
               </Typography>
               <Typography variant="subtitle1" style={{ fontSize: "14px" }} >
-                {user2.getDescription()}
+                {user.getDescription()}
               </Typography>
             </Paper>
           </Grid>
@@ -143,7 +143,7 @@ export default function ProfilePage() {
           </Typography>
         </div>
         
-        {games2 && <Card games={games2} />}
+        {games && <Card games={games} />}
         
         
       </Box>
