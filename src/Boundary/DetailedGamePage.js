@@ -31,7 +31,7 @@ export default function DetailedGamePage() {
   let location = "";
 
   const { gameId } = useParams();
-  const { error, isPending, game } = GameInfo(gameId);
+  const { error, isPending, game } = GameInfo(gameId).then();
   const [success, setSuccess] = React.useState("");
   const [error1, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);

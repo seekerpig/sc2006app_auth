@@ -8,7 +8,7 @@ import { useAuth } from "../Control/SessionController";
 // import { collection, getDocs } from 'firebase/firestore'
 // get entities
 import User from "../Entity/User";
-import { retrieveProfile,retrieveUserGame } from "../Control/ProfileController";
+import { retrieveProfile,retrieveUserGames } from "../Control/ProfileController";
 import {  useNavigate } from "react-router-dom";
 
 
@@ -30,11 +30,11 @@ export default function ProfilePage() {
   const { error, isPending, user2=new User()} = retrieveProfile(currentUser.uid);
   console.log(error);
   console.log(isPending);
-  const {games2}=retrieveUserGame(currentUser.uid);
+  const {games2}=retrieveUserGames(currentUser.uid);
   console.log(games2);
   
   const [logoutMsg, setLogOutMsg] = React.useState("");
-  const SignOut = () => {
+  const signOut = () => {
       logout();
       setLogOutMsg("Successfully Logged Out. Redirecting...");
       setTimeout(function() {
@@ -152,7 +152,7 @@ export default function ProfilePage() {
         align="center"
         type="submit"
         variant="outlined"
-        onClick={SignOut}
+        onClick={signOut}
         sx={{ mt: 3, mb: 2, width:'100px' }}
       >
         Logout
