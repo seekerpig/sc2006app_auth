@@ -1,15 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import {
-  Typography,
-  Card,
-  CardActions,
-  Alert,
-  AlertTitle,
-  CardMedia,
-  Box,
-  Grid, Button,
-} from "@mui/material/";
+import { Typography, Card, CardActions, Alert, AlertTitle, CardMedia, Box, Grid, Button } from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
 import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -28,11 +19,11 @@ export default function DetailedGamePage() {
   const [success, setSuccess] = React.useState("");
   const [error1, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
-  
-  const {currentUser} = useAuth();
+
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
   if (error) {
-    setTimeout(function() {
+    setTimeout(function () {
       navigate("/");
     }, 5000);
   }
@@ -42,66 +33,64 @@ export default function DetailedGamePage() {
     event.preventDefault();
     //const data = new FormData(event.currentTarget);
     // If no user redirect to login page
-    if(currentUser === null){
+    if (currentUser === null) {
       setError("User not found. Please login to create game.");
-        setTimeout(function() {
-          navigate("/login");
-        }, 3000);
+      setTimeout(function () {
+        navigate("/login");
+      }, 3000);
 
     }
-    else{
-    // If game is full show game is full and redirect to other pages
-    if(game.currentPlayers >= game.maxPlayers){
-      setError("Game is full");
-        setTimeout(function() {
+    else {
+      // If game is full show game is full and redirect to other pages
+      if (game.currentPlayers >= game.maxPlayers) {
+        setError("Game is full");
+        setTimeout(function () {
           navigate("/profile");
         }, 3000);
 
-    }
-    else{
-
-    try {
-
-      //Call for join game and catch any error
-      console.log("Here Alrdy")
-      await JoinGame(gameId, currentUser.uid);
-      setSuccess("Game is successfully joined. Redirecting to profile page...");
-      setTimeout(function() {
-        navigate("/profile");
-      } ,3000);
-      
-    } catch(e) {
-      console.log("e");
-      console.log(e);
-      //fail safe if user still managed to call function
-      if(e.type ===400){
-        setError("User not found. Please login to create game.");
-        setTimeout(function() {
-          navigate("/login");
-        }, 3000);
       }
-      
-      else{
-        // If user already in game redirect to profile
-        if (e.type === 200){
-          console.log("Hello")
-          setError("Duplicate Games");
-          setTimeout(function() {
+      else {
+
+        try {
+
+          //Call for join game and catch any error
+          console.log("Here Alrdy")
+          await JoinGame(gameId, currentUser.uid);
+          setSuccess("Game is successfully joined. Redirecting to profile page...");
+          setTimeout(function () {
             navigate("/profile");
           }, 3000);
-        } 
-        else{
-          //any other reason that led to failure 
-      setError("Failed to Create A Game");
+
+        } catch (e) {
+          console.log("e");
+          console.log(e);
+          //fail safe if user still managed to call function
+          if (e.type === 400) {
+            setError("User not found. Please login to create game.");
+            setTimeout(function () {
+              navigate("/login");
+            }, 3000);
+          }
+
+          else {
+            // If user already in game redirect to profile
+            if (e.type === 200) {
+              console.log("Hello")
+              setError("You are already joined");
+            }
+            else {
+              //any other reason that led to failure 
+              setError("Failed to Create A Game");
+            }
+          }
         }
+
+        setLoading(false);
       }
     }
+  }
 
-    setLoading(false);
-  }}
-}
 
-  
 
 
   return (
@@ -149,8 +138,7 @@ export default function DetailedGamePage() {
                   >
                     {game.title}
                   </Typography>
-                  <Typography
-                    variant="body1"
+                  <Typography variant="body1"
                     color="text.secondary"
                     component="div"
                     marginY={2}
@@ -271,11 +259,7 @@ export default function DetailedGamePage() {
                     </Typography>
                   </Grid>
                   <Grid item xs={4} marginBottom={2}>
-                    <Typography
-                      variant="body1"
-                      color="text.secondary"
-                      component="div"
-                    >
+                    <Typography variant="body1" color="text.secondary" component="div">
                       Location
                     </Typography>
                   </Grid>
@@ -289,25 +273,18 @@ export default function DetailedGamePage() {
             </Grid>
 
             <CardActions
-              sx={{ paddingTop: 1, paddingRight: 4, paddingBottom: 4 }}
-            >
+              sx={{ paddingTop: 1, paddingRight: 4, paddingBottom: 4 }}>
               <Box sx={{ flexGrow: 1 }}></Box>
               <Box>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  size="large"
-                  style={{ minWidth: "80px", minHeight: "30px" }}
-                  endIcon={<SendIcon />}
-                >
+                <Button variant="contained" type="submit" size="large" style={{ minWidth: "80px", minHeight: "30px" }} endIcon={<SendIcon />}>
                   JOIN NOW
                 </Button>
               </Box>
             </CardActions>
-            
-            {success && <Alert severity="success">{success}</Alert>} 
+
+            {success && <Alert severity="success">{success}</Alert>}
           </Card>
-          
+
         </Box>
       )}
     </div>
