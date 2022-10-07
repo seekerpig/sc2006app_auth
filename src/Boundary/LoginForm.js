@@ -40,13 +40,19 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  let email = "";
+  let password = "";
+
   async function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    email = data.get("email");
+    password = data.get("password");
+
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
 
     try {
       setLoading(true);
