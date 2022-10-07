@@ -49,9 +49,9 @@ export default function SignUpForm() {
   let password = "";
   let phoneNumber;
   let description = "";
-  let fileName = "";
+  let profileUrl = "";
 
-  async function handleSubmit(event) {
+  async function handleSubmitSignUp(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     name = data.get("firstName") + " " + data.get("lastName");
@@ -59,7 +59,7 @@ export default function SignUpForm() {
     password = data.get("password");
     phoneNumber = data.get("phoneNumber");
     description = data.get("description");
-    fileName = data.get("img");
+    profileUrl = data.get("img");
 
     // console.log({
     //   name: data.get("firstName") + " " + data.get("lastName"),
@@ -90,7 +90,7 @@ export default function SignUpForm() {
         name,
         phoneNumber,
         description,
-        fileName,
+        profileUrl,
       );
 
       setSuccess("Signup is successful! Redirecting to login page...");
@@ -132,7 +132,7 @@ export default function SignUpForm() {
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmitSignUp}
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>

@@ -34,7 +34,7 @@ export default function ProfilePage() {
   console.log(games2);
   
   const [logoutMsg, setLogOutMsg] = React.useState("");
-  const SignOut = () => {
+  const signOut = () => {
       logout();
       setLogOutMsg("Successfully Logged Out. Redirecting...");
       setTimeout(function() {
@@ -152,7 +152,7 @@ export default function ProfilePage() {
         align="center"
         type="submit"
         variant="outlined"
-        onClick={SignOut}
+        onClick={signOut}
         sx={{ mt: 3, mb: 2, width:'100px' }}
       >
         Logout

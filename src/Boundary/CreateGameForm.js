@@ -44,7 +44,7 @@ const locations = [
   "Queenstown Sports Centre",
 ];
 
-const sportType = [
+const sportTypes = [
   "Badminton",
   "Basketball",
   "Pingpong",
@@ -56,13 +56,15 @@ const sportType = [
 export default function Creategame() {
   const { currentUser } = useAuth();
   const today = new Date();
-  
 
-  const [date, setDate] = React.useState(dayjs(today));
+  //attributes from location to maxPlayers
+  const [title, setTitle] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [startDate, setDate] = React.useState(dayjs(today));
   const [endDate, setEndDate] = React.useState(dayjs(today).add(60, "minutes"));
   const [location, setLocation] = React.useState("");
-  const [sport, setSport] = React.useState("");
-  const [players, setPlayers] = React.useState(2);
+  const [sportType, setSport] = React.useState("");
+  const [maxPlayers, setPlayers] = React.useState(2);
 
   const handleChangeLocation = (event) => {
     setLocation(event.target.value);
@@ -71,12 +73,20 @@ export default function Creategame() {
     setSport(event.target.value);
   };
 
+  const handleChangeDescription = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const handleChangeTitle = (event) => {
+    setTitle(event.target.value);
+  };
+
   const handleChangeDate = (newValue) => {
     setDate(newValue);
   };
 
   const handleChangeEndDate = (newValue) => {
-    if (newValue >= date) {
+    if (newValue >= startDate) {
       setEndDate(newValue);
     } else {
       alert("End Date & Time cannot be earlier than Starting Date & Time");
@@ -91,9 +101,9 @@ export default function Creategame() {
   };
 
   const handleBlur = () => {
-    if (players < 0) {
+    if (maxPlayers < 0) {
       setPlayers(0);
-    } else if (players > 100) {
+    } else if (maxPlayers > 100) {
       setPlayers(100);
     }
   };
@@ -109,33 +119,24 @@ export default function Creategame() {
   }, 100);}
      
   
-  async function handleSubmit(event) {
+  async function handleSubmitCreateGame(event) {
     setLoading(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      title: data.get("title"),
-      location: location,
-      sportType: sport,
-      startDate: date,
-      endDate: endDate,
-      description: data.get("description"),
-      maxPlayers: players,
-    });
 
     try {
       setError("")
       setSuccess("")
       console.log({
-        titleA: data.get("title"),
+        titleA: title,
         locationA: location,
-        sportTypeA: sport,
-        startDateA: date,
+        sportTypeA: sportType,
+        startDateA: startDate,
         endDateA: endDate,
-        descriptionA: data.get("description"),
-        maxPlayersA: players,
+        descriptionA: description,
+        maxPlayersA: maxPlayers,
       });
-      CreateNewGame(data.get("title"),location,sport,date,endDate,data.get("description"),players,currentUser);
+      CreateNewGame(title,location,sportType,startDate,endDate,data.description,maxPlayers,currentUser);
       console.log("Here Alrdy")
       //NEED SOME CODE HERE TO CREATE A NEW DOC IN FIRESTORE
       //NEED TO IMPORT CreateNewGame() from CreateGameController
@@ -177,7 +178,7 @@ export default function Creategame() {
           <Typography component="h1" variant="h5">
             Create A Game
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={handleSubmitCreateGame} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -186,6 +187,8 @@ export default function Creategame() {
                   id="title"
                   label="Game Title"
                   name="title"
+                  onChange={handleChangeTitle}
+                  value={title}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -219,7 +222,7 @@ export default function Creategame() {
                   <Select
                     labelId="sportType"
                     id="sportType"
-                    value={sport}
+                    value={sportType}
                     onChange={handleChangeSport}
                     fullWidth
                     label="Sport Type"
@@ -228,7 +231,7 @@ export default function Creategame() {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    {sportType.map((item) => (
+                    {sportTypes.map((item) => (
                       <MenuItem value={item}>{item}</MenuItem>
                     ))}
                   </Select>
@@ -240,7 +243,7 @@ export default function Creategame() {
                     <DateTimePicker
                       label="Start Date & Time"
                       id="startDate"
-                      value={date}
+                      value={startDate}
                       onChange={handleChangeDate}
                       renderInput={(params) => <TextField {...params} />}
                     />
@@ -264,6 +267,8 @@ export default function Creategame() {
                   name="description"
                   label="Description"
                   id="description"
+                  onChange={handleChangeDescription}
+                  
                 />
               </Grid>
               <Grid item xs={12}>
@@ -276,7 +281,7 @@ export default function Creategame() {
                   </Grid>
                   <Grid item xs>
                     <Slider
-                      value={typeof players === "number" ? players : 0}
+                      value={typeof maxPlayers === "number" ? maxPlayers : 0}
                       onChange={handleSliderChange}
                       aria-labelledby="input-slider"
                       max="12"
@@ -285,7 +290,7 @@ export default function Creategame() {
                   <Grid item>
                     <Input
                       id="maxPlayers"
-                      value={players}
+                      value={maxPlayers}
                       size="small"
                       onChange={handleSliderInputChange}
                       onBlur={handleBlur}
