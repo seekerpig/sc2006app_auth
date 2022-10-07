@@ -6,7 +6,7 @@ export const loginUser = (email,password) => {
     return login(email,password);
   }
   catch{
-    throw "Error";
+    console.log("error occured");
   }
   
   //after login is successful, sessioncontroller automatically checks for any updates on user authentication (no need to do extra code here)

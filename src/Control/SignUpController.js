@@ -6,7 +6,7 @@ export const SignUp = (email, password, name, phoneNo, description, profileImg) 
     return signUp(email, password, name, phoneNo, description, profileImg);
   }
   catch{
-    throw "Error";
+    console.log("error occured");
   }
   
 }
