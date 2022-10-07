@@ -1,12 +1,12 @@
 
 export default class User {
-    userID=""
-    name = "";
-    email = "";
-    phoneNo = 0;
-    description = "";
-    profileUrl = "";
-    gameList:string[] = []
+    private userID:string;
+    private name:string;
+    private email:string;
+    private phoneNo:number;
+    private description:string;
+    private profileUrl:string;
+    private gameList:string[] = []
     
     constructor(userID:string, name:string, email:string, phoneNo:number, description:string, profileImage:string,gameList:string[])
     {
@@ -18,12 +18,48 @@ export default class User {
         this.profileUrl = profileImage;
     }
 
-    addGameToUser(game:string)
-    {
+    addGameToUser(game:string){
         this.gameList.push(game);
     }
 
-    
+    public getUserID(){
+        return this.userID;
+    }
+    public getName(){
+        return this.name;
+    }
+    public getEmail(){
+        return this.email;
+    }
+    public getPhoneNo(){
+        return this.phoneNo;
+    }
+    public getDescription(){
+        return this.description;
+    }
+    public getProfileUrl(){
+        return this.profileUrl;
+    }
+    public getGameList(){
+        return this.gameList;
+    }
 
-
+    public setUserID(value:string){
+        this.userID = value;
+    }
+    public setName(value:string){
+        this.name = value;
+    }
+    public setEmail(value:string){
+        this.email = value;
+    }
+    public setPhoneNo(value:number){
+        this.phoneNo = value;
+    }
+    public setDescription(value:string){
+        this.description = value;
+    }
+    public setProfileUrl(value:string){
+        this.profileUrl = value;
+    }
 }
