@@ -176,7 +176,7 @@ export const createAGame = async (title, location, sportType, startDate, endDate
   //console.log(activeUser.data().gameList);
 
   await addDoc(collection(db, "Games"), {
-    currentPlayers: 1,
+    currentPlayers: 0,
     description: description,
     startTime: new Date(startDate),
     endTime: new Date(endDate),
