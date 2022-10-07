@@ -8,14 +8,15 @@ export default class User {
     private profileUrl:string;
     private gameList:string[] = []
     
-    constructor(userID:string, name:string, email:string, phoneNo:number, description:string, profileImage:string,gameList:string[])
+    constructor(userID:string, name:string, email:string, phoneNo:number, description:string, profileURL:string,gameList:string[])
     {
         this.userID = userID;
         this.name = name;
         this.email = email;
         this.phoneNo = phoneNo;
         this.description = description;
-        this.profileUrl = profileImage;
+        this.profileUrl = profileURL;
+        this.gameList = gameList;
     }
 
 
