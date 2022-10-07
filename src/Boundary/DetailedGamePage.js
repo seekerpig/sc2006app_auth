@@ -7,7 +7,6 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Control/SessionController";
 
-// import GameInfo function from GamesInfoController
 import { GameInfo } from "../Control/GamesInfoController";
 import { JoinGame } from "../Control/JoinGameController";
 

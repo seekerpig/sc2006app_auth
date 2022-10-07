@@ -16,7 +16,6 @@ import {
   Slider,
   Stack,
 } from "@mui/material/";
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 import { styled } from "@mui/material/styles";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -24,7 +23,6 @@ import GroupIcon from "@mui/icons-material/Group";
 import { useAuth } from "../Control/SessionController";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import Game from "./entities/Game";
 import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

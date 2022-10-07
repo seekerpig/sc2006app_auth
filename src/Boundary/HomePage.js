@@ -1,17 +1,9 @@
 import React, {useEffect} from "react";
-//import { useAuth } from "../contexts/AuthContext";
-// import Card from "@mui/material/Card";
-// import CardActions from '@mui/material/CardActions';
-// import CardContent from '@mui/material/CardContent';
-// import CardMedia from '@mui/material/CardMedia';
-// import Button from '@mui/material/Button';
 import Typography from "@mui/material/Typography";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
-// import ResponsiveAppBar from './Navbar';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Game from "../Entity/Game";
 import Container from "@mui/material/Container";
 import Card from "./UIComponents/Card";

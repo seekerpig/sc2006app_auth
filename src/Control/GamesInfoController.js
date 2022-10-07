@@ -47,33 +47,5 @@ export const GameInfo = (gameId) => {
     })();
   }, []);
 
-  // useEffect(() => {
-  //   setIsPending(true);
-
-  //   getDoc(ref).then((doc) => {
-  //     let results;
-  //     //console.log(doc.data());
-  //     if (doc.data() == null) {
-  //       setIsPending(false);
-  //       setError("Could not find that game.");
-  //     } else {
-  //       setIsPending(false);
-  //       results = new Game(
-  //         doc.id,
-  //         doc.data().title,
-  //         doc.data().sportType,
-  //         doc.data().description,
-  //         doc.data().startTime,
-  //         doc.data().endTime,
-  //         doc.data().location,
-  //         doc.data().maxPlayers,
-  //         doc.data().currentPlayers,
-  //         doc.data().userList
-  //       );
-  //     }
-  //     setGame(results);
-  //   });
-  // }, [gameId]);
-
   return { error, isPending, game };
 }
