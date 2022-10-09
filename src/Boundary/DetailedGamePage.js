@@ -52,11 +52,8 @@ export default function DetailedGamePage() {
     startTime = game.getStartTime();
     endTime = game.getEndTime();
     location = game.getLocation();
-<<<<<<< Updated upstream
-    iframe = '<iframe width="100%" height="300" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&q=' + game.getLocation()+'">  </iframe>';
-=======
     iframe = '<iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&q=' + game.getLocation()+'">  </iframe>';
->>>>>>> Stashed changes
+
   }
 
   const { currentUser } = useAuth();
@@ -150,11 +147,6 @@ export default function DetailedGamePage() {
           </Box>
 
           <Card>
-<<<<<<< Updated upstream
-          <Iframe iframe={iframe} />
-=======
-          
->>>>>>> Stashed changes
             <Grid container>
               <Grid item xs={12} md={5}>
                 <CardMedia
