@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect}  from "react";
 import {
   Avatar,
   Button,
@@ -29,6 +29,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import MuiInput from "@mui/material/Input";
 import {CreateNewGame } from "../Control/CreateGameController"
+import { getFacilities } from "../Control/DatabaseController";
 
 
 const Input = styled(MuiInput)`
@@ -38,11 +39,11 @@ const Input = styled(MuiInput)`
 // RIGHT NOW THE LOCATIONS AND SPORTTYPE IS HARDCODED, YOU NEED TO RETRIEVE THE LIST OF LOCATIONS AND SPORTTYPE FROM DATABASE
 // AND STORE INTO ENTITY OBJECT
 
-const locations = [
+/*const locations = [
   "Jurong Sports Hall",
   "Sengkang Community Centre",
   "Queenstown Sports Centre",
-];
+];*/
 
 const sportTypes = [
   "Badminton",
@@ -65,6 +66,26 @@ export default function Creategame() {
   const [location, setLocation] = React.useState("");
   const [sportType, setSport] = React.useState("");
   const [maxPlayers, setPlayers] = React.useState(2);
+  
+  const [locations, setList] = React.useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const facilities = await getFacilities();
+        setList(facilities.docs.map((doc) => (
+          {
+            placemarkid:doc.data().placemarkid,
+            name:doc.data().name
+          }
+        )));
+           // printSomething();
+        
+      } catch (err) {
+        console.log('Error occured when fetching games');
+      }
+    })();
+  }, []);
 
   const handleChangeLocation = (event) => {
     setLocation(event.target.value);
@@ -159,7 +180,8 @@ export default function Creategame() {
   }
 
   return (
-    
+    <div>
+      {locations && (
     <Box sx={{ bgcolor: "secondary.main", padding: 2, borderRadius: "8px" }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -208,7 +230,7 @@ export default function Creategame() {
                       <em>None</em>
                     </MenuItem>
                     {locations.map((item) => (
-                      <MenuItem value={item}>{item}</MenuItem>
+                      <MenuItem value={item.placemarkid}>{item.name}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>
@@ -321,6 +343,8 @@ export default function Creategame() {
         </Box>
       </Container>
     </Box>
+      ) }
+    </div>
   );
                     }
                     

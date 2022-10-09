@@ -4,6 +4,7 @@ import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword } fr
 import { getFirestore, collection, getDocs, doc, getDoc,setDoc,addDoc,updateDoc } from "firebase/firestore";
 
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { isFunctionDeclaration } from "typescript";
 
 import {JoinGame} from "./JoinGameController";
 
@@ -146,8 +147,32 @@ export const signUp = (email, password, name, phoneNo, description, profileImg) 
 
   //NEED CODE HERE TO DEAL W CREATING ENTITY in db with name, phone no etc.. and profile img
 }
+export const getFacilities = async() => {
+  //console.log("Get a Game");
+  let ref = collection(db, "Facilities");
+  return await getDocs(ref);
 
+}
+export const insertFacilities = async (facilities) => {
+  const currentFacilities = await getDocs(collection(db,"Facilities"));
+  var flag = 0
+  currentFacilities.docs.map((doc) => {
+    if(facilities.id === doc.data().placemarkid){
+      console.log("something matched");
+      flag = 1;
+    }
+  })
+  if(flag === 0){
+    console.log("Adding")
+  await addDoc(collection(db,"Facilities"),{
+    placemarkid:facilities.id,
+    name:facilities.name,
+    coordinates:facilities.coordinates
+  })
+  }
+  //console.log(currentFacilities);
 
+}
 
 export const getGames = async () => {
 
