@@ -11,6 +11,7 @@ import Banner from "./UIComponents/Banner";
 import ExploreSportsBar from "./UIComponents/ExploreSportsBar";
 // import Realtime Games Collection hooks
 import { GetGames } from "../Control/GamesInfoController";
+// Call for update everyround
 import { printSomething } from "../Control/FacilitiesController";
 
 
