@@ -1,16 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import {
-  Typography,
-  Card,
-  CardActions,
-  Alert,
-  AlertTitle,
-  CardMedia,
-  Box,
-  Grid,
-  Button,
-} from "@mui/material/";
+import {Typography, Card, CardActions, Alert, AlertTitle, CardMedia, Box, Grid, Button} from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
 import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -144,7 +134,9 @@ export default function DetailedGamePage() {
               </Typography>
             </Link>
           </Box>
-
+          <Card>
+            
+          </Card>
           <Card>
             <Grid container>
               <Grid item xs={12} md={5}>
@@ -324,13 +316,17 @@ export default function DetailedGamePage() {
                 </Button>
               </Box>
             </CardActions>
-
+                  
             
 
             {success && <Alert severity="success">{success}</Alert>}
-
-
+            
+            <Box sx= {{p:2}}>
+            <Iframe  iframe={iframe} />
+            </Box>  
+            
           </Card>
+          
         </Box>
       )}
     </div>
