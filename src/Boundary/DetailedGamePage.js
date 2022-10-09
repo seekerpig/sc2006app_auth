@@ -16,7 +16,6 @@ import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Control/SessionController";
-
 import { GameInfo } from "../Control/GamesInfoController";
 import { JoinGame } from "../Control/JoinGameController";
 
@@ -52,7 +51,7 @@ export default function DetailedGamePage() {
     startTime = game.getStartTime();
     endTime = game.getEndTime();
     location = game.getLocation();
-    iframe = '<iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&q=' + game.getLocation()+'">  </iframe>';
+    iframe = '<iframe width="100%" height="300px" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&q=' + game.getLocation()+'">  </iframe>';
 
   }
 
@@ -305,11 +304,9 @@ export default function DetailedGamePage() {
                 </Grid>
               </Grid>
             </Grid>
-            <Box sx= {{p : 2, m:2}}>
-            <Iframe  iframe={iframe} />
-            </Box>
-
-            
+            <Box sx= {{p : 4, pt: 1, pb: 1}}>
+                    <Iframe  sx= {{border: 1, borderRadius: '16px'}} iframe={iframe} />
+            </Box>          
 
             <CardActions
               sx={{ paddingTop: 1, paddingRight: 4, paddingBottom: 4 }}
