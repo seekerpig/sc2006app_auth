@@ -305,7 +305,9 @@ export default function Creategame() {
                       value={typeof maxPlayers === "number" ? maxPlayers : 0}
                       onChange={handleSliderChange}
                       aria-labelledby="input-slider"
-                      max="12"
+                      defaultValue={2}
+                      max={16}
+                      min={2}
                     />
                   </Grid>
                   <Grid item>
