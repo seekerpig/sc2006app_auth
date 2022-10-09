@@ -20,6 +20,11 @@ import { useAuth } from "../Control/SessionController";
 import { GameInfo } from "../Control/GamesInfoController";
 import { JoinGame } from "../Control/JoinGameController";
 
+//UI Embeded Map
+function Iframe(props) {
+  return (<div dangerouslySetInnerHTML={ {__html:  props.iframe?props.iframe:""}} />);
+}
+
 export default function DetailedGamePage() {
   let title = "";
   let description = "";
@@ -29,6 +34,8 @@ export default function DetailedGamePage() {
   let startTime = "";
   let endTime = "";
   let location = "";
+
+  let iframe = '';
 
   const { gameId } = useParams();
   const { error, isPending, game } = GameInfo(gameId);
@@ -45,6 +52,7 @@ export default function DetailedGamePage() {
     startTime = game.getStartTime();
     endTime = game.getEndTime();
     location = game.getLocation();
+    iframe = '<iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&q=' + game.getLocation()+'">  </iframe>';
   }
 
   const { currentUser } = useAuth();
@@ -138,6 +146,7 @@ export default function DetailedGamePage() {
           </Box>
 
           <Card>
+          <Iframe iframe={iframe} />,
             <Grid container>
               <Grid item xs={12} md={5}>
                 <CardMedia
