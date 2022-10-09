@@ -297,7 +297,7 @@ export default function DetailedGamePage() {
               </Grid>
             </Grid>
             <Box sx= {{p : 4, pt: 1, pb: 1}}>
-                    <Iframe  sx= {{border: 1, borderRadius: '16px'}} iframe={iframe} />
+                <Iframe  sx= {{border: 1, borderRadius: '16px'}} iframe={iframe} />
             </Box>          
 
             <CardActions
@@ -320,10 +320,6 @@ export default function DetailedGamePage() {
             
 
             {success && <Alert severity="success">{success}</Alert>}
-            
-            <Box sx= {{p:2}}>
-            <Iframe  iframe={iframe} />
-            </Box>  
             
           </Card>
           
