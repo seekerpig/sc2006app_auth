@@ -54,8 +54,8 @@ const Navbar = () => {
   };
 
   return (
-    <Container maxWidth={false} style={{ background: "#ffffff" }}>
-      <AppBar position="static" color="transparent" elevation={0}>
+    <Container maxWidth={false} style={{ background: "#ffffff"}}>
+      <AppBar position="fixed" color="secondary" elevation={0} >
         <Toolbar>
           {/* <SportsBasketballIcon sx={{ fontSize: 28, display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
