@@ -52,7 +52,11 @@ export default function DetailedGamePage() {
     startTime = game.getStartTime();
     endTime = game.getEndTime();
     location = game.getLocation();
+<<<<<<< Updated upstream
     iframe = '<iframe width="100%" height="300" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&q=' + game.getLocation()+'">  </iframe>';
+=======
+    iframe = '<iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&q=' + game.getLocation()+'">  </iframe>';
+>>>>>>> Stashed changes
   }
 
   const { currentUser } = useAuth();
@@ -146,7 +150,11 @@ export default function DetailedGamePage() {
           </Box>
 
           <Card>
+<<<<<<< Updated upstream
           <Iframe iframe={iframe} />
+=======
+          
+>>>>>>> Stashed changes
             <Grid container>
               <Grid item xs={12} md={5}>
                 <CardMedia
@@ -305,6 +313,11 @@ export default function DetailedGamePage() {
                 </Grid>
               </Grid>
             </Grid>
+            <Box sx= {{p : 2, m:2}}>
+            <Iframe  iframe={iframe} />
+            </Box>
+
+            
 
             <CardActions
               sx={{ paddingTop: 1, paddingRight: 4, paddingBottom: 4 }}
@@ -323,7 +336,11 @@ export default function DetailedGamePage() {
               </Box>
             </CardActions>
 
+            
+
             {success && <Alert severity="success">{success}</Alert>}
+
+
           </Card>
         </Box>
       )}
