@@ -5,7 +5,6 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
@@ -14,10 +13,9 @@ import MenuItem from "@mui/material/MenuItem";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import AddIcon from "@mui/icons-material/Add";
 import { useAuth } from "../../Control/SessionController";
-//import { createTheme, ThemeProvider } from '@mui/system';
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 
 const Navbar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [userExist, setUserExist] = React.useState(false);
   const { currentUser, logout } = useAuth();
@@ -33,15 +31,8 @@ const Navbar = () => {
   });
   
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -54,10 +45,10 @@ const Navbar = () => {
   };
 
   return (
-    <Container maxWidth={false} style={{ background: "#ffffff"}}>
+    <Container  style={{ background: "#ffffff", p: 0}}>
       <AppBar position="fixed" color="secondary" elevation={0} >
+        <Container sx={{p: 0}}>
         <Toolbar>
-          {/* <SportsBasketballIcon sx={{ fontSize: 28, display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
@@ -76,40 +67,9 @@ const Navbar = () => {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" href="/creategame">
-                  Create Game
-                </Typography>
-              </MenuItem>
-            </Menu>
+          <IconButton aria-label="Create Game" size="large" color="primary" href="/creategame">
+            <AddCircleRoundedIcon fontSize="large" pl="0" />
+          </IconButton>
           </Box>
           <Typography
             variant="h5"
@@ -117,7 +77,6 @@ const Navbar = () => {
             component="a"
             href="/"
             sx={{
-              mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontWeight: 700,
@@ -140,7 +99,7 @@ const Navbar = () => {
             </Button>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, pr:1}}>
             <Tooltip title="Profile">
               <IconButton
                 size="large"
@@ -150,7 +109,7 @@ const Navbar = () => {
                 onClick={handleOpenUserMenu}
                 color="inherit"
               >
-                <AccountCircle sx={{ fontSize: 28 }} />
+                <AccountCircle fontSize="large"/>
               </IconButton>
             </Tooltip>
             <Menu
@@ -196,6 +155,7 @@ const Navbar = () => {
             </Menu>
           </Box>
         </Toolbar>
+        </Container>
       </AppBar>
     </Container>
   );

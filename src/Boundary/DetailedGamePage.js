@@ -67,7 +67,7 @@ export default function DetailedGamePage() {
     } else {
       // If game is full show game is full and redirect to other pages
       if (currentPlayers >= maxPlayers) {
-        setError("Game is full");
+        setError("Game is full.");
       } else {
         try {
           //Call for join game and catch any error
@@ -92,10 +92,10 @@ export default function DetailedGamePage() {
             // If user already in game redirect to profile
             if (e.type === 200) {
               console.log("Hello");
-              setError("You are already joined");
+              setError("You have already joined this game.");
             } else {
               //any other reason that led to failure
-              setError("Failed to Create A Game");
+              setError("Failed to create a game.");
             }
           }
         }
@@ -108,7 +108,7 @@ export default function DetailedGamePage() {
   return (
     <div>
       {error1 && (
-        <Alert severity="error">
+        <Alert severity="error" sx={{mb: 4}}>
           {" "}
           <AlertTitle>Error</AlertTitle>
           {error1}

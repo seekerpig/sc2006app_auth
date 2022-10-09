@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "@mui/material/Container";
 import Card from "./UIComponents/Card";
-import { Grid, Typography, Box, Paper, Button, Alert } from "@mui/material";
+import { Grid, Typography, Box, Button, Alert } from "@mui/material";
 import { useAuth } from "../Control/SessionController";
 // firebase connection
 // import { db } from '../../src/firebaseconfig';
@@ -60,7 +60,7 @@ export default function ProfilePage() {
         sx={{
           display: "flex",
           backgroundColor: "#ffffff",
-          padding: "3rem",
+          padding: 2,
           paddingBottom: "5rem",
         }}
       >
@@ -104,15 +104,15 @@ export default function ProfilePage() {
               <b>Phone Number:</b> {user.getPhoneNo()}{" "}
             </Typography>
           </Grid>
-          <Grid item align="center" mt={3}>
-            <Paper
-              style={{
-                minWidth: "60%",
-                minHeight: "50px",
+          <Grid item align="center" mt={3} sx={{
+                width: {md:"80%", xs:"90%"}}}>
+            <Box
+              sx={{
                 backgroundColor: "#3563e9",
                 color: "#ffffff",
                 padding: "1.5rem",
                 borderRadius: "1rem",
+                boxShadow: 1
               }}
             >
               <Typography
@@ -125,7 +125,7 @@ export default function ProfilePage() {
               <Typography variant="subtitle1" style={{ fontSize: "14px" }} >
                 {user.getDescription()}
               </Typography>
-            </Paper>
+            </Box>
           </Grid>
         </Grid>
       </Box> )}
