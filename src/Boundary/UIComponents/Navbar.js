@@ -105,13 +105,12 @@ const Navbar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" href="./creategame">
+                <Typography textAlign="center" href="/creategame">
                   Create Game
                 </Typography>
               </MenuItem>
             </Menu>
           </Box>
-          {/*<SportsBasketballIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
@@ -135,8 +134,7 @@ const Navbar = () => {
               sx={{ display: "inline-flex" }}
               startIcon={<AddIcon />}
               variant="contained"
-              // color="primary"
-              href="./creategame"
+              href="/creategame"
             >
               Create Game
             </Button>
@@ -148,7 +146,6 @@ const Navbar = () => {
                 size="large"
                 edge="end"
                 aria-label="account of current user"
-                //   aria-controls={menuId}
                 aria-haspopup="true"
                 onClick={handleOpenUserMenu}
                 color="inherit"
