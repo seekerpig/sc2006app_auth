@@ -4,7 +4,7 @@ import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword } fr
 import { getFirestore, collection, getDocs, doc, getDoc,setDoc,addDoc,updateDoc } from "firebase/firestore";
 
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { isFunctionDeclaration } from "typescript";
+//import { isFunctionDeclaration } from "typescript";
 
 import {JoinGame} from "./JoinGameController";
 
@@ -156,7 +156,7 @@ export const getFacilities = async() => {
 export const insertFacilities = async (facilities) => {
   const currentFacilities = await getDocs(collection(db,"Facilities"));
   var flag = 0
-  currentFacilities.docs.map((doc) => {
+  currentFacilities.docs.forEach((doc) => {
     if(facilities.id === doc.data().placemarkid){
       console.log("something matched");
       flag = 1;
