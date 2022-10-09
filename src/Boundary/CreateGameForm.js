@@ -230,7 +230,7 @@ export default function Creategame() {
                       <em>None</em>
                     </MenuItem>
                     {locations.map((item) => (
-                      <MenuItem value={item.placemarkid}>{item.name}</MenuItem>
+                      <MenuItem value={item.name}>{item.name}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>
