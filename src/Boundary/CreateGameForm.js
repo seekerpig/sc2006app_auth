@@ -137,7 +137,7 @@ export default function Creategame() {
   if(currentUser === null){
   setTimeout(function() {
     navigate("/login");
-  }, 100);}
+  }, 3000);}
      
   
   async function handleSubmitCreateGame(event) {
@@ -181,7 +181,8 @@ export default function Creategame() {
 
   return (
     <div>
-      {locations && (
+      {!currentUser && <Alert severity="error">You are not logged in. Redirecting you to login page...</Alert>}
+      {locations && currentUser && (
     <Box sx={{ bgcolor: "secondary.main", padding: 2, borderRadius: "8px" }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
