@@ -8,6 +8,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Control/SessionController";
 import { GameInfo } from "../Control/GamesInfoController";
 import { JoinGame } from "../Control/JoinGameController";
+import badminton from "./UIComponents/images/badminton.png";
+import basketball from "./UIComponents/images/basketball.png";
+import soccer from "./UIComponents/images/soccer.png";
+import volleyball from "./UIComponents/images/volleyball.png";
+import pingpong from "./UIComponents/images/ping-pong.png";
+import bike from "./UIComponents/images/bike.png";
 
 //UI Embeded Map
 function Iframe(props) {
@@ -140,12 +146,42 @@ export default function DetailedGamePage() {
           <Card>
             <Grid container>
               <Grid item xs={12} md={5}>
-                <CardMedia
+              {game.getSportType() === "Badminton" && <CardMedia 
                   component="img"
-                  sx={{ width: "100%", padding: 4 }}
-                  image="https://img.freepik.com/free-vector/soccer-volleyball-baseball-rugby-equipment_1441-4026.jpg"
-                  alt="Live from space album cover"
-                />
+                  height="250"
+                  sx={{objectFit: "contain", p:4}}
+                  image={badminton}
+                />}
+                {game.getSportType() === "Cycling" && <CardMedia 
+                  component="img"
+                  height="250"
+                  sx={{objectFit: "contain", p:4}}
+                  image={bike}
+                />}
+                {game.getSportType() === "VolleyBall" && <CardMedia 
+                  component="img"
+                  height="250"
+                  sx={{objectFit: "contain", p:4}}
+                  image={volleyball}
+                />}
+                {game.getSportType() === "Soccer" && <CardMedia 
+                  component="img"
+                  height="250"
+                  sx={{objectFit: "contain", p:4}}
+                  image={soccer}
+                />}
+                {game.getSportType() === "Pingpong" && <CardMedia 
+                  component="img"
+                  height="250"
+                  sx={{objectFit: "contain", p:4}}
+                  image={pingpong}
+                />}
+                {game.getSportType() === "Basketball" && <CardMedia 
+                  component="img"
+                  height="250"
+                  sx={{objectFit: "contain", p:4}}
+                  image={basketball}
+                />}
               </Grid>
               <Grid item xs={12} md={7}>
                 <Box sx={{ paddingX: 4, marginBottom: 6 }}>

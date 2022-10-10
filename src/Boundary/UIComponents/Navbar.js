@@ -13,7 +13,6 @@ import MenuItem from "@mui/material/MenuItem";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import AddIcon from "@mui/icons-material/Add";
 import { useAuth } from "../../Control/SessionController";
-import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 
 const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -63,13 +62,21 @@ const Navbar = () => {
               textDecoration: "none",
             }}
           >
-            VERSA
+            SportSG
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-          <IconButton aria-label="Create Game" size="large" color="primary" href="/creategame">
+          {/* <IconButton aria-label="Create Game" size="large" color="primary" href="/creategame">
             <AddCircleRoundedIcon fontSize="large" pl="0" />
-          </IconButton>
+          </IconButton> */}
+          <Button
+              sx={{ display: "inline-flex" }}
+              startIcon={<AddIcon />}
+              variant="contained"
+              href="/creategame"
+            >
+              Game
+            </Button>
           </Box>
           <Typography
             variant="h5"
@@ -85,7 +92,7 @@ const Navbar = () => {
               textDecoration: "none",
             }}
           >
-            VERSA
+            SportSG
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
           <Box sx={{ flexGrow: 0, mr: 2, display: { xs: "none", md: "flex" } }}>
@@ -109,7 +116,7 @@ const Navbar = () => {
                 onClick={handleOpenUserMenu}
                 color="inherit"
               >
-                <AccountCircle fontSize="large"/>
+                <AccountCircle fontSize="large" sx={{ml:{md: 0, sm: 8, xs: 8}}}/>
               </IconButton>
             </Tooltip>
             <Menu
