@@ -50,7 +50,7 @@ const Navbar = () => {
         <Container sx={{p: 0 }} >
         <Toolbar>
           <Box sx={{display: {xs: 'none', sm: 'none', md: 'block'}}}>
-          <img height="50" src={logo} />
+          <img height="50" src={logo} alt="logo"/>
           </Box>
           
           <Typography
@@ -80,7 +80,7 @@ const Navbar = () => {
             </Button>
           </Box>
           <Box sx={{flexGrow: 1, display: { xs: "flex", md: "none" }}}>
-          <img height="50" src={logo} />
+          <img height="50" src={logo} alt="logo"/>
           </Box>
           {/* <Typography
             variant="h5"
