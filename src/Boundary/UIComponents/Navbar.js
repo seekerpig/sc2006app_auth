@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import AddIcon from "@mui/icons-material/Add";
 import { useAuth } from "../../Control/SessionController";
+import logo from "./images/Black_50.png";
 
 const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -48,6 +49,10 @@ const Navbar = () => {
       <AppBar position="fixed" color="secondary" elevation={0}  >
         <Container sx={{p: 0 }} >
         <Toolbar>
+          <Box sx={{display: {xs: 'none', sm: 'none', md: 'block'}}}>
+          <img height="50" src={logo} />
+          </Box>
+          
           <Typography
             variant="h5"
             noWrap
@@ -65,9 +70,6 @@ const Navbar = () => {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-          {/* <IconButton aria-label="Create Game" size="large" color="primary" href="/creategame">
-            <AddCircleRoundedIcon fontSize="large" pl="0" />
-          </IconButton> */}
           <Button
               sx={{ display: "inline-flex" }}
               startIcon={<AddIcon />}
@@ -77,7 +79,10 @@ const Navbar = () => {
               Game
             </Button>
           </Box>
-          <Typography
+          <Box sx={{flexGrow: 1, display: { xs: "flex", md: "none" }}}>
+          <img height="50" src={logo} />
+          </Box>
+          {/* <Typography
             variant="h5"
             noWrap
             component="a"
@@ -91,7 +96,7 @@ const Navbar = () => {
             }}
           >
             SportSG
-          </Typography>
+          </Typography> */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
           <Box sx={{ flexGrow: 0, mr: 2, display: { xs: "none", md: "flex" } }}>
             <Button
