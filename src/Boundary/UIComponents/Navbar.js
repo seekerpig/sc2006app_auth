@@ -44,9 +44,9 @@ const Navbar = () => {
   };
 
   return (
-    <Container  style={{ background: "#ffffff", p: 0}}>
-      <AppBar position="fixed" color="secondary" elevation={0} >
-        <Container sx={{p: 0}}>
+    // <Container  style={{ background: "#ffffff", p: 0}}>
+      <AppBar position="fixed" color="secondary" elevation={0}  >
+        <Container sx={{p: 0 }} >
         <Toolbar>
           <Typography
             variant="h5"
@@ -57,7 +57,6 @@ const Navbar = () => {
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontWeight: 700,
-              letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
@@ -87,7 +86,6 @@ const Navbar = () => {
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontWeight: 700,
-              letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
@@ -106,7 +104,7 @@ const Navbar = () => {
             </Button>
           </Box>
 
-          <Box sx={{ flexGrow: 0, pr:1}}>
+          <Box sx={{ flexGrow: 0}}>
             <Tooltip title="Profile">
               <IconButton
                 size="large"
@@ -115,8 +113,9 @@ const Navbar = () => {
                 aria-haspopup="true"
                 onClick={handleOpenUserMenu}
                 color="inherit"
+                sx={{ml:{md: 0, sm: 5, xs: 5}}}
               >
-                <AccountCircle fontSize="large" sx={{ml:{md: 0, sm: 8, xs: 8}}}/>
+                <AccountCircle fontSize="large" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -164,7 +163,7 @@ const Navbar = () => {
         </Toolbar>
         </Container>
       </AppBar>
-    </Container>
+// </Container>
   );
 };
 export default Navbar;
