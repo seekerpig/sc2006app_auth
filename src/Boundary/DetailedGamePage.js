@@ -37,6 +37,7 @@ export default function DetailedGamePage() {
   const [success, setSuccess] = React.useState("");
   const [error1, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [pressButton, setPress] = React.useState(true);
 
   if (game != null) {
     title = game.getTitle();
@@ -61,6 +62,7 @@ export default function DetailedGamePage() {
 
   async function handleSubmitJoinGame(event) {
     setLoading(true);
+    setPress(false);
     console.log(loading);
     event.preventDefault();
     //const data = new FormData(event.currentTarget);
@@ -340,6 +342,8 @@ export default function DetailedGamePage() {
               sx={{ paddingTop: 1, paddingRight: 4, paddingBottom: 4 }}
             >
               <Box sx={{ flexGrow: 1 }}></Box>
+              <div>
+              {pressButton && (
               <Box>
                 <Button
                   variant="contained"
@@ -350,7 +354,10 @@ export default function DetailedGamePage() {
                 >
                   JOIN NOW
                 </Button>
-              </Box>
+              
+              
+              </Box>)}
+              </div>
             </CardActions>
                   
             
