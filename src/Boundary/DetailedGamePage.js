@@ -29,6 +29,7 @@ export default function DetailedGamePage() {
   let startTime = "";
   let endTime = "";
   let location = "";
+  let userList = [];
 
   let iframe = '';
 
@@ -38,7 +39,8 @@ export default function DetailedGamePage() {
   const [error1, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [pressButton, setPress] = React.useState(true);
-
+  //const [inGame, setGame] = React.useState(true);
+  const { currentUser } = useAuth();
   if (game != null) {
     title = game.getTitle();
     description = game.getDescription();
@@ -49,10 +51,14 @@ export default function DetailedGamePage() {
     endTime = game.getEndTime();
     location = game.getLocation();
     iframe = '<iframe width="100%" height="300px" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&q=' + game.getLocation()+'">  </iframe>';
-
+    userList = game.getUserList();
+    
+    //console.log(userList);
+    
   }
 
-  const { currentUser } = useAuth();
+  
+  
   const navigate = useNavigate();
   if (error) {
     setTimeout(function() {
@@ -343,7 +349,7 @@ export default function DetailedGamePage() {
             >
               <Box sx={{ flexGrow: 1 }}></Box>
               <div>
-              {pressButton && (
+              {!(userList.includes(currentUser.uid)) && pressButton && (
               <Box>
                 <Button
                   variant="contained"
