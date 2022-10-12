@@ -66,7 +66,7 @@ export const signUp = (email, password, name, phoneNo, description, profileImg) 
   console.log('hello sign up');
   const storage = getStorage();
   
-  
+  try{
   createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
@@ -135,9 +135,16 @@ export const signUp = (email, password, name, phoneNo, description, profileImg) 
   })
   .catch((error) => {
     //const errorCode = error.code;
+    throw (error);
     //const errorMessage = error.message;
     // ..
   });
+}
+catch(error) {
+  console.log("Error in Sign up");
+
+  console.log(error);
+}
 
   
   

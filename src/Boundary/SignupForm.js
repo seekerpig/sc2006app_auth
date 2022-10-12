@@ -91,12 +91,19 @@ export default function SignUpForm() {
         phoneNumber,
         description,
         profileUrl,
-      );
-
+      ).then(() => {
+        if(currentUser !== null){
       setSuccess("Signup is successful! Redirecting to login page...");
       setTimeout(function() {
         navigate("/profile");
-      }, 3000);
+      }, 3000);}
+      else{
+        setError("Email is registered");
+      }}
+      ).catch((error) => {
+        console.log("error at sign up form")
+        console.log(error.type);
+      })
     } catch {
       setError("Failed to Create Account");
     }
