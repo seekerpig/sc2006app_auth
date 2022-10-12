@@ -28,8 +28,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import MuiInput from "@mui/material/Input";
-import {CreateNewGame } from "../Control/CreateGameController"
-import { getFacilities } from "../Control/DatabaseController";
+import {CreateNewGame,getAllFacilities } from "../Control/CreateGameController"
+//import { getFacilities } from "../Control/DatabaseController";
 
 
 const Input = styled(MuiInput)`
@@ -71,14 +71,17 @@ export default function Creategame() {
 
   useEffect(() => {
     (async () => {
-      try {
-        const facilities = await getFacilities();
+      try { 
+        setList(await getAllFacilities());
+        
+        //console.log(something);
+       /* const facilities = await getFacilities();
         setList(facilities.docs.map((doc) => (
           {
             placemarkid:doc.data().placemarkid,
             name:doc.data().name
           }
-        )));
+        )));*/
            // printSomething();
         
       } catch (err) {
@@ -86,6 +89,7 @@ export default function Creategame() {
       }
     })();
   }, []);
+  console.log(locations);
 
   const handleChangeLocation = (event) => {
     setLocation(event.target.value);
@@ -231,7 +235,7 @@ export default function Creategame() {
                       <em>None</em>
                     </MenuItem>
                     {locations.map((item) => (
-                      <MenuItem value={item.name}>{item.name}</MenuItem>
+                      <MenuItem value={item}>{item}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>

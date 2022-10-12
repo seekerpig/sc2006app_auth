@@ -1,5 +1,5 @@
 
-import {createAGame} from'./DatabaseController'
+import {createAGame,getFacilities} from'./DatabaseController'
 
 
 
@@ -31,4 +31,18 @@ export const CreateNewGame = async (title, location, sportType, startDate, endDa
   //if attempt fails, it means that a record alr exist, return false or show alert to show fail or something.
 
   //need to import this function into CreateGameForm page
+}
+
+export const getAllFacilities = async() => {
+  var facilitiesArray = [];
+  const testa = await getFacilities();
+  testa.docs.forEach((doc) => (
+    //console.log(doc.data().name);
+    facilitiesArray.push(doc.data().name)
+  ))
+  //console.log(facilitiesArray);
+  return facilitiesArray;
+  //console.log(facilitiesArray);
+  //return true;
+  //return facilitiesArray;
 }
