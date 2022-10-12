@@ -19,7 +19,7 @@ root.render(
     <ThemeProvider theme={globalTheme}>
       <CssBaseline />
       <AuthProvider>
-      <Navbar />
+      <Navbar/>
       <App />
       <Footer/>
       </AuthProvider>

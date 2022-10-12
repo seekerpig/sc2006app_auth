@@ -12,6 +12,12 @@ import Box from "@mui/material/Box";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import badminton from "./images/badminton.png";
+import basketball from "./images/basketball.png";
+import soccer from "./images/soccer.png";
+import volleyball from "./images/volleyball.png";
+import pingpong from "./images/ping-pong.png";
+import bike from "./images/bike.png";
 
 export default function DisplayGameList({games}) {
   console.log(games);
@@ -26,11 +32,42 @@ export default function DisplayGameList({games}) {
                 },}} width="100%" style={{height:'100%', borderRadius:'0.5rem', paddingLeft:'10px',paddingRight:'10px', paddingBottom:'10px'}}>
             <Box display="flex" flexDirection="column" height="100%">
               <Box>
-                <CardMedia
+              {game.getSportType() === "Badminton" && <CardMedia 
                   component="img"
-                  height="140"
-                  image="https://img.freepik.com/free-vector/soccer-volleyball-baseball-rugby-equipment_1441-4026.jpg"
-                />
+                  height="170"
+                  sx={{objectFit: "contain", p:4}}
+                  image={badminton}
+                />}
+                {game.getSportType() === "Cycling" && <CardMedia 
+                  component="img"
+                  height="170"
+                  sx={{objectFit: "contain", p:4}}
+                  image={bike}
+                />}
+                {game.getSportType() === "VolleyBall" && <CardMedia 
+                  component="img"
+                  height="170"
+                  sx={{objectFit: "contain", p:4}}
+                  image={volleyball}
+                />}
+                {game.getSportType() === "Soccer" && <CardMedia 
+                  component="img"
+                  height="170"
+                  sx={{objectFit: "contain", p:4}}
+                  image={soccer}
+                />}
+                {game.getSportType() === "Pingpong" && <CardMedia 
+                  component="img"
+                  height="170"
+                  sx={{objectFit: "contain", p:4}}
+                  image={pingpong}
+                />}
+                {game.getSportType() === "Basketball" && <CardMedia 
+                  component="img"
+                  height="170"
+                  sx={{objectFit: "contain", p:4}}
+                  image={basketball}
+                />}
               </Box>
               <Box>
                 <CardContent style={{ paddingBottom: "8px" }}>

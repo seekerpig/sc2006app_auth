@@ -137,7 +137,7 @@ export default function Creategame() {
   if(currentUser === null){
   setTimeout(function() {
     navigate("/login");
-  }, 100);}
+  }, 3000);}
      
   
   async function handleSubmitCreateGame(event) {
@@ -181,7 +181,8 @@ export default function Creategame() {
 
   return (
     <div>
-      {locations && (
+      {!currentUser && <Alert severity="error">You are not logged in. Redirecting you to login page...</Alert>}
+      {locations && currentUser && (
     <Box sx={{ bgcolor: "secondary.main", padding: 2, borderRadius: "8px" }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -230,7 +231,7 @@ export default function Creategame() {
                       <em>None</em>
                     </MenuItem>
                     {locations.map((item) => (
-                      <MenuItem value={item.placemarkid}>{item.name}</MenuItem>
+                      <MenuItem value={item.name}>{item.name}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>
@@ -305,7 +306,9 @@ export default function Creategame() {
                       value={typeof maxPlayers === "number" ? maxPlayers : 0}
                       onChange={handleSliderChange}
                       aria-labelledby="input-slider"
-                      max="12"
+                      defaultValue={2}
+                      max={16}
+                      min={2}
                     />
                   </Grid>
                   <Grid item>

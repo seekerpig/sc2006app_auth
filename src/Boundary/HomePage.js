@@ -15,10 +15,15 @@ import { GetGames } from "../Control/GamesInfoController";
 import { printSomething } from "../Control/FacilitiesController";
 
 
-
+let slicedGameList = []
 
 export default function HomePage() {
   const [gameList, setList] = React.useState([]);
+  
+  if (gameList != null) {
+    slicedGameList = gameList.slice(0,8)
+    console.log(slicedGameList)
+  }
 
   useEffect(() => {
     (async () => {
@@ -54,7 +59,7 @@ export default function HomePage() {
           Find Games to Play
         </Typography>
       </div>
-      {gameList.length !== 0 && <DisplayGameList games={gameList} />}
+      {slicedGameList.length !== 0 && <DisplayGameList games={slicedGameList} />}
 
       <Box
         sx={{ display: "flex", justifyContent: "center", marginTop: "60px" }}

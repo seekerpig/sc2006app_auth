@@ -1,24 +1,24 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import {
-  Typography,
-  Card,
-  CardActions,
-  Alert,
-  AlertTitle,
-  CardMedia,
-  Box,
-  Grid,
-  Button,
-} from "@mui/material/";
+import {Typography, Card, CardActions, Alert, AlertTitle, CardMedia, Box, Grid, Button} from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
 import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Control/SessionController";
-
 import { GameInfo } from "../Control/GamesInfoController";
 import { JoinGame } from "../Control/JoinGameController";
+import badminton from "./UIComponents/images/badminton.png";
+import basketball from "./UIComponents/images/basketball.png";
+import soccer from "./UIComponents/images/soccer.png";
+import volleyball from "./UIComponents/images/volleyball.png";
+import pingpong from "./UIComponents/images/ping-pong.png";
+import bike from "./UIComponents/images/bike.png";
+
+//UI Embeded Map
+function Iframe(props) {
+  return (<div dangerouslySetInnerHTML={ {__html:  props.iframe?props.iframe:""}} />);
+}
 
 export default function DetailedGamePage() {
   let title = "";
@@ -29,6 +29,8 @@ export default function DetailedGamePage() {
   let startTime = "";
   let endTime = "";
   let location = "";
+
+  let iframe = '';
 
   const { gameId } = useParams();
   const { error, isPending, game } = GameInfo(gameId);
@@ -45,6 +47,8 @@ export default function DetailedGamePage() {
     startTime = game.getStartTime();
     endTime = game.getEndTime();
     location = game.getLocation();
+    iframe = '<iframe width="100%" height="300px" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&q=' + game.getLocation()+'">  </iframe>';
+
   }
 
   const { currentUser } = useAuth();
@@ -69,7 +73,7 @@ export default function DetailedGamePage() {
     } else {
       // If game is full show game is full and redirect to other pages
       if (currentPlayers >= maxPlayers) {
-        setError("Game is full");
+        setError("Game is full.");
       } else {
         try {
           //Call for join game and catch any error
@@ -94,10 +98,10 @@ export default function DetailedGamePage() {
             // If user already in game redirect to profile
             if (e.type === 200) {
               console.log("Hello");
-              setError("You are already joined");
+              setError("You have already joined this game.");
             } else {
               //any other reason that led to failure
-              setError("Failed to Create A Game");
+              setError("Failed to create a game.");
             }
           }
         }
@@ -110,7 +114,7 @@ export default function DetailedGamePage() {
   return (
     <div>
       {error1 && (
-        <Alert severity="error">
+        <Alert severity="error" sx={{mb: 4}}>
           {" "}
           <AlertTitle>Error</AlertTitle>
           {error1}
@@ -136,16 +140,48 @@ export default function DetailedGamePage() {
               </Typography>
             </Link>
           </Box>
-
+          <Card>
+            
+          </Card>
           <Card>
             <Grid container>
               <Grid item xs={12} md={5}>
-                <CardMedia
+              {game.getSportType() === "Badminton" && <CardMedia 
                   component="img"
-                  sx={{ width: "100%", padding: 4 }}
-                  image="https://img.freepik.com/free-vector/soccer-volleyball-baseball-rugby-equipment_1441-4026.jpg"
-                  alt="Live from space album cover"
-                />
+                  height="250"
+                  sx={{objectFit: "contain", p:4}}
+                  image={badminton}
+                />}
+                {game.getSportType() === "Cycling" && <CardMedia 
+                  component="img"
+                  height="250"
+                  sx={{objectFit: "contain", p:4}}
+                  image={bike}
+                />}
+                {game.getSportType() === "VolleyBall" && <CardMedia 
+                  component="img"
+                  height="250"
+                  sx={{objectFit: "contain", p:4}}
+                  image={volleyball}
+                />}
+                {game.getSportType() === "Soccer" && <CardMedia 
+                  component="img"
+                  height="250"
+                  sx={{objectFit: "contain", p:4}}
+                  image={soccer}
+                />}
+                {game.getSportType() === "Pingpong" && <CardMedia 
+                  component="img"
+                  height="250"
+                  sx={{objectFit: "contain", p:4}}
+                  image={pingpong}
+                />}
+                {game.getSportType() === "Basketball" && <CardMedia 
+                  component="img"
+                  height="250"
+                  sx={{objectFit: "contain", p:4}}
+                  image={basketball}
+                />}
               </Grid>
               <Grid item xs={12} md={7}>
                 <Box sx={{ paddingX: 4, marginBottom: 6 }}>
@@ -296,6 +332,9 @@ export default function DetailedGamePage() {
                 </Grid>
               </Grid>
             </Grid>
+            <Box sx= {{p : 4, pt: 1, pb: 1}}>
+                <Iframe  sx= {{border: 1, borderRadius: '16px'}} iframe={iframe} />
+            </Box>          
 
             <CardActions
               sx={{ paddingTop: 1, paddingRight: 4, paddingBottom: 4 }}
@@ -313,9 +352,13 @@ export default function DetailedGamePage() {
                 </Button>
               </Box>
             </CardActions>
+                  
+            
 
             {success && <Alert severity="success">{success}</Alert>}
+            
           </Card>
+          
         </Box>
       )}
     </div>

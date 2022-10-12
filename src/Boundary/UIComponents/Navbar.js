@@ -5,7 +5,6 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
@@ -14,10 +13,9 @@ import MenuItem from "@mui/material/MenuItem";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import AddIcon from "@mui/icons-material/Add";
 import { useAuth } from "../../Control/SessionController";
-//import { createTheme, ThemeProvider } from '@mui/system';
+import logo from "./images/Black_50.png";
 
 const Navbar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [userExist, setUserExist] = React.useState(false);
   const { currentUser, logout } = useAuth();
@@ -33,15 +31,8 @@ const Navbar = () => {
   });
   
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -54,10 +45,14 @@ const Navbar = () => {
   };
 
   return (
-    <Container maxWidth={false} style={{ background: "#ffffff" }}>
-      <AppBar position="static" color="transparent" elevation={0}>
+    // <Container  style={{ background: "#ffffff", p: 0}}>
+      <AppBar position="fixed" color="secondary" elevation={0}  >
+        <Container sx={{p: 0 }} >
         <Toolbar>
-          {/* <SportsBasketballIcon sx={{ fontSize: 28, display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+          <Box sx={{display: {xs: 'none', sm: 'none', md: 'block'}}}>
+          <img height="50" src={logo} alt="logo"/>
+          </Box>
+          
           <Typography
             variant="h5"
             noWrap
@@ -67,93 +62,65 @@ const Navbar = () => {
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontWeight: 700,
-              letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            VERSA
+            SportSG
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
+          <Button
+              sx={{ display: "inline-flex" }}
+              startIcon={<AddIcon />}
+              variant="contained"
+              href="/creategame"
             >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" href="./creategame">
-                  Create Game
-                </Typography>
-              </MenuItem>
-            </Menu>
+              Game
+            </Button>
           </Box>
-          {/*<SportsBasketballIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
-          <Typography
+          <Box sx={{flexGrow: 1, display: { xs: "flex", md: "none" }}}>
+          <img height="50" src={logo} alt="logo"/>
+          </Box>
+          {/* <Typography
             variant="h5"
             noWrap
             component="a"
             href="/"
             sx={{
-              mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontWeight: 700,
-              letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            VERSA
-          </Typography>
+            SportSG
+          </Typography> */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
           <Box sx={{ flexGrow: 0, mr: 2, display: { xs: "none", md: "flex" } }}>
             <Button
               sx={{ display: "inline-flex" }}
               startIcon={<AddIcon />}
               variant="contained"
-              // color="primary"
-              href="./creategame"
+              href="/creategame"
             >
               Create Game
             </Button>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0}}>
             <Tooltip title="Profile">
               <IconButton
                 size="large"
                 edge="end"
                 aria-label="account of current user"
-                //   aria-controls={menuId}
                 aria-haspopup="true"
                 onClick={handleOpenUserMenu}
                 color="inherit"
+                sx={{ml:{md: 0, sm: 5, xs: 5}}}
               >
-                <AccountCircle sx={{ fontSize: 28 }} />
+                <AccountCircle fontSize="large" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -199,8 +166,9 @@ const Navbar = () => {
             </Menu>
           </Box>
         </Toolbar>
+        </Container>
       </AppBar>
-    </Container>
+// </Container>
   );
 };
 export default Navbar;
