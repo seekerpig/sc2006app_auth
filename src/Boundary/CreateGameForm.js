@@ -53,6 +53,10 @@ const sportTypes = [
   "Cycling",
   "VolleyBall",
 ];
+/**
+ * Function to create game
+ * @returns {html} html code of CreateGameForm
+ */
 export default function Creategame() {
   const { currentUser } = useAuth();
   const today = new Date();
