@@ -39,6 +39,7 @@ function Copyright(props) {
 export default function SignUpForm() {
   const { currentUser } = useAuth();
   //console.log(currentUser);
+  
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -53,6 +54,8 @@ export default function SignUpForm() {
 
   async function handleSubmitSignUp(event) {
     event.preventDefault();
+    setError("");
+    setSuccess("");
     const data = new FormData(event.currentTarget);
     name = data.get("firstName") + " " + data.get("lastName");
     email = data.get("email");
@@ -71,6 +74,7 @@ export default function SignUpForm() {
     // });
 
     try {
+      
       setLoading(true);
       setError("");
       setSuccess("");
@@ -92,13 +96,24 @@ export default function SignUpForm() {
         description,
         profileUrl,
       ).then(() => {
+        //const { currentUser } = useAuth();
         if(currentUser !== null){
+          console.log("Sign Up Successful");
       setSuccess("Signup is successful! Redirecting to login page...");
+      //setError("");
       setTimeout(function() {
         navigate("/profile");
       }, 3000);}
       else{
+        console.log("Not successful");
+        console.log(currentUser);
         setError("Email is registered");
+        setTimeout(function() {
+          navigate("/signup");
+        }, 5000);
+        
+        
+        
       }}
       ).catch((error) => {
         console.log("error at sign up form")
@@ -107,7 +122,7 @@ export default function SignUpForm() {
     } catch {
       setError("Failed to Create Account");
     }
-
+    console.log("Here is loading");
     setLoading(false);
   }
 
