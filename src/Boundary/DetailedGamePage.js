@@ -1,6 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import {Typography, Card, CardActions, Alert, AlertTitle, CardMedia, Box, Grid, Button} from "@mui/material/";
+import {
+  Typography,
+  Card,
+  CardActions,
+  Alert,
+  AlertTitle,
+  CardMedia,
+  Box,
+  Grid,
+  Button,
+} from "@mui/material/";
 import LinearProgress from "@mui/material/LinearProgress";
 import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -17,7 +27,11 @@ import bike from "./UIComponents/images/bike.png";
 
 //UI Embeded Map
 function Iframe(props) {
-  return (<div dangerouslySetInnerHTML={ {__html:  props.iframe?props.iframe:""}} />);
+  return (
+    <div
+      dangerouslySetInnerHTML={{ __html: props.iframe ? props.iframe : "" }}
+    />
+  );
 }
 
 export default function DetailedGamePage() {
@@ -31,7 +45,7 @@ export default function DetailedGamePage() {
   let location = "";
   let userList = [];
 
-  let iframe = '';
+  let iframe = "";
 
   const { gameId } = useParams();
   const { error, isPending, game } = GameInfo(gameId);
@@ -50,18 +64,18 @@ export default function DetailedGamePage() {
     startTime = game.getStartTime();
     endTime = game.getEndTime();
     location = game.getLocation();
-    iframe = '<iframe width="100%" height="300px" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&q=' + game.getLocation()+'">  </iframe>';
+    iframe =
+      '<iframe width="100%" height="300px" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&q=' +
+      game.getLocation() +
+      '">  </iframe>';
     userList = game.getUserList();
-    
+
     //console.log(userList);
-    
   }
 
-  
-  
   const navigate = useNavigate();
   if (error) {
-    setTimeout(function() {
+    setTimeout(function () {
       navigate("/");
     }, 5000);
   }
@@ -75,7 +89,7 @@ export default function DetailedGamePage() {
     // If no user redirect to login page
     if (currentUser === null) {
       setError("User not found. Please login to create game.");
-      setTimeout(function() {
+      setTimeout(function () {
         navigate("/login");
       }, 3000);
     } else {
@@ -90,7 +104,7 @@ export default function DetailedGamePage() {
           setSuccess(
             "Game is successfully joined. Redirecting to profile page..."
           );
-          setTimeout(function() {
+          setTimeout(function () {
             navigate("/profile");
           }, 3000);
         } catch (e) {
@@ -99,7 +113,7 @@ export default function DetailedGamePage() {
           //fail safe if user still managed to call function
           if (e.type === 400) {
             setError("User not found. Please login to create game.");
-            setTimeout(function() {
+            setTimeout(function () {
               navigate("/login");
             }, 3000);
           } else {
@@ -122,7 +136,7 @@ export default function DetailedGamePage() {
   return (
     <div>
       {error1 && (
-        <Alert severity="error" sx={{mb: 4}}>
+        <Alert severity="error" sx={{ mb: 4 }}>
           {" "}
           <AlertTitle>Error</AlertTitle>
           {error1}
@@ -148,48 +162,58 @@ export default function DetailedGamePage() {
               </Typography>
             </Link>
           </Box>
-          <Card>
-            
-          </Card>
+          <Card></Card>
           <Card>
             <Grid container>
               <Grid item xs={12} md={5}>
-              {game.getSportType() === "Badminton" && <CardMedia 
-                  component="img"
-                  height="250"
-                  sx={{objectFit: "contain", p:4}}
-                  image={badminton}
-                />}
-                {game.getSportType() === "Cycling" && <CardMedia 
-                  component="img"
-                  height="250"
-                  sx={{objectFit: "contain", p:4}}
-                  image={bike}
-                />}
-                {game.getSportType() === "VolleyBall" && <CardMedia 
-                  component="img"
-                  height="250"
-                  sx={{objectFit: "contain", p:4}}
-                  image={volleyball}
-                />}
-                {game.getSportType() === "Soccer" && <CardMedia 
-                  component="img"
-                  height="250"
-                  sx={{objectFit: "contain", p:4}}
-                  image={soccer}
-                />}
-                {game.getSportType() === "Pingpong" && <CardMedia 
-                  component="img"
-                  height="250"
-                  sx={{objectFit: "contain", p:4}}
-                  image={pingpong}
-                />}
-                {game.getSportType() === "Basketball" && <CardMedia 
-                  component="img"
-                  height="250"
-                  sx={{objectFit: "contain", p:4}}
-                  image={basketball}
-                />}
+                {game.getSportType() === "Badminton" && (
+                  <CardMedia
+                    component="img"
+                    height="250"
+                    sx={{ objectFit: "contain", p: 6 }}
+                    image={badminton}
+                  />
+                )}
+                {game.getSportType() === "Cycling" && (
+                  <CardMedia
+                    component="img"
+                    height="250"
+                    sx={{ objectFit: "contain", p: 6 }}
+                    image={bike}
+                  />
+                )}
+                {game.getSportType() === "VolleyBall" && (
+                  <CardMedia
+                    component="img"
+                    height="250"
+                    sx={{ objectFit: "contain", p: 6 }}
+                    image={volleyball}
+                  />
+                )}
+                {game.getSportType() === "Soccer" && (
+                  <CardMedia
+                    component="img"
+                    height="250"
+                    sx={{ objectFit: "contain", p: 6 }}
+                    image={soccer}
+                  />
+                )}
+                {game.getSportType() === "Pingpong" && (
+                  <CardMedia
+                    component="img"
+                    height="250"
+                    sx={{ objectFit: "contain", p: 6 }}
+                    image={pingpong}
+                  />
+                )}
+                {game.getSportType() === "Basketball" && (
+                  <CardMedia
+                    component="img"
+                    height="250"
+                    sx={{ objectFit: "contain", p: 6 }}
+                    image={basketball}
+                  />
+                )}
               </Grid>
               <Grid item xs={12} md={7}>
                 <Box sx={{ paddingX: 4, marginBottom: 6 }}>
@@ -340,38 +364,38 @@ export default function DetailedGamePage() {
                 </Grid>
               </Grid>
             </Grid>
-            <Box sx= {{p : 4, pt: 1, pb: 1}}>
-                <Iframe  sx= {{border: 1, borderRadius: '16px'}} iframe={iframe} />
-            </Box>          
+            <Box sx={{ p: 4, pt: 1, pb: 1 }}>
+              <Iframe
+                sx={{ border: 1, borderRadius: "16px" }}
+                iframe={iframe}
+              />
+            </Box>
 
             <CardActions
               sx={{ paddingTop: 1, paddingRight: 4, paddingBottom: 4 }}
             >
               <Box sx={{ flexGrow: 1 }}></Box>
               <div>
-              {(currentUser=== null ||!(userList.includes(currentUser.uid))) && pressButton && (
-              <Box>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  size="large"
-                  style={{ minWidth: "80px", minHeight: "30px" }}
-                  endIcon={<SendIcon />}
-                >
-                  JOIN NOW
-                </Button>
-              
-              
-              </Box>)}
+                {(currentUser === null ||
+                  !userList.includes(currentUser.uid)) &&
+                  pressButton && (
+                    <Box>
+                      <Button
+                        variant="contained"
+                        type="submit"
+                        size="large"
+                        style={{ minWidth: "80px", minHeight: "30px" }}
+                        endIcon={<SendIcon />}
+                      >
+                        JOIN NOW
+                      </Button>
+                    </Box>
+                  )}
               </div>
             </CardActions>
-                  
-            
 
             {success && <Alert severity="success">{success}</Alert>}
-            
           </Card>
-          
         </Box>
       )}
     </div>
