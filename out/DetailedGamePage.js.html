@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: DetailedGamePage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: DetailedGamePage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { useParams } from "react-router-dom";
+import {
+  Typography,
+  Card,
+  CardActions,
+  Alert,
+  AlertTitle,
+  CardMedia,
+  Box,
+  Grid,
+  Button,
+} from "@mui/material/";
+import LinearProgress from "@mui/material/LinearProgress";
+import SendIcon from "@mui/icons-material/Send";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../Control/SessionController";
+import { GameInfo } from "../Control/GamesInfoController";
+import { JoinGame } from "../Control/JoinGameController";
+import badminton from "./UIComponents/images/badminton.png";
+import basketball from "./UIComponents/images/basketball.png";
+import soccer from "./UIComponents/images/soccer.png";
+import volleyball from "./UIComponents/images/volleyball.png";
+import pingpong from "./UIComponents/images/ping-pong.png";
+import bike from "./UIComponents/images/bike.png";
+
+//UI Embeded Map
+function Iframe(props) {
+  return (
+    &lt;div
+      dangerouslySetInnerHTML={{ __html: props.iframe ? props.iframe : "" }}
+    />
+  );
+}
+/**
+ * This function is called when the detailed game page is accessed
+ * @returns {html} 
+ */
+export default function DetailedGamePage() {
+  let title = "";
+  let description = "";
+  let maxPlayers = "";
+  let currentPlayers = "";
+  let sportType = "";
+  let startTime = "";
+  let endTime = "";
+  let location = "";
+  let userList = [];
+
+  let iframe = "";
+
+  const { gameId } = useParams();
+  const { error, isPending, game } = GameInfo(gameId);
+  const [success, setSuccess] = React.useState("");
+  const [error1, setError] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [pressButton, setPress] = React.useState(true);
+  //const [inGame, setGame] = React.useState(true);
+  const { currentUser } = useAuth();
+  if (game != null) {
+    title = game.getTitle();
+    description = game.getDescription();
+    maxPlayers = game.getMaxPlayers();
+    currentPlayers = game.getCurrentPlayers();
+    sportType = game.getSportType();
+    startTime = game.getStartTime();
+    endTime = game.getEndTime();
+    location = game.getLocation();
+    iframe =
+      '&lt;iframe width="100%" height="300px" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&amp;q=' +
+      game.getLocation() +
+      '">  &lt;/iframe>';
+    userList = game.getUserList();
+
+    //console.log(userList);
+  }
+
+  const navigate = useNavigate();
+  if (error) {
+    setTimeout(function () {
+      navigate("/");
+    }, 5000);
+  }
+  /**
+   * Function to submit join game event when button is pressed
+   * @param {Object} event 
+   */
+  async function handleSubmitJoinGame(event) {
+    setLoading(true);
+    setPress(false);
+    console.log(loading);
+    event.preventDefault();
+    //const data = new FormData(event.currentTarget);
+    // If no user redirect to login page
+    if (currentUser === null) {
+      setError("User not found. Please login to create game.");
+      setTimeout(function () {
+        navigate("/login");
+      }, 3000);
+    } else {
+      // If game is full show game is full and redirect to other pages
+      if (currentPlayers >= maxPlayers) {
+        setError("Game is full.");
+      } else {
+        try {
+          //Call for join game and catch any error
+          console.log("Here Alrdy");
+          await JoinGame(gameId, currentUser.uid);
+          setSuccess(
+            "Game is successfully joined. Redirecting to profile page..."
+          );
+          setTimeout(function () {
+            navigate("/profile");
+          }, 3000);
+        } catch (e) {
+          console.log("e");
+          console.log(e);
+          //fail safe if user still managed to call function
+          if (e.type === 400) {
+            setError("User not found. Please login to create game.");
+            setTimeout(function () {
+              navigate("/login");
+            }, 3000);
+          } else {
+            // If user already in game redirect to profile
+            if (e.type === 200) {
+              console.log("Hello");
+              setError("You have already joined this game.");
+            } else {
+              //any other reason that led to failure
+              setError("Failed to create a game.");
+            }
+          }
+        }
+
+        setLoading(false);
+      }
+    }
+  }
+
+  return (
+    &lt;div>
+      {error1 &amp;&amp; (
+        &lt;Alert severity="error" sx={{ mb: 4 }}>
+          {" "}
+          &lt;AlertTitle>Error&lt;/AlertTitle>
+          {error1}
+        &lt;/Alert>
+      )}
+      {isPending &amp;&amp; &lt;LinearProgress />}
+      {game &amp;&amp; (
+        &lt;Box
+          component="form"
+          onSubmit={handleSubmitJoinGame}
+          sx={{ minHeight: 800 }}
+        >
+          &lt;Box paddingBottom={2}>
+            &lt;Link to="../explore" style={{ textDecorationLine: "none" }}>
+              &lt;ArrowBackIosIcon
+                sx={{ verticalAlign: "middle" }}
+                size="small"
+                fontSize="6px"
+                color="primary"
+              />
+              &lt;Typography inline variant="button" align="right" color="primary">
+                Explore more games
+              &lt;/Typography>
+            &lt;/Link>
+          &lt;/Box>
+          &lt;Card>&lt;/Card>
+          &lt;Card>
+            &lt;Grid container>
+              &lt;Grid item xs={12} md={5}>
+                {game.getSportType() === "Badminton" &amp;&amp; (
+                  &lt;CardMedia
+                    component="img"
+                    height="250"
+                    sx={{ objectFit: "contain", p: 6 }}
+                    image={badminton}
+                  />
+                )}
+                {game.getSportType() === "Cycling" &amp;&amp; (
+                  &lt;CardMedia
+                    component="img"
+                    height="250"
+                    sx={{ objectFit: "contain", p: 6 }}
+                    image={bike}
+                  />
+                )}
+                {game.getSportType() === "VolleyBall" &amp;&amp; (
+                  &lt;CardMedia
+                    component="img"
+                    height="250"
+                    sx={{ objectFit: "contain", p: 6 }}
+                    image={volleyball}
+                  />
+                )}
+                {game.getSportType() === "Soccer" &amp;&amp; (
+                  &lt;CardMedia
+                    component="img"
+                    height="250"
+                    sx={{ objectFit: "contain", p: 6 }}
+                    image={soccer}
+                  />
+                )}
+                {game.getSportType() === "Pingpong" &amp;&amp; (
+                  &lt;CardMedia
+                    component="img"
+                    height="250"
+                    sx={{ objectFit: "contain", p: 6 }}
+                    image={pingpong}
+                  />
+                )}
+                {game.getSportType() === "Basketball" &amp;&amp; (
+                  &lt;CardMedia
+                    component="img"
+                    height="250"
+                    sx={{ objectFit: "contain", p: 6 }}
+                    image={basketball}
+                  />
+                )}
+              &lt;/Grid>
+              &lt;Grid item xs={12} md={7}>
+                &lt;Box sx={{ paddingX: 4, marginBottom: 6 }}>
+                  &lt;Typography
+                    component="div"
+                    variant="h4"
+                    marginY={1}
+                    marginTop={4}
+                  >
+                    {title}
+                  &lt;/Typography>
+                  &lt;Typography
+                    variant="body1"
+                    color="text.secondary"
+                    component="div"
+                    marginY={2}
+                  >
+                    {description}
+                  &lt;/Typography>
+                &lt;/Box>
+              &lt;/Grid>
+            &lt;/Grid>
+
+            &lt;Grid container sx={{ paddingX: 4 }}>
+              &lt;Grid item xs={12} md={6}>
+                &lt;Grid container>
+                  {/* &lt;Box sx={{ display: "flex" }}> */}
+                  &lt;Grid item xs={4} marginBottom={2}>
+                    &lt;Typography
+                      variant="body1"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      Game
+                    &lt;/Typography>
+                  &lt;/Grid>
+                  &lt;Grid item xs={8} marginBottom={2}>
+                    &lt;Typography variant="body1" component="div">
+                      {sportType}
+                    &lt;/Typography>
+                  &lt;/Grid>
+                  &lt;Grid item xs={4} marginBottom={2}>
+                    &lt;Typography
+                      variant="body1"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      Date
+                    &lt;/Typography>
+                  &lt;/Grid>
+                  &lt;Grid item xs={8} marginBottom={2}>
+                    &lt;Typography variant="body1" component="div">
+                      {new Date(startTime.seconds * 1000)
+                        .toLocaleDateString("en-GB", {
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                        })
+                        .replace(/ /g, " ")}
+                    &lt;/Typography>
+                  &lt;/Grid>
+                  &lt;Grid item xs={4} marginBottom={2}>
+                    &lt;Typography
+                      variant="body1"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      Maximum Players
+                    &lt;/Typography>
+                  &lt;/Grid>
+                  &lt;Grid item xs={8} marginBottom={2}>
+                    &lt;Typography variant="body1" component="div">
+                      {maxPlayers}
+                    &lt;/Typography>
+                  &lt;/Grid>
+                  &lt;Grid item xs={4} marginBottom={2}>
+                    &lt;Typography
+                      variant="body1"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      Slots Available
+                    &lt;/Typography>
+                  &lt;/Grid>
+                  &lt;Grid item xs={8} marginBottom={2}>
+                    &lt;Typography variant="body1" component="div">
+                      {maxPlayers - currentPlayers}
+                    &lt;/Typography>
+                  &lt;/Grid>
+                &lt;/Grid>
+              &lt;/Grid>
+              &lt;Grid item xs={12} md={6} marginBottom={1}>
+                &lt;Grid container>
+                  &lt;Grid item xs={4} marginBottom={2}>
+                    &lt;Typography
+                      variant="body1"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      Start Time
+                    &lt;/Typography>
+                  &lt;/Grid>
+                  &lt;Grid item xs={8} marginBottom={2}>
+                    &lt;Typography variant="body1" component="div">
+                      {new Date(startTime.seconds * 1000).toLocaleTimeString(
+                        "en-US",
+                        {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        }
+                      )}
+                    &lt;/Typography>
+                  &lt;/Grid>
+                  &lt;Grid item xs={4} marginBottom={2}>
+                    &lt;Typography
+                      variant="body1"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      End Time
+                    &lt;/Typography>
+                  &lt;/Grid>
+                  &lt;Grid item xs={8} marginBottom={2}>
+                    &lt;Typography variant="body1" component="div">
+                      {new Date(endTime.seconds * 1000).toLocaleTimeString(
+                        "en-US",
+                        {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        }
+                      )}
+                    &lt;/Typography>
+                  &lt;/Grid>
+                  &lt;Grid item xs={4} marginBottom={2}>
+                    &lt;Typography
+                      variant="body1"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      Location
+                    &lt;/Typography>
+                  &lt;/Grid>
+                  &lt;Grid item xs={8} marginBottom={2}>
+                    &lt;Typography variant="body1" component="div">
+                      {location}
+                    &lt;/Typography>
+                  &lt;/Grid>
+                &lt;/Grid>
+              &lt;/Grid>
+            &lt;/Grid>
+            &lt;Box sx={{ p: 4, pt: 1, pb: 1 }}>
+              &lt;Iframe
+                sx={{ border: 1, borderRadius: "16px" }}
+                iframe={iframe}
+              />
+            &lt;/Box>
+
+            &lt;CardActions
+              sx={{ paddingTop: 1, paddingRight: 4, paddingBottom: 4 }}
+            >
+              &lt;Box sx={{ flexGrow: 1 }}>&lt;/Box>
+              &lt;div>
+                {(currentUser === null ||
+                  !userList.includes(currentUser.uid)) &amp;&amp;
+                  pressButton &amp;&amp; (
+                    &lt;Box>
+                      &lt;Button
+                        variant="contained"
+                        type="submit"
+                        size="large"
+                        style={{ minWidth: "80px", minHeight: "30px" }}
+                        endIcon={&lt;SendIcon />}
+                      >
+                        JOIN NOW
+                      &lt;/Button>
+                    &lt;/Box>
+                  )}
+              &lt;/div>
+            &lt;/CardActions>
+
+            {success &amp;&amp; &lt;Alert severity="success">{success}&lt;/Alert>}
+          &lt;/Card>
+        &lt;/Box>
+      )}
+    &lt;/div>
+  );
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sat Oct 15 2022 18:21:59 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
