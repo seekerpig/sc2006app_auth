@@ -14,7 +14,7 @@ import { useAuth } from "../Control/SessionController";
 /**
  * This function retrieve the user profile
  * @param {string} userId Unique User ID
- * @returns 
+ * @returns {error, isPending, user} returns error is there is error and also if there is a user logged in or not
  */
 export const retrieveProfile = (userId) => {
   //SO basically here, need to first useAuth from sessioncontroller and check whether if there is a currentUser
@@ -76,7 +76,7 @@ export const retrieveProfile = (userId) => {
 /**
  * This function retrieves the user's games
  * @param {string} userId 
- * @returns 
+ * @returns {games} Games of the user is returned
  */
 export const retrieveUserGames = (userId) => {
   const [games, setGames] = useState(null);
