@@ -9,6 +9,11 @@ import { insertFacilities } from './DatabaseController';
 
 
 var parseString = require('xml2js').parseString;
+
+/**
+ * This function is called to fetch data from the api on data.gov.sg
+ * Once data is fetched, it will try to inser the new facilities into firestore database.
+ */
 export const fetchDataFromAPI= async () =>{
   console.log("Fetch Data from API");
 fetch(raw)
