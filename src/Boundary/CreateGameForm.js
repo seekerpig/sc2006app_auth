@@ -53,7 +53,6 @@ const sportTypes = [
   "Cycling",
   "VolleyBall",
 ];
-
 export default function Creategame() {
   const { currentUser } = useAuth();
   const today = new Date();
