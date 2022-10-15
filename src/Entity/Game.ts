@@ -44,7 +44,7 @@ export default class Game
     }
 
 
-    //getter and setter functions to prevent users from editing attributes directly!
+    // Getter and Setter functions to prevent users from editing attributes directly!
 
 
     /**
@@ -57,7 +57,7 @@ export default class Game
     
     /**
      * Setter function for setting Game ID
-     * @param value 
+     * @param value gameId
      */
     public setGameId(value:string) {
         this.gameId = value;
