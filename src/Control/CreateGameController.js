@@ -2,7 +2,17 @@
 import {createAGame,getFacilities} from'./DatabaseController'
 
 
-
+/**
+ * This methods takes in the currents User and insert a new game into the database
+ * @param {string} title 
+ * @param {string} location 
+ * @param {string} sportType 
+ * @param {Date} startDate 
+ * @param {Date} endDate 
+ * @param {string} description 
+ * @param {number} maxPlayers 
+ * @param {User} currentUser 
+ */
 export const CreateNewGame = async (title, location, sportType, startDate, endDate, description, maxPlayers,currentUser) => {
 //export const CreateNewGame = async => {
   //SO basically here, need to first useAuth from sessioncontroller and check whether if there is a currentUser
@@ -32,7 +42,10 @@ export const CreateNewGame = async (title, location, sportType, startDate, endDa
 
   //need to import this function into CreateGameForm page
 }
-
+/**
+ * 
+ * @returns 
+ */
 export const getAllFacilities = async() => {
   var facilitiesArray = [];
   const testa = await getFacilities();
