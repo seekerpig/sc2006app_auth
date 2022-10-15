@@ -56,12 +56,28 @@ export { db, auth }
 //   return { games };
 // }
 
-
+/**
+ * This function tries to login user using the given email and password by checking against firebase authentication information.
+ * @param {string} email Email address of the user
+ * @param {string} password Password of the user
+ * @returns results of sign in
+ */
 export const login = (email, password) => {
   console.log('trying to login');
   return signInWithEmailAndPassword(auth, email, password);
 }
 
+/**
+ * This function tries to first upload the given profileImage into a storage on firebase.
+ * Afterwards, it will try to attempt to sign up the user onto firebase by creating a firebase auth user and a firestore user object.
+ * @param {string} email Email address
+ * @param {string} password Password
+ * @param {string} name Name
+ * @param {number} phoneNo Phone number
+ * @param {string} description Description
+ * @param {string} profileImg Profile Image URL
+ * @returns results of sign up
+ */
 export const signUp = (email, password, name, phoneNo, description, profileImg) => {
   console.log('hello sign up');
   const storage = getStorage();
@@ -156,14 +172,23 @@ catch(error) {
   //return signInWithEmailAndPassword(auth, email, password);
   
 
-  //NEED CODE HERE TO DEAL W CREATING ENTITY in db with name, phone no etc.. and profile img
+
 }
+
+/**
+ * This function returns an object of game facilities.
+ * @returns objects containing game facilities
+ */
 export const getFacilities = async() => {
   //console.log("Get a Game");
   let ref = collection(db, "Facilities");
   return await getDocs(ref);
 
 }
+/**
+ * This function insert a new facility into our firebase cloud storage.
+ * @param {string} facilities Facility Object
+ */
 export const insertFacilities = async (facilities) => {
   const currentFacilities = await getDocs(collection(db,"Facilities"));
   var flag = 0
@@ -185,6 +210,10 @@ export const insertFacilities = async (facilities) => {
 
 }
 
+/**
+ * This function returns an object of all the games available.
+ * @returns object containing all the games
+ */
 export const getGames = async () => {
 
   let ref = collection(db, "Games");
@@ -192,6 +221,11 @@ export const getGames = async () => {
   
 }
 
+/**
+ * This function retrieves the game details of a particular game
+ * @param {object} gameId 
+ * @returns game details of a particular game
+ */
 export const getAGame = async (gameId) => {
   console.log("Get a Game");
   const ref = doc(db, "Games", gameId);
@@ -199,6 +233,11 @@ export const getAGame = async (gameId) => {
   
 }
 
+/**
+ * This function retrieve a user details from the firestore database
+ * @param {string} userId 
+ * @returns user details of a user
+ */
 export const retrieveAUser = async  (userId) => {
   //console.log("Get a Game");
   const ref = doc(db, "Users", userId);
@@ -206,6 +245,17 @@ export const retrieveAUser = async  (userId) => {
   
 }
 
+/**
+ * This function creates a new game in the firebase cloud database.
+ * @param {string} title Title
+ * @param {string} location Location
+ * @param {string} sportType SportType
+ * @param {Date} startDate Start Date & Time
+ * @param {Date} endDate End Date & Time
+ * @param {string} description Description
+ * @param {number} maxPlayers Max Players
+ * @param {string} creator Creator of this game 
+ */
 export const createAGame = async (title, location, sportType, startDate, endDate, description, maxPlayers,creator) => {
   //const gameDocRef = doc(db, "Games");
   const activeUser = await getDoc(doc(db,"Users",creator));
