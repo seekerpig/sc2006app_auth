@@ -33,7 +33,10 @@ function Iframe(props) {
     />
   );
 }
-
+/**
+ * Function of detailed game page
+ * @returns {html} html code of DetailedGamePage
+ */
 export default function DetailedGamePage() {
   let title = "";
   let description = "";
@@ -79,7 +82,10 @@ export default function DetailedGamePage() {
       navigate("/");
     }, 5000);
   }
-
+  /**
+   * Function to submit join game event
+   * @param {Object} event 
+   */
   async function handleSubmitJoinGame(event) {
     setLoading(true);
     setPress(false);
