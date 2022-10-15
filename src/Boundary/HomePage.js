@@ -12,7 +12,7 @@ import ExploreSportsBar from "./UIComponents/ExploreSportsBar";
 // import Realtime Games Collection hooks
 import { GetGames } from "../Control/GamesInfoController";
 // Call for update everyround
-import { printSomething } from "../Control/FacilitiesController";
+import { fetchDataFromAPI } from "../Control/APIController";
 
 
 let slicedGameList = []
@@ -43,7 +43,8 @@ export default function HomePage() {
             doc.data().userList
           )
         )));
-            printSomething();
+            fetchDataFromAPI();
+            
         
       } catch (err) {
         console.log('Error occured when fetching games');

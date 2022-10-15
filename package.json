@@ -24,9 +24,11 @@
     "read-xml": "^3.0.0",
     "request": "^2.79.0",
     "typescript": "^4.8.4",
+    "unzipper": "^0.10.11",
     "web-vitals": "^2.1.4",
     "xml-js": "^1.6.11",
-    "xml2js": "^0.4.23"
+    "xml2js": "^0.4.23",
+    "yauzl": "^2.10.0"
   },
   "scripts": {
     "start": "react-scripts start",

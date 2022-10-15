@@ -349,7 +349,7 @@ export default function DetailedGamePage() {
             >
               <Box sx={{ flexGrow: 1 }}></Box>
               <div>
-              {!(userList.includes(currentUser.uid)) && pressButton && (
+              {(currentUser=== null ||!(userList.includes(currentUser.uid))) && pressButton && (
               <Box>
                 <Button
                   variant="contained"
