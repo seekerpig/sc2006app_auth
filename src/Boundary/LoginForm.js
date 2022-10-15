@@ -32,9 +32,12 @@ function Copyright(props) {
   );
 }
 
+/**
+ * This method is called when the user accessed the Login Page
+ * @returns HTML
+ */
 export default function LoginForm() {
   const { currentUser } = useAuth();
-  //console.log(currentUser);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -43,16 +46,16 @@ export default function LoginForm() {
   let email = "";
   let password = "";
 
+  /**
+   * This method will log user in if the login button is pressed
+   * @param {Object} event click event from HTML
+   * @returns the status of the sign up (Loading, Error, Success)
+   */
   async function handleSubmitLogin(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     email = data.get("email");
     password = data.get("password");
-
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
 
     try {
       setLoading(true);
@@ -60,7 +63,7 @@ export default function LoginForm() {
       setSuccess("");
       await loginUser(email, password);
       setSuccess("Login Successful! Redirecting...");
-      setTimeout(function() {
+      setTimeout(function () {
         navigate("/");
       }, 2000);
     } catch {
