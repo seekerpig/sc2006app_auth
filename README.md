@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## App Skeleton can be Found in AppSkeleton_TYPEDOC folder
+Just open up the index.html in that folder if you want to see the design doc of classes.
+Typedoc is used instead of jsdoc.
+
 ## Available Scripts
 
 In the project directory, you can run:
