@@ -1,12 +1,29 @@
 import React, { useEffect } from "react";
 import DisplayGameList from "./UIComponents/Card";
 import { useSearchParams } from "react-router-dom";
-import {Container, MenuItem,FormControl,Select,Box,Stack,TextField,Grid,Typography,IconButton,Alert,AlertTitle} from "@mui/material/";
+import {
+  Container,
+  MenuItem,
+  FormControl,
+  Select,
+  Box,
+  Stack,
+  TextField,
+  Grid,
+  Typography,
+  IconButton,
+  Alert,
+  AlertTitle,
+} from "@mui/material/";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
-import {  FilterByFacility,  FilterBySports,  FilterByDate,} from "../Control/Filter";
+import {
+  FilterByFacility,
+  FilterBySports,
+  FilterByDate,
+} from "../Control/FilterController";
 import { GetGames } from "../Control/GamesInfoController";
 import Game from "../Entity/Game";
 export default function ExplorePage() {
@@ -135,7 +152,13 @@ export default function ExplorePage() {
         <Stack
           direction={{ sm: "column", md: "row" }}
           spacing={{ xs: 1, sm: 2, md: 3 }}
-          sx={{ mx: 3, justifyContent: "space-evenly", py: 3, paddingLeft:'1rem',paddingRight:'1rem'}}
+          sx={{
+            mx: 3,
+            justifyContent: "space-evenly",
+            py: 3,
+            paddingLeft: "1rem",
+            paddingRight: "1rem",
+          }}
         >
           <Box width={{ xs: "100%", md: "30%" }}>
             <FormControl fullWidth>
@@ -207,10 +230,13 @@ export default function ExplorePage() {
                   color="primary"
                   aria-label="Filter"
                   onClick={handleSubmit}
-                  sx={{borderRadius:'50%',backgroundColor:'#3563E9',color:'white'}}
+                  sx={{
+                    borderRadius: "50%",
+                    backgroundColor: "#3563E9",
+                    color: "white",
+                  }}
                 >
-                  
-                  <FilterListRoundedIcon sx={{ fontSize: 40,  }} />
+                  <FilterListRoundedIcon sx={{ fontSize: 40 }} />
                 </IconButton>
               </Grid>
             </Grid>
