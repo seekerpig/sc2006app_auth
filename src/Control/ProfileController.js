@@ -11,7 +11,11 @@ import {  getGames, retrieveAUser } from "./DatabaseController";
   
 
 
-
+/**
+ * This function retrieve the user profile
+ * @param {string} userId Unique User ID
+ * @returns 
+ */
 export const retrieveProfile = (userId) => {
   //SO basically here, need to first useAuth from sessioncontroller and check whether if there is a currentUser
   //If no current User, then show alert or something
@@ -67,6 +71,11 @@ export const retrieveProfile = (userId) => {
   //this function is not yet implemented in profile page, so need to import into profile page also, cause profile page is currently hardcoded.
 }
 
+/**
+ * This function retrieves the user's games
+ * @param {string} userId 
+ * @returns 
+ */
 export const retrieveUserGames = (userId) => {
   const [games, setGames] = useState(null);
     

@@ -1,6 +1,11 @@
 import {login} from './DatabaseController';
 
-
+/**
+ * This function takes in user's email address and password and confirm login
+ * @param {string} email Email Address of the user
+ * @param {string} password Password of the user
+ * @returns 
+ */
 export const loginUser = (email,password) => {
   try{
     return login(email,password);
