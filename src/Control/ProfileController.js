@@ -10,10 +10,6 @@ import { useAuth } from "../Control/SessionController";
  * @returns {string} returns error is there is error and also if there is a user logged in or not
  */
 export const retrieveProfile = (userId) => {
-  //SO basically here, need to first useAuth from sessioncontroller and check whether if there is a currentUser
-  //If no current User, then show alert or something
-
-  //if there is currentUser, retrieve data from databasecontroller (need create a new function in databasecontroller.js to retrieve data based on id and collection)
 
   const user1 = useAuth();
   console.log("User 1 is here");
