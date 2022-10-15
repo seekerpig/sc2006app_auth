@@ -27,7 +27,7 @@ import {
 import { GetGames } from "../Control/GamesInfoController";
 import Game from "../Entity/Game";
 /**
- * Function to explore page
+ * Function to generate explore page
  * @returns {html} html code of ExplorePage
  */
 export default function ExplorePage() {

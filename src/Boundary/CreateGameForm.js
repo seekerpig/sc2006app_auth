@@ -54,7 +54,7 @@ const sportTypes = [
   "VolleyBall",
 ];
 /**
- * Function to create game
+ * Function to generate create game
  * @returns {html} html code of CreateGameForm
  */
 export default function Creategame() {
@@ -146,7 +146,10 @@ export default function Creategame() {
     navigate("/login");
   }, 3000);}
      
-  
+  /**
+   * function to submit create game
+   * @param {Object} event 
+   */
   async function handleSubmitCreateGame(event) {
     setLoading(true);
     event.preventDefault();
