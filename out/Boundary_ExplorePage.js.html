@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Boundary/ExplorePage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Boundary/ExplorePage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect } from "react";
+import DisplayGameList from "./UIComponents/Card";
+import { useSearchParams } from "react-router-dom";
+import {
+  Container,
+  MenuItem,
+  FormControl,
+  Select,
+  Box,
+  Stack,
+  TextField,
+  Grid,
+  Typography,
+  IconButton,
+  Alert,
+  AlertTitle,
+} from "@mui/material/";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
+import {
+  FilterByFacility,
+  FilterBySports,
+  FilterByDate,
+} from "../Control/FilterController";
+import { GetGames } from "../Control/GamesInfoController";
+import Game from "../Entity/Game";
+/**
+ * This function is called when the explore page is accessed.
+ * @returns {html} 
+ */
+export default function ExplorePage() {
+  const [gameList, setGameList] = React.useState([]);
+  const [filteredList, setList] = React.useState([]);
+  const [sportList, setSportList] = React.useState([]);
+  const [locationList, setLocationsList] = React.useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const games = await GetGames();
+
+        // get the dropdown filter list based on existing data
+        setSportList(games.docs.map((doc) => doc.data().sportType));
+        setLocationsList(games.docs.map((doc) => doc.data().location));
+
+        setGameList(
+          games.docs.map(
+            (doc) =>
+              new Game(
+                doc.id,
+                doc.data().title,
+                doc.data().sportType,
+                doc.data().description,
+                doc.data().startTime,
+                doc.data().endTime,
+                doc.data().location,
+                doc.data().maxPlayers,
+                doc.data().currentPlayers,
+                doc.data().userList
+              )
+          )
+        );
+
+        let results = [];
+        setList(
+          games.docs.map(
+            (doc) =>
+              new Game(
+                doc.id,
+                doc.data().title,
+                doc.data().sportType,
+                doc.data().description,
+                doc.data().startTime,
+                doc.data().endTime,
+                doc.data().location,
+                doc.data().maxPlayers,
+                doc.data().currentPlayers,
+                doc.data().userList
+              )
+          )
+        );
+        if (searchParams.get("sports") !== "") {
+          setSport(
+            searchParams.get("sports")[0].toUpperCase() +
+              searchParams.get("sports").substring(1)
+          );
+          games.docs.map(
+            (doc) =>
+              doc.data().sportType.toUpperCase() ===
+                searchParams.get("sports").toUpperCase() &amp;&amp;
+              results.push(
+                new Game(
+                  doc.id,
+                  doc.data().title,
+                  doc.data().sportType,
+                  doc.data().description,
+                  doc.data().startTime,
+                  doc.data().endTime,
+                  doc.data().location,
+                  doc.data().maxPlayers,
+                  doc.data().currentPlayers,
+                  doc.data().userList
+                )
+              )
+          );
+          searchParams.delete("sports");
+          setSearchParams(searchParams);
+          setList(results);
+        }
+      } catch (err) {
+        console.log("Error occured when fetching games");
+      }
+    })();
+  }, []);
+
+  // buttons info change upon click
+  const [sport, setSport] = React.useState("");
+  const [location, setLocation] = React.useState("");
+  const [date, setDate] = React.useState(null);
+
+  // handle buttons
+  const handleSport = (event) => {
+    setSport(event.target.value);
+  };
+  const handleLocation = (event) => {
+    setLocation(event.target.value);
+  };
+  const handleDate = (value) => {
+    setDate(value);
+  };
+
+  const handleSubmit = () => {
+    let list = FilterBySports(gameList, sport);
+    list = FilterByFacility(list, location);
+    if (date !== null) {
+      list = FilterByDate(list, date);
+    }
+    setList(list);
+  };
+
+  return (
+    &lt;Container sx={{ minHeight: 800 }}>
+      &lt;Box
+        sx={{
+          mt: 2,
+          mb: 5,
+          mx: "auto",
+          backgroundColor: "secondary.main",
+          borderRadius: 2,
+          maxWidth: 800,
+        }}
+      >
+        &lt;Stack
+          direction={{ sm: "column", md: "row" }}
+          spacing={{ xs: 1, sm: 2, md: 3 }}
+          sx={{
+            mx: 3,
+            justifyContent: "space-evenly",
+            py: 3,
+            paddingLeft: "1rem",
+            paddingRight: "1rem",
+          }}
+        >
+          &lt;Box width={{ xs: "100%", md: "30%" }}>
+            &lt;FormControl fullWidth>
+              &lt;Typography
+                sx={{ typography: "body1", fontWeight: "Medium", mb: 1 }}
+              >
+                Sports
+              &lt;/Typography>
+              &lt;Select value={sport} onChange={handleSport} displayEmpty>
+                &lt;MenuItem value="">
+                  &lt;em>All&lt;/em>
+                &lt;/MenuItem>
+                {[...new Set(sportList)].map((sport) => (
+                  &lt;MenuItem key={sport} value={sport}>
+                    {" "}
+                    {sport}{" "}
+                  &lt;/MenuItem>
+                ))}
+              &lt;/Select>
+            &lt;/FormControl>
+          &lt;/Box>
+          &lt;Box width={{ xs: "100%", md: "30%" }}>
+            &lt;FormControl fullWidth>
+              &lt;Typography
+                sx={{ typography: "body1", fontWeight: "Medium", mb: 1 }}
+              >
+                Facility
+              &lt;/Typography>
+              &lt;Select value={location} onChange={handleLocation} displayEmpty>
+                &lt;MenuItem value="">
+                  &lt;em>All&lt;/em>
+                &lt;/MenuItem>
+                {[...new Set(locationList)].map((location) => (
+                  &lt;MenuItem key={location} value={location}>
+                    {" "}
+                    {location}{" "}
+                  &lt;/MenuItem>
+                ))}
+              &lt;/Select>
+            &lt;/FormControl>
+          &lt;/Box>
+          &lt;Box width={{ xs: "100%", md: "30%" }}>
+            &lt;FormControl fullWidth>
+              &lt;LocalizationProvider dateAdapter={AdapterDayjs}>
+                &lt;Typography
+                  sx={{ typography: "body1", fontWeight: "Medium", mb: 1 }}
+                >
+                  Date
+                &lt;/Typography>
+
+                &lt;DesktopDatePicker
+                  views={["day"]}
+                  inputFormat="MM/DD/YYYY"
+                  value={date}
+                  onChange={handleDate}
+                  renderInput={(params) => &lt;TextField {...params} />}
+                  width="100%"
+                />
+              &lt;/LocalizationProvider>
+            &lt;/FormControl>
+          &lt;/Box>
+          &lt;Box
+            width={{ xs: "100%", md: "10%" }}
+            sx={{ display: "flex", alignItems: "center" }}
+          >
+            &lt;Grid container direction="column" alignItems="center">
+              &lt;Grid item align="center">
+                &lt;IconButton
+                  color="primary"
+                  aria-label="Filter"
+                  onClick={handleSubmit}
+                  sx={{
+                    borderRadius: "50%",
+                    backgroundColor: "#3563E9",
+                    color: "white",
+                  }}
+                >
+                  &lt;FilterListRoundedIcon sx={{ fontSize: 40 }} />
+                &lt;/IconButton>
+              &lt;/Grid>
+            &lt;/Grid>
+          &lt;/Box>
+        &lt;/Stack>
+      &lt;/Box>
+      {filteredList.length === 0 ? (
+        &lt;Alert severity="error">
+          {" "}
+          &lt;AlertTitle>Error&lt;/AlertTitle>No Games Found, Try Other Filter Options
+        &lt;/Alert>
+      ) : (
+        &lt;DisplayGameList games={filteredList} />
+      )}
+    &lt;/Container>
+  );
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AuthProvider">AuthProvider</a></li><li><a href="global.html#createAGame">createAGame</a></li><li><a href="global.html#CreateNewGame">CreateNewGame</a></li><li><a href="global.html#fetchDataFromAPI">fetchDataFromAPI</a></li><li><a href="global.html#FilterByDate">FilterByDate</a></li><li><a href="global.html#FilterByFacility">FilterByFacility</a></li><li><a href="global.html#FilterBySports">FilterBySports</a></li><li><a href="global.html#GameInfo">GameInfo</a></li><li><a href="global.html#getAGame">getAGame</a></li><li><a href="global.html#getAllFacilities">getAllFacilities</a></li><li><a href="global.html#getFacilities">getFacilities</a></li><li><a href="global.html#getGames">getGames</a></li><li><a href="global.html#GetGames">GetGames</a></li><li><a href="global.html#insertFacilities">insertFacilities</a></li><li><a href="global.html#JoinGame">JoinGame</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#retrieveAUser">retrieveAUser</a></li><li><a href="global.html#retrieveProfile">retrieveProfile</a></li><li><a href="global.html#retrieveUserGames">retrieveUserGames</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#useAuth">useAuth</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sat Oct 15 2022 18:30:57 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

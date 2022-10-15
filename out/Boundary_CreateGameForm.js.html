@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Boundary/CreateGameForm.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Boundary/CreateGameForm.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React,{useEffect}  from "react";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  Alert,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Select,
+  Slider,
+  Stack,
+} from "@mui/material/";
+
+import { styled } from "@mui/material/styles";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import GroupIcon from "@mui/icons-material/Group";
+import { useAuth } from "../Control/SessionController";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import MuiInput from "@mui/material/Input";
+import {CreateNewGame,getAllFacilities } from "../Control/CreateGameController"
+//import { getFacilities } from "../Control/DatabaseController";
+
+
+const Input = styled(MuiInput)`
+  width: 42px;
+`;
+
+
+
+const sportTypes = [
+  "Badminton",
+  "Basketball",
+  "Pingpong",
+  "Soccer",
+  "Cycling",
+  "VolleyBall",
+];
+/**
+ * This function is called when the create game form is accessed by the user.
+ * @returns {html} 
+ */
+export default function Creategame() {
+  const { currentUser } = useAuth();
+  const today = new Date();
+
+  //attributes from location to maxPlayers
+  const [title, setTitle] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [startDate, setDate] = React.useState(dayjs(today));
+  const [endDate, setEndDate] = React.useState(dayjs(today).add(60, "minutes"));
+  const [location, setLocation] = React.useState("");
+  const [sportType, setSport] = React.useState("");
+  const [maxPlayers, setPlayers] = React.useState(2);
+  
+  const [locations, setList] = React.useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try { 
+        setList(await getAllFacilities());
+        
+        //console.log(something);
+       /* const facilities = await getFacilities();
+        setList(facilities.docs.map((doc) => (
+          {
+            placemarkid:doc.data().placemarkid,
+            name:doc.data().name
+          }
+        )));*/
+           // printSomething();
+        
+      } catch (err) {
+        console.log('Error occured when fetching games');
+      }
+    })();
+  }, []);
+  console.log(locations);
+
+  const handleChangeLocation = (event) => {
+    setLocation(event.target.value);
+  };
+  const handleChangeSport = (event) => {
+    setSport(event.target.value);
+  };
+
+  const handleChangeDescription = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const handleChangeTitle = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const handleChangeDate = (newValue) => {
+    setDate(newValue);
+  };
+
+  const handleChangeEndDate = (newValue) => {
+    if (newValue >= startDate) {
+      setEndDate(newValue);
+    } else {
+      alert("End Date &amp; Time cannot be earlier than Starting Date &amp; Time");
+    }
+  };
+
+  const handleSliderChange = (event, newValue) => {
+    setPlayers(newValue);
+  };
+  const handleSliderInputChange = (event) => {
+    setPlayers(event.target.value === "" ? "" : Number(event.target.value));
+  };
+
+  const handleBlur = () => {
+    if (maxPlayers &lt; 0) {
+      setPlayers(0);
+    } else if (maxPlayers > 100) {
+      setPlayers(100);
+    }
+  };
+
+  //console.log(currentUser);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  if(currentUser === null){
+  setTimeout(function() {
+    navigate("/login");
+  }, 3000);}
+     
+  
+  /**
+   * This function is called when the user clicks on the create game button.
+   * @param {object} event 
+   */
+  async function handleSubmitCreateGame(event) {
+    setLoading(true);
+    event.preventDefault();
+
+    try {
+      setError("")
+      setSuccess("")
+      console.log({
+        titleA: title,
+        locationA: location,
+        sportTypeA: sportType,
+        startDateA: startDate,
+        endDateA: endDate,
+        descriptionA: description,
+        maxPlayersA: maxPlayers,
+      });
+      CreateNewGame(title,location,sportType,startDate,endDate,description,maxPlayers,currentUser);
+      console.log("Here Alrdy")
+      //NEED SOME CODE HERE TO CREATE A NEW DOC IN FIRESTORE
+      //NEED TO IMPORT CreateNewGame() from CreateGameController
+      setSuccess("Game is successfully created. Redirecting to profile page...");
+      setTimeout(function() {
+        navigate("/profile");
+      }, 3000);
+    } catch(e) {
+      if(e.type ===400){
+        setError("User not found. Please login to create game.");
+        setTimeout(function() {
+          navigate("/login");
+        }, 3000);
+      }
+      else{
+      setError("Failed to Create A Game");
+      }
+    }
+
+    setLoading(false);
+  }
+
+  return (
+    &lt;div>
+      {!currentUser &amp;&amp; &lt;Alert severity="error">You are not logged in. Redirecting you to login page...&lt;/Alert>}
+      {locations &amp;&amp; currentUser &amp;&amp; (
+    &lt;Box sx={{ bgcolor: "secondary.main", padding: 2, borderRadius: "8px" }}>
+      &lt;Container component="main" maxWidth="xs">
+        &lt;CssBaseline />
+        &lt;Box
+          sx={{
+            py: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          &lt;Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+            &lt;AddCircleIcon />
+          &lt;/Avatar>
+          &lt;Typography component="h1" variant="h5">
+            Create A Game
+          &lt;/Typography>
+          &lt;Box component="form" onSubmit={handleSubmitCreateGame} sx={{ mt: 3 }}>
+            &lt;Grid container spacing={2}>
+              &lt;Grid item xs={12}>
+                &lt;TextField
+                  required
+                  fullWidth
+                  id="title"
+                  label="Game Title"
+                  name="title"
+                  onChange={handleChangeTitle}
+                  value={title}
+                />
+              &lt;/Grid>
+              &lt;Grid item xs={12}>
+                &lt;FormControl fullWidth required>
+                  &lt;InputLabel required id="location">
+                    Location
+                  &lt;/InputLabel>
+                  &lt;Select
+                    labelId="location"
+                    id="location"
+                    value={location}
+                    onChange={handleChangeLocation}
+                    fullWidth
+                    label="Location"
+                    required
+                  >
+                    &lt;MenuItem value="">
+                      &lt;em>None&lt;/em>
+                    &lt;/MenuItem>
+                    {locations.map((item) => (
+                      &lt;MenuItem value={item}>{item}&lt;/MenuItem>
+                    ))}
+                  &lt;/Select>
+                &lt;/FormControl>
+              &lt;/Grid>
+              &lt;Grid item xs={12}>
+                &lt;FormControl fullWidth required>
+                  &lt;InputLabel required id="sportType">
+                    Sports Type
+                  &lt;/InputLabel>
+                  &lt;Select
+                    labelId="sportType"
+                    id="sportType"
+                    value={sportType}
+                    onChange={handleChangeSport}
+                    fullWidth
+                    label="Sport Type"
+                    required
+                  >
+                    &lt;MenuItem value="">
+                      &lt;em>None&lt;/em>
+                    &lt;/MenuItem>
+                    {sportTypes.map((item) => (
+                      &lt;MenuItem value={item}>{item}&lt;/MenuItem>
+                    ))}
+                  &lt;/Select>
+                &lt;/FormControl>
+              &lt;/Grid>
+              &lt;Grid item xs={12}>
+                &lt;LocalizationProvider dateAdapter={AdapterDayjs}>
+                  &lt;Stack spacing={3}>
+                    &lt;DateTimePicker
+                      label="Start Date &amp; Time"
+                      id="startDate"
+                      value={startDate}
+                      onChange={handleChangeDate}
+                      renderInput={(params) => &lt;TextField {...params} />}
+                    />
+                    &lt;DateTimePicker
+                      label="End Date &amp; Time"
+                      id="endDate"
+                      value={endDate}
+                      onChange={handleChangeEndDate}
+                      renderInput={(params) => &lt;TextField {...params} />}
+                    />
+                  &lt;/Stack>
+                &lt;/LocalizationProvider>
+              &lt;/Grid>
+
+              &lt;Grid item xs={12}>
+                &lt;TextField
+                  required
+                  multiline
+                  fullWidth
+                  rows={4}
+                  name="description"
+                  label="Description"
+                  id="description"
+                  onChange={handleChangeDescription}
+                  
+                />
+              &lt;/Grid>
+              &lt;Grid item xs={12}>
+                &lt;Typography id="input-slider" gutterBottom>
+                  Max Players
+                &lt;/Typography>
+                &lt;Grid container spacing={2} alignItems="center">
+                  &lt;Grid item>
+                    &lt;GroupIcon />
+                  &lt;/Grid>
+                  &lt;Grid item xs>
+                    &lt;Slider
+                      value={typeof maxPlayers === "number" ? maxPlayers : 0}
+                      onChange={handleSliderChange}
+                      aria-labelledby="input-slider"
+                      defaultValue={2}
+                      max={16}
+                      min={2}
+                    />
+                  &lt;/Grid>
+                  &lt;Grid item>
+                    &lt;Input
+                      id="maxPlayers"
+                      value={maxPlayers}
+                      size="small"
+                      onChange={handleSliderInputChange}
+                      onBlur={handleBlur}
+                      inputProps={{
+                        step: 1,
+                        min: 1,
+                        max: 12,
+                        type: "number",
+                        "aria-labelledby": "input-slider",
+                      }}
+                    />
+                  &lt;/Grid>
+                &lt;/Grid>
+              &lt;/Grid>
+            &lt;/Grid>
+            &lt;Button
+              disabled={loading}
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Create Game
+            &lt;/Button>
+            {success &amp;&amp; &lt;Alert severity="success">{success}&lt;/Alert>}
+            {error &amp;&amp; &lt;Alert severity="error">{error}&lt;/Alert>}
+            {currentUser &amp;&amp; &lt;p>Current logged user is {currentUser.email}&lt;/p>}
+          &lt;/Box>
+        &lt;/Box>
+      &lt;/Container>
+    &lt;/Box>
+      ) }
+    &lt;/div>
+  );
+                    }
+                    
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AuthProvider">AuthProvider</a></li><li><a href="global.html#createAGame">createAGame</a></li><li><a href="global.html#CreateNewGame">CreateNewGame</a></li><li><a href="global.html#fetchDataFromAPI">fetchDataFromAPI</a></li><li><a href="global.html#FilterByDate">FilterByDate</a></li><li><a href="global.html#FilterByFacility">FilterByFacility</a></li><li><a href="global.html#FilterBySports">FilterBySports</a></li><li><a href="global.html#GameInfo">GameInfo</a></li><li><a href="global.html#getAGame">getAGame</a></li><li><a href="global.html#getAllFacilities">getAllFacilities</a></li><li><a href="global.html#getFacilities">getFacilities</a></li><li><a href="global.html#getGames">getGames</a></li><li><a href="global.html#GetGames">GetGames</a></li><li><a href="global.html#insertFacilities">insertFacilities</a></li><li><a href="global.html#JoinGame">JoinGame</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#retrieveAUser">retrieveAUser</a></li><li><a href="global.html#retrieveProfile">retrieveProfile</a></li><li><a href="global.html#retrieveUserGames">retrieveUserGames</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#useAuth">useAuth</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sat Oct 15 2022 18:30:57 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

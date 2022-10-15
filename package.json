@@ -53,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "typedoc-plugin-rename-defaults": "^0.6.4"
   }
 }
