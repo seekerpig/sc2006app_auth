@@ -55,7 +55,7 @@ export default function SignUpForm() {
 
   /**
    * This method will sign user up if the sign up button is pressed
-   * @param {Object} event
+   * @param {Object} event click event from HTML
    * @returns the status of the sign up (Loading, Error, Success)
    */
   async function handleSubmitSignUp(event) {
@@ -78,10 +78,6 @@ export default function SignUpForm() {
         setError("Password Length is Not Long Enough");
         return;
       }
-
-      //CODE FOR CREATING USER:
-      //NEED CODE TO UPLOAD IMAGE TO FIREBASE
-      //AFTER UPLOAD, add all the parameters to the SignUp function, it needs more, see SignUpController.js for full parameters.
 
       await SignUp(email, password, name, phoneNumber, description, profileUrl)
         .then(() => {
