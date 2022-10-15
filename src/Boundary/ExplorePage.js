@@ -27,8 +27,8 @@ import {
 import { GetGames } from "../Control/GamesInfoController";
 import Game from "../Entity/Game";
 /**
- * Function to generate explore page
- * @returns {html} html code of ExplorePage
+ * This function is called when the explore page is accessed.
+ * @returns {html} 
  */
 export default function ExplorePage() {
   const [gameList, setGameList] = React.useState([]);
