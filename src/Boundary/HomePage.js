@@ -13,6 +13,7 @@ import ExploreSportsBar from "./UIComponents/ExploreSportsBar";
 import { GetGames } from "../Control/GamesInfoController";
 // Call for update everyround
 import { fetchDataFromAPI } from "../Control/APIController";
+import {fetchDataFromAPI2} from "../Control/APIController1";
 
 
 let slicedGameList = []
@@ -44,6 +45,7 @@ export default function HomePage() {
           )
         )));
             fetchDataFromAPI();
+            fetchDataFromAPI2();
             
         
       } catch (err) {
