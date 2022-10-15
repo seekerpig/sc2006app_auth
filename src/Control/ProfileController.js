@@ -3,7 +3,7 @@ import { useState, useEffect,useLayoutEffect } from "react";
 import Game from '../Entity/Game';
 import User from "../Entity/User";
 import {  getGames, retrieveAUser } from "./DatabaseController";
-
+import { useAuth } from "../Control/SessionController";
 
 
 
@@ -22,7 +22,9 @@ export const retrieveProfile = (userId) => {
 
   //if there is currentUser, retrieve data from databasecontroller (need create a new function in databasecontroller.js to retrieve data based on id and collection)
   
-
+    const user1 = useAuth();
+    console.log("User 1 is here");
+    console.log(user1);
     const [user, setUser] = useState(null);
     
     const [isPending, setIsPending] = useState(false);
