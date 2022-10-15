@@ -26,6 +26,10 @@ import {
 } from "../Control/FilterController";
 import { GetGames } from "../Control/GamesInfoController";
 import Game from "../Entity/Game";
+/**
+ * Function to explore page
+ * @returns {html} html code of ExplorePage
+ */
 export default function ExplorePage() {
   const [gameList, setGameList] = React.useState([]);
   const [filteredList, setList] = React.useState([]);

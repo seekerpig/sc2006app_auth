@@ -26,7 +26,9 @@ export function AuthProvider({children}) {
 
     
 
-
+    /**
+     * This method is for logging out the user, it will call firebase to logout
+     */
     function logout()
     {
         console.log("trying to logout");

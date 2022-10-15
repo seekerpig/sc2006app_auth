@@ -1,5 +1,5 @@
 /**
- * Creates Sports Facilities
+ * Class of sports facilities
  */
 export default class SportsFacilities
 {
