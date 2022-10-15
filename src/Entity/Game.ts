@@ -70,8 +70,8 @@ export default class Game
         return this.title;
     }
     /**
-     * Setter function for setting Game ID
-     * @param value value of new game ID
+     * Setter function for setting Title
+     * @param value value of new Title
      */
     public setTitle(value:string) {
         this.title = value;
@@ -168,7 +168,7 @@ export default class Game
         return this.currentPlayers;
     }
     /**
-     * Setter function for setting new max current players count
+     * Setter function for setting new current players count
      * @param value value of new current players count
      */
     public setCurrentPlayers(value:number) {
