@@ -1,35 +1,30 @@
-//import React from 'react'
-import {joinAGame} from "./DatabaseController"
+import { joinAGame } from "./DatabaseController";
 
-export const JoinGame = async (gameId,userId) => {
-  //SO basically here, need to first useAuth from sessioncontroller and check whether if there is a currentUser
-  //If no current User, then show alert or something
+/**
+ * This method will check if userId is logged in from SessionController
+ * If user is logged in then will call joinAGame from DatabaseController to enroll user to the game
+ * Else throw error
+ * @param {string} gameId is the unique identifier for the game
+ * @param {string} userId is the unique identifier for the user
+ */
+export const JoinGame = async (gameId, userId) => {
   console.log("In join game");
-  
-  if(userId === null){
+
+  if (userId === null) {
     console.log("something wong");
     const error = {
-      type:400
-    }
+      type: 400,
+    };
     throw error;
   }
-  
-    const result = await joinAGame(gameId,userId);
-    console.log(result);
-    if(result === 200){
-      console.log("triggered");
-      const error = {
-        type:200
-      }
-      throw error;
-    }
-    
-  
- 
 
-
-  //if there is a current user, add user to the game in firestore
-  //AND change the attribute of the user gamelist in database by creating a new function in DatabaseController.js
-
-  //need to import this function into DetailedGamePage Code
-}
+  const result = await joinAGame(gameId, userId);
+  console.log(result);
+  if (result === 200) {
+    console.log("triggered");
+    const error = {
+      type: 200,
+    };
+    throw error;
+  }
+};
