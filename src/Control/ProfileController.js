@@ -7,7 +7,7 @@ import { useAuth } from "../Control/SessionController";
 /**
  * This function retrieve the user profile
  * @param {string} userId Unique User ID
- * @returns {error, isPending, user} returns error is there is error and also if there is a user logged in or not
+ * @returns {string} returns error is there is error and also if there is a user logged in or not
  */
 export const retrieveProfile = (userId) => {
   //SO basically here, need to first useAuth from sessioncontroller and check whether if there is a currentUser
