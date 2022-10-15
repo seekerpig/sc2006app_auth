@@ -128,6 +128,7 @@ export const signUp = (email, password, name, phoneNo, description, profileImg) 
   
   
         });
+        //return {type:200}
       });
     }
   );
@@ -135,7 +136,10 @@ export const signUp = (email, password, name, phoneNo, description, profileImg) 
   })
   .catch((error) => {
     //const errorCode = error.code;
-    throw (error);
+    //console.log("Error occurred in Sign Up")
+    //console.error(error.code);
+    
+    return error.code;
     //const errorMessage = error.message;
     // ..
   });
@@ -147,7 +151,7 @@ catch(error) {
 }
 
   
-  
+  return "successful";
   
   //return signInWithEmailAndPassword(auth, email, password);
   
