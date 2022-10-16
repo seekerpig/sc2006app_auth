@@ -8,6 +8,15 @@ var JSZip = require("jszip");
 var parseString = require('xml2js').parseString;
 
 
+<<<<<<< HEAD
+=======
+var parseString = require('xml2js').parseString;
+
+/**
+ * This function is called to fetch data from the api on data.gov.sg
+ * Once data is fetched, it will try to inser the new facilities into firestore database.
+ */
+>>>>>>> 30c57ff609c97cd472b3d59c8f5ee5ce1e65d9db
 export const fetchDataFromAPI= async () =>{
     console.log("Fetch Data from API");
   var req = http.get(url.parse('https://geo.data.gov.sg/playsg/2014/04/17/kml/playsg.zip'), function (res) {

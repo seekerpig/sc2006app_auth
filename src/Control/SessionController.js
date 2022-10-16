@@ -10,7 +10,7 @@ const AuthContext = React.createContext();
  * Returns current user and logout function. Used to check if there is a current logged in user or a function to log out.
  * @returns currentUser and logout
  */
-export function useAuth(){
+export const useAuth = ()=>{
     return useContext(AuthContext); //returns currentUser and logout function
 }
 
@@ -19,14 +19,16 @@ export function useAuth(){
  * 
  * @returns a React Component for propagating context to its children
  */
-export function AuthProvider({children}) {
+export const AuthProvider = ({children}) => {
 
     const[currentUser, setCurrentUser] = useState();
     const[loading, setLoading] = useState(true);
 
     
 
-
+    /**
+     * This method is for logging out the user, it will call firebase to logout
+     */
     function logout()
     {
         console.log("trying to logout");

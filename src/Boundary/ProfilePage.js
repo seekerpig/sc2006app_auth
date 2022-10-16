@@ -3,162 +3,177 @@ import Container from "@mui/material/Container";
 import Card from "./UIComponents/Card";
 import { Grid, Typography, Box, Button, Alert } from "@mui/material";
 import { useAuth } from "../Control/SessionController";
-// firebase connection
-// import { db } from '../../src/firebaseconfig';
-// import { collection, getDocs } from 'firebase/firestore'
-// get entities
 import User from "../Entity/User";
-import { retrieveProfile,retrieveUserGames } from "../Control/ProfileController";
-import {  useNavigate } from "react-router-dom";
+import {
+  retrieveProfile,
+  retrieveUserGames,
+} from "../Control/ProfileController";
+import { useNavigate } from "react-router-dom";
 
-
-
+/**
+ * This method is called when the user accessed the Profile Page
+ * @returns HTML
+ */
 export default function ProfilePage() {
+  const { logout } = useAuth();
+  const { currentUser } = useAuth();
 
-  const {logout} = useAuth();
-  const {currentUser} = useAuth();
-  //console.log(currentUser);
-  
   const navigate = useNavigate();
-  if(currentUser === null){
-    setTimeout(function() {
+  if (currentUser === null) {
+    setTimeout(function () {
       navigate("/login");
-    }, 100);}
-  else{
-  console.log("User is right below here")
-  //console.log(activeUser);
-  const { error, isPending, user=new User()} = retrieveProfile(currentUser.uid);
-  console.log(error);
-  console.log(isPending);
-  const {games}=retrieveUserGames(currentUser.uid);
-  console.log(games);
-  
-  const [logoutMsg, setLogOutMsg] = React.useState("");
-  const signOut = () => {
+    }, 100);
+  } else {
+    console.log("User is right below here");
+    const {
+      error,
+      isPending,
+      user = new User(),
+    } = retrieveProfile(currentUser.uid);
+    console.log(error);
+    console.log(isPending);
+    const { games } = retrieveUserGames(currentUser.uid);
+    console.log(games);
+
+    const [logoutMsg, setLogOutMsg] = React.useState("");
+    /**
+     * This method will sign user out
+     */
+    const signOut = () => {
       logout();
       setLogOutMsg("Successfully Logged Out. Redirecting...");
-      setTimeout(function() {
+      setTimeout(function () {
         navigate("/");
       }, 2000);
-
-    
-  };
- // if (error) {
-   // setTimeout(function() {
-   //   navigate("/");
-   // }, 5000);
-  //}
-  //
-  //{isPending && <LinearProgress />}
-  return (
-    
-    <Container>
-      
-      
-      {user && (
-      <Box
-        sx={{
-          display: "flex",
-          backgroundColor: "#ffffff",
-          padding: 2,
-          paddingBottom: "5rem",
-        }}
-      >
-        <Grid
-          container
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Grid item sx={{ mb: 2 }}>
-            <Typography gutterBottom variant="overline" align="center" style={{ fontSize: '14px' }}>
-              <b>My Profile</b>
-            </Typography>
-          </Grid>
-          <Grid item align="center">
-            <img
-              alt={user.getName()}
-              src={user.getProfileUrl()}
-              style={{
-                borderRadius: "50%",
-                marginBottom: "20px",
-                maxWidth: "100%",
-                minWidth: "60%",
-                height: "200px",
-                width:"200px",
-              }}
-            />
-          </Grid>
-          <Grid item>
-            <Typography align="center" gutterBottom variant="overline">
-              <b>Name:</b> {user.getName()}{" "}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography align="center" gutterBottom variant="overline">
-              <b>Email Address:</b> {user.getEmail()}{" "}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography align="center" style={{ marginBottom: "30px" }} variant="overline">
-              <b>Phone Number:</b> {user.getPhoneNo()}{" "}
-            </Typography>
-          </Grid>
-          <Grid item align="center" mt={3} sx={{
-                width: {md:"80%", xs:"90%"}}}>
-            <Box
-              sx={{
-                backgroundColor: "#3563e9",
-                color: "#ffffff",
-                padding: "1.5rem",
-                borderRadius: "1rem",
-                boxShadow: 1
-              }}
+    };
+    return (
+      <Container>
+        {user && (
+          <Box
+            sx={{
+              display: "flex",
+              backgroundColor: "#ffffff",
+              padding: 2,
+              paddingBottom: "5rem",
+            }}
+          >
+            <Grid
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
             >
-              <Typography
-                gutterBottom
-
-                style={{ fontSize: "16px", color: "#ffffff", width: "100%" }}
+              <Grid item sx={{ mb: 2 }}>
+                <Typography
+                  gutterBottom
+                  variant="overline"
+                  align="center"
+                  style={{ fontSize: "14px" }}
+                >
+                  <b>My Profile</b>
+                </Typography>
+              </Grid>
+              <Grid item align="center">
+                <img
+                  alt={user.getName()}
+                  src={user.getProfileUrl()}
+                  style={{
+                    borderRadius: "50%",
+                    marginBottom: "20px",
+                    maxWidth: "100%",
+                    minWidth: "60%",
+                    height: "200px",
+                    width: "200px",
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <Typography align="center" gutterBottom variant="overline">
+                  <b>Name:</b> {user.getName()}{" "}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography align="center" gutterBottom variant="overline">
+                  <b>Email Address:</b> {user.getEmail()}{" "}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography
+                  align="center"
+                  style={{ marginBottom: "30px" }}
+                  variant="overline"
+                >
+                  <b>Phone Number:</b> {user.getPhoneNo()}{" "}
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                align="center"
+                mt={3}
+                sx={{
+                  width: { md: "80%", xs: "90%" },
+                }}
               >
-                <b>Description:</b>
-              </Typography>
-              <Typography variant="subtitle1" style={{ fontSize: "14px" }} >
-                {user.getDescription()}
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box> )}
-      <Box
-        sx={{
-          //backgroundColor: '#ffffff',
-          marginTop: "5rem",
-          marginBottom: '5rem',
-        }}
-      >
+                <Box
+                  sx={{
+                    backgroundColor: "#3563e9",
+                    color: "#ffffff",
+                    padding: "1.5rem",
+                    borderRadius: "1rem",
+                    boxShadow: 1,
+                  }}
+                >
+                  <Typography
+                    gutterBottom
+                    style={{
+                      fontSize: "16px",
+                      color: "#ffffff",
+                      width: "100%",
+                    }}
+                  >
+                    <b>Description:</b>
+                  </Typography>
+                  <Typography variant="subtitle1" style={{ fontSize: "14px" }}>
+                    {user.getDescription()}
+                  </Typography>
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
+        )}
+        <Box
+          sx={{
+            //backgroundColor: '#ffffff',
+            marginTop: "5rem",
+            marginBottom: "5rem",
+          }}
+        >
+          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+            <Typography
+              gutterBottom
+              variant="overline"
+              align="center"
+              style={{ fontSize: "14px", marginBottom: "1rem" }}
+            >
+              <b>My Games</b>
+            </Typography>
+          </div>
 
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <Typography gutterBottom variant="overline" align="center" style={{ fontSize: '14px', marginBottom: '1rem' }}>
-            <b>My Games</b>
-          </Typography>
+          {games && <Card games={games} />}
+        </Box>
+        <div style={{ textAlign: "center", marginBottom: "1rem" }}>
+          <Button
+            align="center"
+            type="submit"
+            variant="outlined"
+            onClick={signOut}
+            sx={{ mt: 3, mb: 2, width: "100px" }}
+          >
+            Logout
+          </Button>
+          {logoutMsg !== "" && <Alert severity="success">{logoutMsg}</Alert>}
         </div>
-        
-        {games && <Card games={games} />}
-        
-        
-      </Box>
-      <div style={{ textAlign: 'center' ,marginBottom: '1rem'}}>
-        <Button
-        align="center"
-        type="submit"
-        variant="outlined"
-        onClick={signOut}
-        sx={{ mt: 3, mb: 2, width:'100px' }}
-      >
-        Logout
-      </Button>
-      {logoutMsg !== "" && <Alert severity="success">{logoutMsg}</Alert>}
-        </div>
-    </Container>
-  );
-}}
+      </Container>
+    );
+  }
+}

@@ -35,11 +35,12 @@ function Copyright(props) {
     </Typography>
   );
 }
-
+/**
+ * This method is called when the user accessed the Sign Up Page
+ * @returns HTML
+ */
 export default function SignUpForm() {
   const { currentUser } = useAuth();
-  //console.log(currentUser);
-  
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -52,6 +53,11 @@ export default function SignUpForm() {
   let description = "";
   let profileUrl = "";
 
+  /**
+   * This method will sign user up if the sign up button is pressed
+   * @param {Object} event click event from HTML
+   * @returns the status of the sign up (Loading, Error, Success)
+   */
   async function handleSubmitSignUp(event) {
     event.preventDefault();
     setError("");
@@ -63,18 +69,7 @@ export default function SignUpForm() {
     phoneNumber = data.get("phoneNumber");
     description = data.get("description");
     profileUrl = data.get("img");
-
-    // console.log({
-    //   name: data.get("firstName") + " " + data.get("lastName"),
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    //   phoneNumber: data.get("phoneNumber"),
-    //   description: data.get("description"),
-    //   fileName: data.get("img"),
-    // });
-
     try {
-      
       setLoading(true);
       setError("");
       setSuccess("");
@@ -84,6 +79,7 @@ export default function SignUpForm() {
         return;
       }
 
+<<<<<<< HEAD
       //CODE FOR CREATING USER:
       //NEED CODE TO UPLOAD IMAGE TO FIREBASE
       //AFTER UPLOAD, add all the parameters to the SignUp function, it needs more, see SignUpController.js for full parameters.
@@ -120,6 +116,31 @@ export default function SignUpForm() {
         console.log("error at sign up form")
         console.log(error.type);
       })
+=======
+      await SignUp(email, password, name, phoneNumber, description, profileUrl)
+        .then(() => {
+          //const { currentUser } = useAuth();
+          if (currentUser !== null) {
+            console.log("Sign Up Successful");
+            setSuccess("Signup is successful! Redirecting to login page...");
+            //setError("");
+            setTimeout(function () {
+              navigate("/profile");
+            }, 3000);
+          } else {
+            console.log("Not successful");
+            console.log(currentUser);
+            setError("Email is registered");
+            setTimeout(function () {
+              navigate("/signup");
+            }, 5000);
+          }
+        })
+        .catch((error) => {
+          console.log("error at sign up form");
+          console.log(error.type);
+        });
+>>>>>>> 30c57ff609c97cd472b3d59c8f5ee5ce1e65d9db
     } catch {
       setError("Failed to Create Account");
     }

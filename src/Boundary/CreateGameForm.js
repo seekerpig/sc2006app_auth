@@ -36,14 +36,7 @@ const Input = styled(MuiInput)`
   width: 42px;
 `;
 
-// RIGHT NOW THE LOCATIONS AND SPORTTYPE IS HARDCODED, YOU NEED TO RETRIEVE THE LIST OF LOCATIONS AND SPORTTYPE FROM DATABASE
-// AND STORE INTO ENTITY OBJECT
 
-/*const locations = [
-  "Jurong Sports Hall",
-  "Sengkang Community Centre",
-  "Queenstown Sports Centre",
-];*/
 
 const sportTypes = [
   "Badminton",
@@ -53,6 +46,10 @@ const sportTypes = [
   "Cycling",
   "VolleyBall",
 ];
+/**
+ * This function is called when the create game form is accessed by the user.
+ * @returns {html} 
+ */
 export default function Creategame() {
   const { currentUser } = useAuth();
   const today = new Date();
@@ -143,6 +140,10 @@ export default function Creategame() {
   }, 3000);}
      
   
+  /**
+   * This function is called when the user clicks on the create game button.
+   * @param {object} event 
+   */
   async function handleSubmitCreateGame(event) {
     setLoading(true);
     event.preventDefault();

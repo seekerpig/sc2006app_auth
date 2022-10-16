@@ -33,7 +33,10 @@ function Iframe(props) {
     />
   );
 }
-
+/**
+ * This function is called when the detailed game page is accessed
+ * @returns {html} 
+ */
 export default function DetailedGamePage() {
   let title = "";
   let description = "";
@@ -79,7 +82,10 @@ export default function DetailedGamePage() {
       navigate("/");
     }, 5000);
   }
-
+  /**
+   * Function to submit join game event when button is pressed
+   * @param {Object} event 
+   */
   async function handleSubmitJoinGame(event) {
     setLoading(true);
     setPress(false);
