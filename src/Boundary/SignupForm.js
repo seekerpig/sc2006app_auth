@@ -97,20 +97,21 @@ export default function SignUpForm() {
         profileUrl,
       ).then(() => {
         //const { currentUser } = useAuth();
-        if(currentUser !== null){
+        if(currentUser !== null ){
           console.log("Sign Up Successful");
-      setSuccess("Signup is successful! Redirecting to login page...");
+      setSuccess("Signup is successful! Redirecting to profile page...");
       //setError("");
       setTimeout(function() {
         navigate("/profile");
       }, 3000);}
       else{
-        console.log("Not successful");
-        console.log(currentUser);
-        setError("Email is registered");
+        //console.log("Not successful");
+        //console.log(currentUser);
+        setError("Email is registered!");
         setTimeout(function() {
-          navigate("/signup");
-        }, 5000);
+          window.location.reload(false);
+          //navigate("/signup");
+        }, 3000);
         
         
         

@@ -56,12 +56,26 @@ export { db, auth }
 //   return { games };
 // }
 
-
+/**
+ * This methods take in email and password to retrieve user from firebase/auth
+ * @param {string} email 
+ * @param {string} password 
+ 
+ */
 export const login = (email, password) => {
   console.log('trying to login');
   return signInWithEmailAndPassword(auth, email, password);
 }
-
+/**
+ * This methods takes in the different parameters and create a user in firebase/auth and store the relevant details into firestore and firebase.
+ * @param {string} email 
+ * @param {string} password 
+ * @param {string} name 
+ * @param {number} phoneNo 
+ * @param {string} description 
+ * @param {string} profileImg 
+ * @returns 
+ */
 export const signUp = (email, password, name, phoneNo, description, profileImg) => {
   console.log('hello sign up');
   const storage = getStorage();
@@ -136,10 +150,10 @@ export const signUp = (email, password, name, phoneNo, description, profileImg) 
   })
   .catch((error) => {
     //const errorCode = error.code;
-    //console.log("Error occurred in Sign Up")
+    console.log("Error occurred in Sign Up")
     //console.error(error.code);
     
-    return error.code;
+    //return error.code;
     //const errorMessage = error.message;
     // ..
   });
@@ -158,12 +172,20 @@ catch(error) {
 
   //NEED CODE HERE TO DEAL W CREATING ENTITY in db with name, phone no etc.. and profile img
 }
+
+/**
+ * This methods interact with firestore and retrieve all locations object from it.
+ * @returns All SportFacilities object in the database
+ */
 export const getFacilities = async() => {
   //console.log("Get a Game");
   let ref = collection(db, "Facilities");
   return await getDocs(ref);
 
 }
+/**
+ * This methods takes in one facilities and insert into database if database do not contain the same information.
+ */
 export const insertFacilities = async (facilities) => {
   const currentFacilities = await getDocs(collection(db,"Facilities"));
   var flag = 0
@@ -184,21 +206,32 @@ export const insertFacilities = async (facilities) => {
   //console.log(currentFacilities);
 
 }
-
+/**
+ * this method returns all game object
+ * @returns all game object 
+ */
 export const getGames = async () => {
 
   let ref = collection(db, "Games");
   return await getDocs(ref);
   
 }
-
+/**
+ * This method take in the gameId and retrieve details of the relevant game.
+ * @param {string} gameId 
+ * @returns a single game object with the corressponding gameId
+ */
 export const getAGame = async (gameId) => {
   console.log("Get a Game");
   const ref = doc(db, "Games", gameId);
   return await getDoc(ref);
   
 }
-
+/**
+ * This method take in the userId and retrieve details of the user.
+ * @param {string} userId 
+ * @returns a single user object with the corresponding userId
+ */
 export const retrieveAUser = async  (userId) => {
   //console.log("Get a Game");
   const ref = doc(db, "Users", userId);
@@ -206,6 +239,17 @@ export const retrieveAUser = async  (userId) => {
   
 }
 
+/**
+ * This method takes in the below parameters and insert a game into the database.
+ * @param {string} title 
+ * @param {string} location 
+ * @param {string} sportType 
+ * @param {Date} startDate 
+ * @param {Date} endDate 
+ * @param {string} description 
+ * @param {string} maxPlayers 
+ * @param {string} creator 
+ */
 export const createAGame = async (title, location, sportType, startDate, endDate, description, maxPlayers,creator) => {
   //const gameDocRef = doc(db, "Games");
   const activeUser = await getDoc(doc(db,"Users",creator));
@@ -229,7 +273,12 @@ export const createAGame = async (title, location, sportType, startDate, endDate
     JoinGame(docRef.id,creator);
   })
   }
-
+/**
+ * This methods take in the gameId and userId and if user do not have the game user will be able to join the game.
+ * @param {string} gameId 
+ * @param {string} userId 
+ * @returns a code for success/failure
+ */
   export const joinAGame = async(gameId,userId)=>{
     const game = await getDoc(doc(db,"Games",gameId));
  
