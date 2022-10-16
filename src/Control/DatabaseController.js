@@ -57,33 +57,15 @@ export { db, auth }
 // }
 
 /**
-<<<<<<< HEAD
- * This methods take in email and password to retrieve user from firebase/auth
- * @param {string} email 
- * @param {string} password 
- 
-=======
  * This function tries to login user using the given email and password by checking against firebase authentication information.
  * @param {string} email Email address of the user
  * @param {string} password Password of the user
  * @returns results of sign in
->>>>>>> 30c57ff609c97cd472b3d59c8f5ee5ce1e65d9db
  */
 export const login = (email, password) => {
   console.log('trying to login');
   return signInWithEmailAndPassword(auth, email, password);
 }
-<<<<<<< HEAD
-/**
- * This methods takes in the different parameters and create a user in firebase/auth and store the relevant details into firestore and firebase.
- * @param {string} email 
- * @param {string} password 
- * @param {string} name 
- * @param {number} phoneNo 
- * @param {string} description 
- * @param {string} profileImg 
- * @returns 
-=======
 
 /**
  * This function tries to first upload the given profileImage into a storage on firebase.
@@ -95,7 +77,6 @@ export const login = (email, password) => {
  * @param {string} description Description
  * @param {string} profileImg Profile Image URL
  * @returns results of sign up
->>>>>>> 30c57ff609c97cd472b3d59c8f5ee5ce1e65d9db
  */
 export const signUp = (email, password, name, phoneNo, description, profileImg) => {
   console.log('hello sign up');
@@ -195,13 +176,8 @@ catch(error) {
 }
 
 /**
-<<<<<<< HEAD
- * This methods interact with firestore and retrieve all locations object from it.
- * @returns All SportFacilities object in the database
-=======
  * This function returns an object of game facilities.
  * @returns objects containing game facilities
->>>>>>> 30c57ff609c97cd472b3d59c8f5ee5ce1e65d9db
  */
 export const getFacilities = async() => {
   //console.log("Get a Game");
@@ -210,12 +186,8 @@ export const getFacilities = async() => {
 
 }
 /**
-<<<<<<< HEAD
- * This methods takes in one facilities and insert into database if database do not contain the same information.
-=======
  * This function insert a new facility into our firebase cloud storage.
  * @param {string} facilities Facility Object
->>>>>>> 30c57ff609c97cd472b3d59c8f5ee5ce1e65d9db
  */
 export const insertFacilities = async (facilities) => {
   const currentFacilities = await getDocs(collection(db,"Facilities"));
@@ -237,16 +209,10 @@ export const insertFacilities = async (facilities) => {
   //console.log(currentFacilities);
 
 }
-<<<<<<< HEAD
-/**
- * this method returns all game object
- * @returns all game object 
-=======
 
 /**
  * This function returns an object of all the games available.
  * @returns object containing all the games
->>>>>>> 30c57ff609c97cd472b3d59c8f5ee5ce1e65d9db
  */
 export const getGames = async () => {
 
@@ -254,18 +220,11 @@ export const getGames = async () => {
   return await getDocs(ref);
   
 }
-<<<<<<< HEAD
-/**
- * This method take in the gameId and retrieve details of the relevant game.
- * @param {string} gameId 
- * @returns a single game object with the corressponding gameId
-=======
 
 /**
  * This function retrieves the game details of a particular game
  * @param {object} gameId 
  * @returns game details of a particular game
->>>>>>> 30c57ff609c97cd472b3d59c8f5ee5ce1e65d9db
  */
 export const getAGame = async (gameId) => {
   console.log("Get a Game");
@@ -273,18 +232,11 @@ export const getAGame = async (gameId) => {
   return await getDoc(ref);
   
 }
-<<<<<<< HEAD
-/**
- * This method take in the userId and retrieve details of the user.
- * @param {string} userId 
- * @returns a single user object with the corresponding userId
-=======
 
 /**
  * This function retrieve a user details from the firestore database
  * @param {string} userId 
  * @returns user details of a user
->>>>>>> 30c57ff609c97cd472b3d59c8f5ee5ce1e65d9db
  */
 export const retrieveAUser = async  (userId) => {
   //console.log("Get a Game");
@@ -294,17 +246,6 @@ export const retrieveAUser = async  (userId) => {
 }
 
 /**
-<<<<<<< HEAD
- * This method takes in the below parameters and insert a game into the database.
- * @param {string} title 
- * @param {string} location 
- * @param {string} sportType 
- * @param {Date} startDate 
- * @param {Date} endDate 
- * @param {string} description 
- * @param {string} maxPlayers 
- * @param {string} creator 
-=======
  * This function creates a new game in the firebase cloud database.
  * @param {string} title Title
  * @param {string} location Location

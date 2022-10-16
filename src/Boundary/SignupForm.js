@@ -79,7 +79,7 @@ export default function SignUpForm() {
         return;
       }
 
-<<<<<<< HEAD
+
       //CODE FOR CREATING USER:
       //NEED CODE TO UPLOAD IMAGE TO FIREBASE
       //AFTER UPLOAD, add all the parameters to the SignUp function, it needs more, see SignUpController.js for full parameters.
@@ -116,31 +116,6 @@ export default function SignUpForm() {
         console.log("error at sign up form")
         console.log(error.type);
       })
-=======
-      await SignUp(email, password, name, phoneNumber, description, profileUrl)
-        .then(() => {
-          //const { currentUser } = useAuth();
-          if (currentUser !== null) {
-            console.log("Sign Up Successful");
-            setSuccess("Signup is successful! Redirecting to login page...");
-            //setError("");
-            setTimeout(function () {
-              navigate("/profile");
-            }, 3000);
-          } else {
-            console.log("Not successful");
-            console.log(currentUser);
-            setError("Email is registered");
-            setTimeout(function () {
-              navigate("/signup");
-            }, 5000);
-          }
-        })
-        .catch((error) => {
-          console.log("error at sign up form");
-          console.log(error.type);
-        });
->>>>>>> 30c57ff609c97cd472b3d59c8f5ee5ce1e65d9db
     } catch {
       setError("Failed to Create Account");
     }

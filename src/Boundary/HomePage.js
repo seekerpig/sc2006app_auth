@@ -47,7 +47,7 @@ export default function HomePage() {
                 doc.data().userList
               )
           )
-        );););
+        );
             fetchDataFromAPI();
            
             
