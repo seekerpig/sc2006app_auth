@@ -3,11 +3,12 @@ import Container from "@mui/material/Container";
 import Card from "./UIComponents/Card";
 import { Grid, Typography, Box, Button, Alert } from "@mui/material";
 //import { useAuth } from "../Control/SessionController";
-import { isLoggedin } from "../Control/LoginValidator";
+//import { isLoggedin } from "../Control/LoginValidator";
 import User from "../Entity/User";
 import {
   retrieveProfile,
   retrieveUserGames,
+  isLoggedin
 } from "../Control/ProfileController";
 import { useNavigate } from "react-router-dom";
 //import { WindowSharp } from "@mui/icons-material";

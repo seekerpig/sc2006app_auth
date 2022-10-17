@@ -17,8 +17,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 //import { isLoggedin } from "../Control/LoginValidator";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SignUp } from "../Control/SignUpController";
-import { isLoggedin } from "../Control/LoginValidator";
+import { SignUp,isLoggedin } from "../Control/SignUpController";
+
 
 function Copyright(props) {
   return (

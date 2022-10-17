@@ -1,5 +1,10 @@
 import {signUp} from './DatabaseController';
+import { useAuth } from './SessionController';
 
+export const isLoggedin = () => {
+  const currentUser = useAuth();
+  return currentUser;
+}
 /**
  * This function calls the database controller sign up to sign up a new user.
  * @param {string} email Email address of the user
@@ -21,6 +26,7 @@ export const SignUp = async (email, password, name, phoneNo, description, profil
       console.log("error");
       return 400;
     }
+    
 
     
   

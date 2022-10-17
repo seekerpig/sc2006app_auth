@@ -1,4 +1,5 @@
 import { joinAGame } from "./DatabaseController";
+import { useAuth } from "./SessionController";
 
 /**
  * This method will check if userId is logged in from SessionController
@@ -6,6 +7,7 @@ import { joinAGame } from "./DatabaseController";
  * Else throw error
  * @param {string} gameId is the unique identifier for the game
  * @param {string} userId is the unique identifier for the user
+ * 
  */
 export const JoinGame = async (gameId, userId) => {
   console.log("In join game");
@@ -28,3 +30,8 @@ export const JoinGame = async (gameId, userId) => {
     throw error;
   }
 };
+
+export const isLoggedin = () => {
+  const currentUser = useAuth();
+  return currentUser;
+}

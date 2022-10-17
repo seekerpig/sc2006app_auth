@@ -361,5 +361,6 @@ export const RetrieveMessages =  () =>{
     const q =  query(messagesRef, orderBy("createdAt")); //orderBy("createdAt") where('gameID', '==', gameId),
     //console.log(q);
     const messages =  useCollectionData(q, { idField: 'id' });
+    console.log(messages);
     return messages;
 }

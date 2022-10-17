@@ -28,8 +28,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import MuiInput from "@mui/material/Input";
-import {CreateNewGame,getAllFacilities } from "../Control/CreateGameController"
-import { isLoggedin } from "../Control/LoginValidator";
+import {CreateNewGame,getAllFacilities,isLoggedin } from "../Control/CreateGameController"
+//import { isLoggedin } from "../Control/LoginValidator";
 //import { getFacilities } from "../Control/DatabaseController";
 
 

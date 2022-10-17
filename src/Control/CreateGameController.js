@@ -1,5 +1,6 @@
 
 import {createAGame,getFacilities} from'./DatabaseController'
+import { useAuth } from './SessionController';
 import dayjs from "dayjs";
 
 
@@ -71,4 +72,9 @@ export const getAllFacilities = async() => {
   //console.log(facilitiesArray);
   //return true;
   //return facilitiesArray;
+}
+
+export const isLoggedin = () => {
+  const currentUser = useAuth();
+  return currentUser;
 }

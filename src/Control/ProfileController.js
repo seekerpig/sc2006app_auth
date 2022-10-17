@@ -4,6 +4,11 @@ import User from "../Entity/User";
 import { getGames, retrieveAUser } from "./DatabaseController";
 import { useAuth } from "../Control/SessionController";
 
+export const isLoggedin = () => {
+  const currentUser = useAuth();
+  return currentUser;
+}
+
 /**
  * This function retrieve the user profile
  * @param {string} userId Unique User ID
@@ -114,3 +119,4 @@ export const retrieveUserGames = (userId) => {
   //return gameObjectList
   return { games };
 };
+
