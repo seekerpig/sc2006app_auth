@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 
 import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, collection, getDocs, doc, getDoc,setDoc,addDoc,updateDoc } from "firebase/firestore";
+import { getFirestore, collection, getDocs, doc, getDoc,setDoc,addDoc,updateDoc, serverTimestamp,query, orderBy } from "firebase/firestore";
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 //import { isFunctionDeclaration } from "typescript";
@@ -334,3 +335,31 @@ export const createAGame = async (title, location, sportType, startDate, endDate
   }
 
   }
+  /**
+   * Create a new message in the database
+   * @param {string} text 
+   * @param {Date} createdAt 
+   * @param {string} uid 
+   * @param {string} photoURL 
+   * @param {string} gameId 
+   */
+  export const CreateMessage = async (text, createdAt, uid, photoURL, gameId) =>{
+    await addDoc(collection(db,'messages'), {
+      text: text,
+      createdAt: serverTimestamp(),
+      uid,
+      photoURL,
+      gameID: gameId,
+    })
+}
+/**
+ * Retrieves messages from the database.
+ * @returns object of messages
+ */
+export const RetrieveMessages =  () =>{
+   const messagesRef = collection(db, 'messages');
+    const q =  query(messagesRef, orderBy("createdAt")); //orderBy("createdAt") where('gameID', '==', gameId),
+    //console.log(q);
+    const messages =  useCollectionData(q, { idField: 'id' });
+    return messages;
+}

@@ -6,6 +6,7 @@ import CreateGameForm from "./Boundary/CreateGameForm";
 import ProfilePage from "./Boundary/ProfilePage";
 import ExplorePage from "./Boundary/ExplorePage";
 import DetailedGamePage from "./Boundary/DetailedGamePage";
+import ChatRoomPage from "./Boundary/ChatRoomPage";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/creategame" element={<CreateGameForm />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/chatroom/:gameId" element={<ChatRoomPage />} />
           <Route path="/games/:gameId" element={<DetailedGamePage />} />
         </Routes>
       </Router>

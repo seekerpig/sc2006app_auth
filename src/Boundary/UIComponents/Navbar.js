@@ -139,13 +139,14 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem
+              {userExist &&<MenuItem
                 onClick={handleCloseUserMenu}
                 component="a"
                 href="/profile"
               >
                 <Typography textAlign="center">Profile</Typography>
               </MenuItem>
+              }
               {!userExist &&<MenuItem
                 onClick={handleCloseUserMenu}
                 component="a"

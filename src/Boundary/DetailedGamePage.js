@@ -14,6 +14,7 @@ import {
 import LinearProgress from "@mui/material/LinearProgress";
 import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ChatIcon from '@mui/icons-material/Chat';
 import { Link, useNavigate } from "react-router-dom";
 //import { useAuth } from "../Control/SessionController";
 import { GameInfo } from "../Control/GamesInfoController";
@@ -376,23 +377,38 @@ export default function DetailedGamePage() {
               sx={{ paddingTop: 1, paddingRight: 4, paddingBottom: 4 }}
             >
               <Box sx={{ flexGrow: 1 }}></Box>
-              <div>
-                {(currentUser === null ||
-                  !userList.includes(currentUser.uid)) &&
-                  pressButton && (
-                    <Box>
-                      <Button
-                        variant="contained"
-                        type="submit"
-                        size="large"
-                        style={{ minWidth: "80px", minHeight: "30px" }}
-                        endIcon={<SendIcon />}
-                      >
-                        JOIN NOW
-                      </Button>
-                    </Box>
-                  )}
-              </div>
+                <Box>
+                  {(currentUser === null ||
+                    !userList.includes(currentUser.uid)) &&
+                    pressButton && (
+                      <Box>
+                        <Button
+                          variant="contained"
+                          type="submit"
+                          size="large"
+                          style={{ minWidth: "80px", minHeight: "30px" }}
+                          endIcon={<SendIcon />}
+                        >
+                          JOIN NOW
+                        </Button>
+                      </Box>
+                    )}
+                  {(currentUser !== null && userList.includes(currentUser.uid)) && (
+                      <Box>
+                        <Button
+                          component={Link}
+                          to={`/chatroom/${game.getGameId()}`}
+                          variant="contained"
+                          size="large"
+                          style={{ minWidth: "80px", minHeight: "30px" }}
+                          endIcon={<ChatIcon />}
+                        >
+                          CHAT WITH PLAYERS
+                        </Button>
+                      </Box>
+                    )}
+              </Box>
+              
             </CardActions>
 
             {success && <Alert severity="success">{success}</Alert>}
