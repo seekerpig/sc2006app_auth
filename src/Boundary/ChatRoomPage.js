@@ -17,7 +17,7 @@ function ChatRoomPage() {
 
   const { gameId } = useParams();
   console.log("game id is  " + gameId);
-  const { currentUser, logout } = isLoggedin();
+  const { currentUser } = isLoggedin();
   let currentUserWithProfile;
   console.log("After is Loggedin")
   console.log(currentUser);
@@ -53,7 +53,7 @@ function ChatRoomPage() {
  */
 function ChatRoom(props) {
   const dummy = useRef();
-  const [messages] =  retrieveMessages();
+  const [messages] = retrieveMessages();
   const [formValue, setFormValue] = useState('');
   
   /**
@@ -74,7 +74,7 @@ function ChatRoom(props) {
 
   return (<>
     <main className="chatMain">
-      {messages && messages.map(function (msg, i) { if (msg.gameID == props.gameId) return <ChatMessage key={i} message={msg} currentUser={props.user1} /> })}
+      {messages && messages.map(function (msg, i) { if (msg.gameID === props.gameId) {return <ChatMessage key={i} message={msg} currentUser={props.user1} />}else{return ""} })}
 
       <span ref={dummy}></span>
 
@@ -84,7 +84,7 @@ function ChatRoom(props) {
 
       <input className="inputChat" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
 
-      <button className="buttonChat" type="submit" disabled={!formValue}>🕊️</button>
+      <button className="buttonChat" type="submit" disabled={!formValue}><span role="img" aria-label="send">🕊️</span></button>
 
     </form>
   </>)
@@ -102,7 +102,7 @@ function ChatMessage(props) {
 
   return (<>
     <div className={`message ${messageClass}`}>
-      <img className="imgChat" src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+      <img className="imgChat" alt="" src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
       <p className="chatPara">{text}</p>
     </div>
   </>)

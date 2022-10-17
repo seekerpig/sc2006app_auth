@@ -2,6 +2,7 @@ import { useState,useLayoutEffect } from "react";
 import User from "../Entity/User";
 import { useAuth } from "../Control/SessionController";
 import { retrieveAUser, CreateMessage, RetrieveMessages } from "./DatabaseController";
+//import Message from "../Entity/Message"
 
 
 /**
@@ -73,11 +74,7 @@ export const retrieveProfile = (userId) => {
  * @returns {object} messages retrieved from database.
  */
 export const retrieveMessages = () => {
-    // const messagesRef = collection(db, 'messages');
-    // const q = query(messagesRef, orderBy("createdAt")); //orderBy("createdAt") where('gameID', '==', gameId),
-    // //console.log(q);
-    // const messages = useCollectionData(q, { idField: 'id' });
-    // return messages;
+    //RetrieveMessages().map(function (msg, i) {console.log("hello"+msg);messageArr.push(new Message(msg.createdAt, msg.text, msg.gameID, msg.uid, msg.photoURL))})
     return RetrieveMessages();
 
 }
