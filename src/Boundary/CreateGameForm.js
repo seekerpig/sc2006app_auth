@@ -161,7 +161,7 @@ export default function Creategame() {
         descriptionA: description,
         maxPlayersA: maxPlayers,
       });
-      CreateNewGame(title,location,sportType,startDate,endDate,description,maxPlayers,currentUser);
+      await CreateNewGame(title,location,sportType,startDate,endDate,description,maxPlayers,currentUser);
       console.log("Here Alrdy")
       //NEED SOME CODE HERE TO CREATE A NEW DOC IN FIRESTORE
       //NEED TO IMPORT CreateNewGame() from CreateGameController
@@ -170,14 +170,21 @@ export default function Creategame() {
         navigate("/profile");
       }, 3000);
     } catch(e) {
-      if(e.type ===400){
+      console.log(e);
+      if(e ===400){
         setError("User not found. Please login to create game.");
         setTimeout(function() {
           navigate("/login");
         }, 3000);
       }
+      else if(e ===401){
+      setError("End Date cannot be before Start Date");
+      }
+      else if(e ===402){
+        setError("Start Date cannot be in the past");
+      }
       else{
-      setError("Failed to Create A Game");
+        setError("Failed to create Game");
       }
     }
 
