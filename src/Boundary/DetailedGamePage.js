@@ -15,7 +15,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../Control/SessionController";
+//import { useAuth } from "../Control/SessionController";
 import { GameInfo } from "../Control/GamesInfoController";
 import { JoinGame } from "../Control/JoinGameController";
 import badminton from "./UIComponents/images/badminton.png";
@@ -24,6 +24,7 @@ import soccer from "./UIComponents/images/soccer.png";
 import volleyball from "./UIComponents/images/volleyball.png";
 import pingpong from "./UIComponents/images/ping-pong.png";
 import bike from "./UIComponents/images/bike.png";
+import { isLoggedin } from "../Control/LoginValidator";
 
 //UI Embeded Map
 function Iframe(props) {
@@ -57,7 +58,7 @@ export default function DetailedGamePage() {
   const [loading, setLoading] = React.useState(false);
   const [pressButton, setPress] = React.useState(true);
   //const [inGame, setGame] = React.useState(true);
-  const { currentUser } = useAuth();
+  const { currentUser } = isLoggedin();
   if (game != null) {
     title = game.getTitle();
     description = game.getDescription();

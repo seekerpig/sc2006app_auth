@@ -20,7 +20,7 @@ import {
 import { styled } from "@mui/material/styles";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import GroupIcon from "@mui/icons-material/Group";
-import { useAuth } from "../Control/SessionController";
+//import { useAuth } from "../Control/SessionController";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -29,6 +29,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import MuiInput from "@mui/material/Input";
 import {CreateNewGame,getAllFacilities } from "../Control/CreateGameController"
+import { isLoggedin } from "../Control/LoginValidator";
 //import { getFacilities } from "../Control/DatabaseController";
 
 
@@ -51,7 +52,7 @@ const sportTypes = [
  * @returns {html} 
  */
 export default function Creategame() {
-  const { currentUser } = useAuth();
+  const { currentUser } = isLoggedin();
   const today = new Date();
 
   //attributes from location to maxPlayers

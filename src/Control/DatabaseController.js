@@ -78,12 +78,13 @@ export const login = (email, password) => {
  * @param {string} profileImg Profile Image URL
  * @returns results of sign up
  */
-export const signUp = (email, password, name, phoneNo, description, profileImg) => {
+export const signUp = async (email, password, name, phoneNo, description, profileImg) => {
   console.log('hello sign up');
   const storage = getStorage();
   
-  try{
-  createUserWithEmailAndPassword(auth, email, password)
+ // try{
+    //var flag = true;
+  await createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
@@ -153,21 +154,28 @@ export const signUp = (email, password, name, phoneNo, description, profileImg) 
   .catch((error) => {
     //const errorCode = error.code;
     console.log("Error occurred in Sign Up")
-    //console.error(error.code);
+    console.error(error.code);
+   // flag = false;
+    return new Promise((resolve, reject) => {
+    reject(400);
+  }).then(()=>{
+    return new Promise((resolve, reject) => {
+      resolve(200);
+    })
+  })
     
     //return error.code;
     //const errorMessage = error.message;
     // ..
   });
-}
-catch(error) {
+//}
+/*catch(error) {
   console.log("Error in Sign up");
 
   console.log(error);
-}
-
   
-  return "successful";
+}*/
+
   
   //return signInWithEmailAndPassword(auth, email, password);
   

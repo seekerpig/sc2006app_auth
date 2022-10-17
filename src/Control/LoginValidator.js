@@ -1,4 +1,5 @@
 import {login} from './DatabaseController';
+import { useAuth } from './SessionController';
 
 /**
  * This function takes in user's email address and password and confirm login
@@ -16,5 +17,10 @@ export const loginUser = (email,password) => {
   
   //after login is successful, sessioncontroller automatically checks for any updates on user authentication (no need to do extra code here)
 
+}
+
+export const isLoggedin = () => {
+    const currentUser = useAuth();
+    return currentUser;
 }
 

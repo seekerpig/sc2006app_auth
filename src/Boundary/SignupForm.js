@@ -13,10 +13,12 @@ import {
 } from "@mui/material/";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 // import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useAuth } from "../Control/SessionController";
+//import { useAuth } from "../Control/SessionController";
+//import { isLoggedin } from "../Control/LoginValidator";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SignUp } from "../Control/SignUpController";
+import { isLoggedin } from "../Control/LoginValidator";
 
 function Copyright(props) {
   return (
@@ -40,7 +42,7 @@ function Copyright(props) {
  * @returns HTML
  */
 export default function SignUpForm() {
-  const { currentUser } = useAuth();
+  var { currentUser } = isLoggedin();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -76,6 +78,7 @@ export default function SignUpForm() {
 
       if (data.get("password").length <= 5) {
         setError("Password Length is Not Long Enough");
+        setLoading(false);
         return;
       }
 
@@ -91,27 +94,28 @@ export default function SignUpForm() {
         phoneNumber,
         description,
         profileUrl,
-      ).then(() => {
+      ).then((e) => {
+        console.log("Sign up form here");
+        console.log(e);
         //const { currentUser } = useAuth();
-        if(currentUser !== null ){
+        if(e === 200 ){
           console.log("Sign Up Successful");
       setSuccess("Signup is successful! Redirecting to profile page...");
       //setError("");
       setTimeout(function() {
         navigate("/profile");
       }, 3000);}
-      else{
+      else if (e===400){
         //console.log("Not successful");
         //console.log(currentUser);
         setError("Email is registered!");
-        setTimeout(function() {
-          window.location.reload(false);
-          //navigate("/signup");
-        }, 3000);
         
-        
-        
-      }}
+
+      }
+      else{
+        console.log("Undefined");
+      }
+    }
       ).catch((error) => {
         console.log("error at sign up form")
         console.log(error.type);

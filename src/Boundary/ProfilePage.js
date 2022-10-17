@@ -2,27 +2,42 @@ import React from "react";
 import Container from "@mui/material/Container";
 import Card from "./UIComponents/Card";
 import { Grid, Typography, Box, Button, Alert } from "@mui/material";
-import { useAuth } from "../Control/SessionController";
+//import { useAuth } from "../Control/SessionController";
+import { isLoggedin } from "../Control/LoginValidator";
 import User from "../Entity/User";
 import {
   retrieveProfile,
   retrieveUserGames,
 } from "../Control/ProfileController";
 import { useNavigate } from "react-router-dom";
+//import { WindowSharp } from "@mui/icons-material";
 
 /**
  * This method is called when the user accessed the Profile Page
  * @returns HTML
  */
 export default function ProfilePage() {
-  const { logout } = useAuth();
-  const { currentUser } = useAuth();
+  const { currentUser,logout } =  isLoggedin();
+  console.log("After is Loggedin")
+  console.log(currentUser);
+ // const { currentUser } = useAuth();
+ const [logoutMsg, setLogOutMsg] = React.useState("");
+ const signOut = () => {
+  logout();
+  alert("Successfully Logged Out. Redirecting...");
+  setLogOutMsg("Successfully Logged Out. Redirecting..")
+  setTimeout(function () {
+    navigate("/");
+    window.location.reload();
+    
+  }, 100);
+};
 
   const navigate = useNavigate();
   if (currentUser === null) {
     setTimeout(function () {
       navigate("/login");
-    }, 100);
+    }, 2000);
   } else {
     console.log("User is right below here");
     const {
@@ -35,17 +50,17 @@ export default function ProfilePage() {
     const { games } = retrieveUserGames(currentUser.uid);
     console.log(games);
 
-    const [logoutMsg, setLogOutMsg] = React.useState("");
+    
     /**
      * This method will sign user out
      */
-    const signOut = () => {
+    /*const signOut = () => {
       logout();
       setLogOutMsg("Successfully Logged Out. Redirecting...");
       setTimeout(function () {
         navigate("/");
       }, 2000);
-    };
+    };*/
     return (
       <Container>
         {user && (

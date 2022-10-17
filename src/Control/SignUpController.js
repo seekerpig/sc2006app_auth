@@ -12,10 +12,14 @@ import {signUp} from './DatabaseController';
 export const SignUp = async (email, password, name, phoneNo, description, profileImg) => {
 
     try{
-   await signUp(email, password, name, phoneNo, description, profileImg);
+      const a =  await signUp(email, password, name, phoneNo, description, profileImg);
+      console.log("a is here");
+      console.log(a);
+      return 200;
     }
     catch{
       console.log("error");
+      return 400;
     }
 
     
