@@ -102,6 +102,7 @@ export default function SignUpForm() {
           console.log("Sign Up Successful");
       setSuccess("Signup is successful! Redirecting to profile page...");
       //setError("");
+      setLoading(false);
       setTimeout(function() {
         navigate("/profile");
       }, 3000);}
@@ -109,8 +110,6 @@ export default function SignUpForm() {
         //console.log("Not successful");
         //console.log(currentUser);
         setError("Email is registered!");
-        
-
       }
       else{
         console.log("Undefined");
@@ -119,9 +118,11 @@ export default function SignUpForm() {
       ).catch((error) => {
         console.log("error at sign up form")
         console.log(error.type);
+        setLoading(false);
       })
     } catch {
       setError("Failed to Create Account");
+      setLoading(false);
     }
     console.log("Here is loading");
     setLoading(false);

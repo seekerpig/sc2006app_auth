@@ -142,13 +142,7 @@ export default function DetailedGamePage() {
 
   return (
     <div>
-      {error1 && (
-        <Alert severity="error" sx={{ mb: 4 }}>
-          {" "}
-          <AlertTitle>Error</AlertTitle>
-          {error1}
-        </Alert>
-      )}
+      
       {isPending && <LinearProgress />}
       {game && (
         <Box
@@ -403,7 +397,14 @@ export default function DetailedGamePage() {
 
             {success && <Alert severity="success">{success}</Alert>}
           </Card>
-        </Box>
+        </Box>  
+      )}
+      {error1 && (
+        <Alert  severity="error" sx={{ mb: 4, mt: 4}}>
+          {" "}
+          <AlertTitle>Error</AlertTitle>
+          {error1}
+        </Alert>
       )}
     </div>
   );
