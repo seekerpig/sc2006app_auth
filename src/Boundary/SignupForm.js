@@ -76,6 +76,7 @@ export default function SignUpForm() {
 
       if (data.get("password").length <= 5) {
         setError("Password Length is Not Long Enough");
+        setLoading(false);
         return;
       }
 
@@ -97,6 +98,7 @@ export default function SignUpForm() {
           console.log("Sign Up Successful");
       setSuccess("Signup is successful! Redirecting to profile page...");
       //setError("");
+      setLoading(false);
       setTimeout(function() {
         navigate("/profile");
       }, 3000);}
@@ -109,15 +111,17 @@ export default function SignUpForm() {
           //navigate("/signup");
         }, 3000);
         
-        
+        setLoading(false);
         
       }}
       ).catch((error) => {
         console.log("error at sign up form")
         console.log(error.type);
+        setLoading(false);
       })
     } catch {
       setError("Failed to Create Account");
+      setLoading(false);
     }
     console.log("Here is loading");
     setLoading(false);
