@@ -3,12 +3,11 @@ import Container from "@mui/material/Container";
 import Card from "./UIComponents/Card";
 import { Grid, Typography, Box, Button, Alert } from "@mui/material";
 //import { useAuth } from "../Control/SessionController";
-//import { isLoggedin } from "../Control/LoginValidator";
+import { checkLoggedIn } from "../Control/LoginValidator";
 import User from "../Entity/User";
 import {
   retrieveProfile,
   retrieveUserGames,
-  isLoggedin
 } from "../Control/ProfileController";
 import { useNavigate } from "react-router-dom";
 //import { WindowSharp } from "@mui/icons-material";
@@ -18,7 +17,7 @@ import { useNavigate } from "react-router-dom";
  * @returns HTML
  */
 export default function ProfilePage() {
-  const { currentUser,logout } =  isLoggedin();
+  const { currentUser,logout } =  checkLoggedIn();
   console.log("After is Loggedin")
   console.log(currentUser);
  // const { currentUser } = useAuth();

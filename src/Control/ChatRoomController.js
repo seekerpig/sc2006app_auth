@@ -9,7 +9,7 @@ import { retrieveAUser, CreateMessage, RetrieveMessages } from "./DatabaseContro
  * Checks sessioncontroller if there is someone logged in at the moment. Returns currentuser if true.
  * @returns currentUser
  */
-export const isLoggedin = () => {
+export const checkLoggedIn = () => {
     const currentUser = useAuth();
     return currentUser;
 }
@@ -74,6 +74,12 @@ export const retrieveProfile = (userId) => {
  * @returns {object} messages retrieved from database.
  */
 export const retrieveMessages = () => {
+    // const messagesRef = collection(db, 'messages');
+    // const q = query(messagesRef, orderBy("createdAt")); //orderBy("createdAt") where('gameID', '==', gameId),
+    // //console.log(q);
+    // const messages = useCollectionData(q, { idField: 'id' });
+    // return messages;
+    // let messageArr = [];
     //RetrieveMessages().map(function (msg, i) {console.log("hello"+msg);messageArr.push(new Message(msg.createdAt, msg.text, msg.gameID, msg.uid, msg.photoURL))})
     return RetrieveMessages();
 

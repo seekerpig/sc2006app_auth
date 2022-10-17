@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import './ChatRoomPage.css';
 //import { collection} from "firebase/firestore";
 import { serverTimestamp } from "firebase/firestore";
-import { retrieveProfile, isLoggedin, retrieveMessages, createMessage } from "../Control/ChatRoomController";
+import { retrieveProfile, checkLoggedIn, retrieveMessages, createMessage } from "../Control/ChatRoomController";
 import { Typography } from '@mui/material'
 import { useParams } from "react-router-dom";
 
@@ -17,7 +17,7 @@ function ChatRoomPage() {
 
   const { gameId } = useParams();
   console.log("game id is  " + gameId);
-  const { currentUser } = isLoggedin();
+  const { currentUser } = checkLoggedIn();
   let currentUserWithProfile;
   console.log("After is Loggedin")
   console.log(currentUser);

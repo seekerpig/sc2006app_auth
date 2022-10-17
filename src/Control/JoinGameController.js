@@ -31,6 +31,12 @@ export const JoinGame = async (gameId, userId) => {
   }
 };
 
+export const checkLoggedin = () => {
+  const currentUser = useAuth();
+  return currentUser;
+}
+
+
 export const isLoggedin = () => {
   const currentUser = useAuth();
   return currentUser;

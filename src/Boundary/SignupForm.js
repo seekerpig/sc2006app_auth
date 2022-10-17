@@ -14,10 +14,10 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 // import { createTheme, ThemeProvider } from "@mui/material/styles";
 //import { useAuth } from "../Control/SessionController";
-//import { isLoggedin } from "../Control/LoginValidator";
+//import { checkLoggedIn } from "../Control/LoginValidator";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SignUp,isLoggedin } from "../Control/SignUpController";
+import { SignUp,checkLoggedIn } from "../Control/SignUpController";
 
 
 function Copyright(props) {
@@ -42,7 +42,7 @@ function Copyright(props) {
  * @returns HTML
  */
 export default function SignUpForm() {
-  var { currentUser } = isLoggedin();
+  var { currentUser } = checkLoggedIn();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);

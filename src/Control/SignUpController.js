@@ -1,7 +1,7 @@
 import {signUp} from './DatabaseController';
 import { useAuth } from './SessionController';
 
-export const isLoggedin = () => {
+export const checkLoggedIn = () => {
   const currentUser = useAuth();
   return currentUser;
 }
