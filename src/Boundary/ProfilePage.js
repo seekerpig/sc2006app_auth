@@ -4,15 +4,12 @@ import Container from "@mui/material/Container";
 import Card from "./UIComponents/Card";
 import { Grid, Typography, Box, Button, Alert } from "@mui/material";
 //import { useAuth } from "../Control/SessionController";
-import { checkLoggedIn } from "../Control/LoginValidator";
+//import { checkLoggedIn } from "../Control/LoginValidator";
 import User from "../Entity/User";
 import {
   retrieveProfile,
   retrieveUserGames,
-<<<<<<< HEAD
   isLoggedin,
-=======
->>>>>>> e07bd75c1df16026d7fd9e6110a8179cb2ef769b
 } from "../Control/ProfileController";
 import { useNavigate } from "react-router-dom";
 //import { WindowSharp } from "@mui/icons-material";
@@ -21,13 +18,8 @@ import { useNavigate } from "react-router-dom";
  * This method is called when the user accessed the Profile Page
  * @returns HTML
  */
-<<<<<<< HEAD
 export function ProfilePage() {
   const { currentUser,logout } =  isLoggedin();
-=======
-export default function ProfilePage() {
-  const { currentUser,logout } =  checkLoggedIn();
->>>>>>> e07bd75c1df16026d7fd9e6110a8179cb2ef769b
   console.log("After is Loggedin")
   console.log(currentUser);
  // const { currentUser } = useAuth();
