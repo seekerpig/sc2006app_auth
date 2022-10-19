@@ -18,14 +18,14 @@ import ChatIcon from '@mui/icons-material/Chat';
 import { Link, useNavigate } from "react-router-dom";
 //import { useAuth } from "../Control/SessionController";
 import { GameInfo } from "../Control/GamesInfoController";
-import { JoinGame,isLoggedin } from "../Control/JoinGameController";
+import { JoinGame } from "../Control/JoinGameController";
 import badminton from "./UIComponents/images/badminton.png";
 import basketball from "./UIComponents/images/basketball.png";
 import soccer from "./UIComponents/images/soccer.png";
 import volleyball from "./UIComponents/images/volleyball.png";
 import pingpong from "./UIComponents/images/ping-pong.png";
 import bike from "./UIComponents/images/bike.png";
-
+import { checkLoggedIn } from "../Control/LoginValidator";
 
 //UI Embeded Map
 function Iframe(props) {
@@ -59,7 +59,7 @@ export default function DetailedGamePage() {
   const [loading, setLoading] = React.useState(false);
   const [pressButton, setPress] = React.useState(true);
   //const [inGame, setGame] = React.useState(true);
-  const { currentUser } = isLoggedin();
+  const { currentUser } = checkLoggedIn();
   if (game != null) {
     title = game.getTitle();
     description = game.getDescription();

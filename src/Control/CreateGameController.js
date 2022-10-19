@@ -74,7 +74,7 @@ export const getAllFacilities = async() => {
   //return facilitiesArray;
 }
 
-export const isLoggedin = () => {
+export const checkLoggedIn = () => {
   const currentUser = useAuth();
   return currentUser;
 }

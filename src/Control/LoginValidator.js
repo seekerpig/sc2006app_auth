@@ -19,7 +19,7 @@ export const loginUser = (email,password) => {
 
 }
 
-export const isLoggedin = () => {
+export const checkLoggedIn = () => {
     const currentUser = useAuth();
     return currentUser;
 }
