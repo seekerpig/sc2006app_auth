@@ -3,7 +3,9 @@ import SignupForm from "./Boundary/SignupForm";
 import LoginForm from "./Boundary/LoginForm";
 import HomePage from "./Boundary/HomePage";
 import CreateGameForm from "./Boundary/CreateGameForm";
-import ProfilePage from "./Boundary/ProfilePage";
+import {ProfilePage,ViewOtherProfile} from "./Boundary/ProfilePage";
+//import ViewOtherProfile  from "./Boundary/ProfilePage";
+
 import ExplorePage from "./Boundary/ExplorePage";
 import DetailedGamePage from "./Boundary/DetailedGamePage";
 import ChatRoomPage from "./Boundary/ChatRoomPage";
@@ -23,6 +25,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/creategame" element={<CreateGameForm />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile/:userId" element={<ViewOtherProfile />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/chatroom/:gameId" element={<ChatRoomPage />} />
           <Route path="/games/:gameId" element={<DetailedGamePage />} />
