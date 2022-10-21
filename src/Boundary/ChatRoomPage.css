@@ -9,8 +9,8 @@
 
 .ChatRoomPage header {
   background-color: #181717;
-  height: 10vh;
-  min-height: 50px;
+  height: 6vh;
+  min-height: 30px;
   color: white;
   /* background-color: rgb(255, 255, 255); */
   /* position: fixed; */
@@ -29,14 +29,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* min-height: 100vh; */
+  min-height: 55vh;
   background-color: rgb(40, 37, 53);
   /* background-color: rgb(255, 255, 255); */
 }
 
 main.chatMain{
   padding: 10px;
-  height: 80vh;
+  height: 55vh;
   margin: 0vh 0 0vh;
   overflow-y: scroll;
   display: flex;

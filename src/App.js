@@ -3,7 +3,7 @@ import SignupForm from "./Boundary/SignupForm";
 import LoginForm from "./Boundary/LoginForm";
 import HomePage from "./Boundary/HomePage";
 import CreateGameForm from "./Boundary/CreateGameForm";
-import {ProfilePage,ViewOtherProfile} from "./Boundary/ProfilePage";
+import { ProfilePage, ViewOtherProfile } from "./Boundary/ProfilePage";
 //import ViewOtherProfile  from "./Boundary/ProfilePage";
 
 import ExplorePage from "./Boundary/ExplorePage";
@@ -17,7 +17,7 @@ import Container from "@mui/material/Container";
 
 function App() {
   return (
-    <Container component="main" sx={{ mt: 12 }}>
+    <Container component="main" sx={{ mt: 12, minHeight: 880 }}>
       <Router>
         <Routes>
           <Route exact path="/" element={<HomePage />} />

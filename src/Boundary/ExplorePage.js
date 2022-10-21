@@ -28,7 +28,7 @@ import { GetGames } from "../Control/GamesInfoController";
 import Game from "../Entity/Game";
 /**
  * This function is called when the explore page is accessed.
- * @returns {html} 
+ * @returns {html}
  */
 export default function ExplorePage() {
   const [gameList, setGameList] = React.useState([]);
@@ -142,7 +142,7 @@ export default function ExplorePage() {
   };
 
   return (
-    <Container sx={{ minHeight: 800 }}>
+    <Container>
       <Box
         sx={{
           mt: 2,
