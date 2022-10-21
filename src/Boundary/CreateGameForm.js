@@ -58,8 +58,8 @@ export default function Creategame() {
   //attributes from location to maxPlayers
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [startDate, setDate] = React.useState(dayjs(today));
-  const [endDate, setEndDate] = React.useState(dayjs(today).add(60, "minutes"));
+  const [startDate, setDate] = React.useState(dayjs(today).add(60, "minutes"));
+  const [endDate, setEndDate] = React.useState(dayjs(today).add(120, "minutes"));
   const [location, setLocation] = React.useState("");
   const [sportType, setSport] = React.useState("");
   const [maxPlayers, setPlayers] = React.useState(2);
