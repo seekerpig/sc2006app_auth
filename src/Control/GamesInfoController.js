@@ -47,11 +47,14 @@ export const GameInfo = (gameId) => {
         setGame(results);
         var tempUserList = [];
         let temp;
-        for (let i = 0; i < doc.data().userList.length;i++)
-        {
+        for (let i = 0; i < doc.data().userList.length; i++) {
           temp = await retrieveAUser(doc.data().userList[i]);
-          tempUserList.push({name:temp.data.name,profileUrl:temp.data().profileUrl,userId:doc.data().userList[i]});
-        } 
+          tempUserList.push({
+            name: temp.data().name,
+            profileUrl: temp.data().profileUrl,
+            userId: doc.data().userList[i],
+          });
+        }
         setProfilesData(tempUserList);
       } catch (err) {
         console.log("Error occured when fetching game");

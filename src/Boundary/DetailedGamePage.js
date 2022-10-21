@@ -1,11 +1,23 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import {  Typography,  Card,  CardActions,  Alert,  AlertTitle,  CardMedia,  Box,  Grid,  Button, IconButton} from "@mui/material/";
-import Avatar from '@mui/material/Avatar';
+import {
+  Typography,
+  Card,
+  CardActions,
+  Alert,
+  AlertTitle,
+  CardMedia,
+  Box,
+  Grid,
+  Button,
+  IconButton,
+  Tooltip,
+} from "@mui/material/";
+import Avatar from "@mui/material/Avatar";
 import LinearProgress from "@mui/material/LinearProgress";
 import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ChatIcon from '@mui/icons-material/Chat';
+import ChatIcon from "@mui/icons-material/Chat";
 import { Link, useNavigate } from "react-router-dom";
 import { GameInfo } from "../Control/GamesInfoController";
 import { JoinGame } from "../Control/JoinGameController";
@@ -27,7 +39,7 @@ function Iframe(props) {
 }
 /**
  * This function is called when the detailed game page is accessed
- * @returns {html} 
+ * @returns {html}
  */
 export default function DetailedGamePage() {
   let title = "";
@@ -66,7 +78,6 @@ export default function DetailedGamePage() {
       '">  </iframe>';
     userList = game.getUserList();
 
-    
     //console.log(userList);
   }
 
@@ -78,7 +89,7 @@ export default function DetailedGamePage() {
   }
   /**
    * Function to submit join game event when button is pressed
-   * @param {Object} event 
+   * @param {Object} event
    */
   async function handleSubmitJoinGame(event) {
     setLoading(true);
@@ -135,7 +146,6 @@ export default function DetailedGamePage() {
 
   return (
     <div>
-      
       {isPending && <LinearProgress />}
       {game && (
         <Box
@@ -365,18 +375,30 @@ export default function DetailedGamePage() {
                     </Typography>
                   </Grid>
                   <Grid item xs={8} marginBottom={2}>
-                  <Grid container rowSpacing={{ xs: 1, sm: 2 }} columnSpacing={{ xs: 1, sm: 2 }}>
-                    {profilesData && profilesData.map((profile)=>(
-                    <Grid item>
-                      <Link to={`../profile/${profile.userId}`} style={{ textDecorationLine: "none" }}>
-                        <IconButton>
-                          <Avatar alt={profile.name} src={profile.profileUrl} ></Avatar>
-                        </IconButton>
-                      </Link>
-                    </Grid>))}
-
-                    
-                  </Grid>
+                    <Grid
+                      container
+                      rowSpacing={{ xs: 1, sm: 2 }}
+                      columnSpacing={{ xs: 1, sm: 2 }}
+                    >
+                      {profilesData &&
+                        profilesData.map((profile) => (
+                          <Grid item>
+                            <Link
+                              to={`../profile/${profile.userId}`}
+                              style={{ textDecorationLine: "none" }}
+                            >
+                              <Tooltip title={profile.name}>
+                                <IconButton>
+                                  <Avatar
+                                    alt={profile.name}
+                                    src={profile.profileUrl}
+                                  ></Avatar>
+                                </IconButton>
+                              </Tooltip>
+                            </Link>
+                          </Grid>
+                        ))}
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
@@ -392,46 +414,45 @@ export default function DetailedGamePage() {
               sx={{ paddingTop: 1, paddingRight: 4, paddingBottom: 4 }}
             >
               <Box sx={{ flexGrow: 1 }}></Box>
-                <Box>
-                  {(currentUser === null ||
-                    !userList.includes(currentUser.uid)) &&
-                    pressButton && (
-                      <Box>
-                        <Button
-                          variant="contained"
-                          type="submit"
-                          size="large"
-                          style={{ minWidth: "80px", minHeight: "30px" }}
-                          endIcon={<SendIcon />}
-                        >
-                          JOIN NOW
-                        </Button>
-                      </Box>
-                    )}
-                  {(currentUser !== null && userList.includes(currentUser.uid)) && (
-                      <Box>
-                        <Button
-                          component={Link}
-                          to={`/chatroom/${game.getGameId()}`}
-                          variant="contained"
-                          size="large"
-                          style={{ minWidth: "80px", minHeight: "30px" }}
-                          endIcon={<ChatIcon />}
-                        >
-                          CHAT WITH PLAYERS
-                        </Button>
-                      </Box>
-                    )}
+              <Box>
+                {(currentUser === null ||
+                  !userList.includes(currentUser.uid)) &&
+                  pressButton && (
+                    <Box>
+                      <Button
+                        variant="contained"
+                        type="submit"
+                        size="large"
+                        style={{ minWidth: "80px", minHeight: "30px" }}
+                        endIcon={<SendIcon />}
+                      >
+                        JOIN NOW
+                      </Button>
+                    </Box>
+                  )}
+                {currentUser !== null && userList.includes(currentUser.uid) && (
+                  <Box>
+                    <Button
+                      component={Link}
+                      to={`/chatroom/${game.getGameId()}`}
+                      variant="contained"
+                      size="large"
+                      style={{ minWidth: "80px", minHeight: "30px" }}
+                      endIcon={<ChatIcon />}
+                    >
+                      CHAT WITH PLAYERS
+                    </Button>
+                  </Box>
+                )}
               </Box>
-              
             </CardActions>
 
             {success && <Alert severity="success">{success}</Alert>}
           </Card>
-        </Box>  
+        </Box>
       )}
       {error1 && (
-        <Alert  severity="error" sx={{ mb: 4, mt: 4}}>
+        <Alert severity="error" sx={{ mb: 4, mt: 4 }}>
           {" "}
           <AlertTitle>Error</AlertTitle>
           {error1}
