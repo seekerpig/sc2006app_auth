@@ -184,8 +184,9 @@ export function ProfilePage() {
             align="center"
             type="submit"
             variant="outlined"
+            size="large"
             onClick={signOut}
-            sx={{ mt: 3, mb: 2, width: "100px" }}
+            sx={{ mt: 3, mb: 2 }}
             endIcon={<LogoutIcon/>}
           >
             Logout
