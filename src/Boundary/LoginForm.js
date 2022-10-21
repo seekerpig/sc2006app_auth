@@ -67,7 +67,7 @@ export default function LoginForm() {
         navigate("/");
       }, 2000);
     } catch {
-      setError("Failed to Login");
+      setError("Incorrect Email Address or Password. Please try again.");
     }
 
     setLoading(false);

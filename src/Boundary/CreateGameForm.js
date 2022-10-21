@@ -161,10 +161,33 @@ export default function Creategame() {
         descriptionA: description,
         maxPlayersA: maxPlayers,
       });
+
+      //CHECKING INPUTS FIELDS
+      if (title.length < 10) {
+        setError("Title is too short. It must be more than 10 characters.");
+        setLoading(false);
+        return;
+      }
+
+      if (title.length > 100) {
+        setError("Title is too long. It must be less than 100 characters");
+        setLoading(false);
+        return;
+      }
+
+      if (description.length < 10 ) {
+        setError("Description is too short. It must be at least 10 characters");
+        setLoading(false);
+        return;
+      }
+      if (description.length > 512) {
+        setError("Description is too long. It must be less than 512 characters");
+        setLoading(false);
+        return;
+      }
+      
       await CreateNewGame(title,location,sportType,startDate,endDate,description,maxPlayers,currentUser);
       console.log("Here Alrdy")
-      //NEED SOME CODE HERE TO CREATE A NEW DOC IN FIRESTORE
-      //NEED TO IMPORT CreateNewGame() from CreateGameController
       setSuccess("Game is successfully created. Redirecting to profile page...");
       setTimeout(function() {
         navigate("/profile");

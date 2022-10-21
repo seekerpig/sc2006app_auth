@@ -128,12 +128,12 @@ export default function SignUpForm() {
         return;
       }
       if (data.get("description").length <= 10 ) {
-        setError("Description is too short.");
+        setError("Description is too short. It must be at least 10 characters.");
         setLoading(false);
         return;
       }
       if (data.get("description").length > 512) {
-        setError("Description is too long.");
+        setError("Description is too long. It must be less than 512 characters.");
         setLoading(false);
         return;
       }
