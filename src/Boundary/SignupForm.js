@@ -228,7 +228,7 @@ export default function SignUpForm() {
               <Grid item xs={12}>
                 <Button variant="outlined" component="label">
                   Upload Your Profile Picture
-                  <input accept="image/*" type="file" id="img" name="img" />
+                  <input accept="image/*" type="file" id="img" name="img" required/>
                 </Button>
               </Grid>
             </Grid>
