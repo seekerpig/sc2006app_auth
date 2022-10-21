@@ -1,16 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import {
-  Typography,
-  Card,
-  CardActions,
-  Alert,
-  AlertTitle,
-  CardMedia,
-  Box,
-  Grid,
-  Button,
-} from "@mui/material/";
+import {  Typography,  Card,  CardActions,  Alert,  AlertTitle,  CardMedia,  Box,  Grid,  Button, IconButton} from "@mui/material/";
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import LinearProgress from "@mui/material/LinearProgress";
@@ -18,8 +8,7 @@ import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ChatIcon from '@mui/icons-material/Chat';
 import { Link, useNavigate } from "react-router-dom";
-//import { useAuth } from "../Control/SessionController";
-import { GameInfo } from "../Control/GamesInfoController";
+import { GameInfo, getUserListInfo } from "../Control/GamesInfoController";
 import { JoinGame } from "../Control/JoinGameController";
 import badminton from "./UIComponents/images/badminton.png";
 import basketball from "./UIComponents/images/basketball.png";
@@ -55,13 +44,14 @@ export default function DetailedGamePage() {
   let iframe = "";
 
   const { gameId } = useParams();
-  const { error, isPending, game } = GameInfo(gameId);
+  const { error, isPending, game, profilesData } = GameInfo(gameId);
   const [success, setSuccess] = React.useState("");
   const [error1, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [pressButton, setPress] = React.useState(true);
   //const [inGame, setGame] = React.useState(true);
   const { currentUser } = checkLoggedIn();
+  //let userListProfileData;
   if (game != null) {
     title = game.getTitle();
     description = game.getDescription();
@@ -77,6 +67,7 @@ export default function DetailedGamePage() {
       '">  </iframe>';
     userList = game.getUserList();
 
+    
     //console.log(userList);
   }
 
@@ -375,11 +366,18 @@ export default function DetailedGamePage() {
                     </Typography>
                   </Grid>
                   <Grid item xs={8} marginBottom={2}>
-                  <Stack direction="row" spacing={2}>
-      <Avatar alt="Remy Sharp" src="https://firebasestorage.googleapis.com/v0/b/sc2006app.appspot.com/o/images%2FGzO1eMjQV1fCwyWOSTsHDBeYE1q2?alt=media&token=4d9a51cd-05ea-41bb-8cf4-fc9e03aa7103" />
-      <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-      <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-    </Stack>
+                  <Grid container rowSpacing={{ xs: 1, sm: 2 }} columnSpacing={{ xs: 1, sm: 2 }}>
+                    {profilesData && profilesData.map((profile)=>(
+                    <Grid item>
+                      <Link to={`../profile/${profile.userId}`} style={{ textDecorationLine: "none" }}>
+                        <IconButton>
+                          <Avatar alt={profile.name} src={profile.profileUrl} ></Avatar>
+                        </IconButton>
+                      </Link>
+                    </Grid>))}
+
+                    
+                  </Grid>
                   </Grid>
                 </Grid>
               </Grid>

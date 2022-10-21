@@ -120,3 +120,14 @@ export const retrieveUserGames = (userId) => {
   return { games };
 };
 
+export const getUserListInfo = async (userList) => {
+  var tempUserList = [];
+  let temp;
+
+  for (let i = 0; i < userList.length;i++)
+  {
+    temp = await retrieveAUser(userList[i]);
+    tempUserList.push({name:temp.data.name,profileUrl:temp.data().profileUrl,userId:userList[i]});
+  }
+  return(tempUserList);
+}

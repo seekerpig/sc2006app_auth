@@ -3,8 +3,11 @@ import './ChatRoomPage.css';
 //import { collection} from "firebase/firestore";
 import { serverTimestamp } from "firebase/firestore";
 import { retrieveProfile, checkLoggedIn, retrieveMessages, createMessage } from "../Control/ChatRoomController";
-import { Typography } from '@mui/material'
 import { useParams } from "react-router-dom";
+import { Typography,  Box, Button } from "@mui/material/";
+import { Link } from 'react-router-dom';
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import SendIcon from "@mui/icons-material/Send";
 
 
 /**
@@ -23,13 +26,26 @@ function ChatRoomPage() {
   console.log(currentUser);
   if (currentUser !== null) {
     const messageReturn = retrieveProfile(currentUser.uid);
-    console.log(messageReturn.user);
+    //console.log(messageReturn.user);
     currentUserWithProfile = messageReturn.user;
   }
 
 
   return (
-    <div className="ChatRoomPage" styles={{ marginTop: '50px' }}>
+    <Box className="ChatRoomPage" styles={{ marginTop: '50px' }}>
+      <Box paddingBottom={2} sx={{textAlign: "left"}}>
+        <Link to={`/games/${gameId}`} style={{ textDecorationLine: "none" }}>
+          <ArrowBackIosIcon
+            sx={{ verticalAlign: "middle" }}
+            size="small"
+            fontSize="6px"
+            color="primary"
+          />
+          <Typography inline variant="button" align="right" color="primary">
+            Back to Game information
+          </Typography>
+        </Link>
+      </Box>
       <header>
         <Typography sx={{ align: 'center', flexGrow: 1 }}>Game Room : {gameId}</Typography>
       </header>
@@ -38,7 +54,7 @@ function ChatRoomPage() {
         {currentUserWithProfile && gameId && currentUserWithProfile.gameList.includes(gameId) ? <ChatRoom user1={currentUserWithProfile} gameId={gameId} /> : <p>Please Sign In With The Correct Account</p>}
       </section>
 
-    </div>
+    </Box>
   );
 }
 
@@ -53,15 +69,19 @@ function ChatRoomPage() {
  */
 function ChatRoom(props) {
   const dummy = useRef();
-  const [messages] = retrieveMessages();
+  let [messages] = retrieveMessages();
   const [formValue, setFormValue] = useState('');
   
+
+
   /**
    * When user tries to send a message, this function is called.
    *
    */
   const sendMessage = async (e) => {
     e.preventDefault();
+    
+    //console.log(e);
     console.log(props.user1);
     const uid = props.user1.userID;
     const photoURL = props.user1.profileUrl;
@@ -70,13 +90,16 @@ function ChatRoom(props) {
     createMessage(formValue, serverTimestamp, uid, photoURL, props.gameId);
     setFormValue('');
     dummy.current.scrollIntoView({ behavior: 'smooth' });
+    
+    
+    //this.messagesEnd.scrollIntoView({ behavior: "smooth" });
   }
 
   return (<>
     <main className="chatMain">
       {messages && messages.map(function (msg, i) { if (msg.gameID === props.gameId) {return <ChatMessage key={i} message={msg} currentUser={props.user1} />}else{return ""} })}
-
-      <span ref={dummy}></span>
+      
+      <div ref={dummy}/>
 
     </main >
 
@@ -84,7 +107,17 @@ function ChatRoom(props) {
 
       <input className="inputChat" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
 
-      <button className="buttonChat" type="submit" disabled={!formValue}><span role="img" aria-label="send">🕊️</span></button>
+        <Button
+          variant="contained"
+          type="submit"
+          size="large"
+          disabled={!formValue}
+          sx={{ height: "100%", width: "100%", margin: 0,borderRadius: "0"}}
+        >
+          <SendIcon />
+        </Button>
+
+      {/* <button className="buttonChat" type="submit" disabled={!formValue}><span role="img" aria-label="send">🕊️</span></button> */}
 
     </form>
   </>)

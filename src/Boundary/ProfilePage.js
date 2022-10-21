@@ -12,6 +12,7 @@ import {
   isLoggedin,
 } from "../Control/ProfileController";
 import { useNavigate } from "react-router-dom";
+import LogoutIcon from '@mui/icons-material/Logout';
 //import { WindowSharp } from "@mui/icons-material";
 
 /**
@@ -185,6 +186,7 @@ export function ProfilePage() {
             variant="outlined"
             onClick={signOut}
             sx={{ mt: 3, mb: 2, width: "100px" }}
+            endIcon={<LogoutIcon/>}
           >
             Logout
           </Button>
@@ -320,18 +322,7 @@ export  function ViewOtherProfile() {
 
         {games && <Card games={games} />}
       </Box>
-      <div style={{ textAlign: "center", marginBottom: "1rem" }}>
-        <Button
-          align="center"
-          type="submit"
-          variant="outlined"
-         // onClick={signOut}
-          sx={{ mt: 3, mb: 2, width: "100px" }}
-        >
-          Logout
-        </Button>
-       
-      </div>
+
     </Container>
   );
 }

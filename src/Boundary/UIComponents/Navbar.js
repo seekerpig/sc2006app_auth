@@ -14,6 +14,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import AddIcon from "@mui/icons-material/Add";
 import { useAuth } from "../../Control/SessionController";
 import logo from "./images/Black_50.png";
+// import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -50,7 +51,7 @@ const Navbar = () => {
         <Container sx={{p: 0 }} >
         <Toolbar>
           <Box sx={{display: {xs: 'none', sm: 'none', md: 'block'}}}>
-          <img height="50" src={logo} alt="logo"/>
+          <a href="/"><img height="50" src={logo} alt="logo"/></a>
           </Box>
           
           <Typography
@@ -79,9 +80,11 @@ const Navbar = () => {
               Game
             </Button>
           </Box>
+          
           <Box sx={{flexGrow: 1, display: { xs: "flex", md: "none" }}}>
-          <img height="50" src={logo} alt="logo"/>
+          <a href="/"><img height="50" src={logo} alt="logo"/></a>
           </Box>
+          
           {/* <Typography
             variant="h5"
             noWrap

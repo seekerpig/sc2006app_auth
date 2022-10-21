@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Game from "../Entity/Game";
-import { getGames, getAGame } from "./DatabaseController";
+import { getGames, getAGame, retrieveAUser } from "./DatabaseController";
 
 /**
  * This method will call getGames() from DatabaseController
@@ -19,6 +19,7 @@ export const GameInfo = (gameId) => {
   const [game, setGame] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(false);
+  const [profilesData, setProfilesData] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -44,11 +45,31 @@ export const GameInfo = (gameId) => {
           );
         }
         setGame(results);
+        var tempUserList = [];
+        let temp;
+        for (let i = 0; i < doc.data().userList.length;i++)
+        {
+          temp = await retrieveAUser(doc.data().userList[i]);
+          tempUserList.push({name:temp.data.name,profileUrl:temp.data().profileUrl,userId:doc.data().userList[i]});
+        } 
+        setProfilesData(tempUserList);
       } catch (err) {
         console.log("Error occured when fetching game");
       }
     })();
   }, []);
 
-  return { error, isPending, game };
+  return { error, isPending, game, profilesData };
 };
+
+// export const getUserListInfo = async (userList) => {
+//   var tempUserList = [];
+//   let temp;
+
+//   for (let i = 0; i < userList.length;i++)
+//   {
+//     temp = await retrieveAUser(userList[i]);
+//     tempUserList.push({name:temp.data.name,profileUrl:temp.data().profileUrl,userId:userList[i]});
+//   }
+//   return(tempUserList);
+// }
