@@ -11,6 +11,8 @@ import {
   Grid,
   Button,
 } from "@mui/material/";
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 import LinearProgress from "@mui/material/LinearProgress";
 import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -362,6 +364,22 @@ export default function DetailedGamePage() {
                     <Typography variant="body1" component="div">
                       {location}
                     </Typography>
+                  </Grid>
+                  <Grid item xs={4} marginBottom={2}>
+                    <Typography
+                      variant="body1"
+                      color="text.secondary"
+                      component="div"
+                    >
+                      Players:
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={8} marginBottom={2}>
+                  <Stack direction="row" spacing={2}>
+      <Avatar alt="Remy Sharp" src="https://firebasestorage.googleapis.com/v0/b/sc2006app.appspot.com/o/images%2FGzO1eMjQV1fCwyWOSTsHDBeYE1q2?alt=media&token=4d9a51cd-05ea-41bb-8cf4-fc9e03aa7103" />
+      <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+      <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+    </Stack>
                   </Grid>
                 </Grid>
               </Grid>
