@@ -37,6 +37,7 @@ function Copyright(props) {
     </Typography>
   );
 }
+
 /**
  * This method is called when the user accessed the Sign Up Page
  * @returns HTML
@@ -76,16 +77,71 @@ export default function SignUpForm() {
       setError("");
       setSuccess("");
 
-      if (data.get("password").length <= 5) {
+      // ERROR CHECKING SECTION!
+      if (data.get("firstName").length === 0) {
+        setError("First name cannot be empty.");
+        setLoading(false);
+        return;
+      }
+      if (data.get("firstName").length >= 100) {
+        setError("First name is too long.");
+        setLoading(false);
+        return;
+      }
+      if (data.get("lastName").length === 0) {
+        setError("Last name cannot be empty.");
+        setLoading(false);
+        return;
+      }
+      if (data.get("lastName").length >= 100) {
+        setError("Last name is too long.");
+        setLoading(false);
+        return;
+      }
+      if (data.get("email").length === 0) {
+        setError("Email cannot be empty.");
+        setLoading(false);
+        return;
+      }
+      //regex for checking email
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!data.get("email").toLowerCase().match(re)) {
+        setError("Email is invalid.");
+        setLoading(false);
+        return;
+      }
+      if (data.get("password").length <8) {
         setError("Password Length is Not Long Enough");
         setLoading(false);
         return;
       }
-
-
-      //CODE FOR CREATING USER:
-      //NEED CODE TO UPLOAD IMAGE TO FIREBASE
-      //AFTER UPLOAD, add all the parameters to the SignUp function, it needs more, see SignUpController.js for full parameters.
+      var pw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; //regex for Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:
+      if (!data.get("password").match(pw))
+      {
+        setError("Password not valid. Password must have at least a upper case letter, a lower case letter, a number and a special character");
+        setLoading(false);
+        return;
+      }
+      if (data.get("phoneNumber").length === 0) {
+        setError("Phone number cannot be empty");
+        setLoading(false);
+        return;
+      }
+      if (data.get("description").length <= 10 ) {
+        setError("Description is too short.");
+        setLoading(false);
+        return;
+      }
+      if (data.get("description").length > 512) {
+        setError("Description is too long.");
+        setLoading(false);
+        return;
+      }
+      if (data.get("img").name === "") {
+        setError("Image not found. Please upload an image.");
+        setLoading(false);
+        return;
+      }
 
       await SignUp(
         email,
