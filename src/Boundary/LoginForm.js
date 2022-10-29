@@ -11,7 +11,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Alert from "@mui/material/Alert";
-//import { useAuth } from "../Control/SessionController";
+import { useAuth } from "../Control/SessionController";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../Control/LoginValidator";
@@ -31,14 +31,13 @@ function Copyright(props) {
     </Typography>
   );
 }
-//{currentUser && <p>Current logged user is {currentUser.email}</p>}
 
 /**
  * This method is called when the user accessed the Login Page
  * @returns HTML
  */
 export default function LoginForm() {
-  //const { currentUser } = useAuth();
+  const { currentUser } = useAuth();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -139,7 +138,7 @@ export default function LoginForm() {
             </Button>
             {success && <Alert severity="success">{success}</Alert>}
             {error && <Alert severity="error">{error}</Alert>}
-            
+            {currentUser && <p>Current logged user is {currentUser.email}</p>}
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/signup" variant="body2">

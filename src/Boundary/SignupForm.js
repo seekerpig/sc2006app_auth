@@ -17,7 +17,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 //import { checkLoggedIn } from "../Control/LoginValidator";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SignUp } from "../Control/SignUpController";
+import { SignUp,checkLoggedIn } from "../Control/SignUpController";
 
 
 function Copyright(props) {
@@ -43,7 +43,7 @@ function Copyright(props) {
  * @returns HTML
  */
 export default function SignUpForm() {
-  //var { currentUser } = checkLoggedIn();
+  var { currentUser } = checkLoggedIn();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -183,7 +183,7 @@ export default function SignUpForm() {
     console.log("Here is loading");
     setLoading(false);
   }
-//{currentUser && <p>Current logged user is {currentUser.email}</p>}
+
   return (
     <Box
       sx={{
@@ -299,7 +299,7 @@ export default function SignUpForm() {
             </Button>
             {error && <Alert severity="error">{error}</Alert>}
             {success && <Alert severity="success">{success}</Alert>}
-            
+            {currentUser && <p>Current logged user is {currentUser.email}</p>}
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
