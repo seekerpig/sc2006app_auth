@@ -204,7 +204,7 @@ export function ProfilePage() {
  */
 export  function ViewOtherProfile() {
   const { userId } = useParams();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   console.log("View Other Profile is called");
   const {error,isPending,user = new User(),} = retrieveProfile(userId);
   console.log(error);
