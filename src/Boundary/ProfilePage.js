@@ -66,6 +66,7 @@ export function ProfilePage() {
     };*/
     return (
       <Container>
+        
         {user && (
           <Box
             sx={{
@@ -203,13 +204,22 @@ export function ProfilePage() {
  */
 export  function ViewOtherProfile() {
   const { userId } = useParams();
+  const navigate = useNavigate();
   console.log("View Other Profile is called");
   const {error,isPending,user = new User(),} = retrieveProfile(userId);
   console.log(error);
+  /*if(error){
+    setTimeout(function () {
+      navigate("/profile");
+    }, 1000);
+  }*/
   console.log(isPending);
   const { games } = retrieveUserGames(userId);
   return (
     <Container>
+      <div>
+      {error && <Alert severity="error">{error}</Alert>}
+      </div>
       {user && (
         <Box
           sx={{
