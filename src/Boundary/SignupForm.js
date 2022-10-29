@@ -299,7 +299,7 @@ export default function SignUpForm() {
             </Button>
             {error && <Alert severity="error">{error}</Alert>}
             {success && <Alert severity="success">{success}</Alert>}
-            {currentUser && <p>Current logged user is {currentUser.email}</p>}
+            
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">

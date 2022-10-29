@@ -138,7 +138,7 @@ export default function LoginForm() {
             </Button>
             {success && <Alert severity="success">{success}</Alert>}
             {error && <Alert severity="error">{error}</Alert>}
-            {currentUser && <p>Current logged user is {currentUser.email}</p>}
+            
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/signup" variant="body2">
