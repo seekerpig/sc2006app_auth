@@ -399,9 +399,7 @@ export default function Creategame() {
                 </Button>
                 {success && <Alert severity="success">{success}</Alert>}
                 {error && <Alert severity="error">{error}</Alert>}
-                {currentUser && (
-                  <p>Current logged user is {currentUser.email}</p>
-                )}
+               
               </Box>
             </Box>
           </Container>
