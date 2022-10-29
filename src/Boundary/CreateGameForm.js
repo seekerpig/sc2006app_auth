@@ -1,4 +1,4 @@
-import React,{useEffect}  from "react";
+import React, { useEffect } from "react";
 import {
   Avatar,
   Button,
@@ -28,16 +28,17 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import MuiInput from "@mui/material/Input";
-import {CreateNewGame,getAllFacilities,checkLoggedIn } from "../Control/CreateGameController"
+import {
+  CreateNewGame,
+  getAllFacilities,
+  checkLoggedIn,
+} from "../Control/CreateGameController";
 //import { checkLoggedIn } from "../Control/LoginValidator";
 //import { getFacilities } from "../Control/DatabaseController";
-
 
 const Input = styled(MuiInput)`
   width: 42px;
 `;
-
-
 
 const sportTypes = [
   "Badminton",
@@ -49,7 +50,7 @@ const sportTypes = [
 ];
 /**
  * This function is called when the create game form is accessed by the user.
- * @returns {html} 
+ * @returns {html}
  */
 export default function Creategame() {
   const { currentUser } = checkLoggedIn();
@@ -59,30 +60,31 @@ export default function Creategame() {
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [startDate, setDate] = React.useState(dayjs(today).add(60, "minutes"));
-  const [endDate, setEndDate] = React.useState(dayjs(today).add(120, "minutes"));
+  const [endDate, setEndDate] = React.useState(
+    dayjs(today).add(120, "minutes")
+  );
   const [location, setLocation] = React.useState("");
   const [sportType, setSport] = React.useState("");
   const [maxPlayers, setPlayers] = React.useState(2);
-  
+
   const [locations, setList] = React.useState([]);
 
   useEffect(() => {
     (async () => {
-      try { 
+      try {
         setList(await getAllFacilities());
-        
+
         //console.log(something);
-       /* const facilities = await getFacilities();
+        /* const facilities = await getFacilities();
         setList(facilities.docs.map((doc) => (
           {
             placemarkid:doc.data().placemarkid,
             name:doc.data().name
           }
         )));*/
-           // printSomething();
-        
+        // printSomething();
       } catch (err) {
-        console.log('Error occured when fetching games');
+        console.log("Error occured when fetching games");
       }
     })();
   }, []);
@@ -111,7 +113,7 @@ export default function Creategame() {
     if (newValue >= startDate) {
       setEndDate(newValue);
     } else {
-      alert("End Date & Time cannot be earlier than Starting Date & Time");
+      // alert("End Date & Time cannot be earlier than Starting Date & Time");
     }
   };
 
@@ -135,23 +137,23 @@ export default function Creategame() {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  if(currentUser === null){
-  setTimeout(function() {
-    navigate("/login");
-  }, 3000);}
-     
-  
+  if (currentUser === null) {
+    setTimeout(function () {
+      navigate("/login");
+    }, 3000);
+  }
+
   /**
    * This function is called when the user clicks on the create game button.
-   * @param {object} event 
+   * @param {object} event
    */
   async function handleSubmitCreateGame(event) {
     setLoading(true);
     event.preventDefault();
 
     try {
-      setError("")
-      setSuccess("")
+      setError("");
+      setSuccess("");
       console.log({
         titleA: title,
         locationA: location,
@@ -175,38 +177,48 @@ export default function Creategame() {
         return;
       }
 
-      if (description.length < 10 ) {
+      if (description.length < 10) {
         setError("Description is too short. It must be at least 10 characters");
         setLoading(false);
         return;
       }
       if (description.length > 512) {
-        setError("Description is too long. It must be less than 512 characters");
+        setError(
+          "Description is too long. It must be less than 512 characters"
+        );
         setLoading(false);
         return;
       }
-      
-      await CreateNewGame(title,location,sportType,startDate,endDate,description,maxPlayers,currentUser);
-      console.log("Here Alrdy")
-      setSuccess("Game is successfully created. Redirecting to profile page...");
-      setTimeout(function() {
+
+      await CreateNewGame(
+        title,
+        location,
+        sportType,
+        startDate,
+        endDate,
+        description,
+        maxPlayers,
+        currentUser
+      );
+      console.log("Here Alrdy");
+      setSuccess(
+        "Game is successfully created. Redirecting to profile page..."
+      );
+      setTimeout(function () {
         navigate("/profile");
       }, 3000);
-    } catch(e) {
+    } catch (e) {
       console.log(e);
-      if(e ===400){
+      if (e === 400) {
         setError("User not found. Please login to create game.");
-        setTimeout(function() {
+        setTimeout(function () {
           navigate("/login");
         }, 3000);
-      }
-      else if(e ===401){
-      setError("End Date cannot be before Start Date");
-      }
-      else if(e ===402){
+      } else if (e === 401) {
+        setError("End Date cannot be before Start Date");
+      } else if (e === 402) {
         setError("Start Date cannot be in the past");
-      }
-      else{
+      } else {
         setError("Failed to create Game");
       }
     }
@@ -216,173 +228,185 @@ export default function Creategame() {
 
   return (
     <div>
-      {!currentUser && <Alert severity="error">You are not logged in. Redirecting you to login page...</Alert>}
+      {!currentUser && (
+        <Alert severity="error">
+          You are not logged in. Redirecting you to login page...
+        </Alert>
+      )}
       {locations && currentUser && (
-    <Box sx={{ bgcolor: "secondary.main", padding: 2, borderRadius: "8px" }}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
-          sx={{
-            py: 4,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+          sx={{ bgcolor: "secondary.main", padding: 2, borderRadius: "8px" }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
-            <AddCircleIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Create A Game
-          </Typography>
-          <Box component="form" onSubmit={handleSubmitCreateGame} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="title"
-                  label="Game Title"
-                  name="title"
-                  onChange={handleChangeTitle}
-                  value={title}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl fullWidth required>
-                  <InputLabel required id="location">
-                    Location
-                  </InputLabel>
-                  <Select
-                    labelId="location"
-                    id="location"
-                    value={location}
-                    onChange={handleChangeLocation}
-                    fullWidth
-                    label="Location"
-                    required
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    {locations.map((item) => (
-                      <MenuItem value={item}>{item}</MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl fullWidth required>
-                  <InputLabel required id="sportType">
-                    Sports Type
-                  </InputLabel>
-                  <Select
-                    labelId="sportType"
-                    id="sportType"
-                    value={sportType}
-                    onChange={handleChangeSport}
-                    fullWidth
-                    label="Sport Type"
-                    required
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    {sportTypes.map((item) => (
-                      <MenuItem value={item}>{item}</MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Stack spacing={3}>
-                    <DateTimePicker
-                      label="Start Date & Time"
-                      id="startDate"
-                      value={startDate}
-                      onChange={handleChangeDate}
-                      renderInput={(params) => <TextField {...params} />}
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+              sx={{
+                py: 4,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+                <AddCircleIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Create A Game
+              </Typography>
+              <Box
+                component="form"
+                onSubmit={handleSubmitCreateGame}
+                sx={{ mt: 3 }}
+              >
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="title"
+                      label="Game Title"
+                      name="title"
+                      onChange={handleChangeTitle}
+                      value={title}
                     />
-                    <DateTimePicker
-                      label="End Date & Time"
-                      id="endDate"
-                      value={endDate}
-                      onChange={handleChangeEndDate}
-                      renderInput={(params) => <TextField {...params} />}
-                    />
-                  </Stack>
-                </LocalizationProvider>
-              </Grid>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl fullWidth required>
+                      <InputLabel required id="location">
+                        Location
+                      </InputLabel>
+                      <Select
+                        labelId="location"
+                        id="location"
+                        value={location}
+                        onChange={handleChangeLocation}
+                        fullWidth
+                        label="Location"
+                        required
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        {locations.map((item) => (
+                          <MenuItem value={item}>{item}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl fullWidth required>
+                      <InputLabel required id="sportType">
+                        Sports Type
+                      </InputLabel>
+                      <Select
+                        labelId="sportType"
+                        id="sportType"
+                        value={sportType}
+                        onChange={handleChangeSport}
+                        fullWidth
+                        label="Sport Type"
+                        required
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        {sportTypes.map((item) => (
+                          <MenuItem value={item}>{item}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Stack spacing={3}>
+                        <DateTimePicker
+                          label="Start Date & Time"
+                          id="startDate"
+                          value={startDate}
+                          onChange={handleChangeDate}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                        <DateTimePicker
+                          label="End Date & Time"
+                          id="endDate"
+                          value={endDate}
+                          onChange={handleChangeEndDate}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Stack>
+                    </LocalizationProvider>
+                  </Grid>
 
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  multiline
-                  fullWidth
-                  rows={4}
-                  name="description"
-                  label="Description"
-                  id="description"
-                  onChange={handleChangeDescription}
-                  
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography id="input-slider" gutterBottom>
-                  Max Players
-                </Typography>
-                <Grid container spacing={2} alignItems="center">
-                  <Grid item>
-                    <GroupIcon />
-                  </Grid>
-                  <Grid item xs>
-                    <Slider
-                      value={typeof maxPlayers === "number" ? maxPlayers : 0}
-                      onChange={handleSliderChange}
-                      aria-labelledby="input-slider"
-                      defaultValue={2}
-                      max={16}
-                      min={2}
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      multiline
+                      fullWidth
+                      rows={4}
+                      name="description"
+                      label="Description"
+                      id="description"
+                      onChange={handleChangeDescription}
                     />
                   </Grid>
-                  <Grid item>
-                    <Input
-                      id="maxPlayers"
-                      value={maxPlayers}
-                      size="small"
-                      onChange={handleSliderInputChange}
-                      onBlur={handleBlur}
-                      inputProps={{
-                        step: 1,
-                        min: 1,
-                        max: 12,
-                        type: "number",
-                        "aria-labelledby": "input-slider",
-                      }}
-                    />
+                  <Grid item xs={12}>
+                    <Typography id="input-slider" gutterBottom>
+                      Max Players
+                    </Typography>
+                    <Grid container spacing={2} alignItems="center">
+                      <Grid item>
+                        <GroupIcon />
+                      </Grid>
+                      <Grid item xs>
+                        <Slider
+                          value={
+                            typeof maxPlayers === "number" ? maxPlayers : 0
+                          }
+                          onChange={handleSliderChange}
+                          aria-labelledby="input-slider"
+                          defaultValue={2}
+                          max={16}
+                          min={2}
+                        />
+                      </Grid>
+                      <Grid item>
+                        <Input
+                          id="maxPlayers"
+                          value={maxPlayers}
+                          size="small"
+                          onChange={handleSliderInputChange}
+                          onBlur={handleBlur}
+                          inputProps={{
+                            step: 1,
+                            min: 1,
+                            max: 12,
+                            type: "number",
+                            "aria-labelledby": "input-slider",
+                          }}
+                        />
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
-            </Grid>
-            <Button
-              disabled={loading}
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Create Game
-            </Button>
-            {success && <Alert severity="success">{success}</Alert>}
-            {error && <Alert severity="error">{error}</Alert>}
-            {currentUser && <p>Current logged user is {currentUser.email}</p>}
-          </Box>
+                <Button
+                  disabled={loading}
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Create Game
+                </Button>
+                {success && <Alert severity="success">{success}</Alert>}
+                {error && <Alert severity="error">{error}</Alert>}
+                {currentUser && (
+                  <p>Current logged user is {currentUser.email}</p>
+                )}
+              </Box>
+            </Box>
+          </Container>
         </Box>
-      </Container>
-    </Box>
-      ) }
+      )}
     </div>
   );
-                    }
-                    
+}
