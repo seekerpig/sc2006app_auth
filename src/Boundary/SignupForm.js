@@ -115,6 +115,12 @@ export default function SignUpForm() {
         setLoading(false);
         return;
       }
+
+      if (data.get("password").length >127) {
+        setError("Password Length is Too Long");
+        setLoading(false);
+        return;
+      }
       var pw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; //regex for Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:
       if (!data.get("password").match(pw))
       {
