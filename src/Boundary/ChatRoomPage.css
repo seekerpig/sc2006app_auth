@@ -20,7 +20,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 99;
+  /* z-index: 99; */
   padding: 10px;
   box-sizing: border-box;
 }
@@ -29,14 +29,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 55vh;
+  /* min-height: 55vh; */
   background-color: rgb(40, 37, 53);
   /* background-color: rgb(255, 255, 255); */
 }
 
 main.chatMain{
   padding: 10px;
-  height: 55vh;
+  height: 45vh;
   margin: 0vh 0 0vh;
   overflow-y: scroll;
   display: flex;

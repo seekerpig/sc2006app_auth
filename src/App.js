@@ -17,7 +17,7 @@ import Container from "@mui/material/Container";
 
 function App() {
   return (
-    <Container component="main" sx={{ mt: 12, minHeight: 880 }}>
+    <Container className="content" component="main" sx={{ mt: 12 }}>
       <Router>
         <Routes>
           <Route exact path="/" element={<HomePage />} />

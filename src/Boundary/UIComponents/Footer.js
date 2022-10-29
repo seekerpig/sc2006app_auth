@@ -23,6 +23,7 @@ const footers = [
 export default function Footer() {
   return (
     <Box
+      className="footer"
       id="footer"
       sx={{
         marginTop: "30px",
