@@ -17,7 +17,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 //import { checkLoggedIn } from "../Control/LoginValidator";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SignUp,checkLoggedIn } from "../Control/SignUpController";
+import { SignUp } from "../Control/SignUpController";
 
 
 function Copyright(props) {
@@ -43,7 +43,7 @@ function Copyright(props) {
  * @returns HTML
  */
 export default function SignUpForm() {
-  var { currentUser } = checkLoggedIn();
+ // var { currentUser } = checkLoggedIn();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);

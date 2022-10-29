@@ -11,7 +11,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Alert from "@mui/material/Alert";
-import { useAuth } from "../Control/SessionController";
+//import { useAuth } from "../Control/SessionController";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../Control/LoginValidator";
@@ -37,7 +37,7 @@ function Copyright(props) {
  * @returns HTML
  */
 export default function LoginForm() {
-  const { currentUser } = useAuth();
+ // const { currentUser } = useAuth();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
