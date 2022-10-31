@@ -8,7 +8,14 @@ Typedoc is used instead of jsdoc.
 
 ## Available Scripts
 
-In the project directory, you can run:
+### `npm install`
+
+When you first clone this github repository, make sure to run npm install to install all the libraries.
+This is required before you can npm start to run the project on your local host.
+
+You will need to install Node.js (any latest stable version) to perform all the npm commands.
+
+If there are any queries, do feel free to reach out to the team! We're happy to help.
 
 ### `npm start`
 
