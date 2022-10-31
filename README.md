@@ -6,6 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Just open up the index.html in that folder if you want to see the design doc of classes.
 Typedoc is used instead of jsdoc.
 
+## If you do not wish to run it on your localhost, you can test the live demo version at: https://sc2006app.web.app/ (working as of 31st October 2022)
+
 ## Available Scripts
 
 ### `npm install`
