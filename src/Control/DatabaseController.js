@@ -16,7 +16,7 @@ import {JoinGame} from "./JoinGameController";
 // during production, it will be stored into a env file
 // Note, this apiKey is no longer working, will need to regenerate a new key if you wish to test the project locally.
 const firebaseConfig = {
-  apiKey: "AIzaSyAtIYhQTwSkF8ZL75Vrd18lRLHsVsPx57E",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "sc2006app.firebaseapp.com",
   projectId: "sc2006app",
   storageBucket: "sc2006app.appspot.com",
