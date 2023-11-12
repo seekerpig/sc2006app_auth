@@ -23,6 +23,7 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SC2006APP }}'
-          REACT_APP_API_KEY: '${{ secrets.FIREBASE_API_KEY }}'
           channelId: live
           projectId: sc2006app
+          env: |
+            REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }}
