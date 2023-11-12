@@ -73,7 +73,7 @@ export default function DetailedGamePage() {
     endTime = game.getEndTime();
     location = game.getLocation();
     iframe =
-      '<iframe width="100%" height="300px" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnFSyIityc8Bzm3AqWO4YCDr9RxW4K6qY&q=' +
+      '<iframe width="100%" height="300px" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key='+process.env.REACT_APP_API_KEY+'&q=' +
       game.getLocation() +
       '">  </iframe>';
     userList = game.getUserList();
