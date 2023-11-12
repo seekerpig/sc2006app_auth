@@ -16,12 +16,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.6' # specify the Node.js version you want to use
+          node-version: '16.13' # specify the Node.js version you want to use
           
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SC2006APP }}'
+          FIREBASE_API_KEY: '${{ secrets.FIREBASE_API_KEY }}'
           channelId: live
           projectId: sc2006app
