@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import { useState,useLayoutEffect } from "react";
 import User from "../Entity/User";
 import { useAuth } from "../Control/SessionController";

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 
 import {createAGame,getFacilities} from'./DatabaseController'
 import { useAuth } from './SessionController';

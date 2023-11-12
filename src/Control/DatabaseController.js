@@ -9,13 +9,14 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/
 
 import {JoinGame} from "./JoinGameController";
 
+import 'dotenv/config';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // the firebaseConfig is only stored here for reference purpose
 // during production, it will be stored into a env file
 const firebaseConfig = {
-  apiKey: "AIzaSyAtIYhQTwSkF8ZL75Vrd18lRLHsVsPx57E",
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "sc2006app.firebaseapp.com",
   projectId: "sc2006app",
   storageBucket: "sc2006app.appspot.com",
@@ -23,6 +24,8 @@ const firebaseConfig = {
   appId: "1:258220254585:web:8648b75b7750f54ebbfba8",
   measurementId: "G-Y97WP5YR5N"
 };
+
+console.log(firebaseConfig);
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

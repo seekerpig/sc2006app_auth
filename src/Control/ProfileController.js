@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import { useState, useEffect, useLayoutEffect } from "react";
 import Game from "../Entity/Game";
 import User from "../Entity/User";

@@ -20,7 +20,7 @@ export const useAuth = ()=>{
  * @returns a React Component for propagating context to its children
  */
 export const AuthProvider = ({children}) => {
-
+    
     const[currentUser, setCurrentUser] = useState();
     const[loading, setLoading] = useState(true);
 

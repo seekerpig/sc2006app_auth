@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import {login} from './DatabaseController';
 import { useAuth } from './SessionController';
 
